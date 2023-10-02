@@ -97,20 +97,14 @@ function parse(file) {
     Util.prototype.fixTokens=function(tokenPos,fileStr){
         const fixable=["var"]
         
-        Object.keys(tokenPos).forEach(function(tokenVal,c){
-            //console.log(tokenVal)
-            
-            tokenPos[tokenVal].forEach(function(token){
-                //console.log(tokenVal)
-                //console.log(fileStr)
-                if(fixable.includes(Object.values(tokenVal)[c])){
-                    console.log(fileStr)
-                    var seq=fileStr.split("").slice(token)
-                    console.log(seq)
-                }
-            })
-            
-        })
+        
+    }
+    //forEach be mean
+    Util.prototype.forEach= function(callback,thisArg){
+        thisArg = thisArg || window;
+		for (var i = 0; i < this.length; i++) {
+			callback.call(thisArg, this[i], i, this);
+		}
     }
     var util = new Util()
     const tokenPos = util.tokenize(tokenMap,file)
