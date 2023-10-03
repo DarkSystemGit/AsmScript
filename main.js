@@ -100,8 +100,9 @@ function parse(file) {
             this.forEach(Object.values(tokenList),function(token){
                 
                 if(fixable.includes(Object.keys(tokenPos)[i])){
-                    console.log(Object.keys(tokenPos))
-                    var seq=fileStr.split("").slice(token)
+                    //console.log(Object.keys(tokenPos))
+                    var seq=fileStr.split("").slice(token).join('')
+                    seq=seq.slice(0,seq.indexOf(';'))
                     console.log(seq)
                 }
             })
@@ -117,7 +118,7 @@ function parse(file) {
     }
     var util = new Util()
     const tokenPos = util.tokenize(tokenMap,file)
-    console.log(tokenPos)
+    //console.log(tokenPos)
     var tokens = util.fixTokens(tokenPos,file)
     
 }
