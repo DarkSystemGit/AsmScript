@@ -94,6 +94,9 @@ function parse(file) {
         })
         return locations
     }
+    String.prototype.replaceAt = function(index, replacement) {
+        return this.substring(0, index) + replacement + this.substring(index + replacement.length);
+    }
     Util.prototype.fixTokens=function(tokenPos,fileStr){
         const fixable=["var"]
         this.forEach(Object.values(tokenPos),function(tokenList,i){
@@ -103,7 +106,10 @@ function parse(file) {
                     //console.log(Object.keys(tokenPos))
                     var seq=fileStr.split("").slice(token).join('')
                     seq=seq.slice(0,seq.indexOf(';'))
-                    console.log(seq)
+                    if(this.data.fixTokens[Object.keys(tokenPos)[i]]){
+                        var fixed =this.data.fixTokens[Object.keys(tokenPos)[i]]()
+
+                    }
                 }
             })
         })
