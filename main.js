@@ -97,9 +97,12 @@ function parse(file) {
     Util.prototype.fixTokens=function(tokenPos,fileStr){
         const fixable=["var"]
         this.forEach(Object.values(tokenPos),function(tokenList,i){
-            this.forEach(Object.values(tokenList),function(token,i){
-                if(fixable.includes(token)){
-
+            this.forEach(Object.values(tokenList),function(token){
+                
+                if(fixable.includes(Object.keys(tokenPos)[i])){
+                    console.log(Object.keys(tokenPos))
+                    var seq=fileStr.split("").slice(token)
+                    console.log(seq)
                 }
             })
         })
@@ -107,7 +110,7 @@ function parse(file) {
     }
     //forEach be mean
     Util.prototype.forEach= function(arr,callback,thisArg){
-        thisArg = thisArg || window;
+        thisArg = thisArg || this;
 		for (var i = 0; i < arr.length; i++) {
 			callback.call(thisArg, arr[i], i, arr);
 		}
