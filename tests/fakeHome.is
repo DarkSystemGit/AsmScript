@@ -1,6 +1,7 @@
 while(true){
     var input;
+    var input=1;
     input("",input);
     disp(randInt(1,E3));
 };
-"true"
+

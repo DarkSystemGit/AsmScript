@@ -9,7 +9,7 @@ const tokenMap = {
     "^": "xor",
     "{": "then",
     "}": "end",
-    "=": "->",
+    
     "true": "1",
     "false": "0",
     "var": "",
@@ -49,7 +49,19 @@ function parseArgs(keys) {
 }
 function parse(file) {
     file = file.toString()
-    function Util() { }
+    function Util() {this.data={
+        fixTokens:{
+            var:function(seq){
+                //console.log(seq)
+                if(!seq.includes('=')||(seq.indexOf('=')==seq.length-1)){
+                    seq=""
+                }else{
+                    seq =seq.replace('=','=>').replace("var","")
+                }
+                return seq
+            }
+        }
+    }}
     Util.prototype.inString = function (char) {
         var ret = false
         if (!this.stringMap) {
@@ -94,8 +106,8 @@ function parse(file) {
         })
         return locations
     }
-    String.prototype.replaceAt = function(index, replacement) {
-        return this.substring(0, index) + replacement + this.substring(index + replacement.length);
+    String.prototype.replaceAt = function(index, replacement,length) {
+        return this.substring(0, index) + replacement + this.substring(index + length);
     }
     Util.prototype.fixTokens=function(tokenPos,fileStr){
         const fixable=["var"]
@@ -105,15 +117,16 @@ function parse(file) {
                 if(fixable.includes(Object.keys(tokenPos)[i])){
                     //console.log(Object.keys(tokenPos))
                     var seq=fileStr.split("").slice(token).join('')
-                    seq=seq.slice(0,seq.indexOf(';'))
+                    console.log(fileStr)
+                    seq=seq.slice(0,seq.indexOf(';')+1)
+                    
                     if(this.data.fixTokens[Object.keys(tokenPos)[i]]){
-                        var fixed =this.data.fixTokens[Object.keys(tokenPos)[i]]()
-
+                        fileStr = fileStr.replaceAt(token,this.data.fixTokens[Object.keys(tokenPos)[i]](seq.substring(0,seq.length)),seq.length)
                     }
                 }
             })
         })
-        
+        return fileStr
     }
     //forEach be mean
     Util.prototype.forEach= function(arr,callback,thisArg){
@@ -122,11 +135,12 @@ function parse(file) {
 			callback.call(thisArg, arr[i], i, arr);
 		}
     }
+    
     var util = new Util()
     const tokenPos = util.tokenize(tokenMap,file)
     //console.log(tokenPos)
     var tokens = util.fixTokens(tokenPos,file)
-    
+    console.log(tokens)
 }
 
 function cli() {
