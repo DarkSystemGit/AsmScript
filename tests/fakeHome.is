@@ -1,7 +1,10 @@
 while(true){
+
     var input;
-    var input=1;
+    var input="test";
     input("",input);
     disp(randInt(1,E3));
+    ar input="test";
 };
-
+"true"
+var input="test";
