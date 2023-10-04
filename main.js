@@ -9,7 +9,7 @@ const tokenMap = {
     "^": "xor",
     "{": "then",
     "}": "end",
-    
+
     "true": "1",
     "false": "0",
     "var": "",
@@ -56,7 +56,7 @@ function parse(file) {
                 if(!seq.includes('=')||(seq.indexOf('=')==seq.length-1)){
                     seq=""
                 }else{
-                    seq =seq.replace('=','=>').replace("var","")
+                    seq =seq.replace('=','${//0x>}').replace("var","").trim().split("${//0x>}").reverse().join('=>')
                 }
                 return seq
             }
@@ -104,28 +104,33 @@ function parse(file) {
                 }
             })
         })
-        return locations
+        this.tokenMap = locations
     }
     String.prototype.replaceAt = function(index, replacement,length) {
         return this.substring(0, index) + replacement + this.substring(index + length);
     }
-    Util.prototype.fixTokens=function(tokenPos,fileStr){
-        const fixable=["var"]
-        this.forEach(Object.values(tokenPos),function(tokenList,i){
-            this.forEach(Object.values(tokenList),function(token){
-                
-                if(fixable.includes(Object.keys(tokenPos)[i])){
-                    //console.log(Object.keys(tokenPos))
+    Util.prototype.fixTokens=function(fileStr){
+        //console.log(this.tokenMap)
+        for(var i=0; i<Object.values(this.tokenMap).length;i++){
+            for(var counter=0;counter<=Object.values(Object.values(this.tokenMap)[i]).length;counter++){
+
+                if(Object.keys(this.data.fixTokens).includes(Object.keys(this.tokenMap)[i])){
+                    this.tokenize(tokenMap,fileStr)
+                    var token =Object.values(this.tokenMap)[i][0]
+                    console.log(Object.values(this.tokenMap)[i])
                     var seq=fileStr.split("").slice(token).join('')
-                    console.log(fileStr)
-                    seq=seq.slice(0,seq.indexOf(';')+1)
-                    
-                    if(this.data.fixTokens[Object.keys(tokenPos)[i]]){
-                        fileStr = fileStr.replaceAt(token,this.data.fixTokens[Object.keys(tokenPos)[i]](seq.substring(0,seq.length)),seq.length)
+
+                    seq=seq.slice(0,seq.indexOf(';'))
+                    //console.log(seq,token)
+                    if(this.data.fixTokens[Object.keys(this.tokenMap)[i]]){
+                        fileStr = fileStr.replaceAt(token,this.data.fixTokens[Object.keys(this.tokenMap)[i]](seq.substring(0,seq.length)),seq.length+1)
+
+                    }else{
+
                     }
                 }
-            })
-        })
+            }
+        }
         return fileStr
     }
     //forEach be mean
@@ -135,12 +140,12 @@ function parse(file) {
 			callback.call(thisArg, arr[i], i, arr);
 		}
     }
-    
+
     var util = new Util()
-    const tokenPos = util.tokenize(tokenMap,file)
+    util.tokenize(tokenMap,file)
     //console.log(tokenPos)
-    var tokens = util.fixTokens(tokenPos,file)
-    console.log(tokens)
+    var tokens = util.fixTokens(file)
+    console.log("___________________________________________________________________________\n"+tokens)
 }
 
 function cli() {
