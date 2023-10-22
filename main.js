@@ -117,7 +117,7 @@ function parse(file) {
                 if(Object.keys(this.data.fixTokens).includes(Object.keys(this.tokenMap)[i])){
                     this.tokenize(tokenMap,fileStr)
                     var token =Object.values(this.tokenMap)[i][0]
-                    console.log(Object.values(this.tokenMap)[i])
+                    //console.log(Object.values(this.tokenMap)[i])
                     var seq=fileStr.split("").slice(token).join('')
 
                     seq=seq.slice(0,seq.indexOf(';'))
