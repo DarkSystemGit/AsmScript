@@ -1,7 +1,9 @@
-// Generated from ./antlr/ICEScript by ANTLR 4.13.1
+// Generated from ./antlr/grammars/ICEScript by ANTLR 4.13.1
 // jshint ignore: start
 import antlr4 from 'antlr4';
 import ICEScriptListener from './ICEScriptListener.js';
+import ICEScriptVisitor from './ICEScriptVisitor.js';
+
 const serializedATN = [4,1,45,292,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
 4,2,5,7,5,2,6,7,6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,
 2,13,7,13,2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,
@@ -1481,6 +1483,14 @@ class ScriptContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof ICEScriptVisitor ) {
+	        return visitor.visitScript(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -1527,6 +1537,14 @@ class HeaderContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof ICEScriptVisitor ) {
+	        return visitor.visitHeader(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -1560,6 +1578,14 @@ class MetaContext extends antlr4.ParserRuleContext {
 	    if(listener instanceof ICEScriptListener ) {
 	        listener.exitMeta(this);
 		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof ICEScriptVisitor ) {
+	        return visitor.visitMeta(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
 	}
 
 
@@ -1601,6 +1627,14 @@ class ScriptNameContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof ICEScriptVisitor ) {
+	        return visitor.visitScriptName(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -1638,6 +1672,14 @@ class IncludeContext extends antlr4.ParserRuleContext {
 	    if(listener instanceof ICEScriptListener ) {
 	        listener.exitInclude(this);
 		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof ICEScriptVisitor ) {
+	        return visitor.visitInclude(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
 	}
 
 
@@ -1695,6 +1737,14 @@ class FunctionContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof ICEScriptVisitor ) {
+	        return visitor.visitFunction(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -1735,6 +1785,14 @@ class Func_paramsContext extends antlr4.ParserRuleContext {
 	    if(listener instanceof ICEScriptListener ) {
 	        listener.exitFunc_params(this);
 		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof ICEScriptVisitor ) {
+	        return visitor.visitFunc_params(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
 	}
 
 
@@ -1843,6 +1901,14 @@ class StatementContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof ICEScriptVisitor ) {
+	        return visitor.visitStatement(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -1890,6 +1956,14 @@ class Assign_stmtContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof ICEScriptVisitor ) {
+	        return visitor.visitAssign_stmt(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -1933,6 +2007,14 @@ class Ti_basic_stmtContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof ICEScriptVisitor ) {
+	        return visitor.visitTi_basic_stmt(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -1963,6 +2045,14 @@ class AnyContext extends antlr4.ParserRuleContext {
 	    if(listener instanceof ICEScriptListener ) {
 	        listener.exitAny(this);
 		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof ICEScriptVisitor ) {
+	        return visitor.visitAny(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
 	}
 
 
@@ -2012,6 +2102,14 @@ class Add_assign_stmtContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof ICEScriptVisitor ) {
+	        return visitor.visitAdd_assign_stmt(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -2057,6 +2155,14 @@ class Sub_assign_stmtContext extends antlr4.ParserRuleContext {
 	    if(listener instanceof ICEScriptListener ) {
 	        listener.exitSub_assign_stmt(this);
 		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof ICEScriptVisitor ) {
+	        return visitor.visitSub_assign_stmt(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
 	}
 
 
@@ -2106,6 +2212,14 @@ class Mul_assign_stmtContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof ICEScriptVisitor ) {
+	        return visitor.visitMul_assign_stmt(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -2153,6 +2267,14 @@ class Div_assign_stmtContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof ICEScriptVisitor ) {
+	        return visitor.visitDiv_assign_stmt(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -2196,6 +2318,14 @@ class Inc_stmtContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof ICEScriptVisitor ) {
+	        return visitor.visitInc_stmt(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -2237,6 +2367,14 @@ class Dec_stmtContext extends antlr4.ParserRuleContext {
 	    if(listener instanceof ICEScriptListener ) {
 	        listener.exitDec_stmt(this);
 		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof ICEScriptVisitor ) {
+	        return visitor.visitDec_stmt(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
 	}
 
 
@@ -2290,6 +2428,14 @@ class If_stmtContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof ICEScriptVisitor ) {
+	        return visitor.visitIf_stmt(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -2339,6 +2485,14 @@ class While_stmtContext extends antlr4.ParserRuleContext {
 	    if(listener instanceof ICEScriptListener ) {
 	        listener.exitWhile_stmt(this);
 		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof ICEScriptVisitor ) {
+	        return visitor.visitWhile_stmt(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
 	}
 
 
@@ -2392,6 +2546,14 @@ class Var_stmtContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof ICEScriptVisitor ) {
+	        return visitor.visitVar_stmt(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -2433,6 +2595,14 @@ class Return_stmtContext extends antlr4.ParserRuleContext {
 	    if(listener instanceof ICEScriptListener ) {
 	        listener.exitReturn_stmt(this);
 		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof ICEScriptVisitor ) {
+	        return visitor.visitReturn_stmt(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
 	}
 
 
@@ -2517,6 +2687,14 @@ class ExpressionContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof ICEScriptVisitor ) {
+	        return visitor.visitExpression(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -2596,6 +2774,14 @@ class BoolexprContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof ICEScriptVisitor ) {
+	        return visitor.visitBoolexpr(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -2643,6 +2829,14 @@ class MethodcallContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof ICEScriptVisitor ) {
+	        return visitor.visitMethodcall(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -2685,6 +2879,14 @@ class MethodparamsContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof ICEScriptVisitor ) {
+	        return visitor.visitMethodparams(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -2724,6 +2926,14 @@ class ValueContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof ICEScriptVisitor ) {
+	        return visitor.visitValue(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -2757,6 +2967,14 @@ class IdentifierContext extends antlr4.ParserRuleContext {
 	    if(listener instanceof ICEScriptListener ) {
 	        listener.exitIdentifier(this);
 		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof ICEScriptVisitor ) {
+	        return visitor.visitIdentifier(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
 	}
 
 
@@ -2804,6 +3022,14 @@ class NumberContext extends antlr4.ParserRuleContext {
 	    if(listener instanceof ICEScriptListener ) {
 	        listener.exitNumber(this);
 		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof ICEScriptVisitor ) {
+	        return visitor.visitNumber(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
 	}
 
 

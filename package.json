@@ -1,0 +1,29 @@
+{
+  "name": "icescript",
+  "version": "1.0.0",
+  "description": "A JS like language for The TI84PCE",
+  "main": "main.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "start":"node ./main.js",
+    "test": "npm run clean; npm run compile && npm start",
+    "compile": "antlr4 -visitor -o ./antlr/parsers -lib ./antlr/grammars -Dlanguage=JavaScript ./antlr/grammars/TiB && antlr4 -o ./antlr/parsers -lib ./antlr/grammars -visitor -Dlanguage=JavaScript  ./antlr/grammars/ICEScript",
+"clean":"rm ./antlr/* && rm ./antlr/parsers/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/DarkSystemGit/ICEScript"
+  },
+  "keywords": [
+    "ICEScript",
+    "JS",
+    "TI84"
+  ],
+  "author": "darksystem",
+  "license": "MIT",
+  "dependencies": {
+    "antlr4": "^4.13.1"
+  }
+}

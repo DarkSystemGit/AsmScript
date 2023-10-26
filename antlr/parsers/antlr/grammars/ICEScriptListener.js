@@ -1,4 +1,4 @@
-// Generated from ./antlr/ICEScript by ANTLR 4.13.1
+// Generated from ./antlr/grammars/ICEScript by ANTLR 4.13.1
 // jshint ignore: start
 import antlr4 from 'antlr4';
 

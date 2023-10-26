@@ -1,4 +1,4 @@
-// Generated from /workspaces/ICEScript/antlr/TiB.g4 by ANTLR 4.13.1
+// Generated from /workspaces/ICEScript/antlr/TiB by ANTLR 4.13.1
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -87,7 +87,7 @@ public class TiBParser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "TiB.g4"; }
+	public String getGrammarFileName() { return "TiB"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }

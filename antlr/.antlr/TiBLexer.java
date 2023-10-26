@@ -1,4 +1,4 @@
-// Generated from /workspaces/ICEScript/antlr/TiB.g4 by ANTLR 4.13.1
+// Generated from /workspaces/ICEScript/antlr/TiB by ANTLR 4.13.1
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
@@ -94,7 +94,7 @@ public class TiBLexer extends Lexer {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "TiB.g4"; }
+	public String getGrammarFileName() { return "TiB"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }

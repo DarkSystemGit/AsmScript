@@ -138,6 +138,14 @@ public class ICEScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_script; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).enterScript(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).exitScript(this);
+		}
 	}
 
 	public final ScriptContext script() throws RecognitionException {
@@ -220,6 +228,14 @@ public class ICEScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_header; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).enterHeader(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).exitHeader(this);
+		}
 	}
 
 	public final HeaderContext header() throws RecognitionException {
@@ -267,6 +283,14 @@ public class ICEScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_meta; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).enterMeta(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).exitMeta(this);
+		}
 	}
 
 	public final MetaContext meta() throws RecognitionException {
@@ -300,6 +324,14 @@ public class ICEScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_scriptName; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).enterScriptName(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).exitScriptName(this);
+		}
 	}
 
 	public final ScriptNameContext scriptName() throws RecognitionException {
@@ -337,6 +369,14 @@ public class ICEScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_include; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).enterInclude(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).exitInclude(this);
+		}
 	}
 
 	public final IncludeContext include() throws RecognitionException {
@@ -382,6 +422,14 @@ public class ICEScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_function; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).enterFunction(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).exitFunction(this);
+		}
 	}
 
 	public final FunctionContext function() throws RecognitionException {
@@ -427,6 +475,14 @@ public class ICEScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_func_params; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).enterFunc_params(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).exitFunc_params(this);
+		}
 	}
 
 	public final Func_paramsContext func_params() throws RecognitionException {
@@ -533,6 +589,14 @@ public class ICEScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_statement; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).enterStatement(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).exitStatement(this);
+		}
 	}
 
 	public final StatementContext statement() throws RecognitionException {
@@ -693,6 +757,14 @@ public class ICEScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_assign_stmt; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).enterAssign_stmt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).exitAssign_stmt(this);
+		}
 	}
 
 	public final Assign_stmtContext assign_stmt() throws RecognitionException {
@@ -733,6 +805,14 @@ public class ICEScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_ti_basic_stmt; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).enterTi_basic_stmt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).exitTi_basic_stmt(this);
+		}
 	}
 
 	public final Ti_basic_stmtContext ti_basic_stmt() throws RecognitionException {
@@ -768,6 +848,14 @@ public class ICEScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_any; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).enterAny(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).exitAny(this);
+		}
 	}
 
 	public final AnyContext any() throws RecognitionException {
@@ -824,6 +912,14 @@ public class ICEScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_add_assign_stmt; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).enterAdd_assign_stmt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).exitAdd_assign_stmt(this);
+		}
 	}
 
 	public final Add_assign_stmtContext add_assign_stmt() throws RecognitionException {
@@ -867,6 +963,14 @@ public class ICEScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_sub_assign_stmt; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).enterSub_assign_stmt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).exitSub_assign_stmt(this);
+		}
 	}
 
 	public final Sub_assign_stmtContext sub_assign_stmt() throws RecognitionException {
@@ -910,6 +1014,14 @@ public class ICEScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_mul_assign_stmt; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).enterMul_assign_stmt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).exitMul_assign_stmt(this);
+		}
 	}
 
 	public final Mul_assign_stmtContext mul_assign_stmt() throws RecognitionException {
@@ -953,6 +1065,14 @@ public class ICEScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_div_assign_stmt; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).enterDiv_assign_stmt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).exitDiv_assign_stmt(this);
+		}
 	}
 
 	public final Div_assign_stmtContext div_assign_stmt() throws RecognitionException {
@@ -993,6 +1113,14 @@ public class ICEScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_inc_stmt; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).enterInc_stmt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).exitInc_stmt(this);
+		}
 	}
 
 	public final Inc_stmtContext inc_stmt() throws RecognitionException {
@@ -1031,6 +1159,14 @@ public class ICEScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_dec_stmt; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).enterDec_stmt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).exitDec_stmt(this);
+		}
 	}
 
 	public final Dec_stmtContext dec_stmt() throws RecognitionException {
@@ -1073,6 +1209,14 @@ public class ICEScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_if_stmt; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).enterIf_stmt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).exitIf_stmt(this);
+		}
 	}
 
 	public final If_stmtContext if_stmt() throws RecognitionException {
@@ -1119,6 +1263,14 @@ public class ICEScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_while_stmt; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).enterWhile_stmt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).exitWhile_stmt(this);
+		}
 	}
 
 	public final While_stmtContext while_stmt() throws RecognitionException {
@@ -1165,6 +1317,14 @@ public class ICEScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_var_stmt; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).enterVar_stmt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).exitVar_stmt(this);
+		}
 	}
 
 	public final Var_stmtContext var_stmt() throws RecognitionException {
@@ -1207,6 +1367,14 @@ public class ICEScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_return_stmt; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).enterReturn_stmt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).exitReturn_stmt(this);
+		}
 	}
 
 	public final Return_stmtContext return_stmt() throws RecognitionException {
@@ -1262,6 +1430,14 @@ public class ICEScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_expression; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).enterExpression(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).exitExpression(this);
+		}
 	}
 
 	public final ExpressionContext expression() throws RecognitionException {
@@ -1419,6 +1595,14 @@ public class ICEScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_boolexpr; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).enterBoolexpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).exitBoolexpr(this);
+		}
 	}
 
 	public final BoolexprContext boolexpr() throws RecognitionException {
@@ -1564,6 +1748,14 @@ public class ICEScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_methodcall; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).enterMethodcall(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).exitMethodcall(this);
+		}
 	}
 
 	public final MethodcallContext methodcall() throws RecognitionException {
@@ -1605,6 +1797,14 @@ public class ICEScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_methodparams; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).enterMethodparams(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).exitMethodparams(this);
+		}
 	}
 
 	public final MethodparamsContext methodparams() throws RecognitionException {
@@ -1669,6 +1869,14 @@ public class ICEScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_value; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).enterValue(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).exitValue(this);
+		}
 	}
 
 	public final ValueContext value() throws RecognitionException {
@@ -1717,6 +1925,14 @@ public class ICEScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_identifier; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).enterIdentifier(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).exitIdentifier(this);
+		}
 	}
 
 	public final IdentifierContext identifier() throws RecognitionException {
@@ -1750,6 +1966,14 @@ public class ICEScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_number; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).enterNumber(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICEScriptListener ) ((ICEScriptListener)listener).exitNumber(this);
+		}
 	}
 
 	public final NumberContext number() throws RecognitionException {
