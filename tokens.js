@@ -1,4 +1,6 @@
-export default tokens ={
+export default tokens=function (){
+this.stack=[]
+this.tokens ={
     TO_DMS:[0x1, "TO_DMS"],
 	TO_DEC:[0x2, ">DEC"],
 	TO_FRAC:[0x3, ">FRAC"],
@@ -93,3 +95,12 @@ export default tokens ={
 	DISP:[0xDE, "DISP"],
 	CLR_LIST:[0xFA, "CLR_LIST"],
 }
+}
+tokens.prototype.push=(token)=>{
+	this.stack.push(this.tokens[token.toUpperCase()][0])
+}
+tokens.prototype.toString=()=>{
+	return this.stack.join('')
+}
+
+
