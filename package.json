@@ -9,9 +9,11 @@
   "type":"module",
   "scripts": {
     "start":"node ./main.js",
-    "test": "npm run clean; npm run compile && npm start",
-    "compile": "antlr4 -visitor -o ./antlr/parsers -lib ./antlr/grammars -Dlanguage=JavaScript ./antlr/grammars/TiB && antlr4 -o ./antlr/parsers -lib ./antlr/grammars -visitor -Dlanguage=JavaScript  ./antlr/grammars/ICEScript",
-"clean":"rm ./antlr/* && rm ./antlr/parsers/*"
+    "build": "cd ~/ICEScript&& npm run clean; npm run compileVisitor && npm start ./tests/fakeHome.is",
+    "test":"cd ~/ICEScript&&npm start ./tests/fakeHome.is",
+    "compileVisitor": "antlr4 -visitor -o ./antlr/parsers -lib ./antlr/grammars -Dlanguage=JavaScript ./antlr/grammars/TiB && antlr4 -o ./antlr/parsers -lib ./antlr/grammars -visitor -Dlanguage=JavaScript  ./antlr/grammars/ICEScript",
+"clean":"rm ./antlr/* && rm -r ./antlr/parsers/antlr           ",
+"compile":"antlr4  -o ./antlr/parsers -lib ./antlr/grammars -Dlanguage=JavaScript ./antlr/grammars/TiB && antlr4 -o ./antlr/parsers -lib ./antlr/grammars  -Dlanguage=JavaScript  ./antlr/grammars/ICEScript"
   },
   "repository": {
     "type": "git",

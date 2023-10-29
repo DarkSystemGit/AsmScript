@@ -1,4 +1,4 @@
-name:fakeHome;
+
 while(true){
     var input="test";
     input("",input);
