@@ -1,10 +1,7 @@
+name:fakeHome;
 while(true){
-
-    var input;
     var input="test";
     input("",input);
-    disp(randInt(1,E3));
-    ar input="test";
+    disp(randInt(0-input,input)+input);
 };
-"true"
-var input="test";
+

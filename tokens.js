@@ -1,4 +1,4 @@
-export default tokens=function (){
+var tokens=function (){
 this.stack=[]
 this.tokens ={
     TO_DMS:[0x1, "TO_DMS"],
@@ -102,5 +102,6 @@ tokens.prototype.push=(token)=>{
 tokens.prototype.toString=()=>{
 	return this.stack.join('')
 }
+export default tokens
 
 
