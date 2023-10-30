@@ -97,7 +97,7 @@ this.tokens ={
 }
 }
 tokens.prototype.push=(token)=>{
-	this.stack.push(this.tokens[token.toUpperCase()][0])
+	this.stack.push(this.tokens[token.toUpperCase()])
 }
 tokens.prototype.toString=()=>{
 	return this.stack.join('')

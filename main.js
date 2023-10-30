@@ -12,7 +12,13 @@ function handler(token,ctx,context){
         "&":"and",
         "||":"or",
         "!!":"not",
-        "=":"=>"
+        "=":"=>",
+        "var":(ctx)=>{
+            this.data.vars=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","[theta]"]
+            this.data.InUseVars=this.data.InUseVars||[]
+            const val =ctx.getProperty('expression')
+            return `${val}=>${this.data.vars[this.data.InUseVars.length+1]}`
+        }
     }
     console.log(token,ctx.getText(), children)
     if(handlers.hasOwnProperty(token)){
