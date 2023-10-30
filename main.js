@@ -6,13 +6,15 @@ import tokens from "./tokens.js";
 import {readFileSync,writeFileSync} from 'fs'
 //console.log(readFileSync(process.argv[2]))
 
-function handler(token,ctx){
+function handler(token,ctx,context){
+    var children = context.visitChildren(ctx)
     var handlers={
         "&":"and",
         "||":"or",
-        "!!":"not"
+        "!!":"not",
+        "=":"=>"
     }
-    console.log(token,ctx.getText())
+    console.log(token,ctx.getText(), children)
     if(handlers.hasOwnProperty(token)){
         if(typeof handlers[token]=="Function"){
             return handlers[token](ctx)
@@ -43,49 +45,49 @@ class Visitor extends ICEScriptVisitor{
     	// Visit a parse tree produced by ICEScriptParser#header.
 	visitHeader(ctx) {
 
-	  this.visitChildren(ctx);return handler("head",ctx);
+	  return handler("head",ctx,this);
 	}
 
 
 	// Visit a parse tree produced by ICEScriptParser#meta.
 	visitMeta(ctx) {
-	  this.visitChildren(ctx);return handler("meta",ctx);
+	  return handler("meta",ctx,this);
 	}
 
 
 	// Visit a parse tree produced by ICEScriptParser#scriptName.
 	visitScriptName(ctx) {
-	  this.visitChildren(ctx);return handler("scriptName",ctx);
+	  return handler("scriptName",ctx,this);
 	}
 
 
 	// Visit a parse tree produced by ICEScriptParser#include.
 	visitInclude(ctx) {
-	  this.visitChildren(ctx);return handler("import",ctx);
+	  return handler("import",ctx,this);
 	}
 
 
 	// Visit a parse tree produced by ICEScriptParser#function.
 	visitFunction(ctx) {
-	  this.visitChildren(ctx);return handler("function",ctx);
+	  return handler("function",ctx,this);
 	}
 
 
 	// Visit a parse tree produced by ICEScriptParser#func_params.
 	visitFunc_params(ctx) {
-	  this.visitChildren(ctx);return handler("funcPrams",ctx);
+	  return handler("funcPrams",ctx,this);
 	}
 
 
 	// Visit a parse tree produced by ICEScriptParser#assign_stmt.
 	visitAssign_stmt(ctx) {
-	  this.visitChildren(ctx);return handler("assign",ctx);
+	  return handler("assign",ctx,this);
 	}
 
 
 	// Visit a parse tree produced by ICEScriptParser#ti_basic_stmt.
 	visitTi_basic_stmt(ctx) {
-	  this.visitChildren(ctx);return handler("tibStmt",ctx);
+	  return handler("tibStmt",ctx,this);
 	}
 
 
@@ -94,61 +96,61 @@ class Visitor extends ICEScriptVisitor{
 
 	// Visit a parse tree produced by ICEScriptParser#add_assign_stmt.
 	visitAdd_assign_stmt(ctx) {
-	  this.visitChildren(ctx);return handler("addAssign",ctx);
+	  return handler("addAssign",ctx,this);
 	}
 
 
 	// Visit a parse tree produced by ICEScriptParser#sub_assign_stmt.
 	visitSub_assign_stmt(ctx) {
-	  this.visitChildren(ctx);return handler("subAssign",ctx);
+	  return handler("subAssign",ctx,this);
 	}
 
 
 	// Visit a parse tree produced by ICEScriptParser#mul_assign_stmt.
 	visitMul_assign_stmt(ctx) {
-	  this.visitChildren(ctx);return handler("mulAssign",ctx);
+	  return handler("mulAssign",ctx,this);
 	}
 
 
 	// Visit a parse tree produced by ICEScriptParser#div_assign_stmt.
 	visitDiv_assign_stmt(ctx) {
-	  this.visitChildren(ctx);return handler("divAssign",ctx);
+	  return handler("divAssign",ctx,this);
 	}
 
 
 	// Visit a parse tree produced by ICEScriptParser#inc_stmt.
 	visitInc_stmt(ctx) {
-	  this.visitChildren(ctx);return handler("inc",ctx);
+	  return handler("inc",ctx,this);
 	}
 
 
 	// Visit a parse tree produced by ICEScriptParser#dec_stmt.
 	visitDec_stmt(ctx) {
-	  this.visitChildren(ctx);return handler("dec",ctx);
+	  return handler("dec",ctx,this);
 	}
 
 
 	// Visit a parse tree produced by ICEScriptParser#if_stmt.
 	visitIf_stmt(ctx) {
-	  this.visitChildren(ctx);return handler("if",ctx);
+	  return handler("if",ctx,this);
 	}
 
 
 	// Visit a parse tree produced by ICEScriptParser#while_stmt.
 	visitWhile_stmt(ctx) {
-	  this.visitChildren(ctx);return handler("while",ctx);
+	  return handler("while",ctx,this);
 	}
 
 
 	// Visit a parse tree produced by ICEScriptParser#var_stmt.
 	visitVar_stmt(ctx) {
-	  this.visitChildren(ctx);return handler("var",ctx);
+	  return handler("var",ctx,this);
 	}
 
 
 	// Visit a parse tree produced by ICEScriptParser#return_stmt.
 	visitReturn_stmt(ctx) {
-	  this.visitChildren(ctx);return handler("return",ctx);
+	  return handler("return",ctx,this);
 	}
 
 
@@ -157,19 +159,19 @@ class Visitor extends ICEScriptVisitor{
 
 	// Visit a parse tree produced by ICEScriptParser#boolexpr.
 	visitBoolexpr(ctx) {
-	  this.visitChildren(ctx);return handler("bool",ctx);
+	  return handler("bool",ctx,this);
 	}
 
 
 	// Visit a parse tree produced by ICEScriptParser#methodcall.
 	visitMethodcall(ctx) {
-	  this.visitChildren(ctx);return handler("methodCall",ctx);
+	  return handler("methodCall",ctx,this);
 	}
 
 
 	// Visit a parse tree produced by ICEScriptParser#methodparams.
 	visitMethodparams(ctx) {
-	  this.visitChildren(ctx);return handler("funcParams",ctx);
+	  return handler("funcParams",ctx,this);
 	}
 }
 //console.log(tree.toStringTree(parser.ruleNames))
