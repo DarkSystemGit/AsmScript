@@ -14,10 +14,12 @@ function handler(token,ctx,context){
         "!!":"not",
         "=":"=>",
         "var":(ctx)=>{
-            this.data.vars=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","[theta]"]
-            this.data.InUseVars=this.data.InUseVars||[]
+            this.data.var.num=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+			this.data.var.list = JSON.parse(JSON.stringify(this.data.var.num))
+			this.data.var.matrix=["A","B","C","D","E","F","G","H","I","J"]
+            this.data.InUseVars=this.data.InUseVars||{}
             const val =ctx.getProperty('expression')
-            return `${val}=>${this.data.vars[this.data.InUseVars.length+1]}`
+            
         }
     }
     console.log(token,ctx.getText(), children)

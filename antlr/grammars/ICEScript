@@ -55,6 +55,12 @@ assign_stmt
 ti_basic_stmt
     : '__TiBasic' '{' any '}'
     ;
+list 
+	:'[' any ']'
+	;
+matrix
+	:'[[' any ']'any ']'
+	;
 any : ( . )+?;
 add_assign_stmt
 	: identifier ADDASSIGN value END_STMT
