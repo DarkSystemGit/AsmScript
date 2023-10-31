@@ -21,9 +21,23 @@ function handler(token,ctx,context){
 			this.data.var.list = this.data.var.list||{"A":"","B":"","C":"","D":"","E":"","F":"","G":"","H":"","I":"","J":"","K":"","L":"","M":"","N":"","O":"","P":"","Q":"","R":"","S":"","T":"","U":"","V":"","W":"","X":"","Y":"","Z":""}
 			this.data.var.matrix=this.data.var.matrix||{"A":"","B":"","C":"","D":"","E":"","F":"","G":"","H":"","I":"","J":""}
             const val =ctx.expression()
-            if(val.getText()[0]=='"'){
-
-            }
+            if((val.getText()[0]=='"')||(!!(+val.getText()==NaN))){
+				var index=0
+				Object.values(this.data.var.num).forEach((elm,i)=>{if((elm=="")&&(index==0)){index=i}})
+				this.data.var.num[Object.keys(this.data.var.num)[index]]=ctx.identifier().getText()
+				return `${val.getText()}=>${Object.keys(this.data.var.num)[index]}`
+            }else if((val.getText()[0]=='[')&&(!!(val.getText()[1]=='['))){
+				var index=0
+				Object.values(this.data.var.list).forEach((elm,i)=>{if((elm=="")&&(index==0)){index=i}})
+				var list=ctx.identifier().getText().replace('[','')
+				list[list.length-1]=""
+				list=list.split(',').join('')
+				if(!!(+list==NaN)){
+					his.data.var.list[Object.keys(this.data.var.list)[index+1]]=ctx.identifier().getText()
+				}
+				this.data.var.list[Object.keys(this.data.var.list)[index]]=ctx.identifier().getText()
+				var ret=`${val.getText()}=>${Object.keys(this.data.var.num)[index]}`
+			}
             return ""
         }
     }
