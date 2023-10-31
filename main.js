@@ -13,18 +13,25 @@ function handler(token,ctx,context){
         "||":"or",
         "!!":"not",
         "=":"=>",
-        "var":(ctx)=>{
-            this.data.var.num=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
-			this.data.var.list = JSON.parse(JSON.stringify(this.data.var.num))
-			this.data.var.matrix=["A","B","C","D","E","F","G","H","I","J"]
-            this.data.InUseVars=this.data.InUseVars||{}
-            const val =ctx.getProperty('expression')
-            
+        "var":function(ctx){
+            //console.log(this)
+            this.data=this.data||{}
+            this.data.var=this.data.var||{}
+            this.data.var.num=this.data.var.num||{"A":"","B":"","C":"","D":"","E":"","F":"","G":"","H":"","I":"","J":"","K":"","L":"","M":"","N":"","O":"","P":"","Q":"","R":"","S":"","T":"","U":"","V":"","W":"","X":"","Y":"","Z":""}
+			this.data.var.list = this.data.var.list||{"A":"","B":"","C":"","D":"","E":"","F":"","G":"","H":"","I":"","J":"","K":"","L":"","M":"","N":"","O":"","P":"","Q":"","R":"","S":"","T":"","U":"","V":"","W":"","X":"","Y":"","Z":""}
+			this.data.var.matrix=this.data.var.matrix||{"A":"","B":"","C":"","D":"","E":"","F":"","G":"","H":"","I":"","J":""}
+            const val =ctx.expression()
+            if(val.getText()[0]=='"'){
+
+            }
+            return ""
         }
     }
     console.log(token,ctx.getText(), children)
+
     if(handlers.hasOwnProperty(token)){
-        if(typeof handlers[token]=="Function"){
+        console.log(typeof handlers[token])
+        if(typeof handlers[token]=="function"){
             return handlers[token](ctx)
         }else{
             return handlers[token]
@@ -152,6 +159,7 @@ class Visitor extends ICEScriptVisitor{
 
 	// Visit a parse tree produced by ICEScriptParser#var_stmt.
 	visitVar_stmt(ctx) {
+
 	  return handler("var",ctx,this);
 	}
 
@@ -173,6 +181,7 @@ class Visitor extends ICEScriptVisitor{
 
 	// Visit a parse tree produced by ICEScriptParser#methodcall.
 	visitMethodcall(ctx) {
+
 	  return handler("methodCall",ctx,this);
 	}
 
@@ -189,4 +198,4 @@ const tokenstr = new antlr4.CommonTokenStream(lexer);
 const parser = new ICEScriptParser(tokenstr);
 const tree = parser.script();
 var out =new Visitor().start(tree)
-//console.log(tree.toStringTree(parser.ruleNames))
+console.log(out)

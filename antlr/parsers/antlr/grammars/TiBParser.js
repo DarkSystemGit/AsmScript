@@ -2,6 +2,8 @@
 // jshint ignore: start
 import antlr4 from 'antlr4';
 import TiBListener from './TiBListener.js';
+import TiBVisitor from './TiBVisitor.js';
+
 const serializedATN = [4,1,25,127,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
 4,2,5,7,5,2,6,7,6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,
 2,13,7,13,2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,
@@ -857,6 +859,14 @@ class ScriptContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof TiBVisitor ) {
+	        return visitor.visitScript(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -976,6 +986,14 @@ class TokenContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof TiBVisitor ) {
+	        return visitor.visitToken(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -1006,6 +1024,14 @@ class DispContext extends antlr4.ParserRuleContext {
 	    if(listener instanceof TiBListener ) {
 	        listener.exitDisp(this);
 		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof TiBVisitor ) {
+	        return visitor.visitDisp(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
 	}
 
 
@@ -1040,6 +1066,14 @@ class InputContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof TiBVisitor ) {
+	        return visitor.visitInput(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -1070,6 +1104,14 @@ class StoreContext extends antlr4.ParserRuleContext {
 	    if(listener instanceof TiBListener ) {
 	        listener.exitStore(this);
 		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof TiBVisitor ) {
+	        return visitor.visitStore(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
 	}
 
 
@@ -1104,6 +1146,14 @@ class If_Context extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof TiBVisitor ) {
+	        return visitor.visitIf_(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -1136,6 +1186,14 @@ class ThenContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof TiBVisitor ) {
+	        return visitor.visitThen(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -1166,6 +1224,14 @@ class EndContext extends antlr4.ParserRuleContext {
 	    if(listener instanceof TiBListener ) {
 	        listener.exitEnd(this);
 		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof TiBVisitor ) {
+	        return visitor.visitEnd(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
 	}
 
 
@@ -1203,6 +1269,14 @@ class ListContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof TiBVisitor ) {
+	        return visitor.visitList(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -1235,6 +1309,14 @@ class SpaceContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof TiBVisitor ) {
+	        return visitor.visitSpace(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -1265,6 +1347,14 @@ class QuoteContext extends antlr4.ParserRuleContext {
 	    if(listener instanceof TiBListener ) {
 	        listener.exitQuote(this);
 		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof TiBVisitor ) {
+	        return visitor.visitQuote(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
 	}
 
 
@@ -1302,6 +1392,14 @@ class LetterContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof TiBVisitor ) {
+	        return visitor.visitLetter(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -1332,6 +1430,14 @@ class ColonContext extends antlr4.ParserRuleContext {
 	    if(listener instanceof TiBListener ) {
 	        listener.exitColon(this);
 		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof TiBVisitor ) {
+	        return visitor.visitColon(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
 	}
 
 
@@ -1366,6 +1472,14 @@ class SemicolonContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof TiBVisitor ) {
+	        return visitor.visitSemicolon(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -1396,6 +1510,14 @@ class CommaContext extends antlr4.ParserRuleContext {
 	    if(listener instanceof TiBListener ) {
 	        listener.exitComma(this);
 		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof TiBVisitor ) {
+	        return visitor.visitComma(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
 	}
 
 
@@ -1430,6 +1552,14 @@ class PeriodContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof TiBVisitor ) {
+	        return visitor.visitPeriod(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -1460,6 +1590,14 @@ class Open_bracketContext extends antlr4.ParserRuleContext {
 	    if(listener instanceof TiBListener ) {
 	        listener.exitOpen_bracket(this);
 		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof TiBVisitor ) {
+	        return visitor.visitOpen_bracket(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
 	}
 
 
@@ -1494,6 +1632,14 @@ class Close_bracketContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof TiBVisitor ) {
+	        return visitor.visitClose_bracket(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -1524,6 +1670,14 @@ class EqualsContext extends antlr4.ParserRuleContext {
 	    if(listener instanceof TiBListener ) {
 	        listener.exitEquals(this);
 		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof TiBVisitor ) {
+	        return visitor.visitEquals(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
 	}
 
 
@@ -1561,6 +1715,14 @@ class NumberContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof TiBVisitor ) {
+	        return visitor.visitNumber(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -1591,6 +1753,14 @@ class PiContext extends antlr4.ParserRuleContext {
 	    if(listener instanceof TiBListener ) {
 	        listener.exitPi(this);
 		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof TiBVisitor ) {
+	        return visitor.visitPi(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
 	}
 
 
@@ -1625,6 +1795,14 @@ class EContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof TiBVisitor ) {
+	        return visitor.visitE(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -1657,6 +1835,14 @@ class IContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof TiBVisitor ) {
+	        return visitor.visitI(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -1687,6 +1873,14 @@ class NewlineContext extends antlr4.ParserRuleContext {
 	    if(listener instanceof TiBListener ) {
 	        listener.exitNewline(this);
 		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof TiBVisitor ) {
+	        return visitor.visitNewline(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
 	}
 
 

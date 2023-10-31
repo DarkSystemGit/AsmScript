@@ -61,6 +61,9 @@ list
 matrix
 	:'[[' any ']'any ']'
 	;
+string
+	:'"' any '"'
+	;
 any : ( . )+?;
 add_assign_stmt
 	: identifier ADDASSIGN value END_STMT
