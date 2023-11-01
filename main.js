@@ -18,7 +18,7 @@ function handler(token,ctx,context){
             this.data=this.data||{}
             this.data.var=this.data.var||{}
             this.data.var.num=this.data.var.num||{"A":"","B":"","C":"","D":"","E":"","F":"","G":"","H":"","I":"","J":"","K":"","L":"","M":"","N":"","O":"","P":"","Q":"","R":"","S":"","T":"","U":"","V":"","W":"","X":"","Y":"","Z":""}
-			this.data.var.list = this.data.var.list||{"A":"","B":"","C":"","D":"","E":"","F":"","G":"","H":"","I":"","J":"","K":"","L":"","M":"","N":"","O":"","P":"","Q":"","R":"","S":"","T":"","U":"","V":"","W":"","X":"","Y":"","Z":""}
+			this.data.var.list = this.data.var.list||{"A":"","B":"","C":"","D":"","E":"","F":"","G":"","H":"","I":"","J":"","K":"","L":"","M":"","N":"","O":"","P":"","Q":"","R":"","S":"","T":"","U":"","V":"","W":"","X":"","Y":"","Z":"","Str0":"","Str1":"","Str2":"","Str3":"","Str4":"","Str5":"","Str6":"","Str7":"","Str8":"","Str9":""}
 			this.data.var.matrix=this.data.var.matrix||{"A":"","B":"","C":"","D":"","E":"","F":"","G":"","H":"","I":"","J":""}
             const val =ctx.expression()
             if((val.getText()[0]=='"')||(!!(+val.getText()==NaN))){
@@ -28,15 +28,18 @@ function handler(token,ctx,context){
 				return `${val.getText()}=>${Object.keys(this.data.var.num)[index]}`
             }else if((val.getText()[0]=='[')&&(!!(val.getText()[1]=='['))){
 				var index=0
-				Object.values(this.data.var.list).forEach((elm,i)=>{if((elm=="")&&(index==0)){index=i}})
+				var strIndex=0
+				Object.values(this.data.var.list).forEach((elm,i)=>{if((elm=="")&&(index==0)&&(index<=26)){index=i}})
+                Object.values(this.data.var.list).forEach((elm,i)=>{if((elm=="")&&(index==0)&&(index>26)){strIndex=i}})
 				var list=ctx.identifier().getText().replace('[','')
 				list[list.length-1]=""
 				list=list.split(',').join('')
-				if(!!(+list==NaN)){
-					his.data.var.list[Object.keys(this.data.var.list)[index+1]]=ctx.identifier().getText()
-				}
-				this.data.var.list[Object.keys(this.data.var.list)[index]]=ctx.identifier().getText()
-				var ret=`${val.getText()}=>${Object.keys(this.data.var.num)[index]}`
+				if(+list==NaN){
+					this.data.var.list[Object.keys(this.data.var.list)[index+1]]={name:ctx.identifier().getText(),type:"str",strMap:"",val}
+				}else{
+                    this.data.var.list[Object.keys(this.data.var.list)[index]]={name:ctx.identifier().getText(),type:"num",val}
+                }
+
 			}
             return ""
         }
