@@ -79,14 +79,18 @@ function handler(token, ctx, context) {
 			this.data.var.list = this.data.var.list || { "":"","A": "", "B": "", "C": "", "D": "", "E": "", "F": "", "G": "", "H": "", "I": "", "J": "", "K": "", "L": "", "M": "", "N": "", "O": "", "P": "", "Q": "", "R": "", "S": "", "T": "", "U": "", "V": "", "W": "", "X": "", "Y": "", "Z": "", "Str0": "", "Str1": "", "Str2": "", "Str3": "", "Str4": "", "Str5": "", "Str6": "", "Str7": "", "Str8": "", "Str9": "" }
 			this.data.var.matrix = this.data.var.matrix || { "":"","A": "", "B": "", "C": "", "D": "", "E": "", "F": "", "G": "", "H": "", "I": "", "J": "" }
 			const val = ctx.expression()
-			
-			if ((val.getText()[0] == '"') || (!!(+val.getText() == NaN))) {
+
+			if ((val.getText()[0] == '"') || (!(+val.getText() == NaN))) {
 				var index = 0
 				Object.values(this.data.var.num).forEach((elm, i) => { if ((elm == "") && (index == 0)) { index = i } })
 				this.data.var.num[Object.keys(this.data.var.num)[index]] = ctx.identifier().getText()
-				console.log(this.data.var.num)
-				return `${val.getText()}=>${Object.keys(this.data.var.num)[index]}`
-			} else if ((val.getText()[0] == '[') && (!!(val.getText()[1] == '['))) {
+				var list=val.getText().replace('[','{')
+                list =list.split('')
+                list.splice(list.length-1,1)
+                list=list.join('')
+				return `{${list}}=>${Object.keys(this.data.var.num)[index]}`
+			} else if ((val.getText()[0] == '[') && (!(val.getText()[1] == '['))) {
+                //console.log("list")
 				var index = 0
 				var strIndex = 0
 				var res;
@@ -96,8 +100,9 @@ function handler(token, ctx, context) {
 				list[list.length - 1] = ""
 				var strMap= genStrMap(list)
 				list = split(list,',',strMap)
+                //console.log(list)
 				if (+list.join('') == NaN) {
-					this.data.var.list[Object.keys(this.data.var.list)[index]] = { name: ctx.identifier().getText(), type: "str", strMap: Object.keys(this.data.var.list)[strIndex], val,list:Object.keys(this.data.var.list)[index] }
+					this.data.var.list[Object.keys(this.data.var.list)[index]] = { name: ctx.identifier().getText(), type: "str", strMap: Object.keys(this.data.var.list)[strIndex], val:val.getText(),list:Object.keys(this.data.var.list)[index] }
 					var listData = this.data.var.list[Object.keys(this.data.var.list)[index]]
 					var len=[]
 					var listStr=""
@@ -107,8 +112,9 @@ function handler(token, ctx, context) {
 					})
 					return	`{${len.join(',')}}=>${listData.strMap}:{${listStr}}=>${listData.list}`
 				} else {
-					this.data.var.list[Object.keys(this.data.var.list)[index]] = { name: ctx.identifier().getText(), type: "num", val,list:Object.keys(this.data.var.list)[index] }
-					res = val.replace('[', '{')
+					this.data.var.list[Object.keys(this.data.var.list)[index]] = { name: ctx.identifier().getText(), type: "num", val:val.getText(),list:Object.keys(this.data.var.list)[index] }
+					res = val.getText().replace('[', '{')
+                    //console.log(res)
 					res[res.length - 1] = "}"
 					return `${res}=>${Object.keys(this.data.var.list)[index]}`
 				}

@@ -4,7 +4,7 @@ import antlr4 from 'antlr4';
 import ICEScriptListener from './ICEScriptListener.js';
 import ICEScriptVisitor from './ICEScriptVisitor.js';
 
-const serializedATN = [4,1,47,291,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
+const serializedATN = [4,1,47,293,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
 4,2,5,7,5,2,6,7,6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,
 2,13,7,13,2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,
 20,7,20,2,21,7,21,2,22,7,22,2,23,7,23,2,24,7,24,2,25,7,25,2,26,7,26,2,27,
@@ -18,83 +18,84 @@ const serializedATN = [4,1,47,291,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
 1,13,1,13,1,13,1,14,1,14,1,14,1,14,1,14,1,15,1,15,1,15,1,15,1,16,1,16,1,
 16,1,16,1,17,1,17,1,17,1,17,1,17,1,17,1,18,1,18,1,18,1,18,1,18,1,18,1,19,
 1,19,1,19,1,19,1,19,1,19,1,20,1,20,1,20,1,20,1,21,1,21,1,21,1,21,1,21,1,
-21,1,21,1,21,1,21,3,21,209,8,21,1,21,1,21,1,21,1,21,1,21,1,21,1,21,1,21,
-1,21,1,21,1,21,1,21,5,21,223,8,21,10,21,12,21,226,9,21,1,22,1,22,1,22,1,
+21,1,21,1,21,1,21,1,21,1,21,3,21,211,8,21,1,21,1,21,1,21,1,21,1,21,1,21,
+1,21,1,21,1,21,1,21,1,21,1,21,5,21,225,8,21,10,21,12,21,228,9,21,1,22,1,
 22,1,22,1,22,1,22,1,22,1,22,1,22,1,22,1,22,1,22,1,22,1,22,1,22,1,22,1,22,
 1,22,1,22,1,22,1,22,1,22,1,22,1,22,1,22,1,22,1,22,1,22,1,22,1,22,1,22,1,
-22,1,22,1,22,3,22,263,8,22,1,23,1,23,1,23,1,23,1,23,1,24,5,24,271,8,24,10,
-24,12,24,274,9,24,1,24,1,24,5,24,278,8,24,10,24,12,24,281,9,24,1,25,1,25,
-3,25,285,8,25,1,26,1,26,1,27,1,27,1,27,1,147,1,42,28,0,2,4,6,8,10,12,14,
-16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,0,1,1,0,38,41,
-305,0,70,1,0,0,0,2,75,1,0,0,0,4,78,1,0,0,0,6,80,1,0,0,0,8,84,1,0,0,0,10,
-88,1,0,0,0,12,98,1,0,0,0,14,132,1,0,0,0,16,134,1,0,0,0,18,139,1,0,0,0,20,
-145,1,0,0,0,22,149,1,0,0,0,24,154,1,0,0,0,26,159,1,0,0,0,28,164,1,0,0,0,
-30,169,1,0,0,0,32,173,1,0,0,0,34,177,1,0,0,0,36,183,1,0,0,0,38,189,1,0,0,
-0,40,195,1,0,0,0,42,208,1,0,0,0,44,262,1,0,0,0,46,264,1,0,0,0,48,272,1,0,
-0,0,50,284,1,0,0,0,52,286,1,0,0,0,54,288,1,0,0,0,56,60,3,2,1,0,57,59,3,10,
-5,0,58,57,1,0,0,0,59,62,1,0,0,0,60,58,1,0,0,0,60,61,1,0,0,0,61,66,1,0,0,
-0,62,60,1,0,0,0,63,65,3,14,7,0,64,63,1,0,0,0,65,68,1,0,0,0,66,64,1,0,0,0,
-66,67,1,0,0,0,67,71,1,0,0,0,68,66,1,0,0,0,69,71,5,0,0,1,70,56,1,0,0,0,70,
-69,1,0,0,0,71,1,1,0,0,0,72,74,3,8,4,0,73,72,1,0,0,0,74,77,1,0,0,0,75,73,
-1,0,0,0,75,76,1,0,0,0,76,3,1,0,0,0,77,75,1,0,0,0,78,79,3,6,3,0,79,5,1,0,
-0,0,80,81,5,1,0,0,81,82,3,52,26,0,82,83,5,9,0,0,83,7,1,0,0,0,84,85,5,2,0,
-0,85,86,3,52,26,0,86,87,5,9,0,0,87,9,1,0,0,0,88,89,5,29,0,0,89,90,3,52,26,
-0,90,91,5,5,0,0,91,92,3,12,6,0,92,93,5,6,0,0,93,94,3,14,7,0,94,11,1,0,0,
-0,95,97,3,52,26,0,96,95,1,0,0,0,97,100,1,0,0,0,98,96,1,0,0,0,98,99,1,0,0,
-0,99,105,1,0,0,0,100,98,1,0,0,0,101,102,5,3,0,0,102,104,3,52,26,0,103,101,
-1,0,0,0,104,107,1,0,0,0,105,103,1,0,0,0,105,106,1,0,0,0,106,13,1,0,0,0,107,
-105,1,0,0,0,108,112,5,7,0,0,109,111,3,14,7,0,110,109,1,0,0,0,111,114,1,0,
-0,0,112,110,1,0,0,0,112,113,1,0,0,0,113,115,1,0,0,0,114,112,1,0,0,0,115,
-133,5,8,0,0,116,133,3,16,8,0,117,133,3,18,9,0,118,133,3,22,11,0,119,133,
-3,24,12,0,120,133,3,26,13,0,121,133,3,28,14,0,122,133,3,30,15,0,123,133,
-3,32,16,0,124,133,3,34,17,0,125,133,3,36,18,0,126,133,3,38,19,0,127,133,
-3,40,20,0,128,129,3,42,21,0,129,130,5,9,0,0,130,133,1,0,0,0,131,133,5,9,
-0,0,132,108,1,0,0,0,132,116,1,0,0,0,132,117,1,0,0,0,132,118,1,0,0,0,132,
-119,1,0,0,0,132,120,1,0,0,0,132,121,1,0,0,0,132,122,1,0,0,0,132,123,1,0,
-0,0,132,124,1,0,0,0,132,125,1,0,0,0,132,126,1,0,0,0,132,127,1,0,0,0,132,
-128,1,0,0,0,132,131,1,0,0,0,133,15,1,0,0,0,134,135,3,52,26,0,135,136,5,22,
-0,0,136,137,3,42,21,0,137,138,5,9,0,0,138,17,1,0,0,0,139,140,5,4,0,0,140,
-141,5,7,0,0,141,142,3,20,10,0,142,143,5,8,0,0,143,19,1,0,0,0,144,146,9,0,
-0,0,145,144,1,0,0,0,146,147,1,0,0,0,147,148,1,0,0,0,147,145,1,0,0,0,148,
-21,1,0,0,0,149,150,3,52,26,0,150,151,5,23,0,0,151,152,3,50,25,0,152,153,
-5,9,0,0,153,23,1,0,0,0,154,155,3,52,26,0,155,156,5,24,0,0,156,157,3,50,25,
-0,157,158,5,9,0,0,158,25,1,0,0,0,159,160,3,52,26,0,160,161,5,25,0,0,161,
-162,3,50,25,0,162,163,5,9,0,0,163,27,1,0,0,0,164,165,3,52,26,0,165,166,5,
-26,0,0,166,167,3,50,25,0,167,168,5,9,0,0,168,29,1,0,0,0,169,170,3,52,26,
-0,170,171,5,27,0,0,171,172,5,9,0,0,172,31,1,0,0,0,173,174,3,52,26,0,174,
-175,5,28,0,0,175,176,5,9,0,0,176,33,1,0,0,0,177,178,5,32,0,0,178,179,5,5,
-0,0,179,180,3,44,22,0,180,181,5,6,0,0,181,182,3,14,7,0,182,35,1,0,0,0,183,
-184,5,33,0,0,184,185,5,5,0,0,185,186,3,44,22,0,186,187,5,6,0,0,187,188,3,
-14,7,0,188,37,1,0,0,0,189,190,5,30,0,0,190,191,3,52,26,0,191,192,5,22,0,
-0,192,193,3,42,21,0,193,194,5,9,0,0,194,39,1,0,0,0,195,196,5,34,0,0,196,
-197,3,42,21,0,197,198,5,9,0,0,198,41,1,0,0,0,199,200,6,21,-1,0,200,201,5,
-5,0,0,201,202,3,42,21,0,202,203,5,6,0,0,203,209,1,0,0,0,204,209,3,50,25,
-0,205,209,3,44,22,0,206,209,5,42,0,0,207,209,3,46,23,0,208,199,1,0,0,0,208,
-204,1,0,0,0,208,205,1,0,0,0,208,206,1,0,0,0,208,207,1,0,0,0,209,224,1,0,
-0,0,210,211,10,8,0,0,211,212,5,10,0,0,212,223,3,42,21,9,213,214,10,7,0,0,
-214,215,5,11,0,0,215,223,3,42,21,8,216,217,10,6,0,0,217,218,5,12,0,0,218,
-223,3,42,21,7,219,220,10,5,0,0,220,221,5,13,0,0,221,223,3,42,21,6,222,210,
-1,0,0,0,222,213,1,0,0,0,222,216,1,0,0,0,222,219,1,0,0,0,223,226,1,0,0,0,
-224,222,1,0,0,0,224,225,1,0,0,0,225,43,1,0,0,0,226,224,1,0,0,0,227,263,3,
-50,25,0,228,263,5,35,0,0,229,263,5,36,0,0,230,231,3,50,25,0,231,232,5,14,
-0,0,232,233,3,44,22,0,233,263,1,0,0,0,234,235,3,50,25,0,235,236,5,15,0,0,
-236,237,3,44,22,0,237,263,1,0,0,0,238,239,3,50,25,0,239,240,5,16,0,0,240,
-241,3,44,22,0,241,263,1,0,0,0,242,243,3,50,25,0,243,244,5,17,0,0,244,245,
-3,44,22,0,245,263,1,0,0,0,246,247,3,50,25,0,247,248,5,18,0,0,248,249,3,44,
-22,0,249,263,1,0,0,0,250,251,3,50,25,0,251,252,5,19,0,0,252,253,3,44,22,
-0,253,263,1,0,0,0,254,255,3,50,25,0,255,256,5,20,0,0,256,257,3,44,22,0,257,
-263,1,0,0,0,258,259,3,50,25,0,259,260,5,21,0,0,260,261,3,44,22,0,261,263,
-1,0,0,0,262,227,1,0,0,0,262,228,1,0,0,0,262,229,1,0,0,0,262,230,1,0,0,0,
-262,234,1,0,0,0,262,238,1,0,0,0,262,242,1,0,0,0,262,246,1,0,0,0,262,250,
-1,0,0,0,262,254,1,0,0,0,262,258,1,0,0,0,263,45,1,0,0,0,264,265,3,52,26,0,
-265,266,5,5,0,0,266,267,3,48,24,0,267,268,5,6,0,0,268,47,1,0,0,0,269,271,
-3,42,21,0,270,269,1,0,0,0,271,274,1,0,0,0,272,270,1,0,0,0,272,273,1,0,0,
-0,273,279,1,0,0,0,274,272,1,0,0,0,275,276,5,3,0,0,276,278,3,42,21,0,277,
-275,1,0,0,0,278,281,1,0,0,0,279,277,1,0,0,0,279,280,1,0,0,0,280,49,1,0,0,
-0,281,279,1,0,0,0,282,285,3,52,26,0,283,285,3,54,27,0,284,282,1,0,0,0,284,
-283,1,0,0,0,285,51,1,0,0,0,286,287,5,37,0,0,287,53,1,0,0,0,288,289,7,0,0,
-0,289,55,1,0,0,0,16,60,66,70,75,98,105,112,132,147,208,222,224,262,272,279,
-284];
+22,1,22,1,22,1,22,1,22,3,22,265,8,22,1,23,1,23,1,23,1,23,1,23,1,24,5,24,
+273,8,24,10,24,12,24,276,9,24,1,24,1,24,5,24,280,8,24,10,24,12,24,283,9,
+24,1,25,1,25,3,25,287,8,25,1,26,1,26,1,27,1,27,1,27,1,147,1,42,28,0,2,4,
+6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,
+0,1,1,0,38,41,309,0,70,1,0,0,0,2,75,1,0,0,0,4,78,1,0,0,0,6,80,1,0,0,0,8,
+84,1,0,0,0,10,88,1,0,0,0,12,98,1,0,0,0,14,132,1,0,0,0,16,134,1,0,0,0,18,
+139,1,0,0,0,20,145,1,0,0,0,22,149,1,0,0,0,24,154,1,0,0,0,26,159,1,0,0,0,
+28,164,1,0,0,0,30,169,1,0,0,0,32,173,1,0,0,0,34,177,1,0,0,0,36,183,1,0,0,
+0,38,189,1,0,0,0,40,195,1,0,0,0,42,210,1,0,0,0,44,264,1,0,0,0,46,266,1,0,
+0,0,48,274,1,0,0,0,50,286,1,0,0,0,52,288,1,0,0,0,54,290,1,0,0,0,56,60,3,
+2,1,0,57,59,3,10,5,0,58,57,1,0,0,0,59,62,1,0,0,0,60,58,1,0,0,0,60,61,1,0,
+0,0,61,66,1,0,0,0,62,60,1,0,0,0,63,65,3,14,7,0,64,63,1,0,0,0,65,68,1,0,0,
+0,66,64,1,0,0,0,66,67,1,0,0,0,67,71,1,0,0,0,68,66,1,0,0,0,69,71,5,0,0,1,
+70,56,1,0,0,0,70,69,1,0,0,0,71,1,1,0,0,0,72,74,3,8,4,0,73,72,1,0,0,0,74,
+77,1,0,0,0,75,73,1,0,0,0,75,76,1,0,0,0,76,3,1,0,0,0,77,75,1,0,0,0,78,79,
+3,6,3,0,79,5,1,0,0,0,80,81,5,1,0,0,81,82,3,52,26,0,82,83,5,9,0,0,83,7,1,
+0,0,0,84,85,5,2,0,0,85,86,3,52,26,0,86,87,5,9,0,0,87,9,1,0,0,0,88,89,5,29,
+0,0,89,90,3,52,26,0,90,91,5,5,0,0,91,92,3,12,6,0,92,93,5,6,0,0,93,94,3,14,
+7,0,94,11,1,0,0,0,95,97,3,52,26,0,96,95,1,0,0,0,97,100,1,0,0,0,98,96,1,0,
+0,0,98,99,1,0,0,0,99,105,1,0,0,0,100,98,1,0,0,0,101,102,5,3,0,0,102,104,
+3,52,26,0,103,101,1,0,0,0,104,107,1,0,0,0,105,103,1,0,0,0,105,106,1,0,0,
+0,106,13,1,0,0,0,107,105,1,0,0,0,108,112,5,7,0,0,109,111,3,14,7,0,110,109,
+1,0,0,0,111,114,1,0,0,0,112,110,1,0,0,0,112,113,1,0,0,0,113,115,1,0,0,0,
+114,112,1,0,0,0,115,133,5,8,0,0,116,133,3,16,8,0,117,133,3,18,9,0,118,133,
+3,22,11,0,119,133,3,24,12,0,120,133,3,26,13,0,121,133,3,28,14,0,122,133,
+3,30,15,0,123,133,3,32,16,0,124,133,3,34,17,0,125,133,3,36,18,0,126,133,
+3,38,19,0,127,133,3,40,20,0,128,129,3,42,21,0,129,130,5,9,0,0,130,133,1,
+0,0,0,131,133,5,9,0,0,132,108,1,0,0,0,132,116,1,0,0,0,132,117,1,0,0,0,132,
+118,1,0,0,0,132,119,1,0,0,0,132,120,1,0,0,0,132,121,1,0,0,0,132,122,1,0,
+0,0,132,123,1,0,0,0,132,124,1,0,0,0,132,125,1,0,0,0,132,126,1,0,0,0,132,
+127,1,0,0,0,132,128,1,0,0,0,132,131,1,0,0,0,133,15,1,0,0,0,134,135,3,52,
+26,0,135,136,5,22,0,0,136,137,3,42,21,0,137,138,5,9,0,0,138,17,1,0,0,0,139,
+140,5,4,0,0,140,141,5,7,0,0,141,142,3,20,10,0,142,143,5,8,0,0,143,19,1,0,
+0,0,144,146,9,0,0,0,145,144,1,0,0,0,146,147,1,0,0,0,147,148,1,0,0,0,147,
+145,1,0,0,0,148,21,1,0,0,0,149,150,3,52,26,0,150,151,5,23,0,0,151,152,3,
+50,25,0,152,153,5,9,0,0,153,23,1,0,0,0,154,155,3,52,26,0,155,156,5,24,0,
+0,156,157,3,50,25,0,157,158,5,9,0,0,158,25,1,0,0,0,159,160,3,52,26,0,160,
+161,5,25,0,0,161,162,3,50,25,0,162,163,5,9,0,0,163,27,1,0,0,0,164,165,3,
+52,26,0,165,166,5,26,0,0,166,167,3,50,25,0,167,168,5,9,0,0,168,29,1,0,0,
+0,169,170,3,52,26,0,170,171,5,27,0,0,171,172,5,9,0,0,172,31,1,0,0,0,173,
+174,3,52,26,0,174,175,5,28,0,0,175,176,5,9,0,0,176,33,1,0,0,0,177,178,5,
+32,0,0,178,179,5,5,0,0,179,180,3,44,22,0,180,181,5,6,0,0,181,182,3,14,7,
+0,182,35,1,0,0,0,183,184,5,33,0,0,184,185,5,5,0,0,185,186,3,44,22,0,186,
+187,5,6,0,0,187,188,3,14,7,0,188,37,1,0,0,0,189,190,5,30,0,0,190,191,3,52,
+26,0,191,192,5,22,0,0,192,193,3,42,21,0,193,194,5,9,0,0,194,39,1,0,0,0,195,
+196,5,34,0,0,196,197,3,42,21,0,197,198,5,9,0,0,198,41,1,0,0,0,199,200,6,
+21,-1,0,200,201,5,5,0,0,201,202,3,42,21,0,202,203,5,6,0,0,203,211,1,0,0,
+0,204,211,3,50,25,0,205,211,3,44,22,0,206,211,5,42,0,0,207,211,3,46,23,0,
+208,211,5,43,0,0,209,211,5,44,0,0,210,199,1,0,0,0,210,204,1,0,0,0,210,205,
+1,0,0,0,210,206,1,0,0,0,210,207,1,0,0,0,210,208,1,0,0,0,210,209,1,0,0,0,
+211,226,1,0,0,0,212,213,10,10,0,0,213,214,5,10,0,0,214,225,3,42,21,11,215,
+216,10,9,0,0,216,217,5,11,0,0,217,225,3,42,21,10,218,219,10,8,0,0,219,220,
+5,12,0,0,220,225,3,42,21,9,221,222,10,7,0,0,222,223,5,13,0,0,223,225,3,42,
+21,8,224,212,1,0,0,0,224,215,1,0,0,0,224,218,1,0,0,0,224,221,1,0,0,0,225,
+228,1,0,0,0,226,224,1,0,0,0,226,227,1,0,0,0,227,43,1,0,0,0,228,226,1,0,0,
+0,229,265,3,50,25,0,230,265,5,35,0,0,231,265,5,36,0,0,232,233,3,50,25,0,
+233,234,5,14,0,0,234,235,3,44,22,0,235,265,1,0,0,0,236,237,3,50,25,0,237,
+238,5,15,0,0,238,239,3,44,22,0,239,265,1,0,0,0,240,241,3,50,25,0,241,242,
+5,16,0,0,242,243,3,44,22,0,243,265,1,0,0,0,244,245,3,50,25,0,245,246,5,17,
+0,0,246,247,3,44,22,0,247,265,1,0,0,0,248,249,3,50,25,0,249,250,5,18,0,0,
+250,251,3,44,22,0,251,265,1,0,0,0,252,253,3,50,25,0,253,254,5,19,0,0,254,
+255,3,44,22,0,255,265,1,0,0,0,256,257,3,50,25,0,257,258,5,20,0,0,258,259,
+3,44,22,0,259,265,1,0,0,0,260,261,3,50,25,0,261,262,5,21,0,0,262,263,3,44,
+22,0,263,265,1,0,0,0,264,229,1,0,0,0,264,230,1,0,0,0,264,231,1,0,0,0,264,
+232,1,0,0,0,264,236,1,0,0,0,264,240,1,0,0,0,264,244,1,0,0,0,264,248,1,0,
+0,0,264,252,1,0,0,0,264,256,1,0,0,0,264,260,1,0,0,0,265,45,1,0,0,0,266,267,
+3,52,26,0,267,268,5,5,0,0,268,269,3,48,24,0,269,270,5,6,0,0,270,47,1,0,0,
+0,271,273,3,42,21,0,272,271,1,0,0,0,273,276,1,0,0,0,274,272,1,0,0,0,274,
+275,1,0,0,0,275,281,1,0,0,0,276,274,1,0,0,0,277,278,5,3,0,0,278,280,3,42,
+21,0,279,277,1,0,0,0,280,283,1,0,0,0,281,279,1,0,0,0,281,282,1,0,0,0,282,
+49,1,0,0,0,283,281,1,0,0,0,284,287,3,52,26,0,285,287,3,54,27,0,286,284,1,
+0,0,0,286,285,1,0,0,0,287,51,1,0,0,0,288,289,5,37,0,0,289,53,1,0,0,0,290,
+291,7,0,0,0,291,55,1,0,0,0,16,60,66,70,75,98,105,112,132,147,210,224,226,
+264,274,281,286];
 
 
 const atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
@@ -152,13 +153,13 @@ export default class ICEScriptParser extends antlr4.Parser {
     expression_sempred(localctx, predIndex) {
     	switch(predIndex) {
     		case 0:
-    			return this.precpred(this._ctx, 8);
+    			return this.precpred(this._ctx, 10);
     		case 1:
-    			return this.precpred(this._ctx, 7);
+    			return this.precpred(this._ctx, 9);
     		case 2:
-    			return this.precpred(this._ctx, 6);
+    			return this.precpred(this._ctx, 8);
     		case 3:
-    			return this.precpred(this._ctx, 5);
+    			return this.precpred(this._ctx, 7);
     		default:
     			throw "No predicate with index:" + predIndex;
     	}
@@ -193,7 +194,7 @@ export default class ICEScriptParser extends antlr4.Parser {
 	            this.state = 66;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	            while((((_la) & ~0x1f) === 0 && ((1 << _la) & 1073742512) !== 0) || ((((_la - 32)) & ~0x1f) === 0 && ((1 << (_la - 32)) & 2047) !== 0)) {
+	            while((((_la) & ~0x1f) === 0 && ((1 << _la) & 1073742512) !== 0) || ((((_la - 32)) & ~0x1f) === 0 && ((1 << (_la - 32)) & 8191) !== 0)) {
 	                this.state = 63;
 	                this.statement();
 	                this.state = 68;
@@ -427,7 +428,7 @@ export default class ICEScriptParser extends antlr4.Parser {
 	            this.state = 112;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	            while((((_la) & ~0x1f) === 0 && ((1 << _la) & 1073742512) !== 0) || ((((_la - 32)) & ~0x1f) === 0 && ((1 << (_la - 32)) & 2047) !== 0)) {
+	            while((((_la) & ~0x1f) === 0 && ((1 << _la) & 1073742512) !== 0) || ((((_la - 32)) & ~0x1f) === 0 && ((1 << (_la - 32)) & 8191) !== 0)) {
 	                this.state = 109;
 	                this.statement();
 	                this.state = 114;
@@ -937,7 +938,7 @@ export default class ICEScriptParser extends antlr4.Parser {
 	    this.enterRecursionRule(localctx, 42, ICEScriptParser.RULE_expression, _p);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 208;
+	        this.state = 210;
 	        this._errHandler.sync(this);
 	        var la_ = this._interp.adaptivePredict(this._input,9,this._ctx);
 	        switch(la_) {
@@ -970,9 +971,19 @@ export default class ICEScriptParser extends antlr4.Parser {
 	            this.methodcall();
 	            break;
 
+	        case 6:
+	            this.state = 208;
+	            this.match(ICEScriptParser.LIST);
+	            break;
+
+	        case 7:
+	            this.state = 209;
+	            this.match(ICEScriptParser.MATRIX);
+	            break;
+
 	        }
 	        this._ctx.stop = this._input.LT(-1);
-	        this.state = 224;
+	        this.state = 226;
 	        this._errHandler.sync(this);
 	        var _alt = this._interp.adaptivePredict(this._input,11,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
@@ -981,65 +992,65 @@ export default class ICEScriptParser extends antlr4.Parser {
 	                    this.triggerExitRuleEvent();
 	                }
 	                _prevctx = localctx;
-	                this.state = 222;
+	                this.state = 224;
 	                this._errHandler.sync(this);
 	                var la_ = this._interp.adaptivePredict(this._input,10,this._ctx);
 	                switch(la_) {
 	                case 1:
 	                    localctx = new ExpressionContext(this, _parentctx, _parentState);
 	                    this.pushNewRecursionContext(localctx, _startState, ICEScriptParser.RULE_expression);
-	                    this.state = 210;
-	                    if (!( this.precpred(this._ctx, 8))) {
-	                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 8)");
-	                    }
-	                    this.state = 211;
-	                    this.match(ICEScriptParser.ADD);
 	                    this.state = 212;
-	                    this.expression(9);
+	                    if (!( this.precpred(this._ctx, 10))) {
+	                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 10)");
+	                    }
+	                    this.state = 213;
+	                    this.match(ICEScriptParser.ADD);
+	                    this.state = 214;
+	                    this.expression(11);
 	                    break;
 
 	                case 2:
 	                    localctx = new ExpressionContext(this, _parentctx, _parentState);
 	                    this.pushNewRecursionContext(localctx, _startState, ICEScriptParser.RULE_expression);
-	                    this.state = 213;
-	                    if (!( this.precpred(this._ctx, 7))) {
-	                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 7)");
-	                    }
-	                    this.state = 214;
-	                    this.match(ICEScriptParser.SUB);
 	                    this.state = 215;
-	                    this.expression(8);
+	                    if (!( this.precpred(this._ctx, 9))) {
+	                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 9)");
+	                    }
+	                    this.state = 216;
+	                    this.match(ICEScriptParser.SUB);
+	                    this.state = 217;
+	                    this.expression(10);
 	                    break;
 
 	                case 3:
 	                    localctx = new ExpressionContext(this, _parentctx, _parentState);
 	                    this.pushNewRecursionContext(localctx, _startState, ICEScriptParser.RULE_expression);
-	                    this.state = 216;
-	                    if (!( this.precpred(this._ctx, 6))) {
-	                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 6)");
-	                    }
-	                    this.state = 217;
-	                    this.match(ICEScriptParser.MUL);
 	                    this.state = 218;
-	                    this.expression(7);
+	                    if (!( this.precpred(this._ctx, 8))) {
+	                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 8)");
+	                    }
+	                    this.state = 219;
+	                    this.match(ICEScriptParser.MUL);
+	                    this.state = 220;
+	                    this.expression(9);
 	                    break;
 
 	                case 4:
 	                    localctx = new ExpressionContext(this, _parentctx, _parentState);
 	                    this.pushNewRecursionContext(localctx, _startState, ICEScriptParser.RULE_expression);
-	                    this.state = 219;
-	                    if (!( this.precpred(this._ctx, 5))) {
-	                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 5)");
-	                    }
-	                    this.state = 220;
-	                    this.match(ICEScriptParser.DIV);
 	                    this.state = 221;
-	                    this.expression(6);
+	                    if (!( this.precpred(this._ctx, 7))) {
+	                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 7)");
+	                    }
+	                    this.state = 222;
+	                    this.match(ICEScriptParser.DIV);
+	                    this.state = 223;
+	                    this.expression(8);
 	                    break;
 
 	                } 
 	            }
-	            this.state = 226;
+	            this.state = 228;
 	            this._errHandler.sync(this);
 	            _alt = this._interp.adaptivePredict(this._input,11,this._ctx);
 	        }
@@ -1064,105 +1075,105 @@ export default class ICEScriptParser extends antlr4.Parser {
 	    let localctx = new BoolexprContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 44, ICEScriptParser.RULE_boolexpr);
 	    try {
-	        this.state = 262;
+	        this.state = 264;
 	        this._errHandler.sync(this);
 	        var la_ = this._interp.adaptivePredict(this._input,12,this._ctx);
 	        switch(la_) {
 	        case 1:
 	            this.enterOuterAlt(localctx, 1);
-	            this.state = 227;
+	            this.state = 229;
 	            this.value();
 	            break;
 
 	        case 2:
 	            this.enterOuterAlt(localctx, 2);
-	            this.state = 228;
+	            this.state = 230;
 	            this.match(ICEScriptParser.TRUE);
 	            break;
 
 	        case 3:
 	            this.enterOuterAlt(localctx, 3);
-	            this.state = 229;
+	            this.state = 231;
 	            this.match(ICEScriptParser.FALSE);
 	            break;
 
 	        case 4:
 	            this.enterOuterAlt(localctx, 4);
-	            this.state = 230;
-	            this.value();
-	            this.state = 231;
-	            this.match(ICEScriptParser.GREATER_THAN);
 	            this.state = 232;
+	            this.value();
+	            this.state = 233;
+	            this.match(ICEScriptParser.GREATER_THAN);
+	            this.state = 234;
 	            this.boolexpr();
 	            break;
 
 	        case 5:
 	            this.enterOuterAlt(localctx, 5);
-	            this.state = 234;
-	            this.value();
-	            this.state = 235;
-	            this.match(ICEScriptParser.LESS_THAN);
 	            this.state = 236;
+	            this.value();
+	            this.state = 237;
+	            this.match(ICEScriptParser.LESS_THAN);
+	            this.state = 238;
 	            this.boolexpr();
 	            break;
 
 	        case 6:
 	            this.enterOuterAlt(localctx, 6);
-	            this.state = 238;
-	            this.value();
-	            this.state = 239;
-	            this.match(ICEScriptParser.EQUAL_TO);
 	            this.state = 240;
+	            this.value();
+	            this.state = 241;
+	            this.match(ICEScriptParser.EQUAL_TO);
+	            this.state = 242;
 	            this.boolexpr();
 	            break;
 
 	        case 7:
 	            this.enterOuterAlt(localctx, 7);
-	            this.state = 242;
-	            this.value();
-	            this.state = 243;
-	            this.match(ICEScriptParser.NOT_EQUAL_TO);
 	            this.state = 244;
+	            this.value();
+	            this.state = 245;
+	            this.match(ICEScriptParser.NOT_EQUAL_TO);
+	            this.state = 246;
 	            this.boolexpr();
 	            break;
 
 	        case 8:
 	            this.enterOuterAlt(localctx, 8);
-	            this.state = 246;
-	            this.value();
-	            this.state = 247;
-	            this.match(ICEScriptParser.GREATER_THAN_OR_EQUAL);
 	            this.state = 248;
+	            this.value();
+	            this.state = 249;
+	            this.match(ICEScriptParser.GREATER_THAN_OR_EQUAL);
+	            this.state = 250;
 	            this.boolexpr();
 	            break;
 
 	        case 9:
 	            this.enterOuterAlt(localctx, 9);
-	            this.state = 250;
-	            this.value();
-	            this.state = 251;
-	            this.match(ICEScriptParser.LESS_THAN_OR_EQUAL);
 	            this.state = 252;
+	            this.value();
+	            this.state = 253;
+	            this.match(ICEScriptParser.LESS_THAN_OR_EQUAL);
+	            this.state = 254;
 	            this.boolexpr();
 	            break;
 
 	        case 10:
 	            this.enterOuterAlt(localctx, 10);
-	            this.state = 254;
-	            this.value();
-	            this.state = 255;
-	            this.match(ICEScriptParser.OR);
 	            this.state = 256;
+	            this.value();
+	            this.state = 257;
+	            this.match(ICEScriptParser.OR);
+	            this.state = 258;
 	            this.boolexpr();
 	            break;
 
 	        case 11:
 	            this.enterOuterAlt(localctx, 11);
-	            this.state = 258;
-	            this.value();
-	            this.state = 259;
-	            this.match(ICEScriptParser.AND);
 	            this.state = 260;
+	            this.value();
+	            this.state = 261;
+	            this.match(ICEScriptParser.AND);
+	            this.state = 262;
 	            this.boolexpr();
 	            break;
 
@@ -1188,13 +1199,13 @@ export default class ICEScriptParser extends antlr4.Parser {
 	    this.enterRule(localctx, 46, ICEScriptParser.RULE_methodcall);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 264;
-	        this.identifier();
-	        this.state = 265;
-	        this.match(ICEScriptParser.OPEN_BRACKET);
 	        this.state = 266;
-	        this.methodparams();
+	        this.identifier();
 	        this.state = 267;
+	        this.match(ICEScriptParser.OPEN_BRACKET);
+	        this.state = 268;
+	        this.methodparams();
+	        this.state = 269;
 	        this.match(ICEScriptParser.CLOSE_BRACKET);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -1218,25 +1229,25 @@ export default class ICEScriptParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 272;
+	        this.state = 274;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        while(_la===5 || ((((_la - 35)) & ~0x1f) === 0 && ((1 << (_la - 35)) & 255) !== 0)) {
-	            this.state = 269;
+	        while(_la===5 || ((((_la - 35)) & ~0x1f) === 0 && ((1 << (_la - 35)) & 1023) !== 0)) {
+	            this.state = 271;
 	            this.expression(0);
-	            this.state = 274;
+	            this.state = 276;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	        }
-	        this.state = 279;
+	        this.state = 281;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        while(_la===3) {
-	            this.state = 275;
+	            this.state = 277;
 	            this.match(ICEScriptParser.T__2);
-	            this.state = 276;
+	            this.state = 278;
 	            this.expression(0);
-	            this.state = 281;
+	            this.state = 283;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	        }
@@ -1260,12 +1271,12 @@ export default class ICEScriptParser extends antlr4.Parser {
 	    let localctx = new ValueContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 50, ICEScriptParser.RULE_value);
 	    try {
-	        this.state = 284;
+	        this.state = 286;
 	        this._errHandler.sync(this);
 	        switch(this._input.LA(1)) {
 	        case 37:
 	            this.enterOuterAlt(localctx, 1);
-	            this.state = 282;
+	            this.state = 284;
 	            this.identifier();
 	            break;
 	        case 38:
@@ -1273,7 +1284,7 @@ export default class ICEScriptParser extends antlr4.Parser {
 	        case 40:
 	        case 41:
 	            this.enterOuterAlt(localctx, 2);
-	            this.state = 283;
+	            this.state = 285;
 	            this.number();
 	            break;
 	        default:
@@ -1300,7 +1311,7 @@ export default class ICEScriptParser extends antlr4.Parser {
 	    this.enterRule(localctx, 52, ICEScriptParser.RULE_identifier);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 286;
+	        this.state = 288;
 	        this.match(ICEScriptParser.IDENTIFIER);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -1324,7 +1335,7 @@ export default class ICEScriptParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 288;
+	        this.state = 290;
 	        _la = this._input.LA(1);
 	        if(!(((((_la - 38)) & ~0x1f) === 0 && ((1 << (_la - 38)) & 15) !== 0))) {
 	        this._errHandler.recoverInline(this);
@@ -2654,6 +2665,14 @@ class ExpressionContext extends antlr4.ParserRuleContext {
 
 	methodcall() {
 	    return this.getTypedRuleContext(MethodcallContext,0);
+	};
+
+	LIST() {
+	    return this.getToken(ICEScriptParser.LIST, 0);
+	};
+
+	MATRIX() {
+	    return this.getToken(ICEScriptParser.MATRIX, 0);
 	};
 
 	ADD() {
