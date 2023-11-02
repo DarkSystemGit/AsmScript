@@ -29,15 +29,21 @@ function handler(token,ctx,context){
             }else if((val.getText()[0]=='[')&&(!!(val.getText()[1]=='['))){
 				var index=0
 				var strIndex=0
-				Object.values(this.data.var.list).forEach((elm,i)=>{if((elm=="")&&(index==0)&&(index<=26)){index=i}})
-                Object.values(this.data.var.list).forEach((elm,i)=>{if((elm=="")&&(index==0)&&(index>26)){strIndex=i}})
-				var list=ctx.identifier().getText().replace('[','')
+				var res;
+				Object.values(this.data.var.list).forEach((elm,i)=>{if((elm=="")&&(index==0)&&(i<=26)){index=i}})
+                Object.values(this.data.var.list).forEach((elm,i)=>{if((elm=="")&&(strIndex==0)&&(i>26)){strIndex=i}})
+				var list=val.getText().replace('[','')
 				list[list.length-1]=""
-				list=list.split(',').join('')
-				if(+list==NaN){
-					this.data.var.list[Object.keys(this.data.var.list)[index+1]]={name:ctx.identifier().getText(),type:"str",strMap:"",val}
+				list=list.split(',')
+				if(+list.join('')==NaN){
+					this.data.var.list[Object.keys(this.data.var.list)[index]]={name:ctx.identifier().getText(),type:"str",strMap:Object.keys(this.data.var.list)[strIndex],val}
+					var listData=this.data.var.list[Object.keys(this.data.var.list)[index]]
+					
 				}else{
                     this.data.var.list[Object.keys(this.data.var.list)[index]]={name:ctx.identifier().getText(),type:"num",val}
+					res=val.replace('[','{')
+					res[res.length-1]="}"
+					return `${res}=>${Object.keys(this.data.var.list)[index]}`
                 }
 
 			}
