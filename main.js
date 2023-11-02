@@ -8,6 +8,51 @@ import {readFileSync,writeFileSync} from 'fs'
 
 function handler(token,ctx,context){
     var children = context.visitChildren(ctx)
+    function indexOf(searchStr, str, caseSensitive) {
+    var searchStrLen = searchStr.length;
+    if (searchStrLen == 0) {
+        return [];
+    }
+    var startIndex = 0, index, indices = [];
+    if (!caseSensitive) {
+        str = str.toLowerCase();
+        searchStr = searchStr.toLowerCase();
+    }
+    while ((index = str.indexOf(searchStr, startIndex)) > -1) {
+        indices.push(index);
+        startIndex = index + searchStrLen;
+    }
+    return indices;
+}
+Util.prototype.inString = function (char,stringMap) {
+        var ret = false
+
+        stringMap.forEach((item) => {
+            try {
+                //console.log(char >= item[0], char <= item[1])
+                if ((char >= item[0]) && (char <= item[1])) {
+                    ret = true
+                }
+            } catch (error) {
+
+                return
+            }
+
+        })
+
+        return ret
+    }
+    function genStrMap (str) {
+        var stringMap = []
+        var strs = indexOf('"', str, true)
+        strs.forEach((section, i) => {
+
+            if ((i % 2 == 0)) {
+                stringMap.push([strs[i], strs[i + 1]])
+            }
+        })
+        return stringMap
+    }
     var handlers={
         "&":"and",
         "||":"or",
