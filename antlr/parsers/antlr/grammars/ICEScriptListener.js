@@ -95,33 +95,6 @@ export default class ICEScriptListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by ICEScriptParser#list.
-	enterList(ctx) {
-	}
-
-	// Exit a parse tree produced by ICEScriptParser#list.
-	exitList(ctx) {
-	}
-
-
-	// Enter a parse tree produced by ICEScriptParser#matrix.
-	enterMatrix(ctx) {
-	}
-
-	// Exit a parse tree produced by ICEScriptParser#matrix.
-	exitMatrix(ctx) {
-	}
-
-
-	// Enter a parse tree produced by ICEScriptParser#string.
-	enterString(ctx) {
-	}
-
-	// Exit a parse tree produced by ICEScriptParser#string.
-	exitString(ctx) {
-	}
-
-
 	// Enter a parse tree produced by ICEScriptParser#any.
 	enterAny(ctx) {
 	}

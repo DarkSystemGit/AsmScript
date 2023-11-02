@@ -55,15 +55,7 @@ assign_stmt
 ti_basic_stmt
     : '__TiBasic' '{' any '}'
     ;
-list 
-	:'[' any ']'
-	;
-matrix
-	:'[[' any ']'any ']'
-	;
-string
-	:'"' any '"'
-	;
+
 any : ( . )+?;
 add_assign_stmt
 	: identifier ADDASSIGN value END_STMT
@@ -107,6 +99,8 @@ expression
 	| boolexpr
 	| QUOTED_TEXT
 	| methodcall
+	| LIST
+	| MATRIX
 	;
 
 //Boolean expression
@@ -210,7 +204,10 @@ I : 'i';
 fragment INT
    : '0' | [1-9] [0-9]*
    ;
+
 QUOTED_TEXT : '"' ~ ["\r\n]* '"';
+LIST :'[' ( . )+? ']';
+MATRIX:'[[' ( . )+? ']' ( . )+? ']';
 
 //Stuff we wanna ignore
 LINECOMMENT : '//' ~[\r\n]* -> skip;
