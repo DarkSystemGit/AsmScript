@@ -207,7 +207,7 @@ fragment INT
 
 QUOTED_TEXT : '"' ~ ["\r\n]* '"';
 LIST :'[' ( . )+? ']';
-MATRIX:'[''[' any ']'(',''[' any ']' )*']';
+MATRIX:'[' LIST (',' LIST)* ']';
 
 //Stuff we wanna ignore
 LINECOMMENT : '//' ~[\r\n]* -> skip;
