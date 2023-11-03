@@ -80,37 +80,37 @@ function handler(token, ctx, context) {
 			this.data.var.matrix = this.data.var.matrix || { "":"","A": "", "B": "", "C": "", "D": "", "E": "", "F": "", "G": "", "H": "", "I": "", "J": "" }
 			const val = ctx.expression()
 
-			if ((val.getText()[0] == '"') || (!(+val.getText() == NaN))) {
+			if ((val.getText()[0] == '"') || (
+                !isNaN(val.getText()))) {
 				var index = 0
 				Object.values(this.data.var.num).forEach((elm, i) => { if ((elm == "") && (index == 0)) { index = i } })
 				this.data.var.num[Object.keys(this.data.var.num)[index]] = ctx.identifier().getText()
-				var list=val.getText().replace('[','{')
-                list =list.split('')
-                list.splice(list.length-1,1)
-                list=list.join('')
-				return `{${list}}=>${Object.keys(this.data.var.num)[index]}`
+
+				return `{${val.getText()}}=>${Object.keys(this.data.var.num)[index]}`
 			} else if ((val.getText()[0] == '[') && (!(val.getText()[1] == '['))) {
-                //console.log("list")
+                console.log("list")
 				var index = 0
 				var strIndex = 0
 				var res;
 				Object.values(this.data.var.list).forEach((elm, i) => { if ((elm == "") && (index == 0) && (i <= 26)) { index = i } })
 				Object.values(this.data.var.list).forEach((elm, i) => { if ((elm == "") && (strIndex == 0) && (i > 26)) { strIndex = i } })
 				var list = val.getText().replace('[', '')
-				list[list.length - 1] = ""
+				list=list.split('')
+                list.splice(list.length - 1,1)
+                list=list.join('')
 				var strMap= genStrMap(list)
 				list = split(list,',',strMap)
-                //console.log(list)
-				if (+list.join('') == NaN) {
+
+				if (isNaN(list.join(''))) {
 					this.data.var.list[Object.keys(this.data.var.list)[index]] = { name: ctx.identifier().getText(), type: "str", strMap: Object.keys(this.data.var.list)[strIndex], val:val.getText(),list:Object.keys(this.data.var.list)[index] }
 					var listData = this.data.var.list[Object.keys(this.data.var.list)[index]]
 					var len=[]
 					var listStr=""
 					list.forEach((elm)=>{
 						len.push(elm.length)
-						listStr=listStr+elm
+						listStr=listStr+elm.replace('"','').substring(0,elm.length-1)
 					})
-					return	`{${len.join(',')}}=>${listData.strMap}:{${listStr}}=>${listData.list}`
+					return	`"${listStr}"=>${listData.strMap}:{${len.join(',')}}=>${listData.list}`
 				} else {
 					this.data.var.list[Object.keys(this.data.var.list)[index]] = { name: ctx.identifier().getText(), type: "num", val:val.getText(),list:Object.keys(this.data.var.list)[index] }
 					res = val.getText().replace('[', '{')
@@ -119,7 +119,12 @@ function handler(token, ctx, context) {
 					return `${res}=>${Object.keys(this.data.var.list)[index]}`
 				}
 
-			}
+			}else if ((val.getText()[0] == '[') && (val.getText()[1] == '[')) {
+                var index=0
+                Object.values(this.data.var.matrix).forEach((elm, i) => { if ((elm == "") && (index == 0)) { index = i } })
+                console.log('matrix',`${val.getText().replaceAll('[','{').replaceAll(']','}')}=>[${Object.keys(this.data.var.matrix)[index]}]`)
+                return `${val.getText().replaceAll('[','{').replaceAll(']','}')}=>[${Object.keys(this.data.var.matrix)[index]}]`
+            }
 			return ""
 		}
 	}
