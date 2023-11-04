@@ -4,5 +4,6 @@ while(true){
     input=[[1,1],[1,2],[3]];
     input("",input);
     disp(randInt(0-input,input)+input);
+    if(true){}else{}
 };
 

@@ -155,6 +155,11 @@ function handler(token, ctx, context) {
 			var body=context.visit(ctx.statement())
 			return `If ${ctx.boolexpr().getText()}:Then:${body.substring(1,body.length-1)}:End`
 		},
+		"ifElse":(ctx,children,context)=>{
+			var ifBody=context.visit(ctx.statement()[0])
+			var elseBody=context.visit(ctx.statement()[1])
+			return `If ${ctx.boolexpr().getText()}:Then:${ifBody.substring(1,ifBody.length-1)}:Else:${elseBody.substring(1,elseBody.length-1)}:End`
+		},
 		"tib":(ctx,children,context)=>{
 			return context.visit(ctx.any())
 		}
@@ -282,6 +287,10 @@ class Visitor extends ICEScriptVisitor {
 		return handler("if", ctx, this);
 	}
 
+	// Visit a parse tree produced by ICEScriptParser#if_else_stmt.
+	visitIf_else_stmt(ctx) {
+		return handler("ifElse", ctx, this);
+	  }
 
 	// Visit a parse tree produced by ICEScriptParser#while_stmt.
 	visitWhile_stmt(ctx) {
