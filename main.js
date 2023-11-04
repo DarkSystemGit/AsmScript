@@ -71,7 +71,7 @@ function handler(token, ctx, context) {
 		"||": "or",
 		"!!": "not",
 		"=": "=>",
-		"var": function (ctx) {
+		"var": function (ctx,children) {
 			//console.log(this)
 			this.data = this.data || {}
 			this.data.var = this.data.var || {}
@@ -124,7 +124,11 @@ function handler(token, ctx, context) {
                 Object.values(this.data.var.matrix).forEach((elm, i) => { if ((elm == "") && (index == 0)) { index = i } })
                 console.log('matrix',`${val.getText().replaceAll('[','{').replaceAll(']','}')}=>[${Object.keys(this.data.var.matrix)[index]}]`)
                 return `${val.getText().replaceAll('[','{').replaceAll(']','}')}=>[${Object.keys(this.data.var.matrix)[index]}]`
-            }
+            }else{
+				var index=0
+                Object.values(this.data.var.num).forEach((elm, i) => { if ((elm == "") && (index == 0)) { index = i } })
+				return `${children}=>${Object.keys(this.data.var.num)[index]}`
+			}
 			return ""
 		}
 	}
@@ -133,7 +137,7 @@ function handler(token, ctx, context) {
 	if (handlers.hasOwnProperty(token)) {
 		console.log(typeof handlers[token])
 		if (typeof handlers[token] == "function") {
-			return handlers[token](ctx)
+			return handlers[token](ctx,children)
 		} else {
 			return handlers[token]
 		}
@@ -197,7 +201,7 @@ class Visitor extends ICEScriptVisitor {
 
 	// Visit a parse tree produced by ICEScriptParser#assign_stmt.
 	visitAssign_stmt(ctx) {
-		return handler("assign", ctx, this);
+		return handler("var", ctx, this);
 	}
 
 
