@@ -122,8 +122,8 @@ function handler(token, ctx, context) {
 			}else if ((val.getText()[0] == '[') && (val.getText()[1] == '[')) {
                 var index=0
                 Object.values(this.data.var.matrix).forEach((elm, i) => { if ((elm == "") && (index == 0)) { index = i } })
-                console.log('matrix',`${val.getText().replaceAll('[','{').replaceAll(']','}')}=>[${Object.keys(this.data.var.matrix)[index]}]`)
-                return `${val.getText().replaceAll('[','{').replaceAll(']','}')}=>[${Object.keys(this.data.var.matrix)[index]}]`
+                //console.log('matrix',`${val.getText().replaceAll('[','{').replaceAll(']','}')}=>[${Object.keys(this.data.var.matrix)[index]}]`)
+                return `${val.getText()}=>[${Object.keys(this.data.var.matrix)[index]}]`
             }else{
 				var index=0
                 Object.values(this.data.var.num).forEach((elm, i) => { if ((elm == "") && (index == 0)) { index = i } })
