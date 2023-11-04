@@ -167,6 +167,15 @@ export default class ICEScriptListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by ICEScriptParser#if_else_stmt.
+	enterIf_else_stmt(ctx) {
+	}
+
+	// Exit a parse tree produced by ICEScriptParser#if_else_stmt.
+	exitIf_else_stmt(ctx) {
+	}
+
+
 	// Enter a parse tree produced by ICEScriptParser#while_stmt.
 	enterWhile_stmt(ctx) {
 	}
@@ -245,69 +254,6 @@ export default class ICEScriptListener extends antlr4.tree.ParseTreeListener {
 
 	// Exit a parse tree produced by ICEScriptParser#identifier.
 	exitIdentifier(ctx) {
-	}
-
-
-	// Enter a parse tree produced by ICEScriptParser#eol.
-	enterEol(ctx) {
-	}
-
-	// Exit a parse tree produced by ICEScriptParser#eol.
-	exitEol(ctx) {
-	}
-
-
-	// Enter a parse tree produced by ICEScriptParser#not.
-	enterNot(ctx) {
-	}
-
-	// Exit a parse tree produced by ICEScriptParser#not.
-	exitNot(ctx) {
-	}
-
-
-	// Enter a parse tree produced by ICEScriptParser#or.
-	enterOr(ctx) {
-	}
-
-	// Exit a parse tree produced by ICEScriptParser#or.
-	exitOr(ctx) {
-	}
-
-
-	// Enter a parse tree produced by ICEScriptParser#and.
-	enterAnd(ctx) {
-	}
-
-	// Exit a parse tree produced by ICEScriptParser#and.
-	exitAnd(ctx) {
-	}
-
-
-	// Enter a parse tree produced by ICEScriptParser#equalTo.
-	enterEqualTo(ctx) {
-	}
-
-	// Exit a parse tree produced by ICEScriptParser#equalTo.
-	exitEqualTo(ctx) {
-	}
-
-
-	// Enter a parse tree produced by ICEScriptParser#trueToken.
-	enterTrueToken(ctx) {
-	}
-
-	// Exit a parse tree produced by ICEScriptParser#trueToken.
-	exitTrueToken(ctx) {
-	}
-
-
-	// Enter a parse tree produced by ICEScriptParser#falseToken.
-	enterFalseToken(ctx) {
-	}
-
-	// Exit a parse tree produced by ICEScriptParser#falseToken.
-	exitFalseToken(ctx) {
 	}
 
 

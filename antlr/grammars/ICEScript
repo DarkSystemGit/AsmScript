@@ -42,6 +42,7 @@ statement
 	| inc_stmt
 	| dec_stmt
 	| if_stmt
+	| if_else_stmt
 	| while_stmt
 	| var_stmt
 	| return_stmt
@@ -78,6 +79,9 @@ dec_stmt
 if_stmt
 	: IF OPEN_BRACKET boolexpr CLOSE_BRACKET statement
 	;
+if_else_stmt
+	: IF OPEN_BRACKET boolexpr CLOSE_BRACKET statement ELSE statement
+	;	
 while_stmt
 	: WHILE OPEN_BRACKET boolexpr CLOSE_BRACKET statement
 	;
@@ -162,6 +166,7 @@ MULASSIGN : '*=';
 DIVASSIGN : '/=';
 STR : 'str'; //Same as Var but for strings
 IF : 'if';
+ELSE : 'else';
 //Incremental operators
 INCREMENT : '++';
 DECREMENT : '--';
