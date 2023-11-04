@@ -168,6 +168,48 @@ export default class ICEScriptVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
+	// Visit a parse tree produced by ICEScriptParser#eol.
+	visitEol(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by ICEScriptParser#not.
+	visitNot(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by ICEScriptParser#or.
+	visitOr(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by ICEScriptParser#and.
+	visitAnd(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by ICEScriptParser#equalTo.
+	visitEqualTo(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by ICEScriptParser#trueToken.
+	visitTrueToken(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by ICEScriptParser#falseToken.
+	visitFalseToken(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
 	// Visit a parse tree produced by ICEScriptParser#number.
 	visitNumber(ctx) {
 	  return this.visitChildren(ctx);

@@ -116,6 +116,7 @@ boolexpr
 	| value LESS_THAN_OR_EQUAL boolexpr
 	| value OR boolexpr
 	| value AND boolexpr
+	| NOT boolexpr
 	;
 
 
@@ -135,6 +136,7 @@ OPEN_CURLEY : '{';
 CLOSE_CURLEY : '}';
 END_STMT : ';';
 
+
 //Mathematic operators
 ADD : '+';
 SUB : '-';
@@ -150,6 +152,7 @@ GREATER_THAN_OR_EQUAL : '>=';
 LESS_THAN_OR_EQUAL : '<=';
 OR : '||';
 AND  : '&&';
+NOT : '!';
 
 //Assignment operators
 ASSIGN : '=';
@@ -157,7 +160,8 @@ ADDASSIGN : '+=';
 SUBASSIGN : '-=';
 MULASSIGN : '*=';
 DIVASSIGN : '/=';
-
+STR : 'str'; //Same as Var but for strings
+IF : 'if';
 //Incremental operators
 INCREMENT : '++';
 DECREMENT : '--';
@@ -165,8 +169,6 @@ DECREMENT : '--';
 //Basic keywords & concepts
 DEF : 'function';
 VAR : 'var';
-STR : 'str'; //Same as Var but for strings
-IF : 'if';
 WHILE : 'while';
 RETURN : 'return';
 TRUE : 'true';
@@ -179,7 +181,7 @@ value
 	;
 
 identifier
-	: IDENTIFIER
+	:IDENTIFIER
 	;
 
 IDENTIFIER : [a-zA-Z][a-zA-Z0-9_]*;
@@ -205,6 +207,7 @@ fragment INT
    : '0' | [1-9] [0-9]*
    ;
 
+//Data types
 QUOTED_TEXT : '"' ~ ["\r\n]* '"';
 LIST :'[' ( . )+? ']';
 MATRIX:'[' LIST (',' LIST)* ']';

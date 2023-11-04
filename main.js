@@ -5,72 +5,87 @@ import ICEScriptLexer from "./antlr/parsers/antlr/grammars/ICEScriptLexer.js";
 import tokens from "./tokens.js";
 import { readFileSync, writeFileSync } from 'fs'
 //console.log(readFileSync(process.argv[2]))
+function indexOf(searchStr, str, caseSensitive) {
+	var searchStrLen = searchStr.length;
+	if (searchStrLen == 0) {
+		return [];
+	}
+	var startIndex = 0, index, indices = [];
+	if (!caseSensitive) {
+		str = str.toLowerCase();
+		searchStr = searchStr.toLowerCase();
+	}
+	while ((index = str.indexOf(searchStr, startIndex)) > -1) {
+		indices.push(index);
+		startIndex = index + searchStrLen;
+	}
+	return indices;
+}
+function replaceAt(str, index, replacement,length) {
+	return str.substring(0, index) + replacement + str.substring(index + length);
+}
+function inString(char, stringMap) {
+	var ret = false
 
+	stringMap.forEach((item) => {
+		try {
+			//console.log(char >= item[0], char <= item[1])
+			if ((char >= item[0]) && (char <= item[1])) {
+				ret = true
+			}
+		} catch (error) {
+
+			return
+		}
+
+	})
+
+	return ret
+}
+function genStrMap(str) {
+	var stringMap = []
+	var strs = indexOf('"', str, true)
+	strs.forEach((section, i) => {
+
+		if ((i % 2 == 0)) {
+			stringMap.push([strs[i], strs[i + 1]])
+		}
+	})
+	return stringMap
+}
+function split(str,splitter,strMap){
+	var pos=indexOf(splitter,str)
+	pos.forEach((elm,i,array)=>{
+		if(inString(elm,strMap)){
+			array.splice(i, 1); 
+		}
+	})
+	var res=[]
+	strMap.forEach((elm)=>{
+		res.push(str.substring(elm[0],elm[1]))
+	})
+	return res
+}
+function strIndexOf(str,substr){
+	var strMap=genStrMap(str)
+	var pos=indexOf(substr,str)
+	pos.forEach((elm,i,array)=>{
+		if(inString(elm,strMap)){
+			array.splice(i, 1); 
+		}
+	})
+	return pos
+}
 function handler(token, ctx, context) {
-	var children = context.visitChildren(ctx)
-	function indexOf(searchStr, str, caseSensitive) {
-		var searchStrLen = searchStr.length;
-		if (searchStrLen == 0) {
-			return [];
-		}
-		var startIndex = 0, index, indices = [];
-		if (!caseSensitive) {
-			str = str.toLowerCase();
-			searchStr = searchStr.toLowerCase();
-		}
-		while ((index = str.indexOf(searchStr, startIndex)) > -1) {
-			indices.push(index);
-			startIndex = index + searchStrLen;
-		}
-		return indices;
-	}
-	function inString(char, stringMap) {
-		var ret = false
 
-		stringMap.forEach((item) => {
-			try {
-				//console.log(char >= item[0], char <= item[1])
-				if ((char >= item[0]) && (char <= item[1])) {
-					ret = true
-				}
-			} catch (error) {
-
-				return
-			}
-
-		})
-
-		return ret
-	}
-	function genStrMap(str) {
-		var stringMap = []
-		var strs = indexOf('"', str, true)
-		strs.forEach((section, i) => {
-
-			if ((i % 2 == 0)) {
-				stringMap.push([strs[i], strs[i + 1]])
-			}
-		})
-		return stringMap
-	}
-	function split(str,splitter,strMap){
-		var pos=indexOf(splitter,str)
-		pos.forEach((elm,i,arr)=>{
-			if(inString(elm,strMap)){
-				array.splice(i, 1); 
-			}
-		})
-		var res=[]
-		strMap.forEach((elm)=>{
-			res.push(str.substring(elm[0],elm[1]))
-		})
-		return res
-	}
 	var handlers = {
-		"&": "and",
+		"&&": "and",
 		"||": "or",
-		"!!": "not",
-		"=": "=>",
+		"!": "not",
+		";":":",
+		"==":"=",
+		"true":"1",
+		"false":"0",
 		"var": function (ctx,children) {
 			//console.log(this)
 			this.data = this.data || {}
@@ -83,17 +98,18 @@ function handler(token, ctx, context) {
 			if ((val.getText()[0] == '"') || (
                 !isNaN(val.getText()))) {
 				var index = 0
-				Object.values(this.data.var.num).forEach((elm, i) => { if ((elm == "") && (index == 0)) { index = i } })
+				Object.values(this.data.var.num).forEach((elm, i) => { if (((elm == "") && (index == 0))||(elm==ctx.identifier().getText())) { index = i } })
+				
 				this.data.var.num[Object.keys(this.data.var.num)[index]] = ctx.identifier().getText()
 
-				return `{${val.getText()}}=>${Object.keys(this.data.var.num)[index]}`
+				return `:{${val.getText()}}=>${Object.keys(this.data.var.num)[index]}`
 			} else if ((val.getText()[0] == '[') && (!(val.getText()[1] == '['))) {
                 console.log("list")
 				var index = 0
 				var strIndex = 0
 				var res;
-				Object.values(this.data.var.list).forEach((elm, i) => { if ((elm == "") && (index == 0) && (i <= 26)) { index = i } })
-				Object.values(this.data.var.list).forEach((elm, i) => { if ((elm == "") && (strIndex == 0) && (i > 26)) { strIndex = i } })
+				Object.values(this.data.var.list).forEach((elm, i) => { if (((elm == "") && (index == 0) && (i <= 26))||(elm==ctx.identifier().getText())) { index = i } })
+				Object.values(this.data.var.list).forEach((elm, i) => { if (((elm == "") && (strIndex == 0) && (i > 26))||(elm==ctx.identifier().getText())) { strIndex = i } })
 				var list = val.getText().replace('[', '')
 				list=list.split('')
                 list.splice(list.length - 1,1)
@@ -110,34 +126,49 @@ function handler(token, ctx, context) {
 						len.push(elm.length)
 						listStr=listStr+elm.replace('"','').substring(0,elm.length-1)
 					})
-					return	`"${listStr}"=>${listData.strMap}:{${len.join(',')}}=>${listData.list}`
+					return	`:"${listStr}"=>${listData.strMap}:{${len.join(',')}}=>${listData.list}`
 				} else {
 					this.data.var.list[Object.keys(this.data.var.list)[index]] = { name: ctx.identifier().getText(), type: "num", val:val.getText(),list:Object.keys(this.data.var.list)[index] }
 					res = val.getText().replace('[', '{')
                     //console.log(res)
 					res[res.length - 1] = "}"
-					return `${res}=>${Object.keys(this.data.var.list)[index]}`
+					return `:${res}=>${Object.keys(this.data.var.list)[index]}`
 				}
 
 			}else if ((val.getText()[0] == '[') && (val.getText()[1] == '[')) {
                 var index=0
                 Object.values(this.data.var.matrix).forEach((elm, i) => { if ((elm == "") && (index == 0)) { index = i } })
                 //console.log('matrix',`${val.getText().replaceAll('[','{').replaceAll(']','}')}=>[${Object.keys(this.data.var.matrix)[index]}]`)
-                return `${val.getText()}=>[${Object.keys(this.data.var.matrix)[index]}]`
+                return `:${val.getText()}=>[${Object.keys(this.data.var.matrix)[index]}]`
             }else{
 				var index=0
                 Object.values(this.data.var.num).forEach((elm, i) => { if ((elm == "") && (index == 0)) { index = i } })
-				return `${children}=>${Object.keys(this.data.var.num)[index]}`
+				return `:${children}=>${Object.keys(this.data.var.num)[index]}`
 			}
 			return ""
+		},
+		"while":function(ctx,children,context){
+			var body=context.visit(ctx.statement())
+			return `:While ${ctx.boolexpr().getText()}:${body.substring(1,body.length-1)}:End`
+		},
+		"if":(ctx,children,context)=>{
+			var body=context.visit(ctx.statement())
+			return `If ${ctx.boolexpr().getText()}:Then:${body.substring(1,body.length-1)}:End`
+		},
+		"tib":(ctx,children,context)=>{
+			return context.visit(ctx.any())
 		}
 	}
+	if(!token){
+		return handlers
+	}
+	var children = context.visitChildren(ctx)
 	console.log(token, ctx.getText(), children)
 
 	if (handlers.hasOwnProperty(token)) {
 		console.log(typeof handlers[token])
 		if (typeof handlers[token] == "function") {
-			return handlers[token](ctx,children)
+			return handlers[token](ctx,children,context)
 		} else {
 			return handlers[token]
 		}
@@ -207,12 +238,8 @@ class Visitor extends ICEScriptVisitor {
 
 	// Visit a parse tree produced by ICEScriptParser#ti_basic_stmt.
 	visitTi_basic_stmt(ctx) {
-		return handler("tibStmt", ctx, this);
+		return handler("tib", ctx, this);
 	}
-
-
-
-
 
 	// Visit a parse tree produced by ICEScriptParser#add_assign_stmt.
 	visitAdd_assign_stmt(ctx) {
@@ -275,8 +302,7 @@ class Visitor extends ICEScriptVisitor {
 	}
 
 
-
-
+	
 
 	// Visit a parse tree produced by ICEScriptParser#boolexpr.
 	visitBoolexpr(ctx) {
@@ -303,4 +329,14 @@ const tokenstr = new antlr4.CommonTokenStream(lexer);
 const parser = new ICEScriptParser(tokenstr);
 const tree = parser.script();
 var out = new Visitor().start(tree)
+
+Object.keys(handler()).forEach((elm,i)=>{
+	var pos = strIndexOf(out,elm)
+	pos.forEach((index)=>{
+		if(typeof handler()[Object.keys(handler())[i]] =="function"){return}
+		out=replaceAt(out,index,handler()[Object.keys(handler())[i]],Object.keys(handler())[i].length)
+		console.log(out,index,elm,handler()[Object.keys(handler())[i]],Object.keys(handler())[i].length)
+		pos = strIndexOf(out,elm)
+	})
+})
 console.log(out)
