@@ -21,7 +21,7 @@ function indexOf(searchStr, str, caseSensitive) {
 	}
 	return indices;
 }
-function replaceAt(str, index, replacement,length) {
+function replaceAt(str, index, replacement, length) {
 	return str.substring(0, index) + replacement + str.substring(index + length);
 }
 function inString(char, stringMap) {
@@ -53,25 +53,25 @@ function genStrMap(str) {
 	})
 	return stringMap
 }
-function split(str,splitter,strMap){
-	var pos=indexOf(splitter,str)
-	pos.forEach((elm,i,array)=>{
-		if(inString(elm,strMap)){
-			array.splice(i, 1); 
+function split(str, splitter, strMap) {
+	var pos = indexOf(splitter, str)
+	pos.forEach((elm, i, array) => {
+		if (inString(elm, strMap)) {
+			array.splice(i, 1);
 		}
 	})
-	var res=[]
-	strMap.forEach((elm)=>{
-		res.push(str.substring(elm[0],elm[1]))
+	var res = []
+	strMap.forEach((elm) => {
+		res.push(str.substring(elm[0], elm[1]))
 	})
 	return res
 }
-function strIndexOf(str,substr){
-	var strMap=genStrMap(str)
-	var pos=indexOf(substr,str)
-	pos.forEach((elm,i,array)=>{
-		if(inString(elm,strMap)){
-			array.splice(i, 1); 
+function strIndexOf(str, substr) {
+	var strMap = genStrMap(str)
+	var pos = indexOf(substr, str)
+	pos.forEach((elm, i, array) => {
+		if (inString(elm, strMap)) {
+			array.splice(i, 1);
 		}
 	})
 	return pos
@@ -82,89 +82,89 @@ function handler(token, ctx, context) {
 		"&&": "and",
 		"||": "or",
 		"!": "not",
-		";":":",
-		"==":"=",
-		"true":"1",
-		"false":"0",
-		"var": function (ctx,children) {
+		";": ":",
+		"==": "=",
+		"true": "1",
+		"false": "0",
+		"var": function (ctx, children) {
 			//console.log(this)
 			this.data = this.data || {}
 			this.data.var = this.data.var || {}
-			this.data.var.num = this.data.var.num || { "":"","A": "", "B": "", "C": "", "D": "", "E": "", "F": "", "G": "", "H": "", "I": "", "J": "", "K": "", "L": "", "M": "", "N": "", "O": "", "P": "", "Q": "", "R": "", "S": "", "T": "", "U": "", "V": "", "W": "", "X": "", "Y": "", "Z": "" }
-			this.data.var.list = this.data.var.list || { "":"","A": "", "B": "", "C": "", "D": "", "E": "", "F": "", "G": "", "H": "", "I": "", "J": "", "K": "", "L": "", "M": "", "N": "", "O": "", "P": "", "Q": "", "R": "", "S": "", "T": "", "U": "", "V": "", "W": "", "X": "", "Y": "", "Z": "", "Str0": "", "Str1": "", "Str2": "", "Str3": "", "Str4": "", "Str5": "", "Str6": "", "Str7": "", "Str8": "", "Str9": "" }
-			this.data.var.matrix = this.data.var.matrix || { "":"","A": "", "B": "", "C": "", "D": "", "E": "", "F": "", "G": "", "H": "", "I": "", "J": "" }
+			this.data.var.num = this.data.var.num || { "": "", "A": "", "B": "", "C": "", "D": "", "E": "", "F": "", "G": "", "H": "", "I": "", "J": "", "K": "", "L": "", "M": "", "N": "", "O": "", "P": "", "Q": "", "R": "", "S": "", "T": "", "U": "", "V": "", "W": "", "X": "", "Y": "", "Z": "" }
+			this.data.var.list = this.data.var.list || { "": "", "A": "", "B": "", "C": "", "D": "", "E": "", "F": "", "G": "", "H": "", "I": "", "J": "", "K": "", "L": "", "M": "", "N": "", "O": "", "P": "", "Q": "", "R": "", "S": "", "T": "", "U": "", "V": "", "W": "", "X": "", "Y": "", "Z": "", "Str0": "", "Str1": "", "Str2": "", "Str3": "", "Str4": "", "Str5": "", "Str6": "", "Str7": "", "Str8": "", "Str9": "" }
+			this.data.var.matrix = this.data.var.matrix || { "": "", "A": "", "B": "", "C": "", "D": "", "E": "", "F": "", "G": "", "H": "", "I": "", "J": "" }
 			const val = ctx.expression()
 
 			if ((val.getText()[0] == '"') || (
-                !isNaN(val.getText()))) {
+				!isNaN(val.getText()))) {
 				var index = 0
-				Object.values(this.data.var.num).forEach((elm, i) => { if (((elm == "") && (index == 0))||(elm==ctx.identifier().getText())) { index = i } })
-				
+				Object.values(this.data.var.num).forEach((elm, i) => { if (((elm == "") && (index == 0)) || (elm == ctx.identifier().getText())) { index = i } })
+
 				this.data.var.num[Object.keys(this.data.var.num)[index]] = ctx.identifier().getText()
 
 				return `:{${val.getText()}}=>${Object.keys(this.data.var.num)[index]}`
 			} else if ((val.getText()[0] == '[') && (!(val.getText()[1] == '['))) {
-                console.log("list")
+				console.log("list")
 				var index = 0
 				var strIndex = 0
 				var res;
-				Object.values(this.data.var.list).forEach((elm, i) => { if (((elm == "") && (index == 0) && (i <= 26))||(elm==ctx.identifier().getText())) { index = i } })
-				Object.values(this.data.var.list).forEach((elm, i) => { if (((elm == "") && (strIndex == 0) && (i > 26))||(elm==ctx.identifier().getText())) { strIndex = i } })
+				Object.values(this.data.var.list).forEach((elm, i) => { if (((elm == "") && (index == 0) && (i <= 26)) || (elm == ctx.identifier().getText())) { index = i } })
+				Object.values(this.data.var.list).forEach((elm, i) => { if (((elm == "") && (strIndex == 0) && (i > 26)) || (elm == ctx.identifier().getText())) { strIndex = i } })
 				var list = val.getText().replace('[', '')
-				list=list.split('')
-                list.splice(list.length - 1,1)
-                list=list.join('')
-				var strMap= genStrMap(list)
-				list = split(list,',',strMap)
+				list = list.split('')
+				list.splice(list.length - 1, 1)
+				list = list.join('')
+				var strMap = genStrMap(list)
+				list = split(list, ',', strMap)
 
 				if (isNaN(list.join(''))) {
-					this.data.var.list[Object.keys(this.data.var.list)[index]] = { name: ctx.identifier().getText(), type: "str", strMap: Object.keys(this.data.var.list)[strIndex], val:val.getText(),list:Object.keys(this.data.var.list)[index] }
+					this.data.var.list[Object.keys(this.data.var.list)[index]] = { name: ctx.identifier().getText(), type: "str", strMap: Object.keys(this.data.var.list)[strIndex], val: val.getText(), list: Object.keys(this.data.var.list)[index] }
 					var listData = this.data.var.list[Object.keys(this.data.var.list)[index]]
-					var len=[]
-					var listStr=""
-					list.forEach((elm)=>{
+					var len = []
+					var listStr = ""
+					list.forEach((elm) => {
 						len.push(elm.length)
-						listStr=listStr+elm.replace('"','').substring(0,elm.length-1)
+						listStr = listStr + elm.replace('"', '').substring(0, elm.length - 1)
 					})
-					return	`:"${listStr}"=>${listData.strMap}:{${len.join(',')}}=>${listData.list}`
+					return `:"${listStr}"=>${listData.strMap}:{${len.join(',')}}=>|L${listData.list}`
 				} else {
-					this.data.var.list[Object.keys(this.data.var.list)[index]] = { name: ctx.identifier().getText(), type: "num", val:val.getText(),list:Object.keys(this.data.var.list)[index] }
+					this.data.var.list[Object.keys(this.data.var.list)[index]] = { name: ctx.identifier().getText(), type: "num", val: val.getText(), list: Object.keys(this.data.var.list)[index] }
 					res = val.getText().replace('[', '{')
-                    //console.log(res)
+					//console.log(res)
 					res[res.length - 1] = "}"
-					return `:${res}=>${Object.keys(this.data.var.list)[index]}`
+					return `:${res}=>|L${Object.keys(this.data.var.list)[index]}`
 				}
 
-			}else if ((val.getText()[0] == '[') && (val.getText()[1] == '[')) {
-                var index=0
-                Object.values(this.data.var.matrix).forEach((elm, i) => { if ((elm == "") && (index == 0)) { index = i } })
-                //console.log('matrix',`${val.getText().replaceAll('[','{').replaceAll(']','}')}=>[${Object.keys(this.data.var.matrix)[index]}]`)
-                return `:${val.getText()}=>[${Object.keys(this.data.var.matrix)[index]}]`
-            }else{
-				var index=0
-                Object.values(this.data.var.num).forEach((elm, i) => { if ((elm == "") && (index == 0)) { index = i } })
+			} else if ((val.getText()[0] == '[') && (val.getText()[1] == '[')) {
+				var index = 0
+				Object.values(this.data.var.matrix).forEach((elm, i) => { if ((elm == "") && (index == 0)) { index = i } })
+				//console.log('matrix',`${val.getText().replaceAll('[','{').replaceAll(']','}')}=>[${Object.keys(this.data.var.matrix)[index]}]`)
+				return `:${val.getText()}=>[${Object.keys(this.data.var.matrix)[index]}]`
+			} else {
+				var index = 0
+				Object.values(this.data.var.num).forEach((elm, i) => { if ((elm == "") && (index == 0)) { index = i } })
 				return `:${children}=>${Object.keys(this.data.var.num)[index]}`
 			}
 			return ""
 		},
-		"while":function(ctx,children,context){
-			var body=context.visit(ctx.statement())
-			return `:While ${ctx.boolexpr().getText()}:${body.substring(1,body.length-1)}:End`
+		"while": function (ctx, children, context) {
+			var body = context.visit(ctx.statement())
+			return `:While ${ctx.boolexpr().getText()}:${body.substring(1, body.length - 1)}:End`
 		},
-		"if":(ctx,children,context)=>{
-			var body=context.visit(ctx.statement())
-			return `If ${ctx.boolexpr().getText()}:Then:${body.substring(1,body.length-1)}:End`
+		"if": (ctx, children, context) => {
+			var body = context.visit(ctx.statement())
+			return `If ${ctx.boolexpr().getText()}:Then:${body.substring(1, body.length - 1)}:End`
 		},
-		"ifElse":(ctx,children,context)=>{
-			var ifBody=context.visit(ctx.statement()[0])
-			var elseBody=context.visit(ctx.statement()[1])
-			return `If ${ctx.boolexpr().getText()}:Then:${ifBody.substring(1,ifBody.length-1)}:Else:${elseBody.substring(1,elseBody.length-1)}:End`
+		"ifElse": (ctx, children, context) => {
+			var ifBody = context.visit(ctx.statement()[0])
+			var elseBody = context.visit(ctx.statement()[1])
+			return `If ${ctx.boolexpr().getText()}:Then:${ifBody.substring(1, ifBody.length - 1)}:Else:${elseBody.substring(1, elseBody.length - 1)}:End`
 		},
-		"tib":(ctx,children,context)=>{
+		"tib": (ctx, children, context) => {
 			return context.visit(ctx.any())
 		}
 	}
-	if(!token){
+	if (!token) {
 		return handlers
 	}
 	var children = context.visitChildren(ctx)
@@ -173,7 +173,7 @@ function handler(token, ctx, context) {
 	if (handlers.hasOwnProperty(token)) {
 		console.log(typeof handlers[token])
 		if (typeof handlers[token] == "function") {
-			return handlers[token](ctx,children,context)
+			return handlers[token](ctx, children, context)
 		} else {
 			return handlers[token]
 		}
@@ -290,7 +290,7 @@ class Visitor extends ICEScriptVisitor {
 	// Visit a parse tree produced by ICEScriptParser#if_else_stmt.
 	visitIf_else_stmt(ctx) {
 		return handler("ifElse", ctx, this);
-	  }
+	}
 
 	// Visit a parse tree produced by ICEScriptParser#while_stmt.
 	visitWhile_stmt(ctx) {
@@ -311,7 +311,7 @@ class Visitor extends ICEScriptVisitor {
 	}
 
 
-	
+
 
 	// Visit a parse tree produced by ICEScriptParser#boolexpr.
 	visitBoolexpr(ctx) {
@@ -339,13 +339,21 @@ const parser = new ICEScriptParser(tokenstr);
 const tree = parser.script();
 var out = new Visitor().start(tree)
 
-Object.keys(handler()).forEach((elm,i)=>{
-	var pos = strIndexOf(out,elm)
-	pos.forEach((index)=>{
-		if(typeof handler()[Object.keys(handler())[i]] =="function"){return}
-		out=replaceAt(out,index,handler()[Object.keys(handler())[i]],Object.keys(handler())[i].length)
-		console.log(out,index,elm,handler()[Object.keys(handler())[i]],Object.keys(handler())[i].length)
-		pos = strIndexOf(out,elm)
-	})
+Object.keys(handler()).forEach((elm, i) => {
+	var pos = strIndexOf(out, elm)
+	
+	for(var c=0;c<pos.length;c++){
+		//pos.push(0)
+		var index =pos[c]
+		if (typeof handler()[Object.keys(handler())[i]] == "function") { return }
+		console.log('Pos Length:',pos.length,'\nPos:',pos,'\nToken String: ' + elm, '\n	Beggining:', out.substring(0, index), '\n	Replacement:', handler()[Object.keys(handler())[i]], '\n	End:', out.substring(index + Object.keys(handler())[i].length),'\n	Src (Est):',out.substring(index-3,index+3), '\n	Length:', Object.keys(handler())[i].length, '\n	Index:',index,'\n	Index Char:',out[index])
+		out = replaceAt(out, index, handler()[Object.keys(handler())[i]], Object.keys(handler())[i].length)
+		//console.log(out,index,elm,handler()[Object.keys(handler())[i]],Object.keys(handler())[i].length,index + Object.keys(handler())[i].length,out.substring(index + Object.keys(handler())[i].length))
+		
+		pos = strIndexOf(out, elm)
+	}
+	if(pos.length==1){
+		out = replaceAt(out, pos[0], handler()[Object.keys(handler())[i]], Object.keys(handler())[i].length)
+	}
 })
 console.log(out)
