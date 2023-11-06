@@ -1,9 +1,7 @@
 
 while(true){
-    var input=[1,1,1,"hello","world"];
-    input=[[1,1],[1,2],[3]];
+    var input=0;
     input("",input);
     disp(randInt(0-input,input)+input);
-    if(true){}else{}
 };
 

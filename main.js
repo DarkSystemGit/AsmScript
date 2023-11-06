@@ -79,6 +79,7 @@ function strIndexOf(str, substr) {
 function handler(token, ctx, context) {
 
 	var handlers = {
+		data: {},
 		"&&": "and",
 		"||": "or",
 		"!": "not",
@@ -86,6 +87,7 @@ function handler(token, ctx, context) {
 		"==": "=",
 		"true": "1",
 		"false": "0",
+		"::":":",
 		"var": function (ctx, children) {
 			//console.log(this)
 			this.data = this.data || {}
@@ -102,7 +104,7 @@ function handler(token, ctx, context) {
 
 				this.data.var.num[Object.keys(this.data.var.num)[index]] = ctx.identifier().getText()
 
-				return `:{${val.getText()}}=>${Object.keys(this.data.var.num)[index]}`
+				return `:${val.getText()}=>${Object.keys(this.data.var.num)[index]}:`
 			} else if ((val.getText()[0] == '[') && (!(val.getText()[1] == '['))) {
 				console.log("list")
 				var index = 0
@@ -126,42 +128,60 @@ function handler(token, ctx, context) {
 						len.push(elm.length)
 						listStr = listStr + elm.replace('"', '').substring(0, elm.length - 1)
 					})
-					return `:"${listStr}"=>${listData.strMap}:{${len.join(',')}}=>|L${listData.list}`
+					return `:"${listStr}"=>${listData.strMap}:{${len.join(',')}}=>|L${listData.list}:`
 				} else {
 					this.data.var.list[Object.keys(this.data.var.list)[index]] = { name: ctx.identifier().getText(), type: "num", val: val.getText(), list: Object.keys(this.data.var.list)[index] }
 					res = val.getText().replace('[', '{')
 					//console.log(res)
 					res[res.length - 1] = "}"
-					return `:${res}=>|L${Object.keys(this.data.var.list)[index]}`
+					return `:${res}=>|L${Object.keys(this.data.var.list)[index]}:`
 				}
 
 			} else if ((val.getText()[0] == '[') && (val.getText()[1] == '[')) {
 				var index = 0
 				Object.values(this.data.var.matrix).forEach((elm, i) => { if ((elm == "") && (index == 0)) { index = i } })
 				//console.log('matrix',`${val.getText().replaceAll('[','{').replaceAll(']','}')}=>[${Object.keys(this.data.var.matrix)[index]}]`)
-				return `:${val.getText()}=>[${Object.keys(this.data.var.matrix)[index]}]`
+				return `:${val.getText()}=>[${Object.keys(this.data.var.matrix)[index]}]:`
 			} else {
 				var index = 0
 				Object.values(this.data.var.num).forEach((elm, i) => { if ((elm == "") && (index == 0)) { index = i } })
-				return `:${children}=>${Object.keys(this.data.var.num)[index]}`
+				return `:${children}=>${Object.keys(this.data.var.num)[index]}:`
 			}
 			return ""
 		},
 		"while": function (ctx, children, context) {
 			var body = context.visit(ctx.statement())
-			return `:While ${ctx.boolexpr().getText()}:${body.substring(1, body.length - 1)}:End`
+			return `:While ${ctx.boolexpr().getText()}:${body.substring(1, body.length - 1)}:End:`
 		},
 		"if": (ctx, children, context) => {
 			var body = context.visit(ctx.statement())
-			return `If ${ctx.boolexpr().getText()}:Then:${body.substring(1, body.length - 1)}:End`
+			return `If ${ctx.boolexpr().getText()}:Then:${body.substring(1, body.length - 1)}:End:`
 		},
 		"ifElse": (ctx, children, context) => {
 			var ifBody = context.visit(ctx.statement()[0])
 			var elseBody = context.visit(ctx.statement()[1])
-			return `If ${ctx.boolexpr().getText()}:Then:${ifBody.substring(1, ifBody.length - 1)}:Else:${elseBody.substring(1, elseBody.length - 1)}:End`
+			return `If ${ctx.boolexpr().getText()}:Then:${ifBody.substring(1, ifBody.length - 1)}:Else:${elseBody.substring(1, elseBody.length - 1)}:End:`
 		},
 		"tib": (ctx, children, context) => {
 			return context.visit(ctx.any())
+		},
+		"funcCall": (ctx, children, context) => {
+			handlers.data.functions = handlers.data.functions || {}
+			handlers.data.functionCall.tokens= handlers.data.functionCall.tokens || {
+				"menu":"Menu","graph.graphStyle":"GraphStyle","graph.graphColor":"GraphColor","io.openLib":"OpenLib","io.output":"Output","io.getCalc":"GetCalc","io.get":"Get","io.send":"Send","matrix.det":"det","matrix.dim":"dim","matrix.fill":"Fill",
+				"matrix.identity":"identity","matrix.randM":"randM","matrix.augment":"augment","matrix.toList":"Matr>List","matrix.fromList":"List>matr","matrix.cumSum":"cumSum","matrix.ref":"ref","matrix.rref":"rref","matrix.rowSwap":"rowSwap",
+				"matrix.rowAdd":"row+","matrix.multiplyRow":"row*","matrix.multipleRowAdd":"*row+","gfx.line":"Line","gfx.tangent":"Tangent","gfx.shade":"Shade","gfx.text":"Text","gfx.circle":"Circle","gfx.textColor":"TextColor",
+				"gfx.pointOn":"Pt-On","gfx.pointOff":"Pt-Off","gfx.pointChange":"Pt-Change","gfx.pixelOn":"Pxl-On","gfx.pixelOff":"Pxl-Off","gfx.pixelChange":"Pxl-Change","gfx.pixelIsOn":"pxl-Test","string.length":"length","string.subStr":"sub",
+				"string.toExpression":"expr","string.indexOf":"inString","string.fromEquVar":"String>Equ","math.max":"max","math.min":"min","math.gcm":"gcm","math.lcd":"lcd","math.toInt":"int","math.mod":"remainder",
+				"math.intPart":"iPart","math.floatPart":"fPart","math.abs":"abs","math.round":"round","math.solve":"solve","math.log":"log","math.sin":"sin","math.cos":"cos","math.rand.dec":"rand","math.rand":"randInt","math.rand.norm":"randNorm",
+				"math.rand.bin":"randBin","list.sortUp":"SortA","list.sortDown":"SortD","list.diff":"DeltaList","list.median":"median","list.mean":"mean","list.sum":"sum","list.product":"prod",
+				"list.stdDev":"stdDev","list.variance":"variance","list.seq":"seq","list.fromMatrix":"Matr>List","list.toMatrix":"List>matr"
+			}
+			if (!(handlers.data.functions.hasOwnProperty(ctx.identifier().getText()))) {
+				if(!handlers.data.functionCall.tokens.hasOwnProperty(ctx.identifier().getText())){
+				return `${ctx.identifier().getText().charAt(0).toUpperCase() + ctx.identifier().getText().slice(1)} ${context.visit(ctx.methodparams())}`
+			}
+			}
 		}
 	}
 	if (!token) {
@@ -171,7 +191,7 @@ function handler(token, ctx, context) {
 	console.log(token, ctx.getText(), children)
 
 	if (handlers.hasOwnProperty(token)) {
-		console.log(typeof handlers[token])
+		//console.log(handlers[token](ctx, children, context).toString())
 		if (typeof handlers[token] == "function") {
 			return handlers[token](ctx, children, context)
 		} else {
@@ -198,6 +218,9 @@ class Visitor extends ICEScriptVisitor {
 	visitTerminal(ctx) {
 		return ctx.getText();
 	}
+	/*visitNumber(ctx){
+		return this.visitChildren(ctx)//this.visitTerminal(ctx)
+	}*/
 	// Visit a parse tree produced by ICEScriptParser#header.
 	visitHeader(ctx) {
 
@@ -225,7 +248,7 @@ class Visitor extends ICEScriptVisitor {
 
 	// Visit a parse tree produced by ICEScriptParser#function.
 	visitFunction(ctx) {
-		return handler("function", ctx, this);
+		return handler("functionDec", ctx, this);
 	}
 
 
@@ -322,7 +345,7 @@ class Visitor extends ICEScriptVisitor {
 	// Visit a parse tree produced by ICEScriptParser#methodcall.
 	visitMethodcall(ctx) {
 
-		return handler("methodCall", ctx, this);
+		return handler("funcCall", ctx, this);
 	}
 
 
@@ -338,22 +361,22 @@ const tokenstr = new antlr4.CommonTokenStream(lexer);
 const parser = new ICEScriptParser(tokenstr);
 const tree = parser.script();
 var out = new Visitor().start(tree)
-
+//Imagine using Antlr wheen you could roll your own
 Object.keys(handler()).forEach((elm, i) => {
 	var pos = strIndexOf(out, elm)
-	
-	for(var c=0;c<pos.length;c++){
+
+	for (var c = 0; c < pos.length; c++) {
 		//pos.push(0)
-		var index =pos[c]
+		var index = pos[c]
 		if (typeof handler()[Object.keys(handler())[i]] == "function") { return }
-		console.log('Pos Length:',pos.length,'\nPos:',pos,'\nToken String: ' + elm, '\n	Beggining:', out.substring(0, index), '\n	Replacement:', handler()[Object.keys(handler())[i]], '\n	End:', out.substring(index + Object.keys(handler())[i].length),'\n	Src (Est):',out.substring(index-3,index+3), '\n	Length:', Object.keys(handler())[i].length, '\n	Index:',index,'\n	Index Char:',out[index])
+		console.log('Pos Length:', pos.length, '\nPos:', pos, '\nToken String: ' + elm, '\n	Beggining:', out.substring(0, index), '\n	Replacement:', handler()[Object.keys(handler())[i]], '\n	End:', out.substring(index + Object.keys(handler())[i].length), '\n	Src (Est):', out.substring(index - 3, index + 3), '\n	Length:', Object.keys(handler())[i].length, '\n	Index:', index, '\n	Index Char:', out[index])
 		out = replaceAt(out, index, handler()[Object.keys(handler())[i]], Object.keys(handler())[i].length)
 		//console.log(out,index,elm,handler()[Object.keys(handler())[i]],Object.keys(handler())[i].length,index + Object.keys(handler())[i].length,out.substring(index + Object.keys(handler())[i].length))
-		
+
 		pos = strIndexOf(out, elm)
 	}
-	if(pos.length==1){
+	if (pos.length == 1) {
 		out = replaceAt(out, pos[0], handler()[Object.keys(handler())[i]], Object.keys(handler())[i].length)
 	}
 })
-console.log(out)
+console.log('\nResults:', '\n	Tree:\n		', tree.toStringTree(parser.ruleNames), '\n	TI-Basic:\n		', out.replaceAll(':','\n:'))
