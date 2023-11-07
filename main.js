@@ -167,6 +167,7 @@ function handler(token, ctx, context) {
 		},
 		"funcCall": (ctx, children, context) => {
 			handlers.data.functions = handlers.data.functions || {}
+			handlers.data.functionCall=handlers.data.functionCall||{}
 			handlers.data.functionCall.tokens= handlers.data.functionCall.tokens || {
 				"menu":"Menu","graph.graphStyle":"GraphStyle","graph.graphColor":"GraphColor","io.openLib":"OpenLib","io.output":"Output","io.getCalc":"GetCalc","io.get":"Get","io.send":"Send","matrix.det":"det","matrix.dim":"dim","matrix.fill":"Fill",
 				"matrix.identity":"identity","matrix.randM":"randM","matrix.augment":"augment","matrix.toList":"Matr>List","matrix.fromList":"List>matr","matrix.cumSum":"cumSum","matrix.ref":"ref","matrix.rref":"rref","matrix.rowSwap":"rowSwap",
@@ -177,9 +178,24 @@ function handler(token, ctx, context) {
 				"math.rand.bin":"randBin","list.sortUp":"SortA","list.sortDown":"SortD","list.diff":"DeltaList","list.median":"median","list.mean":"mean","list.sum":"sum","list.product":"prod",
 				"list.stdDev":"stdDev","list.variance":"variance","list.seq":"seq","list.fromMatrix":"Matr>List","list.toMatrix":"List>matr"
 			}
-			if (!(handlers.data.functions.hasOwnProperty(ctx.identifier().getText()))) {
-				if(!handlers.data.functionCall.tokens.hasOwnProperty(ctx.identifier().getText())){
-				return `${ctx.identifier().getText().charAt(0).toUpperCase() + ctx.identifier().getText().slice(1)} ${context.visit(ctx.methodparams())}`
+			var identifier=[]
+			ctx.identifier().forEach((elm)=>{
+				identifier.push(elm.getText())
+			})
+			//console.log(identifier)
+			if (!(handlers.data.functions.hasOwnProperty(identifier.join('.')))) {
+				if(!handlers.data.functionCall.tokens.hasOwnProperty(identifier.join('.'))){
+					
+					var name=identifier[identifier.length-1]
+					
+					//console.log(name)
+					
+					var prams=context.visit(ctx.methodparams())
+					console.log(' \x1b[34m','params:','resulting prams:',prams,'src:',ctx.methodparams().getText(),'returned:',`${name.charAt(0).toUpperCase() +name.slice(1)} ${prams}`,"\x1b[0m")
+				return `${name.charAt(0).toUpperCase() +name.slice(1)} ${prams}`
+			}else{
+				var name = handlers.data.functionCall.tokens[identifier.join('.')]
+				return `${name}(${context.visit(ctx.methodparams())})`
 			}
 			}
 		}
@@ -188,11 +204,12 @@ function handler(token, ctx, context) {
 		return handlers
 	}
 	var children = context.visitChildren(ctx)
-	console.log(token, ctx.getText(), children)
+	
 
 	if (handlers.hasOwnProperty(token)) {
-		//console.log(handlers[token](ctx, children, context).toString())
+		
 		if (typeof handlers[token] == "function") {
+			console.log(token+':',ctx.getText(),handlers[token](ctx, children, context))
 			return handlers[token](ctx, children, context)
 		} else {
 			return handlers[token]
@@ -353,6 +370,11 @@ class Visitor extends ICEScriptVisitor {
 	visitMethodparams(ctx) {
 		return handler("funcParams", ctx, this);
 	}
+
+	visitValue(ctx){
+		console.log(' \x1b[33m',ctx.getText(),' \x1b[0m')
+		return ctx.getText()
+	}
 }
 //console.log(tree.toStringTree(parser.ruleNames))
 const chars = new antlr4.InputStream(readFileSync(process.argv[2]).toString());
@@ -369,7 +391,7 @@ Object.keys(handler()).forEach((elm, i) => {
 		//pos.push(0)
 		var index = pos[c]
 		if (typeof handler()[Object.keys(handler())[i]] == "function") { return }
-		console.log('Pos Length:', pos.length, '\nPos:', pos, '\nToken String: ' + elm, '\n	Beggining:', out.substring(0, index), '\n	Replacement:', handler()[Object.keys(handler())[i]], '\n	End:', out.substring(index + Object.keys(handler())[i].length), '\n	Src (Est):', out.substring(index - 3, index + 3), '\n	Length:', Object.keys(handler())[i].length, '\n	Index:', index, '\n	Index Char:', out[index])
+		//console.log('Pos Length:', pos.length, '\nPos:', pos, '\nToken String: ' + elm, '\n	Beggining:', out.substring(0, index), '\n	Replacement:', handler()[Object.keys(handler())[i]], '\n	End:', out.substring(index + Object.keys(handler())[i].length), '\n	Src (Est):', out.substring(index - 3, index + 3), '\n	Length:', Object.keys(handler())[i].length, '\n	Index:', index, '\n	Index Char:', out[index])
 		out = replaceAt(out, index, handler()[Object.keys(handler())[i]], Object.keys(handler())[i].length)
 		//console.log(out,index,elm,handler()[Object.keys(handler())[i]],Object.keys(handler())[i].length,index + Object.keys(handler())[i].length,out.substring(index + Object.keys(handler())[i].length))
 
@@ -379,4 +401,4 @@ Object.keys(handler()).forEach((elm, i) => {
 		out = replaceAt(out, pos[0], handler()[Object.keys(handler())[i]], Object.keys(handler())[i].length)
 	}
 })
-console.log('\nResults:', '\n	Tree:\n		', tree.toStringTree(parser.ruleNames), '\n	TI-Basic:\n		', out.replaceAll(':','\n:'))
+//console.log('\nResults:', '\n	Tree:\n		', tree.toStringTree(parser.ruleNames), '\n	TI-Basic:\n		', out.replaceAll(':','\n:'))

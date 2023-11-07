@@ -1,7 +1,7 @@
 
 while(true){
     var input=0;
-    input("",input);
-    disp(randInt(0-input,input)+input);
+    io.input("",input);
+    io.disp(math.rand(0-input,input)+input);
 };
 
