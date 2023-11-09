@@ -92,7 +92,7 @@ function handler(token, ctx, context) {
 			//console.log(this)
 			this.data = this.data || {}
 			this.data.var = this.data.var || {}
-			this.data.var.num = this.data.var.num || { "": "", "A": "", "B": "", "C": "", "D": "", "E": "", "F": "", "G": "", "H": "", "I": "", "J": "", "K": "", "L": "", "M": "", "N": "", "O": "", "P": "", "Q": "", "R": "", "S": "", "T": "", "U": "", "V": "", "W": "", "X": "", "Y": "", "Z": "" }
+			this.data.var.num = this.data.var.num || {}
 			this.data.var.list = this.data.var.list || { "": "", "A": "", "B": "", "C": "", "D": "", "E": "", "F": "", "G": "", "H": "", "I": "", "J": "", "K": "", "L": "", "M": "", "N": "", "O": "", "P": "", "Q": "", "R": "", "S": "", "T": "", "U": "", "V": "", "W": "", "X": "", "Y": "", "Z": "", "Str0": "", "Str1": "", "Str2": "", "Str3": "", "Str4": "", "Str5": "", "Str6": "", "Str7": "", "Str8": "", "Str9": "" }
 			this.data.var.matrix = this.data.var.matrix || { "": "", "A": "", "B": "", "C": "", "D": "", "E": "", "F": "", "G": "", "H": "", "I": "", "J": "" }
 			const val = ctx.expression()
@@ -100,11 +100,11 @@ function handler(token, ctx, context) {
 			if ((val.getText()[0] == '"') || (
 				!isNaN(val.getText()))) {
 				var index = 0
-				Object.values(this.data.var.num).forEach((elm, i) => { if (((elm == "") && (index == 0)) || (elm == ctx.identifier().getText())) { index = i } })
+				//Object.values(this.data.var.num).forEach((elm, i) => { if (((elm == "") && (index == 0)) || (elm == ctx.identifier().getText())) { index = i } })
 
-				this.data.var.num[Object.keys(this.data.var.num)[index]] = ctx.identifier().getText()
+				this.data.var.num[ctx.identifier().getText()] = { name: ctx.identifier().getText(), type: "reg", val: val.getText(),ref:ctx.identifier().getText().toUpperCase()}
 
-				return `:${val.getText()}=>${Object.keys(this.data.var.num)[index]}:`
+				return `:${val.getText()}=>${ctx.identifier().getText().toUpperCase()}:`
 			} else if ((val.getText()[0] == '[') && (!(val.getText()[1] == '['))) {
 				console.log("list")
 				var index = 0
@@ -130,11 +130,11 @@ function handler(token, ctx, context) {
 					})
 					return `:"${listStr}"=>${listData.strMap}:{${len.join(',')}}=>|L${listData.list}:`
 				} else {
-					this.data.var.list[Object.keys(this.data.var.list)[index]] = { name: ctx.identifier().getText(), type: "num", val: val.getText(), list: Object.keys(this.data.var.list)[index] }
+					this.data.var.list[Object.keys(this.data.var.list)[index]] = { name: ctx.identifier().getText(), type: "numList", val: val.getText(), list: Object.keys(this.data.var.list)[index] }
 					res = val.getText().replace('[', '{')
 					//console.log(res)
 					res[res.length - 1] = "}"
-					return `:${res}=>|L${Object.keys(this.data.var.list)[index]}:`
+					return `:${res}=>L${Object.keys(this.data.var.list)[index]}:`
 				}
 
 			} else if ((val.getText()[0] == '[') && (val.getText()[1] == '[')) {
@@ -160,7 +160,7 @@ function handler(token, ctx, context) {
 		"ifElse": (ctx, children, context) => {
 			var ifBody = context.visit(ctx.statement()[0])
 			var elseBody = context.visit(ctx.statement()[1])
-			return `If ${ctx.boolexpr().getText()}:Then:${ifBody.substring(1, ifBody.length - 1)}:Else:${elseBody.substring(1, elseBody.length - 1)}:End:`
+			return `If ${ctx.boolexpr().getText()}:${ifBody.substring(1, ifBody.length - 1)}:Else:${elseBody.substring(1, elseBody.length - 1)}:End:`
 		},
 		"tib": (ctx, children, context) => {
 			return context.visit(ctx.any())
@@ -401,4 +401,4 @@ Object.keys(handler()).forEach((elm, i) => {
 		out = replaceAt(out, pos[0], handler()[Object.keys(handler())[i]], Object.keys(handler())[i].length)
 	}
 })
-//console.log('\nResults:', '\n	Tree:\n		', tree.toStringTree(parser.ruleNames), '\n	TI-Basic:\n		', out.replaceAll(':','\n:'))
+console.log('\nResults:', '\n	Tree:\n		', tree.toStringTree(parser.ruleNames), '\n	TI-Basic:\n		', out.replaceAll(':','\n:'),'\n Data:',handler())
