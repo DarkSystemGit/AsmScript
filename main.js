@@ -165,6 +165,17 @@ function handler(token, ctx, context) {
 		"tib": (ctx, children, context) => {
 			return context.visit(ctx.any())
 		},
+		"funcParams":(ctx,children,context)=>{
+
+		let code = '';
+
+		for (let i = 0; i < ctx.getChildCount(); i++) {
+			
+			if(!(context.visit(ctx.getChild(i))==""))code += context.visit(ctx.getChild(i))+",";
+		}
+
+		return code.trim();
+		},
 		"funcCall": (ctx, children, context) => {
 			handlers.data.functions = handlers.data.functions || {}
 			handlers.data.functionCall=handlers.data.functionCall||{}
@@ -197,6 +208,8 @@ function handler(token, ctx, context) {
 				var name = handlers.data.functionCall.tokens[identifier.join('.')]
 				return `${name}(${context.visit(ctx.methodparams())})`
 			}
+			}else{
+				return `Call ${handlers.data.functions[identifier.join('.')]}`
 			}
 		}
 	}
@@ -209,7 +222,7 @@ function handler(token, ctx, context) {
 	if (handlers.hasOwnProperty(token)) {
 		
 		if (typeof handlers[token] == "function") {
-			console.log(token+':',ctx.getText(),handlers[token](ctx, children, context))
+			//console.log(token+':',ctx.getText(),handlers[token](ctx, children, context))
 			return handlers[token](ctx, children, context)
 		} else {
 			return handlers[token]
@@ -372,7 +385,7 @@ class Visitor extends ICEScriptVisitor {
 	}
 
 	visitValue(ctx){
-		console.log(' \x1b[33m',ctx.getText(),' \x1b[0m')
+		//console.log(' \x1b[33m',ctx.getText(),' \x1b[0m')
 		return ctx.getText()
 	}
 }

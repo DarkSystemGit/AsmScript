@@ -25,10 +25,10 @@ include
 	;
 
 function
-	: 'function' identifier OPEN_BRACKET func_params CLOSE_BRACKET statement
+	: 'function ' identifier func_params statement
 	;
 func_params
-	: identifier* (',' identifier)*
+	: OPEN_BRACKET (identifier ||(identifier (',' identifier)*)) CLOSE_BRACKET
 	;
 
 statement
