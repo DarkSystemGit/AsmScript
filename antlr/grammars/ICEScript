@@ -25,10 +25,10 @@ include
 	;
 
 function
-	: 'function ' identifier func_params statement
+	: 'function ' identifier '(' func_params ')' statement
 	;
 func_params
-	: '(' func_identifier || func_identifier(',' func_identifier)* ')'
+	: func_identifier || func_identifier(',' func_identifier)*
 	;
 func_identifier
 	:(identifier||expression||any)

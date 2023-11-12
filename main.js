@@ -176,8 +176,27 @@ function handler(token, ctx, context) {
 
 		return code.trim();
 		},
+		"function":(ctx,children,context)=>{
+			context.data = context.data ||{}
+			context.data.functions = context.data.functions ||{}
+			var name = ctx.identifier().getText()
+			var params=ctx.func_params().getText().split(')')[0].split(',')
+			context.data.functions[name]={label,params,paramRefs:[]}
+			if(name.length>20){
+				context.data.functions[name].label=name.slice(1,20)
+			}
+			params.forEach((elm)=>{
+				if(!(context.data.var.num.hasOwnProperty('_$P'+elm))){
+					context.data.var.num['_$P'+elm]={ name: '_$P'+elm, type: "reg", val: "",ref:`${'_$P'+elm}`.toUpperCase()}
+					context.data.functions[name].paramRefs.push(`${'_$P'+elm}`.toUpperCase())
+				}else{
+					console.error(`Error: var ${'_$P'+elm} is reserved. Please change it.`)
+				}
+			})
+			return `:Label ${context.data.functions[name].label}:$`
+		},
 		"funcCall": (ctx, children, context) => {
-			handlers.data.functions = handlers.data.functions || {}
+			context.data.functions = handlers.data.functions || {}
 			handlers.data.functionCall=handlers.data.functionCall||{}
 			handlers.data.functionCall.tokens= handlers.data.functionCall.tokens || {
 				"menu":"Menu","graph.graphStyle":"GraphStyle","graph.graphColor":"GraphColor","io.openLib":"OpenLib","io.output":"Output","io.getCalc":"GetCalc","io.get":"Get","io.send":"Send","matrix.det":"det","matrix.dim":"dim","matrix.fill":"Fill",
@@ -278,7 +297,7 @@ class Visitor extends ICEScriptVisitor {
 
 	// Visit a parse tree produced by ICEScriptParser#function.
 	visitFunction(ctx) {
-		return handler("functionDec", ctx, this);
+		return handler("function", ctx, this);
 	}
 
 
