@@ -284,7 +284,7 @@ class Visitor extends ICEScriptVisitor {
 
 	// Visit a parse tree produced by ICEScriptParser#func_params.
 	visitFunc_params(ctx) {
-		return handler("funcPrams", ctx, this);
+		return handler("funcDecPrams", ctx, this);
 	}
 
 
@@ -414,4 +414,4 @@ Object.keys(handler()).forEach((elm, i) => {
 		out = replaceAt(out, pos[0], handler()[Object.keys(handler())[i]], Object.keys(handler())[i].length)
 	}
 })
-console.log('\nResults:', '\n	Tree:\n		', tree.toStringTree(parser.ruleNames), '\n	TI-Basic:\n		', out.replaceAll(':','\n:'),'\n Data:',handler())
+console.log('\nResults:', '\n	Tree:\n		', tree.toStringTree(parser.ruleNames), '\n	TI-Basic:\n		', out.replaceAll(':','\n:'),'\n Data:',/*handler()*/)

@@ -28,7 +28,7 @@ function
 	: 'function ' identifier func_params statement
 	;
 func_params
-	: OPEN_BRACKET (identifier ||(identifier (',' identifier)*)) CLOSE_BRACKET
+	: '(' identifier || identifier(',' identifier)* ')'
 	;
 
 statement
@@ -54,7 +54,7 @@ assign_stmt
 	: identifier ASSIGN expression END_STMT
 	;
 ti_basic_stmt
-    : '__TiBasic' '{' any '}'
+    : '__ICE' '{' any '}'
     ;
 
 any : ( . )+?;
