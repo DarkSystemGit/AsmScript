@@ -4,105 +4,108 @@ import antlr4 from 'antlr4';
 import ICEScriptListener from './ICEScriptListener.js';
 import ICEScriptVisitor from './ICEScriptVisitor.js';
 
-const serializedATN = [4,1,51,313,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
+const serializedATN = [4,1,51,322,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
 4,2,5,7,5,2,6,7,6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,
 2,13,7,13,2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,
 20,7,20,2,21,7,21,2,22,7,22,2,23,7,23,2,24,7,24,2,25,7,25,2,26,7,26,2,27,
-7,27,2,28,7,28,1,0,1,0,5,0,61,8,0,10,0,12,0,64,9,0,1,0,5,0,67,8,0,10,0,12,
-0,70,9,0,1,0,3,0,73,8,0,1,1,5,1,76,8,1,10,1,12,1,79,9,1,1,2,1,2,1,3,1,3,
-1,3,1,3,1,4,1,4,1,4,1,4,1,5,1,5,1,5,1,5,1,5,1,6,1,6,1,6,1,6,1,6,1,6,5,6,
-102,8,6,10,6,12,6,105,9,6,1,6,1,6,3,6,109,8,6,1,7,1,7,5,7,113,8,7,10,7,12,
-7,116,9,7,1,7,1,7,1,7,1,7,1,7,1,7,1,7,1,7,1,7,1,7,1,7,1,7,1,7,1,7,1,7,1,
-7,1,7,1,7,3,7,136,8,7,1,8,1,8,1,8,1,8,1,8,1,9,1,9,1,9,1,9,1,9,1,10,4,10,
-149,8,10,11,10,12,10,150,1,11,1,11,1,11,1,11,1,11,1,12,1,12,1,12,1,12,1,
-12,1,13,1,13,1,13,1,13,1,13,1,14,1,14,1,14,1,14,1,14,1,15,1,15,1,15,1,15,
-1,16,1,16,1,16,1,16,1,17,1,17,1,17,1,17,1,17,1,17,1,18,1,18,1,18,1,18,1,
-18,1,18,1,18,1,18,1,19,1,19,1,19,1,19,1,19,1,19,1,20,1,20,1,20,1,20,1,20,
-1,20,1,21,1,21,1,21,1,21,1,22,1,22,1,22,1,22,1,22,1,22,1,22,1,22,1,22,1,
-22,1,22,3,22,222,8,22,1,22,1,22,1,22,1,22,1,22,1,22,1,22,1,22,1,22,1,22,
-1,22,1,22,5,22,236,8,22,10,22,12,22,239,9,22,1,23,1,23,1,23,1,23,1,23,1,
-23,1,23,1,23,1,23,1,23,1,23,1,23,1,23,1,23,1,23,1,23,1,23,1,23,1,23,1,23,
-1,23,1,23,1,23,1,23,1,23,1,23,1,23,1,23,1,23,1,23,1,23,1,23,1,23,1,23,1,
-23,1,23,1,23,3,23,278,8,23,1,24,1,24,1,24,1,24,1,24,1,24,3,24,286,8,24,1,
-24,1,24,1,24,1,24,1,25,5,25,293,8,25,10,25,12,25,296,9,25,1,25,1,25,5,25,
-300,8,25,10,25,12,25,303,9,25,1,26,1,26,3,26,307,8,26,1,27,1,27,1,28,1,28,
-1,28,1,150,1,44,29,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,
-40,42,44,46,48,50,52,54,56,0,1,1,0,42,45,333,0,72,1,0,0,0,2,77,1,0,0,0,4,
-80,1,0,0,0,6,82,1,0,0,0,8,86,1,0,0,0,10,90,1,0,0,0,12,108,1,0,0,0,14,135,
-1,0,0,0,16,137,1,0,0,0,18,142,1,0,0,0,20,148,1,0,0,0,22,152,1,0,0,0,24,157,
-1,0,0,0,26,162,1,0,0,0,28,167,1,0,0,0,30,172,1,0,0,0,32,176,1,0,0,0,34,180,
-1,0,0,0,36,186,1,0,0,0,38,194,1,0,0,0,40,200,1,0,0,0,42,206,1,0,0,0,44,221,
-1,0,0,0,46,277,1,0,0,0,48,285,1,0,0,0,50,294,1,0,0,0,52,306,1,0,0,0,54,308,
-1,0,0,0,56,310,1,0,0,0,58,62,3,2,1,0,59,61,3,10,5,0,60,59,1,0,0,0,61,64,
-1,0,0,0,62,60,1,0,0,0,62,63,1,0,0,0,63,68,1,0,0,0,64,62,1,0,0,0,65,67,3,
-14,7,0,66,65,1,0,0,0,67,70,1,0,0,0,68,66,1,0,0,0,68,69,1,0,0,0,69,73,1,0,
-0,0,70,68,1,0,0,0,71,73,5,0,0,1,72,58,1,0,0,0,72,71,1,0,0,0,73,1,1,0,0,0,
-74,76,3,8,4,0,75,74,1,0,0,0,76,79,1,0,0,0,77,75,1,0,0,0,77,78,1,0,0,0,78,
-3,1,0,0,0,79,77,1,0,0,0,80,81,3,6,3,0,81,5,1,0,0,0,82,83,5,1,0,0,83,84,3,
-54,27,0,84,85,5,11,0,0,85,7,1,0,0,0,86,87,5,2,0,0,87,88,3,54,27,0,88,89,
-5,11,0,0,89,9,1,0,0,0,90,91,5,3,0,0,91,92,3,54,27,0,92,93,3,12,6,0,93,94,
-3,14,7,0,94,11,1,0,0,0,95,96,5,7,0,0,96,109,3,54,27,0,97,109,1,0,0,0,98,
-103,3,54,27,0,99,100,5,4,0,0,100,102,3,54,27,0,101,99,1,0,0,0,102,105,1,
-0,0,0,103,101,1,0,0,0,103,104,1,0,0,0,104,106,1,0,0,0,105,103,1,0,0,0,106,
-107,5,8,0,0,107,109,1,0,0,0,108,95,1,0,0,0,108,97,1,0,0,0,108,98,1,0,0,0,
-109,13,1,0,0,0,110,114,5,9,0,0,111,113,3,14,7,0,112,111,1,0,0,0,113,116,
-1,0,0,0,114,112,1,0,0,0,114,115,1,0,0,0,115,117,1,0,0,0,116,114,1,0,0,0,
-117,136,5,10,0,0,118,136,3,16,8,0,119,136,3,18,9,0,120,136,3,22,11,0,121,
-136,3,24,12,0,122,136,3,26,13,0,123,136,3,28,14,0,124,136,3,30,15,0,125,
-136,3,32,16,0,126,136,3,34,17,0,127,136,3,36,18,0,128,136,3,38,19,0,129,
-136,3,40,20,0,130,136,3,42,21,0,131,132,3,44,22,0,132,133,5,11,0,0,133,136,
-1,0,0,0,134,136,5,11,0,0,135,110,1,0,0,0,135,118,1,0,0,0,135,119,1,0,0,0,
-135,120,1,0,0,0,135,121,1,0,0,0,135,122,1,0,0,0,135,123,1,0,0,0,135,124,
-1,0,0,0,135,125,1,0,0,0,135,126,1,0,0,0,135,127,1,0,0,0,135,128,1,0,0,0,
-135,129,1,0,0,0,135,130,1,0,0,0,135,131,1,0,0,0,135,134,1,0,0,0,136,15,1,
-0,0,0,137,138,3,54,27,0,138,139,5,25,0,0,139,140,3,44,22,0,140,141,5,11,
-0,0,141,17,1,0,0,0,142,143,5,5,0,0,143,144,5,9,0,0,144,145,3,20,10,0,145,
-146,5,10,0,0,146,19,1,0,0,0,147,149,9,0,0,0,148,147,1,0,0,0,149,150,1,0,
-0,0,150,151,1,0,0,0,150,148,1,0,0,0,151,21,1,0,0,0,152,153,3,54,27,0,153,
-154,5,26,0,0,154,155,3,52,26,0,155,156,5,11,0,0,156,23,1,0,0,0,157,158,3,
-54,27,0,158,159,5,27,0,0,159,160,3,52,26,0,160,161,5,11,0,0,161,25,1,0,0,
-0,162,163,3,54,27,0,163,164,5,28,0,0,164,165,3,52,26,0,165,166,5,11,0,0,
-166,27,1,0,0,0,167,168,3,54,27,0,168,169,5,29,0,0,169,170,3,52,26,0,170,
-171,5,11,0,0,171,29,1,0,0,0,172,173,3,54,27,0,173,174,5,33,0,0,174,175,5,
-11,0,0,175,31,1,0,0,0,176,177,3,54,27,0,177,178,5,34,0,0,178,179,5,11,0,
-0,179,33,1,0,0,0,180,181,5,31,0,0,181,182,5,7,0,0,182,183,3,46,23,0,183,
-184,5,8,0,0,184,185,3,14,7,0,185,35,1,0,0,0,186,187,5,31,0,0,187,188,5,7,
-0,0,188,189,3,46,23,0,189,190,5,8,0,0,190,191,3,14,7,0,191,192,5,32,0,0,
-192,193,3,14,7,0,193,37,1,0,0,0,194,195,5,37,0,0,195,196,5,7,0,0,196,197,
-3,46,23,0,197,198,5,8,0,0,198,199,3,14,7,0,199,39,1,0,0,0,200,201,5,36,0,
-0,201,202,3,54,27,0,202,203,5,25,0,0,203,204,3,44,22,0,204,205,5,11,0,0,
-205,41,1,0,0,0,206,207,5,38,0,0,207,208,3,44,22,0,208,209,5,11,0,0,209,43,
-1,0,0,0,210,211,6,22,-1,0,211,212,5,7,0,0,212,213,3,44,22,0,213,214,5,8,
-0,0,214,222,1,0,0,0,215,222,3,52,26,0,216,222,3,46,23,0,217,222,5,46,0,0,
-218,222,3,48,24,0,219,222,5,47,0,0,220,222,5,48,0,0,221,210,1,0,0,0,221,
-215,1,0,0,0,221,216,1,0,0,0,221,217,1,0,0,0,221,218,1,0,0,0,221,219,1,0,
-0,0,221,220,1,0,0,0,222,237,1,0,0,0,223,224,10,10,0,0,224,225,5,12,0,0,225,
-236,3,44,22,11,226,227,10,9,0,0,227,228,5,13,0,0,228,236,3,44,22,10,229,
-230,10,8,0,0,230,231,5,14,0,0,231,236,3,44,22,9,232,233,10,7,0,0,233,234,
-5,15,0,0,234,236,3,44,22,8,235,223,1,0,0,0,235,226,1,0,0,0,235,229,1,0,0,
-0,235,232,1,0,0,0,236,239,1,0,0,0,237,235,1,0,0,0,237,238,1,0,0,0,238,45,
-1,0,0,0,239,237,1,0,0,0,240,278,3,52,26,0,241,278,5,39,0,0,242,278,5,40,
-0,0,243,244,3,52,26,0,244,245,5,16,0,0,245,246,3,46,23,0,246,278,1,0,0,0,
-247,248,3,52,26,0,248,249,5,17,0,0,249,250,3,46,23,0,250,278,1,0,0,0,251,
-252,3,52,26,0,252,253,5,18,0,0,253,254,3,46,23,0,254,278,1,0,0,0,255,256,
-3,52,26,0,256,257,5,19,0,0,257,258,3,46,23,0,258,278,1,0,0,0,259,260,3,52,
-26,0,260,261,5,20,0,0,261,262,3,46,23,0,262,278,1,0,0,0,263,264,3,52,26,
-0,264,265,5,21,0,0,265,266,3,46,23,0,266,278,1,0,0,0,267,268,3,52,26,0,268,
-269,5,22,0,0,269,270,3,46,23,0,270,278,1,0,0,0,271,272,3,52,26,0,272,273,
-5,23,0,0,273,274,3,46,23,0,274,278,1,0,0,0,275,276,5,24,0,0,276,278,3,46,
-23,0,277,240,1,0,0,0,277,241,1,0,0,0,277,242,1,0,0,0,277,243,1,0,0,0,277,
-247,1,0,0,0,277,251,1,0,0,0,277,255,1,0,0,0,277,259,1,0,0,0,277,263,1,0,
-0,0,277,267,1,0,0,0,277,271,1,0,0,0,277,275,1,0,0,0,278,47,1,0,0,0,279,286,
-3,54,27,0,280,286,1,0,0,0,281,282,3,54,27,0,282,283,5,6,0,0,283,284,3,54,
-27,0,284,286,1,0,0,0,285,279,1,0,0,0,285,280,1,0,0,0,285,281,1,0,0,0,286,
-287,1,0,0,0,287,288,5,7,0,0,288,289,3,50,25,0,289,290,5,8,0,0,290,49,1,0,
-0,0,291,293,3,44,22,0,292,291,1,0,0,0,293,296,1,0,0,0,294,292,1,0,0,0,294,
-295,1,0,0,0,295,301,1,0,0,0,296,294,1,0,0,0,297,298,5,4,0,0,298,300,3,44,
-22,0,299,297,1,0,0,0,300,303,1,0,0,0,301,299,1,0,0,0,301,302,1,0,0,0,302,
-51,1,0,0,0,303,301,1,0,0,0,304,307,3,54,27,0,305,307,3,56,28,0,306,304,1,
-0,0,0,306,305,1,0,0,0,307,53,1,0,0,0,308,309,5,41,0,0,309,55,1,0,0,0,310,
-311,7,0,0,0,311,57,1,0,0,0,17,62,68,72,77,103,108,114,135,150,221,235,237,
-277,285,294,301,306];
+7,27,2,28,7,28,2,29,7,29,1,0,1,0,5,0,63,8,0,10,0,12,0,66,9,0,1,0,5,0,69,
+8,0,10,0,12,0,72,9,0,1,0,3,0,75,8,0,1,1,5,1,78,8,1,10,1,12,1,81,9,1,1,2,
+1,2,1,3,1,3,1,3,1,3,1,4,1,4,1,4,1,4,1,5,1,5,1,5,1,5,1,5,1,6,1,6,1,6,1,6,
+1,6,1,6,5,6,104,8,6,10,6,12,6,107,9,6,1,6,1,6,3,6,111,8,6,1,7,1,7,1,7,1,
+7,1,7,3,7,118,8,7,1,8,1,8,5,8,122,8,8,10,8,12,8,125,9,8,1,8,1,8,1,8,1,8,
+1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,8,3,8,145,8,8,1,9,
+1,9,1,9,1,9,1,9,1,10,1,10,1,10,1,10,1,10,1,11,4,11,158,8,11,11,11,12,11,
+159,1,12,1,12,1,12,1,12,1,12,1,13,1,13,1,13,1,13,1,13,1,14,1,14,1,14,1,14,
+1,14,1,15,1,15,1,15,1,15,1,15,1,16,1,16,1,16,1,16,1,17,1,17,1,17,1,17,1,
+18,1,18,1,18,1,18,1,18,1,18,1,19,1,19,1,19,1,19,1,19,1,19,1,19,1,19,1,20,
+1,20,1,20,1,20,1,20,1,20,1,21,1,21,1,21,1,21,1,21,1,21,1,22,1,22,1,22,1,
+22,1,23,1,23,1,23,1,23,1,23,1,23,1,23,1,23,1,23,1,23,1,23,3,23,231,8,23,
+1,23,1,23,1,23,1,23,1,23,1,23,1,23,1,23,1,23,1,23,1,23,1,23,5,23,245,8,23,
+10,23,12,23,248,9,23,1,24,1,24,1,24,1,24,1,24,1,24,1,24,1,24,1,24,1,24,1,
+24,1,24,1,24,1,24,1,24,1,24,1,24,1,24,1,24,1,24,1,24,1,24,1,24,1,24,1,24,
+1,24,1,24,1,24,1,24,1,24,1,24,1,24,1,24,1,24,1,24,1,24,1,24,3,24,287,8,24,
+1,25,1,25,1,25,1,25,1,25,1,25,3,25,295,8,25,1,25,1,25,1,25,1,25,1,26,5,26,
+302,8,26,10,26,12,26,305,9,26,1,26,1,26,5,26,309,8,26,10,26,12,26,312,9,
+26,1,27,1,27,3,27,316,8,27,1,28,1,28,1,29,1,29,1,29,1,159,1,46,30,0,2,4,
+6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,
+56,58,0,1,1,0,42,45,345,0,74,1,0,0,0,2,79,1,0,0,0,4,82,1,0,0,0,6,84,1,0,
+0,0,8,88,1,0,0,0,10,92,1,0,0,0,12,110,1,0,0,0,14,117,1,0,0,0,16,144,1,0,
+0,0,18,146,1,0,0,0,20,151,1,0,0,0,22,157,1,0,0,0,24,161,1,0,0,0,26,166,1,
+0,0,0,28,171,1,0,0,0,30,176,1,0,0,0,32,181,1,0,0,0,34,185,1,0,0,0,36,189,
+1,0,0,0,38,195,1,0,0,0,40,203,1,0,0,0,42,209,1,0,0,0,44,215,1,0,0,0,46,230,
+1,0,0,0,48,286,1,0,0,0,50,294,1,0,0,0,52,303,1,0,0,0,54,315,1,0,0,0,56,317,
+1,0,0,0,58,319,1,0,0,0,60,64,3,2,1,0,61,63,3,10,5,0,62,61,1,0,0,0,63,66,
+1,0,0,0,64,62,1,0,0,0,64,65,1,0,0,0,65,70,1,0,0,0,66,64,1,0,0,0,67,69,3,
+16,8,0,68,67,1,0,0,0,69,72,1,0,0,0,70,68,1,0,0,0,70,71,1,0,0,0,71,75,1,0,
+0,0,72,70,1,0,0,0,73,75,5,0,0,1,74,60,1,0,0,0,74,73,1,0,0,0,75,1,1,0,0,0,
+76,78,3,8,4,0,77,76,1,0,0,0,78,81,1,0,0,0,79,77,1,0,0,0,79,80,1,0,0,0,80,
+3,1,0,0,0,81,79,1,0,0,0,82,83,3,6,3,0,83,5,1,0,0,0,84,85,5,1,0,0,85,86,3,
+56,28,0,86,87,5,11,0,0,87,7,1,0,0,0,88,89,5,2,0,0,89,90,3,56,28,0,90,91,
+5,11,0,0,91,9,1,0,0,0,92,93,5,3,0,0,93,94,3,56,28,0,94,95,3,12,6,0,95,96,
+3,16,8,0,96,11,1,0,0,0,97,98,5,7,0,0,98,111,3,14,7,0,99,111,1,0,0,0,100,
+105,3,14,7,0,101,102,5,4,0,0,102,104,3,14,7,0,103,101,1,0,0,0,104,107,1,
+0,0,0,105,103,1,0,0,0,105,106,1,0,0,0,106,108,1,0,0,0,107,105,1,0,0,0,108,
+109,5,8,0,0,109,111,1,0,0,0,110,97,1,0,0,0,110,99,1,0,0,0,110,100,1,0,0,
+0,111,13,1,0,0,0,112,118,3,56,28,0,113,118,1,0,0,0,114,118,3,46,23,0,115,
+118,1,0,0,0,116,118,3,22,11,0,117,112,1,0,0,0,117,113,1,0,0,0,117,114,1,
+0,0,0,117,115,1,0,0,0,117,116,1,0,0,0,118,15,1,0,0,0,119,123,5,9,0,0,120,
+122,3,16,8,0,121,120,1,0,0,0,122,125,1,0,0,0,123,121,1,0,0,0,123,124,1,0,
+0,0,124,126,1,0,0,0,125,123,1,0,0,0,126,145,5,10,0,0,127,145,3,18,9,0,128,
+145,3,20,10,0,129,145,3,24,12,0,130,145,3,26,13,0,131,145,3,28,14,0,132,
+145,3,30,15,0,133,145,3,32,16,0,134,145,3,34,17,0,135,145,3,36,18,0,136,
+145,3,38,19,0,137,145,3,40,20,0,138,145,3,42,21,0,139,145,3,44,22,0,140,
+141,3,46,23,0,141,142,5,11,0,0,142,145,1,0,0,0,143,145,5,11,0,0,144,119,
+1,0,0,0,144,127,1,0,0,0,144,128,1,0,0,0,144,129,1,0,0,0,144,130,1,0,0,0,
+144,131,1,0,0,0,144,132,1,0,0,0,144,133,1,0,0,0,144,134,1,0,0,0,144,135,
+1,0,0,0,144,136,1,0,0,0,144,137,1,0,0,0,144,138,1,0,0,0,144,139,1,0,0,0,
+144,140,1,0,0,0,144,143,1,0,0,0,145,17,1,0,0,0,146,147,3,56,28,0,147,148,
+5,25,0,0,148,149,3,46,23,0,149,150,5,11,0,0,150,19,1,0,0,0,151,152,5,5,0,
+0,152,153,5,9,0,0,153,154,3,22,11,0,154,155,5,10,0,0,155,21,1,0,0,0,156,
+158,9,0,0,0,157,156,1,0,0,0,158,159,1,0,0,0,159,160,1,0,0,0,159,157,1,0,
+0,0,160,23,1,0,0,0,161,162,3,56,28,0,162,163,5,26,0,0,163,164,3,54,27,0,
+164,165,5,11,0,0,165,25,1,0,0,0,166,167,3,56,28,0,167,168,5,27,0,0,168,169,
+3,54,27,0,169,170,5,11,0,0,170,27,1,0,0,0,171,172,3,56,28,0,172,173,5,28,
+0,0,173,174,3,54,27,0,174,175,5,11,0,0,175,29,1,0,0,0,176,177,3,56,28,0,
+177,178,5,29,0,0,178,179,3,54,27,0,179,180,5,11,0,0,180,31,1,0,0,0,181,182,
+3,56,28,0,182,183,5,33,0,0,183,184,5,11,0,0,184,33,1,0,0,0,185,186,3,56,
+28,0,186,187,5,34,0,0,187,188,5,11,0,0,188,35,1,0,0,0,189,190,5,31,0,0,190,
+191,5,7,0,0,191,192,3,48,24,0,192,193,5,8,0,0,193,194,3,16,8,0,194,37,1,
+0,0,0,195,196,5,31,0,0,196,197,5,7,0,0,197,198,3,48,24,0,198,199,5,8,0,0,
+199,200,3,16,8,0,200,201,5,32,0,0,201,202,3,16,8,0,202,39,1,0,0,0,203,204,
+5,37,0,0,204,205,5,7,0,0,205,206,3,48,24,0,206,207,5,8,0,0,207,208,3,16,
+8,0,208,41,1,0,0,0,209,210,5,36,0,0,210,211,3,56,28,0,211,212,5,25,0,0,212,
+213,3,46,23,0,213,214,5,11,0,0,214,43,1,0,0,0,215,216,5,38,0,0,216,217,3,
+46,23,0,217,218,5,11,0,0,218,45,1,0,0,0,219,220,6,23,-1,0,220,221,5,7,0,
+0,221,222,3,46,23,0,222,223,5,8,0,0,223,231,1,0,0,0,224,231,3,54,27,0,225,
+231,3,48,24,0,226,231,5,46,0,0,227,231,3,50,25,0,228,231,5,47,0,0,229,231,
+5,48,0,0,230,219,1,0,0,0,230,224,1,0,0,0,230,225,1,0,0,0,230,226,1,0,0,0,
+230,227,1,0,0,0,230,228,1,0,0,0,230,229,1,0,0,0,231,246,1,0,0,0,232,233,
+10,10,0,0,233,234,5,12,0,0,234,245,3,46,23,11,235,236,10,9,0,0,236,237,5,
+13,0,0,237,245,3,46,23,10,238,239,10,8,0,0,239,240,5,14,0,0,240,245,3,46,
+23,9,241,242,10,7,0,0,242,243,5,15,0,0,243,245,3,46,23,8,244,232,1,0,0,0,
+244,235,1,0,0,0,244,238,1,0,0,0,244,241,1,0,0,0,245,248,1,0,0,0,246,244,
+1,0,0,0,246,247,1,0,0,0,247,47,1,0,0,0,248,246,1,0,0,0,249,287,3,54,27,0,
+250,287,5,39,0,0,251,287,5,40,0,0,252,253,3,54,27,0,253,254,5,16,0,0,254,
+255,3,48,24,0,255,287,1,0,0,0,256,257,3,54,27,0,257,258,5,17,0,0,258,259,
+3,48,24,0,259,287,1,0,0,0,260,261,3,54,27,0,261,262,5,18,0,0,262,263,3,48,
+24,0,263,287,1,0,0,0,264,265,3,54,27,0,265,266,5,19,0,0,266,267,3,48,24,
+0,267,287,1,0,0,0,268,269,3,54,27,0,269,270,5,20,0,0,270,271,3,48,24,0,271,
+287,1,0,0,0,272,273,3,54,27,0,273,274,5,21,0,0,274,275,3,48,24,0,275,287,
+1,0,0,0,276,277,3,54,27,0,277,278,5,22,0,0,278,279,3,48,24,0,279,287,1,0,
+0,0,280,281,3,54,27,0,281,282,5,23,0,0,282,283,3,48,24,0,283,287,1,0,0,0,
+284,285,5,24,0,0,285,287,3,48,24,0,286,249,1,0,0,0,286,250,1,0,0,0,286,251,
+1,0,0,0,286,252,1,0,0,0,286,256,1,0,0,0,286,260,1,0,0,0,286,264,1,0,0,0,
+286,268,1,0,0,0,286,272,1,0,0,0,286,276,1,0,0,0,286,280,1,0,0,0,286,284,
+1,0,0,0,287,49,1,0,0,0,288,295,3,56,28,0,289,295,1,0,0,0,290,291,3,56,28,
+0,291,292,5,6,0,0,292,293,3,56,28,0,293,295,1,0,0,0,294,288,1,0,0,0,294,
+289,1,0,0,0,294,290,1,0,0,0,295,296,1,0,0,0,296,297,5,7,0,0,297,298,3,52,
+26,0,298,299,5,8,0,0,299,51,1,0,0,0,300,302,3,46,23,0,301,300,1,0,0,0,302,
+305,1,0,0,0,303,301,1,0,0,0,303,304,1,0,0,0,304,310,1,0,0,0,305,303,1,0,
+0,0,306,307,5,4,0,0,307,309,3,46,23,0,308,306,1,0,0,0,309,312,1,0,0,0,310,
+308,1,0,0,0,310,311,1,0,0,0,311,53,1,0,0,0,312,310,1,0,0,0,313,316,3,56,
+28,0,314,316,3,58,29,0,315,313,1,0,0,0,315,314,1,0,0,0,316,55,1,0,0,0,317,
+318,5,41,0,0,318,57,1,0,0,0,319,320,7,0,0,0,320,59,1,0,0,0,18,64,70,74,79,
+105,110,117,123,144,159,230,244,246,286,294,303,310,315];
 
 
 const atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
@@ -135,13 +138,13 @@ export default class ICEScriptParser extends antlr4.Parser {
                              "LIST", "MATRIX", "LINECOMMENT", "BLOCKCOMMENT", 
                              "WHITESPACE" ];
     static ruleNames = [ "script", "header", "meta", "scriptName", "include", 
-                         "function", "func_params", "statement", "assign_stmt", 
-                         "ti_basic_stmt", "any", "add_assign_stmt", "sub_assign_stmt", 
-                         "mul_assign_stmt", "div_assign_stmt", "inc_stmt", 
-                         "dec_stmt", "if_stmt", "if_else_stmt", "while_stmt", 
-                         "var_stmt", "return_stmt", "expression", "boolexpr", 
-                         "methodcall", "methodparams", "value", "identifier", 
-                         "number" ];
+                         "function", "func_params", "func_identifier", "statement", 
+                         "assign_stmt", "ti_basic_stmt", "any", "add_assign_stmt", 
+                         "sub_assign_stmt", "mul_assign_stmt", "div_assign_stmt", 
+                         "inc_stmt", "dec_stmt", "if_stmt", "if_else_stmt", 
+                         "while_stmt", "var_stmt", "return_stmt", "expression", 
+                         "boolexpr", "methodcall", "methodparams", "value", 
+                         "identifier", "number" ];
 
     constructor(input) {
         super(input);
@@ -153,7 +156,7 @@ export default class ICEScriptParser extends antlr4.Parser {
 
     sempred(localctx, ruleIndex, predIndex) {
     	switch(ruleIndex) {
-    	case 22:
+    	case 23:
     	    		return this.expression_sempred(localctx, predIndex);
         default:
             throw "No predicate with index:" + ruleIndex;
@@ -183,31 +186,31 @@ export default class ICEScriptParser extends antlr4.Parser {
 	    this.enterRule(localctx, 0, ICEScriptParser.RULE_script);
 	    var _la = 0;
 	    try {
-	        this.state = 72;
+	        this.state = 74;
 	        this._errHandler.sync(this);
 	        var la_ = this._interp.adaptivePredict(this._input,2,this._ctx);
 	        switch(la_) {
 	        case 1:
 	            this.enterOuterAlt(localctx, 1);
-	            this.state = 58;
+	            this.state = 60;
 	            this.header();
-	            this.state = 62;
+	            this.state = 64;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	            while(_la===3) {
-	                this.state = 59;
+	                this.state = 61;
 	                this.function_();
-	                this.state = 64;
+	                this.state = 66;
 	                this._errHandler.sync(this);
 	                _la = this._input.LA(1);
 	            }
-	            this.state = 68;
+	            this.state = 70;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	            while((((_la) & ~0x1f) === 0 && ((1 << _la) & 2164263584) !== 0) || ((((_la - 36)) & ~0x1f) === 0 && ((1 << (_la - 36)) & 8191) !== 0)) {
-	                this.state = 65;
+	                this.state = 67;
 	                this.statement();
-	                this.state = 70;
+	                this.state = 72;
 	                this._errHandler.sync(this);
 	                _la = this._input.LA(1);
 	            }
@@ -215,7 +218,7 @@ export default class ICEScriptParser extends antlr4.Parser {
 
 	        case 2:
 	            this.enterOuterAlt(localctx, 2);
-	            this.state = 71;
+	            this.state = 73;
 	            this.match(ICEScriptParser.EOF);
 	            break;
 
@@ -242,13 +245,13 @@ export default class ICEScriptParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 77;
+	        this.state = 79;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        while(_la===2) {
-	            this.state = 74;
+	            this.state = 76;
 	            this.include();
-	            this.state = 79;
+	            this.state = 81;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	        }
@@ -273,7 +276,7 @@ export default class ICEScriptParser extends antlr4.Parser {
 	    this.enterRule(localctx, 4, ICEScriptParser.RULE_meta);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 80;
+	        this.state = 82;
 	        this.scriptName();
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -296,11 +299,11 @@ export default class ICEScriptParser extends antlr4.Parser {
 	    this.enterRule(localctx, 6, ICEScriptParser.RULE_scriptName);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 82;
-	        this.match(ICEScriptParser.T__0);
-	        this.state = 83;
-	        this.identifier();
 	        this.state = 84;
+	        this.match(ICEScriptParser.T__0);
+	        this.state = 85;
+	        this.identifier();
+	        this.state = 86;
 	        this.match(ICEScriptParser.END_STMT);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -323,11 +326,11 @@ export default class ICEScriptParser extends antlr4.Parser {
 	    this.enterRule(localctx, 8, ICEScriptParser.RULE_include);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 86;
-	        this.match(ICEScriptParser.T__1);
-	        this.state = 87;
-	        this.identifier();
 	        this.state = 88;
+	        this.match(ICEScriptParser.T__1);
+	        this.state = 89;
+	        this.identifier();
+	        this.state = 90;
 	        this.match(ICEScriptParser.END_STMT);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -350,13 +353,13 @@ export default class ICEScriptParser extends antlr4.Parser {
 	    this.enterRule(localctx, 10, ICEScriptParser.RULE_function);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 90;
-	        this.match(ICEScriptParser.T__2);
-	        this.state = 91;
-	        this.identifier();
 	        this.state = 92;
-	        this.func_params();
+	        this.match(ICEScriptParser.T__2);
 	        this.state = 93;
+	        this.identifier();
+	        this.state = 94;
+	        this.func_params();
+	        this.state = 95;
 	        this.statement();
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -379,16 +382,16 @@ export default class ICEScriptParser extends antlr4.Parser {
 	    this.enterRule(localctx, 12, ICEScriptParser.RULE_func_params);
 	    var _la = 0;
 	    try {
-	        this.state = 108;
+	        this.state = 110;
 	        this._errHandler.sync(this);
 	        var la_ = this._interp.adaptivePredict(this._input,5,this._ctx);
 	        switch(la_) {
 	        case 1:
 	            this.enterOuterAlt(localctx, 1);
-	            this.state = 95;
+	            this.state = 97;
 	            this.match(ICEScriptParser.OPEN_BRACKET);
-	            this.state = 96;
-	            this.identifier();
+	            this.state = 98;
+	            this.func_identifier();
 	            break;
 
 	        case 2:
@@ -398,22 +401,69 @@ export default class ICEScriptParser extends antlr4.Parser {
 
 	        case 3:
 	            this.enterOuterAlt(localctx, 3);
-	            this.state = 98;
-	            this.identifier();
-	            this.state = 103;
+	            this.state = 100;
+	            this.func_identifier();
+	            this.state = 105;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	            while(_la===4) {
-	                this.state = 99;
+	                this.state = 101;
 	                this.match(ICEScriptParser.T__3);
-	                this.state = 100;
-	                this.identifier();
-	                this.state = 105;
+	                this.state = 102;
+	                this.func_identifier();
+	                this.state = 107;
 	                this._errHandler.sync(this);
 	                _la = this._input.LA(1);
 	            }
-	            this.state = 106;
+	            this.state = 108;
 	            this.match(ICEScriptParser.CLOSE_BRACKET);
+	            break;
+
+	        }
+	    } catch (re) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
+		        localctx.exception = re;
+		        this._errHandler.reportError(this, re);
+		        this._errHandler.recover(this, re);
+		    } else {
+		    	throw re;
+		    }
+	    } finally {
+	        this.exitRule();
+	    }
+	    return localctx;
+	}
+
+
+
+	func_identifier() {
+	    let localctx = new Func_identifierContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 14, ICEScriptParser.RULE_func_identifier);
+	    try {
+	        this.enterOuterAlt(localctx, 1);
+	        this.state = 117;
+	        this._errHandler.sync(this);
+	        var la_ = this._interp.adaptivePredict(this._input,6,this._ctx);
+	        switch(la_) {
+	        case 1:
+	            this.state = 112;
+	            this.identifier();
+	            break;
+
+	        case 2:
+	            break;
+
+	        case 3:
+	            this.state = 114;
+	            this.expression(0);
+	            break;
+
+	        case 4:
+	            break;
+
+	        case 5:
+	            this.state = 116;
+	            this.any();
 	            break;
 
 	        }
@@ -435,120 +485,120 @@ export default class ICEScriptParser extends antlr4.Parser {
 
 	statement() {
 	    let localctx = new StatementContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 14, ICEScriptParser.RULE_statement);
+	    this.enterRule(localctx, 16, ICEScriptParser.RULE_statement);
 	    var _la = 0;
 	    try {
-	        this.state = 135;
+	        this.state = 144;
 	        this._errHandler.sync(this);
-	        var la_ = this._interp.adaptivePredict(this._input,7,this._ctx);
+	        var la_ = this._interp.adaptivePredict(this._input,8,this._ctx);
 	        switch(la_) {
 	        case 1:
 	            this.enterOuterAlt(localctx, 1);
-	            this.state = 110;
+	            this.state = 119;
 	            this.match(ICEScriptParser.OPEN_CURLEY);
-	            this.state = 114;
+	            this.state = 123;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	            while((((_la) & ~0x1f) === 0 && ((1 << _la) & 2164263584) !== 0) || ((((_la - 36)) & ~0x1f) === 0 && ((1 << (_la - 36)) & 8191) !== 0)) {
-	                this.state = 111;
+	                this.state = 120;
 	                this.statement();
-	                this.state = 116;
+	                this.state = 125;
 	                this._errHandler.sync(this);
 	                _la = this._input.LA(1);
 	            }
-	            this.state = 117;
+	            this.state = 126;
 	            this.match(ICEScriptParser.CLOSE_CURLEY);
 	            break;
 
 	        case 2:
 	            this.enterOuterAlt(localctx, 2);
-	            this.state = 118;
+	            this.state = 127;
 	            this.assign_stmt();
 	            break;
 
 	        case 3:
 	            this.enterOuterAlt(localctx, 3);
-	            this.state = 119;
+	            this.state = 128;
 	            this.ti_basic_stmt();
 	            break;
 
 	        case 4:
 	            this.enterOuterAlt(localctx, 4);
-	            this.state = 120;
+	            this.state = 129;
 	            this.add_assign_stmt();
 	            break;
 
 	        case 5:
 	            this.enterOuterAlt(localctx, 5);
-	            this.state = 121;
+	            this.state = 130;
 	            this.sub_assign_stmt();
 	            break;
 
 	        case 6:
 	            this.enterOuterAlt(localctx, 6);
-	            this.state = 122;
+	            this.state = 131;
 	            this.mul_assign_stmt();
 	            break;
 
 	        case 7:
 	            this.enterOuterAlt(localctx, 7);
-	            this.state = 123;
+	            this.state = 132;
 	            this.div_assign_stmt();
 	            break;
 
 	        case 8:
 	            this.enterOuterAlt(localctx, 8);
-	            this.state = 124;
+	            this.state = 133;
 	            this.inc_stmt();
 	            break;
 
 	        case 9:
 	            this.enterOuterAlt(localctx, 9);
-	            this.state = 125;
+	            this.state = 134;
 	            this.dec_stmt();
 	            break;
 
 	        case 10:
 	            this.enterOuterAlt(localctx, 10);
-	            this.state = 126;
+	            this.state = 135;
 	            this.if_stmt();
 	            break;
 
 	        case 11:
 	            this.enterOuterAlt(localctx, 11);
-	            this.state = 127;
+	            this.state = 136;
 	            this.if_else_stmt();
 	            break;
 
 	        case 12:
 	            this.enterOuterAlt(localctx, 12);
-	            this.state = 128;
+	            this.state = 137;
 	            this.while_stmt();
 	            break;
 
 	        case 13:
 	            this.enterOuterAlt(localctx, 13);
-	            this.state = 129;
+	            this.state = 138;
 	            this.var_stmt();
 	            break;
 
 	        case 14:
 	            this.enterOuterAlt(localctx, 14);
-	            this.state = 130;
+	            this.state = 139;
 	            this.return_stmt();
 	            break;
 
 	        case 15:
 	            this.enterOuterAlt(localctx, 15);
-	            this.state = 131;
+	            this.state = 140;
 	            this.expression(0);
-	            this.state = 132;
+	            this.state = 141;
 	            this.match(ICEScriptParser.END_STMT);
 	            break;
 
 	        case 16:
 	            this.enterOuterAlt(localctx, 16);
-	            this.state = 134;
+	            this.state = 143;
 	            this.match(ICEScriptParser.END_STMT);
 	            break;
 
@@ -571,16 +621,16 @@ export default class ICEScriptParser extends antlr4.Parser {
 
 	assign_stmt() {
 	    let localctx = new Assign_stmtContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 16, ICEScriptParser.RULE_assign_stmt);
+	    this.enterRule(localctx, 18, ICEScriptParser.RULE_assign_stmt);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 137;
+	        this.state = 146;
 	        this.identifier();
-	        this.state = 138;
+	        this.state = 147;
 	        this.match(ICEScriptParser.ASSIGN);
-	        this.state = 139;
+	        this.state = 148;
 	        this.expression(0);
-	        this.state = 140;
+	        this.state = 149;
 	        this.match(ICEScriptParser.END_STMT);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -600,16 +650,16 @@ export default class ICEScriptParser extends antlr4.Parser {
 
 	ti_basic_stmt() {
 	    let localctx = new Ti_basic_stmtContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 18, ICEScriptParser.RULE_ti_basic_stmt);
+	    this.enterRule(localctx, 20, ICEScriptParser.RULE_ti_basic_stmt);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 142;
+	        this.state = 151;
 	        this.match(ICEScriptParser.T__4);
-	        this.state = 143;
+	        this.state = 152;
 	        this.match(ICEScriptParser.OPEN_CURLEY);
-	        this.state = 144;
+	        this.state = 153;
 	        this.any();
-	        this.state = 145;
+	        this.state = 154;
 	        this.match(ICEScriptParser.CLOSE_CURLEY);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -629,24 +679,24 @@ export default class ICEScriptParser extends antlr4.Parser {
 
 	any() {
 	    let localctx = new AnyContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 20, ICEScriptParser.RULE_any);
+	    this.enterRule(localctx, 22, ICEScriptParser.RULE_any);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 148; 
+	        this.state = 157; 
 	        this._errHandler.sync(this);
 	        var _alt = 1+1;
 	        do {
 	        	switch (_alt) {
 	        	case 1+1:
-	        		this.state = 147;
+	        		this.state = 156;
 	        		this.matchWildcard();
 	        		break;
 	        	default:
 	        		throw new antlr4.error.NoViableAltException(this);
 	        	}
-	        	this.state = 150; 
+	        	this.state = 159; 
 	        	this._errHandler.sync(this);
-	        	_alt = this._interp.adaptivePredict(this._input,8, this._ctx);
+	        	_alt = this._interp.adaptivePredict(this._input,9, this._ctx);
 	        } while ( _alt!=1 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER );
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -666,16 +716,16 @@ export default class ICEScriptParser extends antlr4.Parser {
 
 	add_assign_stmt() {
 	    let localctx = new Add_assign_stmtContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 22, ICEScriptParser.RULE_add_assign_stmt);
+	    this.enterRule(localctx, 24, ICEScriptParser.RULE_add_assign_stmt);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 152;
+	        this.state = 161;
 	        this.identifier();
-	        this.state = 153;
+	        this.state = 162;
 	        this.match(ICEScriptParser.ADDASSIGN);
-	        this.state = 154;
+	        this.state = 163;
 	        this.value();
-	        this.state = 155;
+	        this.state = 164;
 	        this.match(ICEScriptParser.END_STMT);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -695,16 +745,16 @@ export default class ICEScriptParser extends antlr4.Parser {
 
 	sub_assign_stmt() {
 	    let localctx = new Sub_assign_stmtContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 24, ICEScriptParser.RULE_sub_assign_stmt);
+	    this.enterRule(localctx, 26, ICEScriptParser.RULE_sub_assign_stmt);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 157;
+	        this.state = 166;
 	        this.identifier();
-	        this.state = 158;
+	        this.state = 167;
 	        this.match(ICEScriptParser.SUBASSIGN);
-	        this.state = 159;
+	        this.state = 168;
 	        this.value();
-	        this.state = 160;
+	        this.state = 169;
 	        this.match(ICEScriptParser.END_STMT);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -724,16 +774,16 @@ export default class ICEScriptParser extends antlr4.Parser {
 
 	mul_assign_stmt() {
 	    let localctx = new Mul_assign_stmtContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 26, ICEScriptParser.RULE_mul_assign_stmt);
+	    this.enterRule(localctx, 28, ICEScriptParser.RULE_mul_assign_stmt);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 162;
+	        this.state = 171;
 	        this.identifier();
-	        this.state = 163;
+	        this.state = 172;
 	        this.match(ICEScriptParser.MULASSIGN);
-	        this.state = 164;
+	        this.state = 173;
 	        this.value();
-	        this.state = 165;
+	        this.state = 174;
 	        this.match(ICEScriptParser.END_STMT);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -753,16 +803,16 @@ export default class ICEScriptParser extends antlr4.Parser {
 
 	div_assign_stmt() {
 	    let localctx = new Div_assign_stmtContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 28, ICEScriptParser.RULE_div_assign_stmt);
+	    this.enterRule(localctx, 30, ICEScriptParser.RULE_div_assign_stmt);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 167;
+	        this.state = 176;
 	        this.identifier();
-	        this.state = 168;
+	        this.state = 177;
 	        this.match(ICEScriptParser.DIVASSIGN);
-	        this.state = 169;
+	        this.state = 178;
 	        this.value();
-	        this.state = 170;
+	        this.state = 179;
 	        this.match(ICEScriptParser.END_STMT);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -782,14 +832,14 @@ export default class ICEScriptParser extends antlr4.Parser {
 
 	inc_stmt() {
 	    let localctx = new Inc_stmtContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 30, ICEScriptParser.RULE_inc_stmt);
+	    this.enterRule(localctx, 32, ICEScriptParser.RULE_inc_stmt);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 172;
+	        this.state = 181;
 	        this.identifier();
-	        this.state = 173;
+	        this.state = 182;
 	        this.match(ICEScriptParser.INCREMENT);
-	        this.state = 174;
+	        this.state = 183;
 	        this.match(ICEScriptParser.END_STMT);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -809,14 +859,14 @@ export default class ICEScriptParser extends antlr4.Parser {
 
 	dec_stmt() {
 	    let localctx = new Dec_stmtContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 32, ICEScriptParser.RULE_dec_stmt);
+	    this.enterRule(localctx, 34, ICEScriptParser.RULE_dec_stmt);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 176;
+	        this.state = 185;
 	        this.identifier();
-	        this.state = 177;
+	        this.state = 186;
 	        this.match(ICEScriptParser.DECREMENT);
-	        this.state = 178;
+	        this.state = 187;
 	        this.match(ICEScriptParser.END_STMT);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -836,18 +886,18 @@ export default class ICEScriptParser extends antlr4.Parser {
 
 	if_stmt() {
 	    let localctx = new If_stmtContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 34, ICEScriptParser.RULE_if_stmt);
+	    this.enterRule(localctx, 36, ICEScriptParser.RULE_if_stmt);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 180;
+	        this.state = 189;
 	        this.match(ICEScriptParser.IF);
-	        this.state = 181;
+	        this.state = 190;
 	        this.match(ICEScriptParser.OPEN_BRACKET);
-	        this.state = 182;
+	        this.state = 191;
 	        this.boolexpr();
-	        this.state = 183;
+	        this.state = 192;
 	        this.match(ICEScriptParser.CLOSE_BRACKET);
-	        this.state = 184;
+	        this.state = 193;
 	        this.statement();
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -867,22 +917,22 @@ export default class ICEScriptParser extends antlr4.Parser {
 
 	if_else_stmt() {
 	    let localctx = new If_else_stmtContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 36, ICEScriptParser.RULE_if_else_stmt);
+	    this.enterRule(localctx, 38, ICEScriptParser.RULE_if_else_stmt);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 186;
+	        this.state = 195;
 	        this.match(ICEScriptParser.IF);
-	        this.state = 187;
+	        this.state = 196;
 	        this.match(ICEScriptParser.OPEN_BRACKET);
-	        this.state = 188;
+	        this.state = 197;
 	        this.boolexpr();
-	        this.state = 189;
+	        this.state = 198;
 	        this.match(ICEScriptParser.CLOSE_BRACKET);
-	        this.state = 190;
+	        this.state = 199;
 	        this.statement();
-	        this.state = 191;
+	        this.state = 200;
 	        this.match(ICEScriptParser.ELSE);
-	        this.state = 192;
+	        this.state = 201;
 	        this.statement();
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -902,18 +952,18 @@ export default class ICEScriptParser extends antlr4.Parser {
 
 	while_stmt() {
 	    let localctx = new While_stmtContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 38, ICEScriptParser.RULE_while_stmt);
+	    this.enterRule(localctx, 40, ICEScriptParser.RULE_while_stmt);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 194;
+	        this.state = 203;
 	        this.match(ICEScriptParser.WHILE);
-	        this.state = 195;
+	        this.state = 204;
 	        this.match(ICEScriptParser.OPEN_BRACKET);
-	        this.state = 196;
+	        this.state = 205;
 	        this.boolexpr();
-	        this.state = 197;
+	        this.state = 206;
 	        this.match(ICEScriptParser.CLOSE_BRACKET);
-	        this.state = 198;
+	        this.state = 207;
 	        this.statement();
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -933,18 +983,18 @@ export default class ICEScriptParser extends antlr4.Parser {
 
 	var_stmt() {
 	    let localctx = new Var_stmtContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 40, ICEScriptParser.RULE_var_stmt);
+	    this.enterRule(localctx, 42, ICEScriptParser.RULE_var_stmt);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 200;
+	        this.state = 209;
 	        this.match(ICEScriptParser.VAR);
-	        this.state = 201;
+	        this.state = 210;
 	        this.identifier();
-	        this.state = 202;
+	        this.state = 211;
 	        this.match(ICEScriptParser.ASSIGN);
-	        this.state = 203;
+	        this.state = 212;
 	        this.expression(0);
-	        this.state = 204;
+	        this.state = 213;
 	        this.match(ICEScriptParser.END_STMT);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -964,14 +1014,14 @@ export default class ICEScriptParser extends antlr4.Parser {
 
 	return_stmt() {
 	    let localctx = new Return_stmtContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 42, ICEScriptParser.RULE_return_stmt);
+	    this.enterRule(localctx, 44, ICEScriptParser.RULE_return_stmt);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 206;
+	        this.state = 215;
 	        this.match(ICEScriptParser.RETURN);
-	        this.state = 207;
+	        this.state = 216;
 	        this.expression(0);
-	        this.state = 208;
+	        this.state = 217;
 	        this.match(ICEScriptParser.END_STMT);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -996,125 +1046,125 @@ export default class ICEScriptParser extends antlr4.Parser {
 	    const _parentState = this.state;
 	    let localctx = new ExpressionContext(this, this._ctx, _parentState);
 	    let _prevctx = localctx;
-	    const _startState = 44;
-	    this.enterRecursionRule(localctx, 44, ICEScriptParser.RULE_expression, _p);
+	    const _startState = 46;
+	    this.enterRecursionRule(localctx, 46, ICEScriptParser.RULE_expression, _p);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 221;
+	        this.state = 230;
 	        this._errHandler.sync(this);
-	        var la_ = this._interp.adaptivePredict(this._input,9,this._ctx);
+	        var la_ = this._interp.adaptivePredict(this._input,10,this._ctx);
 	        switch(la_) {
 	        case 1:
-	            this.state = 211;
+	            this.state = 220;
 	            this.match(ICEScriptParser.OPEN_BRACKET);
-	            this.state = 212;
+	            this.state = 221;
 	            this.expression(0);
-	            this.state = 213;
+	            this.state = 222;
 	            this.match(ICEScriptParser.CLOSE_BRACKET);
 	            break;
 
 	        case 2:
-	            this.state = 215;
+	            this.state = 224;
 	            this.value();
 	            break;
 
 	        case 3:
-	            this.state = 216;
+	            this.state = 225;
 	            this.boolexpr();
 	            break;
 
 	        case 4:
-	            this.state = 217;
+	            this.state = 226;
 	            this.match(ICEScriptParser.QUOTED_TEXT);
 	            break;
 
 	        case 5:
-	            this.state = 218;
+	            this.state = 227;
 	            this.methodcall();
 	            break;
 
 	        case 6:
-	            this.state = 219;
+	            this.state = 228;
 	            this.match(ICEScriptParser.LIST);
 	            break;
 
 	        case 7:
-	            this.state = 220;
+	            this.state = 229;
 	            this.match(ICEScriptParser.MATRIX);
 	            break;
 
 	        }
 	        this._ctx.stop = this._input.LT(-1);
-	        this.state = 237;
+	        this.state = 246;
 	        this._errHandler.sync(this);
-	        var _alt = this._interp.adaptivePredict(this._input,11,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,12,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                if(this._parseListeners!==null) {
 	                    this.triggerExitRuleEvent();
 	                }
 	                _prevctx = localctx;
-	                this.state = 235;
+	                this.state = 244;
 	                this._errHandler.sync(this);
-	                var la_ = this._interp.adaptivePredict(this._input,10,this._ctx);
+	                var la_ = this._interp.adaptivePredict(this._input,11,this._ctx);
 	                switch(la_) {
 	                case 1:
 	                    localctx = new ExpressionContext(this, _parentctx, _parentState);
 	                    this.pushNewRecursionContext(localctx, _startState, ICEScriptParser.RULE_expression);
-	                    this.state = 223;
+	                    this.state = 232;
 	                    if (!( this.precpred(this._ctx, 10))) {
 	                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 10)");
 	                    }
-	                    this.state = 224;
+	                    this.state = 233;
 	                    this.match(ICEScriptParser.ADD);
-	                    this.state = 225;
+	                    this.state = 234;
 	                    this.expression(11);
 	                    break;
 
 	                case 2:
 	                    localctx = new ExpressionContext(this, _parentctx, _parentState);
 	                    this.pushNewRecursionContext(localctx, _startState, ICEScriptParser.RULE_expression);
-	                    this.state = 226;
+	                    this.state = 235;
 	                    if (!( this.precpred(this._ctx, 9))) {
 	                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 9)");
 	                    }
-	                    this.state = 227;
+	                    this.state = 236;
 	                    this.match(ICEScriptParser.SUB);
-	                    this.state = 228;
+	                    this.state = 237;
 	                    this.expression(10);
 	                    break;
 
 	                case 3:
 	                    localctx = new ExpressionContext(this, _parentctx, _parentState);
 	                    this.pushNewRecursionContext(localctx, _startState, ICEScriptParser.RULE_expression);
-	                    this.state = 229;
+	                    this.state = 238;
 	                    if (!( this.precpred(this._ctx, 8))) {
 	                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 8)");
 	                    }
-	                    this.state = 230;
+	                    this.state = 239;
 	                    this.match(ICEScriptParser.MUL);
-	                    this.state = 231;
+	                    this.state = 240;
 	                    this.expression(9);
 	                    break;
 
 	                case 4:
 	                    localctx = new ExpressionContext(this, _parentctx, _parentState);
 	                    this.pushNewRecursionContext(localctx, _startState, ICEScriptParser.RULE_expression);
-	                    this.state = 232;
+	                    this.state = 241;
 	                    if (!( this.precpred(this._ctx, 7))) {
 	                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 7)");
 	                    }
-	                    this.state = 233;
+	                    this.state = 242;
 	                    this.match(ICEScriptParser.DIV);
-	                    this.state = 234;
+	                    this.state = 243;
 	                    this.expression(8);
 	                    break;
 
 	                } 
 	            }
-	            this.state = 239;
+	            this.state = 248;
 	            this._errHandler.sync(this);
-	            _alt = this._interp.adaptivePredict(this._input,11,this._ctx);
+	            _alt = this._interp.adaptivePredict(this._input,12,this._ctx);
 	        }
 
 	    } catch( error) {
@@ -1135,115 +1185,115 @@ export default class ICEScriptParser extends antlr4.Parser {
 
 	boolexpr() {
 	    let localctx = new BoolexprContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 46, ICEScriptParser.RULE_boolexpr);
+	    this.enterRule(localctx, 48, ICEScriptParser.RULE_boolexpr);
 	    try {
-	        this.state = 277;
+	        this.state = 286;
 	        this._errHandler.sync(this);
-	        var la_ = this._interp.adaptivePredict(this._input,12,this._ctx);
+	        var la_ = this._interp.adaptivePredict(this._input,13,this._ctx);
 	        switch(la_) {
 	        case 1:
 	            this.enterOuterAlt(localctx, 1);
-	            this.state = 240;
+	            this.state = 249;
 	            this.value();
 	            break;
 
 	        case 2:
 	            this.enterOuterAlt(localctx, 2);
-	            this.state = 241;
+	            this.state = 250;
 	            this.match(ICEScriptParser.TRUE);
 	            break;
 
 	        case 3:
 	            this.enterOuterAlt(localctx, 3);
-	            this.state = 242;
+	            this.state = 251;
 	            this.match(ICEScriptParser.FALSE);
 	            break;
 
 	        case 4:
 	            this.enterOuterAlt(localctx, 4);
-	            this.state = 243;
+	            this.state = 252;
 	            this.value();
-	            this.state = 244;
+	            this.state = 253;
 	            this.match(ICEScriptParser.GREATER_THAN);
-	            this.state = 245;
+	            this.state = 254;
 	            this.boolexpr();
 	            break;
 
 	        case 5:
 	            this.enterOuterAlt(localctx, 5);
-	            this.state = 247;
+	            this.state = 256;
 	            this.value();
-	            this.state = 248;
+	            this.state = 257;
 	            this.match(ICEScriptParser.LESS_THAN);
-	            this.state = 249;
+	            this.state = 258;
 	            this.boolexpr();
 	            break;
 
 	        case 6:
 	            this.enterOuterAlt(localctx, 6);
-	            this.state = 251;
+	            this.state = 260;
 	            this.value();
-	            this.state = 252;
+	            this.state = 261;
 	            this.match(ICEScriptParser.EQUAL_TO);
-	            this.state = 253;
+	            this.state = 262;
 	            this.boolexpr();
 	            break;
 
 	        case 7:
 	            this.enterOuterAlt(localctx, 7);
-	            this.state = 255;
+	            this.state = 264;
 	            this.value();
-	            this.state = 256;
+	            this.state = 265;
 	            this.match(ICEScriptParser.NOT_EQUAL_TO);
-	            this.state = 257;
+	            this.state = 266;
 	            this.boolexpr();
 	            break;
 
 	        case 8:
 	            this.enterOuterAlt(localctx, 8);
-	            this.state = 259;
+	            this.state = 268;
 	            this.value();
-	            this.state = 260;
+	            this.state = 269;
 	            this.match(ICEScriptParser.GREATER_THAN_OR_EQUAL);
-	            this.state = 261;
+	            this.state = 270;
 	            this.boolexpr();
 	            break;
 
 	        case 9:
 	            this.enterOuterAlt(localctx, 9);
-	            this.state = 263;
+	            this.state = 272;
 	            this.value();
-	            this.state = 264;
+	            this.state = 273;
 	            this.match(ICEScriptParser.LESS_THAN_OR_EQUAL);
-	            this.state = 265;
+	            this.state = 274;
 	            this.boolexpr();
 	            break;
 
 	        case 10:
 	            this.enterOuterAlt(localctx, 10);
-	            this.state = 267;
+	            this.state = 276;
 	            this.value();
-	            this.state = 268;
+	            this.state = 277;
 	            this.match(ICEScriptParser.OR);
-	            this.state = 269;
+	            this.state = 278;
 	            this.boolexpr();
 	            break;
 
 	        case 11:
 	            this.enterOuterAlt(localctx, 11);
-	            this.state = 271;
+	            this.state = 280;
 	            this.value();
-	            this.state = 272;
+	            this.state = 281;
 	            this.match(ICEScriptParser.AND);
-	            this.state = 273;
+	            this.state = 282;
 	            this.boolexpr();
 	            break;
 
 	        case 12:
 	            this.enterOuterAlt(localctx, 12);
-	            this.state = 275;
+	            this.state = 284;
 	            this.match(ICEScriptParser.NOT);
-	            this.state = 276;
+	            this.state = 285;
 	            this.boolexpr();
 	            break;
 
@@ -1266,15 +1316,15 @@ export default class ICEScriptParser extends antlr4.Parser {
 
 	methodcall() {
 	    let localctx = new MethodcallContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 48, ICEScriptParser.RULE_methodcall);
+	    this.enterRule(localctx, 50, ICEScriptParser.RULE_methodcall);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 285;
+	        this.state = 294;
 	        this._errHandler.sync(this);
-	        var la_ = this._interp.adaptivePredict(this._input,13,this._ctx);
+	        var la_ = this._interp.adaptivePredict(this._input,14,this._ctx);
 	        switch(la_) {
 	        case 1:
-	            this.state = 279;
+	            this.state = 288;
 	            this.identifier();
 	            break;
 
@@ -1282,20 +1332,20 @@ export default class ICEScriptParser extends antlr4.Parser {
 	            break;
 
 	        case 3:
-	            this.state = 281;
+	            this.state = 290;
 	            this.identifier();
-	            this.state = 282;
+	            this.state = 291;
 	            this.match(ICEScriptParser.T__5);
-	            this.state = 283;
+	            this.state = 292;
 	            this.identifier();
 	            break;
 
 	        }
-	        this.state = 287;
+	        this.state = 296;
 	        this.match(ICEScriptParser.OPEN_BRACKET);
-	        this.state = 288;
+	        this.state = 297;
 	        this.methodparams();
-	        this.state = 289;
+	        this.state = 298;
 	        this.match(ICEScriptParser.CLOSE_BRACKET);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -1315,29 +1365,29 @@ export default class ICEScriptParser extends antlr4.Parser {
 
 	methodparams() {
 	    let localctx = new MethodparamsContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 50, ICEScriptParser.RULE_methodparams);
+	    this.enterRule(localctx, 52, ICEScriptParser.RULE_methodparams);
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 294;
+	        this.state = 303;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        while(_la===7 || _la===24 || ((((_la - 39)) & ~0x1f) === 0 && ((1 << (_la - 39)) & 1023) !== 0)) {
-	            this.state = 291;
+	            this.state = 300;
 	            this.expression(0);
-	            this.state = 296;
+	            this.state = 305;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	        }
-	        this.state = 301;
+	        this.state = 310;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        while(_la===4) {
-	            this.state = 297;
+	            this.state = 306;
 	            this.match(ICEScriptParser.T__3);
-	            this.state = 298;
+	            this.state = 307;
 	            this.expression(0);
-	            this.state = 303;
+	            this.state = 312;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	        }
@@ -1359,14 +1409,14 @@ export default class ICEScriptParser extends antlr4.Parser {
 
 	value() {
 	    let localctx = new ValueContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 52, ICEScriptParser.RULE_value);
+	    this.enterRule(localctx, 54, ICEScriptParser.RULE_value);
 	    try {
-	        this.state = 306;
+	        this.state = 315;
 	        this._errHandler.sync(this);
 	        switch(this._input.LA(1)) {
 	        case 41:
 	            this.enterOuterAlt(localctx, 1);
-	            this.state = 304;
+	            this.state = 313;
 	            this.identifier();
 	            break;
 	        case 42:
@@ -1374,7 +1424,7 @@ export default class ICEScriptParser extends antlr4.Parser {
 	        case 44:
 	        case 45:
 	            this.enterOuterAlt(localctx, 2);
-	            this.state = 305;
+	            this.state = 314;
 	            this.number();
 	            break;
 	        default:
@@ -1398,10 +1448,10 @@ export default class ICEScriptParser extends antlr4.Parser {
 
 	identifier() {
 	    let localctx = new IdentifierContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 54, ICEScriptParser.RULE_identifier);
+	    this.enterRule(localctx, 56, ICEScriptParser.RULE_identifier);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 308;
+	        this.state = 317;
 	        this.match(ICEScriptParser.IDENTIFIER);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -1421,11 +1471,11 @@ export default class ICEScriptParser extends antlr4.Parser {
 
 	number() {
 	    let localctx = new NumberContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 56, ICEScriptParser.RULE_number);
+	    this.enterRule(localctx, 58, ICEScriptParser.RULE_number);
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 310;
+	        this.state = 319;
 	        _la = this._input.LA(1);
 	        if(!(((((_la - 42)) & ~0x1f) === 0 && ((1 << (_la - 42)) & 15) !== 0))) {
 	        this._errHandler.recoverInline(this);
@@ -1511,28 +1561,29 @@ ICEScriptParser.RULE_scriptName = 3;
 ICEScriptParser.RULE_include = 4;
 ICEScriptParser.RULE_function = 5;
 ICEScriptParser.RULE_func_params = 6;
-ICEScriptParser.RULE_statement = 7;
-ICEScriptParser.RULE_assign_stmt = 8;
-ICEScriptParser.RULE_ti_basic_stmt = 9;
-ICEScriptParser.RULE_any = 10;
-ICEScriptParser.RULE_add_assign_stmt = 11;
-ICEScriptParser.RULE_sub_assign_stmt = 12;
-ICEScriptParser.RULE_mul_assign_stmt = 13;
-ICEScriptParser.RULE_div_assign_stmt = 14;
-ICEScriptParser.RULE_inc_stmt = 15;
-ICEScriptParser.RULE_dec_stmt = 16;
-ICEScriptParser.RULE_if_stmt = 17;
-ICEScriptParser.RULE_if_else_stmt = 18;
-ICEScriptParser.RULE_while_stmt = 19;
-ICEScriptParser.RULE_var_stmt = 20;
-ICEScriptParser.RULE_return_stmt = 21;
-ICEScriptParser.RULE_expression = 22;
-ICEScriptParser.RULE_boolexpr = 23;
-ICEScriptParser.RULE_methodcall = 24;
-ICEScriptParser.RULE_methodparams = 25;
-ICEScriptParser.RULE_value = 26;
-ICEScriptParser.RULE_identifier = 27;
-ICEScriptParser.RULE_number = 28;
+ICEScriptParser.RULE_func_identifier = 7;
+ICEScriptParser.RULE_statement = 8;
+ICEScriptParser.RULE_assign_stmt = 9;
+ICEScriptParser.RULE_ti_basic_stmt = 10;
+ICEScriptParser.RULE_any = 11;
+ICEScriptParser.RULE_add_assign_stmt = 12;
+ICEScriptParser.RULE_sub_assign_stmt = 13;
+ICEScriptParser.RULE_mul_assign_stmt = 14;
+ICEScriptParser.RULE_div_assign_stmt = 15;
+ICEScriptParser.RULE_inc_stmt = 16;
+ICEScriptParser.RULE_dec_stmt = 17;
+ICEScriptParser.RULE_if_stmt = 18;
+ICEScriptParser.RULE_if_else_stmt = 19;
+ICEScriptParser.RULE_while_stmt = 20;
+ICEScriptParser.RULE_var_stmt = 21;
+ICEScriptParser.RULE_return_stmt = 22;
+ICEScriptParser.RULE_expression = 23;
+ICEScriptParser.RULE_boolexpr = 24;
+ICEScriptParser.RULE_methodcall = 25;
+ICEScriptParser.RULE_methodparams = 26;
+ICEScriptParser.RULE_value = 27;
+ICEScriptParser.RULE_identifier = 28;
+ICEScriptParser.RULE_number = 29;
 
 class ScriptContext extends antlr4.ParserRuleContext {
 
@@ -1859,14 +1910,14 @@ class Func_paramsContext extends antlr4.ParserRuleContext {
 	    return this.getToken(ICEScriptParser.OPEN_BRACKET, 0);
 	};
 
-	identifier = function(i) {
+	func_identifier = function(i) {
 	    if(i===undefined) {
 	        i = null;
 	    }
 	    if(i===null) {
-	        return this.getTypedRuleContexts(IdentifierContext);
+	        return this.getTypedRuleContexts(Func_identifierContext);
 	    } else {
-	        return this.getTypedRuleContext(IdentifierContext,i);
+	        return this.getTypedRuleContext(Func_identifierContext,i);
 	    }
 	};
 
@@ -1889,6 +1940,57 @@ class Func_paramsContext extends antlr4.ParserRuleContext {
 	accept(visitor) {
 	    if ( visitor instanceof ICEScriptVisitor ) {
 	        return visitor.visitFunc_params(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
+
+}
+
+
+
+class Func_identifierContext extends antlr4.ParserRuleContext {
+
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = ICEScriptParser.RULE_func_identifier;
+    }
+
+	identifier() {
+	    return this.getTypedRuleContext(IdentifierContext,0);
+	};
+
+	expression() {
+	    return this.getTypedRuleContext(ExpressionContext,0);
+	};
+
+	any() {
+	    return this.getTypedRuleContext(AnyContext,0);
+	};
+
+	enterRule(listener) {
+	    if(listener instanceof ICEScriptListener ) {
+	        listener.enterFunc_identifier(this);
+		}
+	}
+
+	exitRule(listener) {
+	    if(listener instanceof ICEScriptListener ) {
+	        listener.exitFunc_identifier(this);
+		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof ICEScriptVisitor ) {
+	        return visitor.visitFunc_identifier(this);
 	    } else {
 	        return visitor.visitChildren(this);
 	    }
@@ -3237,6 +3339,7 @@ ICEScriptParser.ScriptNameContext = ScriptNameContext;
 ICEScriptParser.IncludeContext = IncludeContext; 
 ICEScriptParser.FunctionContext = FunctionContext; 
 ICEScriptParser.Func_paramsContext = Func_paramsContext; 
+ICEScriptParser.Func_identifierContext = Func_identifierContext; 
 ICEScriptParser.StatementContext = StatementContext; 
 ICEScriptParser.Assign_stmtContext = Assign_stmtContext; 
 ICEScriptParser.Ti_basic_stmtContext = Ti_basic_stmtContext; 

@@ -68,6 +68,15 @@ export default class ICEScriptListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by ICEScriptParser#func_identifier.
+	enterFunc_identifier(ctx) {
+	}
+
+	// Exit a parse tree produced by ICEScriptParser#func_identifier.
+	exitFunc_identifier(ctx) {
+	}
+
+
 	// Enter a parse tree produced by ICEScriptParser#statement.
 	enterStatement(ctx) {
 	}

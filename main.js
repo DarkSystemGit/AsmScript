@@ -82,7 +82,7 @@ function handler(token, ctx, context) {
 		data: {},
 		"&&": "and",
 		"||": "or",
-		"!": "not",
+		"!!": "not(",
 		";": ":",
 		"==": "=",
 		"true": "1",

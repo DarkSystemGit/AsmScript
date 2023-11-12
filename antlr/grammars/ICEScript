@@ -28,9 +28,11 @@ function
 	: 'function ' identifier func_params statement
 	;
 func_params
-	: '(' identifier || identifier(',' identifier)* ')'
+	: '(' func_identifier || func_identifier(',' func_identifier)* ')'
 	;
-
+func_identifier
+	:(identifier||expression||any)
+	;
 statement
 	: OPEN_CURLEY statement* CLOSE_CURLEY
 	| assign_stmt
