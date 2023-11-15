@@ -234,10 +234,10 @@ function handler(token, ctx, context) {
 				return `${name.charAt(0).toUpperCase() +name.slice(1)} ${prams}`
 			}else{
 				var name = handlers.data.functionCall.tokens[identifier.join('.')]
-				return `${name}(${context.visit(ctx.methodparams())})`
+				return `${name}(${context.visit(ctx.methodparams()).join()})`
 			}
 			}else{
-				var params=ctx.func_params().getText().split(')')[0].split(',')
+				var params=context.visit(ctx.methodparams())
 				return `:Call ${handlers.data.functions[identifier.join('.')]}:`
 			}
 		}
