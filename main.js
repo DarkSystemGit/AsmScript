@@ -66,6 +66,14 @@ function split(str, splitter, strMap) {
 	})
 	return res
 }
+function replace(str,substr,replacement){
+	var indices=strIndexOf(str,substr)
+	indices.forEach((elm)=>{
+		str=replaceAt(str,elm,replacement,substr.length)
+		indices=strIndexOf(str,substr)
+	})
+	return str
+}
 function strIndexOf(str, substr) {
 	var strMap = genStrMap(str)
 	var pos = indexOf(substr, str)
@@ -84,6 +92,7 @@ function handler(token, ctx, context) {
 		"||": "or",
 		"!!": "not(",
 		";": ":",
+		"===":"=",
 		"==": "=",
 		"true": "1",
 		"false": "0",
@@ -167,14 +176,14 @@ function handler(token, ctx, context) {
 		},
 		"funcParams":(ctx,children,context)=>{
 
-		let code = '';
+		let code = [];
 
 		for (let i = 0; i < ctx.getChildCount(); i++) {
 			
-			if(!(context.visit(ctx.getChild(i))==""))code += context.visit(ctx.getChild(i))+",";
+			if(!(context.visit(ctx.getChild(i))==""))code.push(context.visit(ctx.getChild(i)));
 		}
 
-		return code.trim();
+		return code;
 		},
 		"function":(ctx,children,context)=>{
 			context.data = context.data ||{}
@@ -193,7 +202,7 @@ function handler(token, ctx, context) {
 					console.error(`Error: var ${'_$P'+elm} is reserved. Please change it.`)
 				}
 			})
-			return `:Label ${context.data.functions[name].label}:$`
+			return `:Label ${context.data.functions[name].label}:${context.visit(ctx.statement())}:`
 		},
 		"funcCall": (ctx, children, context) => {
 			context.data.functions = handlers.data.functions || {}
@@ -228,7 +237,8 @@ function handler(token, ctx, context) {
 				return `${name}(${context.visit(ctx.methodparams())})`
 			}
 			}else{
-				return `Call ${handlers.data.functions[identifier.join('.')]}`
+				var params=ctx.func_params().getText().split(')')[0].split(',')
+				return `:Call ${handlers.data.functions[identifier.join('.')]}:`
 			}
 		}
 	}
