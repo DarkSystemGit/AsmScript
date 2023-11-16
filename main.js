@@ -194,9 +194,9 @@ function handler(token, ctx, context) {
 			if(name.length>20){
 				context.data.functions[name].label=name.slice(1,20)
 			}
-			params.forEach((elm)=>{
+			params.forEach((elm,i)=>{
 				if(!(context.data.var.num.hasOwnProperty('_$P'+elm))){
-					context.data.var.num['_$P'+elm]={ name: '_$P'+elm, type: "reg", val: "",ref:`${'_$P'+elm}`.toUpperCase()}
+					context.data.var.num['_$P'+name.slice(1,1)+name.slice(name.length-1,1)+elm]={ name: params[i], type: "reg", val: "",ref:`${'_$P'+name.slice(1,1)+name.slice(name.length-1,1)+elm}`.toUpperCase()}
 					context.data.functions[name].paramRefs.push(`${'_$P'+elm}`.toUpperCase())
 				}else{
 					console.error(`Error: var ${'_$P'+elm} is reserved. Please change it.`)
@@ -218,7 +218,7 @@ function handler(token, ctx, context) {
 				"list.stdDev":"stdDev","list.variance":"variance","list.seq":"seq","list.fromMatrix":"Matr>List","list.toMatrix":"List>matr"
 			}
 			var identifier=[]
-			ctx.identifier().forEach((elm)=>{
+			ctx.identifier().split('.').forEach((elm)=>{
 				identifier.push(elm.getText())
 			})
 			//console.log(identifier)
@@ -242,7 +242,7 @@ function handler(token, ctx, context) {
                 params.forEach((pram,i)=>{
                     commands.push(`${pram}=>${handlers.data.functions[identifier.join('.')].paramRefs[i]}`)
                 })
-				return `:${commands.join(':')}:Call ${handlers.data.functions[identifier.join('.')]}:`
+				return `:${commands.join(':')}:Call ${handlers.data.functions[identifier.join('.')].label}:`
 			}
 		}
 	}
