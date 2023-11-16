@@ -239,8 +239,8 @@ function handler(token, ctx, context) {
 			}else{
 				var params=context.visit(ctx.methodparams())
                 var commands=[]
-                params.forEach((pram)=>{
-                    
+                params.forEach((pram,i)=>{
+                    commands.push(`${pram}=>${handlers.data.functions[identifier.join('.')].paramRefs[i]}`)
                 })
 				return `:${commands.join(':')}:Call ${handlers.data.functions[identifier.join('.')]}:`
 			}
