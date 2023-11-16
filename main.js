@@ -238,7 +238,11 @@ function handler(token, ctx, context) {
 			}
 			}else{
 				var params=context.visit(ctx.methodparams())
-				return `:Call ${handlers.data.functions[identifier.join('.')]}:`
+                var commands=[]
+                params.forEach((pram)=>{
+                    
+                })
+				return `:${commands.join(':')}:Call ${handlers.data.functions[identifier.join('.')]}:`
 			}
 		}
 	}
