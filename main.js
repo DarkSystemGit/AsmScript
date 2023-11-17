@@ -97,21 +97,21 @@ function handler(token, ctx, context) {
 		"true": "1",
 		"false": "0",
 		"::":":",
-		"var": function (ctx, children) {
-			//console.log(this)
-			this.data = this.data || {}
-			this.data.var = this.data.var || {}
-			this.data.var.num = this.data.var.num || {}
-			this.data.var.list = this.data.var.list || { "": "", "A": "", "B": "", "C": "", "D": "", "E": "", "F": "", "G": "", "H": "", "I": "", "J": "", "K": "", "L": "", "M": "", "N": "", "O": "", "P": "", "Q": "", "R": "", "S": "", "T": "", "U": "", "V": "", "W": "", "X": "", "Y": "", "Z": "", "Str0": "", "Str1": "", "Str2": "", "Str3": "", "Str4": "", "Str5": "", "Str6": "", "Str7": "", "Str8": "", "Str9": "" }
-			this.data.var.matrix = this.data.var.matrix || { "": "", "A": "", "B": "", "C": "", "D": "", "E": "", "F": "", "G": "", "H": "", "I": "", "J": "" }
+		"var": function (ctx, children,context) {
+			//console.log(context)
+			context.data = context.data || {}
+			context.data.var = context.data.var || {}
+			context.data.var.num = context.data.var.num || {}
+			context.data.var.list = context.data.var.list || { "": "", "A": "", "B": "", "C": "", "D": "", "E": "", "F": "", "G": "", "H": "", "I": "", "J": "", "K": "", "L": "", "M": "", "N": "", "O": "", "P": "", "Q": "", "R": "", "S": "", "T": "", "U": "", "V": "", "W": "", "X": "", "Y": "", "Z": "", "Str0": "", "Str1": "", "Str2": "", "Str3": "", "Str4": "", "Str5": "", "Str6": "", "Str7": "", "Str8": "", "Str9": "" }
+			context.data.var.matrix = context.data.var.matrix || { "": "", "A": "", "B": "", "C": "", "D": "", "E": "", "F": "", "G": "", "H": "", "I": "", "J": "" }
 			const val = ctx.expression()
 
 			if ((val.getText()[0] == '"') || (
 				!isNaN(val.getText()))) {
 				var index = 0
-				//Object.values(this.data.var.num).forEach((elm, i) => { if (((elm == "") && (index == 0)) || (elm == ctx.identifier().getText())) { index = i } })
+				//Object.values(context.data.var.num).forEach((elm, i) => { if (((elm == "") && (index == 0)) || (elm == ctx.identifier().getText())) { index = i } })
 
-				this.data.var.num[ctx.identifier().getText()] = { name: ctx.identifier().getText(), type: "reg", val: val.getText(),ref:ctx.identifier().getText().toUpperCase()}
+				context.data.var.num[ctx.identifier().getText()] = { name: ctx.identifier().getText(), type: "reg", val: val.getText(),ref:ctx.identifier().getText().toUpperCase()}
 
 				return `:${val.getText()}=>${ctx.identifier().getText().toUpperCase()}:`
 			} else if ((val.getText()[0] == '[') && (!(val.getText()[1] == '['))) {
@@ -119,8 +119,8 @@ function handler(token, ctx, context) {
 				var index = 0
 				var strIndex = 0
 				var res;
-				Object.values(this.data.var.list).forEach((elm, i) => { if (((elm == "") && (index == 0) && (i <= 26)) || (elm == ctx.identifier().getText())) { index = i } })
-				Object.values(this.data.var.list).forEach((elm, i) => { if (((elm == "") && (strIndex == 0) && (i > 26)) || (elm == ctx.identifier().getText())) { strIndex = i } })
+				Object.values(context.data.var.list).forEach((elm, i) => { if (((elm == "") && (index == 0) && (i <= 26)) || (elm == ctx.identifier().getText())) { index = i } })
+				Object.values(context.data.var.list).forEach((elm, i) => { if (((elm == "") && (strIndex == 0) && (i > 26)) || (elm == ctx.identifier().getText())) { strIndex = i } })
 				var list = val.getText().replace('[', '')
 				list = list.split('')
 				list.splice(list.length - 1, 1)
@@ -129,8 +129,8 @@ function handler(token, ctx, context) {
 				list = split(list, ',', strMap)
 
 				if (isNaN(list.join(''))) {
-					this.data.var.list[Object.keys(this.data.var.list)[index]] = { name: ctx.identifier().getText(), type: "str", strMap: Object.keys(this.data.var.list)[strIndex], val: val.getText(), list: Object.keys(this.data.var.list)[index] }
-					var listData = this.data.var.list[Object.keys(this.data.var.list)[index]]
+					context.data.var.list[Object.keys(context.data.var.list)[index]] = { name: ctx.identifier().getText(), type: "str", strMap: Object.keys(context.data.var.list)[strIndex], val: val.getText(), list: Object.keys(context.data.var.list)[index] }
+					var listData = context.data.var.list[Object.keys(context.data.var.list)[index]]
 					var len = []
 					var listStr = ""
 					list.forEach((elm) => {
@@ -139,22 +139,22 @@ function handler(token, ctx, context) {
 					})
 					return `:"${listStr}"=>${listData.strMap}:{${len.join(',')}}=>|L${listData.list}:`
 				} else {
-					this.data.var.list[Object.keys(this.data.var.list)[index]] = { name: ctx.identifier().getText(), type: "numList", val: val.getText(), list: Object.keys(this.data.var.list)[index] }
+					context.data.var.list[Object.keys(context.data.var.list)[index]] = { name: ctx.identifier().getText(), type: "numList", val: val.getText(), list: Object.keys(context.data.var.list)[index] }
 					res = val.getText().replace('[', '{')
 					//console.log(res)
 					res[res.length - 1] = "}"
-					return `:${res}=>L${Object.keys(this.data.var.list)[index]}:`
+					return `:${res}=>L${Object.keys(context.data.var.list)[index]}:`
 				}
 
 			} else if ((val.getText()[0] == '[') && (val.getText()[1] == '[')) {
 				var index = 0
-				Object.values(this.data.var.matrix).forEach((elm, i) => { if ((elm == "") && (index == 0)) { index = i } })
-				//console.log('matrix',`${val.getText().replaceAll('[','{').replaceAll(']','}')}=>[${Object.keys(this.data.var.matrix)[index]}]`)
-				return `:${val.getText()}=>[${Object.keys(this.data.var.matrix)[index]}]:`
+				Object.values(context.data.var.matrix).forEach((elm, i) => { if ((elm == "") && (index == 0)) { index = i } })
+				//console.log('matrix',`${val.getText().replaceAll('[','{').replaceAll(']','}')}=>[${Object.keys(context.data.var.matrix)[index]}]`)
+				return `:${val.getText()}=>[${Object.keys(context.data.var.matrix)[index]}]:`
 			} else {
 				var index = 0
-				Object.values(this.data.var.num).forEach((elm, i) => { if ((elm == "") && (index == 0)) { index = i } })
-				return `:${children}=>${Object.keys(this.data.var.num)[index]}:`
+				Object.values(context.data.var.num).forEach((elm, i) => { if ((elm == "") && (index == 0)) { index = i } })
+				return `:${children}=>${Object.keys(context.data.var.num)[index]}:`
 			}
 			return ""
 		},
@@ -205,9 +205,10 @@ function handler(token, ctx, context) {
 			return `:Label ${context.data.functions[name].label}:${context.visit(ctx.statement())}:`
 		},
 		"funcCall": (ctx, children, context) => {
-			context.data.functions = handlers.data.functions || {}
-			handlers.data.functionCall=handlers.data.functionCall||{}
-			handlers.data.functionCall.tokens= handlers.data.functionCall.tokens || {
+			context.data = context.data||{}
+			context.data.functions = context.data.functions || {}
+			context.data.functionCall=context.data.functionCall||{}
+			context.data.functionCall.tokens= context.data.functionCall.tokens || {
 				"menu":"Menu","graph.graphStyle":"GraphStyle","graph.graphColor":"GraphColor","io.openLib":"OpenLib","io.output":"Output","io.getCalc":"GetCalc","io.get":"Get","io.send":"Send","matrix.det":"det","matrix.dim":"dim","matrix.fill":"Fill",
 				"matrix.identity":"identity","matrix.randM":"randM","matrix.augment":"augment","matrix.toList":"Matr>List","matrix.fromList":"List>matr","matrix.cumSum":"cumSum","matrix.ref":"ref","matrix.rref":"rref","matrix.rowSwap":"rowSwap",
 				"matrix.rowAdd":"row+","matrix.multiplyRow":"row*","matrix.multipleRowAdd":"*row+","gfx.line":"Line","gfx.tangent":"Tangent","gfx.shade":"Shade","gfx.text":"Text","gfx.circle":"Circle","gfx.textColor":"TextColor",
@@ -218,12 +219,13 @@ function handler(token, ctx, context) {
 				"list.stdDev":"stdDev","list.variance":"variance","list.seq":"seq","list.fromMatrix":"Matr>List","list.toMatrix":"List>matr"
 			}
 			var identifier=[]
-			ctx.identifier().split('.').forEach((elm)=>{
+			console.log(ctx.getText())
+			ctx.identifier().getText().split('.').forEach((elm)=>{
 				identifier.push(elm.getText())
 			})
 			//console.log(identifier)
-			if (!(handlers.data.functions.hasOwnProperty(identifier.join('.')))) {
-				if(!handlers.data.functionCall.tokens.hasOwnProperty(identifier.join('.'))){
+			if (!(context.data.functions.hasOwnProperty(identifier.join('.')))) {
+				if(!context.data.functionCall.tokens.hasOwnProperty(identifier.join('.'))){
 					
 					var name=identifier[identifier.length-1]
 					
@@ -233,16 +235,16 @@ function handler(token, ctx, context) {
 					console.log(' \x1b[34m','params:','resulting prams:',prams,'src:',ctx.methodparams().getText(),'returned:',`${name.charAt(0).toUpperCase() +name.slice(1)} ${prams}`,"\x1b[0m")
 				return `${name.charAt(0).toUpperCase() +name.slice(1)} ${prams}`
 			}else{
-				var name = handlers.data.functionCall.tokens[identifier.join('.')]
+				var name = context.data.functionCall.tokens[identifier.join('.')]
 				return `${name}(${context.visit(ctx.methodparams()).join()})`
 			}
 			}else{
 				var params=context.visit(ctx.methodparams())
                 var commands=[]
                 params.forEach((pram,i)=>{
-                    commands.push(`${pram}=>${handlers.data.functions[identifier.join('.')].paramRefs[i]}`)
+                    commands.push(`${pram}=>${context.data.functions[identifier.join('.')].paramRefs[i]}`)
                 })
-				return `:${commands.join(':')}:Call ${handlers.data.functions[identifier.join('.')].label}:`
+				return `:${commands.join(':')}:Call ${context.data.functions[identifier.join('.')].label}:`
 			}
 		}
 	}
@@ -255,7 +257,7 @@ function handler(token, ctx, context) {
 	if (handlers.hasOwnProperty(token)) {
 		
 		if (typeof handlers[token] == "function") {
-			//console.log(token+':',ctx.getText(),handlers[token](ctx, children, context))
+			console.log(token+':',ctx.getText(),handlers[token](ctx, children, context))
 			return handlers[token](ctx, children, context)
 		} else {
 			return handlers[token]
