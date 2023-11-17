@@ -128,7 +128,7 @@ boolexpr
 
 
 methodcall
-	: (identifier || identifier '.' identifier) OPEN_BRACKET methodparams CLOSE_BRACKET
+	: identifier OPEN_BRACKET methodparams CLOSE_BRACKET
 	;
 
 methodparams
@@ -191,7 +191,7 @@ identifier
 	:IDENTIFIER
 	;
 
-IDENTIFIER : [a-zA-Z][a-zA-Z0-9_]*;
+IDENTIFIER : [a-zA-Z][a-zA-Z0-9_.]*;
 number
    : NUMBER
    | PI

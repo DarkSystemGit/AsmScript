@@ -219,9 +219,9 @@ function handler(token, ctx, context) {
 				"list.stdDev":"stdDev","list.variance":"variance","list.seq":"seq","list.fromMatrix":"Matr>List","list.toMatrix":"List>matr"
 			}
 			var identifier=[]
-			console.log(ctx.getText())
+			console.log(ctx.identifier().getText())
 			ctx.identifier().getText().split('.').forEach((elm)=>{
-				identifier.push(elm.getText())
+				identifier.push(elm)
 			})
 			//console.log(identifier)
 			if (!(context.data.functions.hasOwnProperty(identifier.join('.')))) {
