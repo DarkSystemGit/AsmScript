@@ -111,21 +111,35 @@ function handler(token, ctx, context) {
 		"true": "1",
 		"false": "0",
 		"::":":",
-		"var": function (ctx, children,context) {
-			//console.log(context)
+		"const":(ctx,children,context)=>{
 			context.data = context.data || {}
 			context.data.var = context.data.var || {}
-			context.data.var.num = context.data.var.num || {}
-			context.data.var.list = context.data.var.list || { "": "", "A": "", "B": "", "C": "", "D": "", "E": "", "F": "", "G": "", "H": "", "I": "", "J": "", "K": "", "L": "", "M": "", "N": "", "O": "", "P": "", "Q": "", "R": "", "S": "", "T": "", "U": "", "V": "", "W": "", "X": "", "Y": "", "Z": "", "Str0": "", "Str1": "", "Str2": "", "Str3": "", "Str4": "", "Str5": "", "Str6": "", "Str7": "", "Str8": "", "Str9": "" }
-			context.data.var.matrix = context.data.var.matrix || { "": "", "A": "", "B": "", "C": "", "D": "", "E": "", "F": "", "G": "", "H": "", "I": "", "J": "" }
-			const val = ctx.expression()
-
+			context.data.functions = context.data.functions ||{}
+			context.data.functionCall=context.data.functionCall||{}
+			context.data.functionCall.tokens= context.data.functionCall.tokens || {
+				"menu":"Menu","graph.graphStyle":"GraphStyle","graph.graphColor":"GraphColor","io.openLib":"OpenLib","io.output":"Output","io.getCalc":"GetCalc","io.get":"Get","io.send":"Send","matrix.det":"det","matrix.dim":"dim","matrix.fill":"Fill",
+				"matrix.identity":"identity","matrix.randM":"randM","matrix.augment":"augment","matrix.toList":"Matr>List","matrix.fromList":"List>matr","matrix.cumSum":"cumSum","matrix.ref":"ref","matrix.rref":"rref","matrix.rowSwap":"rowSwap",
+				"matrix.rowAdd":"row+","matrix.multiplyRow":"row*","matrix.multipleRowAdd":"*row+","gfx.line":"Line","gfx.tangent":"Tangent","gfx.shade":"Shade","gfx.text":"Text","gfx.circle":"Circle","gfx.textColor":"TextColor",
+				"gfx.pointOn":"Pt-On","gfx.pointOff":"Pt-Off","gfx.pointChange":"Pt-Change","gfx.pixelOn":"Pxl-On","gfx.pixelOff":"Pxl-Off","gfx.pixelChange":"Pxl-Change","gfx.pixelIsOn":"pxl-Test","string.length":"length","string.subStr":"sub",
+				"string.toExpression":"expr","string.indexOf":"inString","string.fromEquVar":"String>Equ","math.max":"max","math.min":"min","math.gcm":"gcm","math.lcd":"lcd","math.toInt":"int","math.mod":"remainder",
+				"math.intPart":"iPart","math.floatPart":"fPart","math.abs":"abs","math.round":"round","math.solve":"solve","math.log":"log","math.sin":"sin","math.cos":"cos","math.rand.dec":"rand","math.rand":"randInt","math.rand.norm":"randNorm",
+				"math.rand.bin":"randBin","list.sortUp":"SortA","list.sortDown":"SortD","list.diff":"DeltaList","list.median":"median","list.mean":"mean","list.sum":"sum","list.product":"prod",
+				"list.stdDev":"stdDev","list.variance":"variance","list.seq":"seq","list.fromMatrix":"Matr>List","list.toMatrix":"List>matr"
+			}
+			context.data.var.strLists = context.data.var.strLists || ["Str0","Str1","Str2","Str3","Str4","Str5","Str6","Str7","Str8","Str9"]
+			
+		},
+		"var": function (ctx, children,context,scope) {
+			//console.log(context)
+			scope =scope||"global"
 			if ((val.getText()[0] == '"') || (
 				!isNaN(val.getText()))) {
-				var index = 0
+				var type="num"
 				//Object.values(context.data.var.num).forEach((elm, i) => { if (((elm == "") && (index == 0)) || (elm == ctx.identifier().getText())) { index = i } })
-
-				context.data.var.num[ctx.identifier().getText()] = { name: ctx.identifier().getText(), type: "reg", val: val.getText(),ref:ctx.identifier().getText().toUpperCase()}
+				if(val.getText()[0] == '"'){
+					type="str"
+				}
+				context.data.var.push({ name: ctx.identifier().getText(), type, val: val.getText(),ref:ctx.identifier().getText().toUpperCase(),scope})
 
 				return `:${val.getText()}=>${ctx.identifier().getText().toUpperCase()}:`
 			} else if ((val.getText()[0] == '[') && (!(val.getText()[1] == '['))) {
@@ -133,8 +147,8 @@ function handler(token, ctx, context) {
 				var index = 0
 				var strIndex = 0
 				var res;
-				Object.values(context.data.var.list).forEach((elm, i) => { if (((elm == "") && (index == 0) && (i <= 26)) || (elm == ctx.identifier().getText())) { index = i } })
-				Object.values(context.data.var.list).forEach((elm, i) => { if (((elm == "") && (strIndex == 0) && (i > 26)) || (elm == ctx.identifier().getText())) { strIndex = i } })
+				context.data.var.list.forEach((elm, i) => { if (((elm == "") && (index == 0) && (i <= 26)) || (elm == ctx.identifier().getText())) { index = i } })
+				//context.data.var.list.forEach((elm, i) => { if (((elm == "") && (strIndex == 0) && (i > 26)) || (elm == ctx.identifier().getText())) { strIndex = i } })
 				var list = val.getText().replace('[', '')
 				list = list.split('')
 				list.splice(list.length - 1, 1)
@@ -143,32 +157,31 @@ function handler(token, ctx, context) {
 				list = split(list, ',', strMap)
 
 				if (isNaN(list.join(''))) {
-					context.data.var.list[Object.keys(context.data.var.list)[index]] = { name: ctx.identifier().getText(), type: "str", strMap: Object.keys(context.data.var.list)[strIndex], val: val.getText(), list: Object.keys(context.data.var.list)[index] }
-					var listData = context.data.var.list[Object.keys(context.data.var.list)[index]]
+					var listName=ctx.identifier().getText()
+					if(listName.length>5){
+						listName=listName.slice(1,5)
+					}
+					context.data.var.push({ name: ctx.identifier().getText(),scope, type: "strList", strRef: listName, val: val.getText(), ref: listName })
+					var listData = context.data.var[context.data.var.length-1]
 					var len = []
 					var listStr = ""
 					list.forEach((elm) => {
 						len.push(elm.length)
 						listStr = listStr + elm.replace('"', '').substring(0, elm.length - 1)
 					})
-					return `:"${listStr}"=>${listData.strMap}:{${len.join(',')}}=>|L${listData.list}:`
+					return `:"${listStr}"=>${listData.strRef}:CopyData(|L${listData.list},${len.join(',')}):`
 				} else {
-					context.data.var.list[Object.keys(context.data.var.list)[index]] = { name: ctx.identifier().getText(), type: "numList", val: val.getText(), list: Object.keys(context.data.var.list)[index] }
+					var listName=ctx.identifier().getText()
+					if(listName.length>5){
+						listName=listName.slice(1,5)
+					}
+					context.data.var.push({ name: listName,scope, type: "numList", val: val.getText(), ref:listName })
 					res = val.getText().replace('[', '{')
 					//console.log(res)
 					res[res.length - 1] = "}"
-					return `:${res}=>L${Object.keys(context.data.var.list)[index]}:`
+					return `:CopyData(|L${Object.keys(context.data.var.list)[index]},${res}):`
 				}
 
-			} else if ((val.getText()[0] == '[') && (val.getText()[1] == '[')) {
-				var index = 0
-				Object.values(context.data.var.matrix).forEach((elm, i) => { if ((elm == "") && (index == 0)) { index = i } })
-				//console.log('matrix',`${val.getText().replaceAll('[','{').replaceAll(']','}')}=>[${Object.keys(context.data.var.matrix)[index]}]`)
-				return `:${val.getText()}=>[${Object.keys(context.data.var.matrix)[index]}]:`
-			} else {
-				var index = 0
-				Object.values(context.data.var.num).forEach((elm, i) => { if ((elm == "") && (index == 0)) { index = i } })
-				return `:${children}=>${Object.keys(context.data.var.num)[index]}:`
 			}
 			return ""
 		},
@@ -178,7 +191,7 @@ function handler(token, ctx, context) {
 		},
 		"if": (ctx, children, context) => {
 			var body = context.visit(ctx.statement())
-			return `If ${ctx.boolexpr().getText()}:Then:${body.substring(1, body.length - 1)}:End:`
+			return `If ${ctx.boolexpr().getText()}:${body.substring(1, body.length - 1)}:End:`
 		},
 		"ifElse": (ctx, children, context) => {
 			var ifBody = context.visit(ctx.statement()[0])
@@ -200,8 +213,8 @@ function handler(token, ctx, context) {
 		return code;
 		},
 		"function":(ctx,children,context)=>{
-			context.data = context.data ||{}
-			context.data.functions = context.data.functions ||{}
+			
+			
 			var name = ctx.identifier().getText()
 			var params=ctx.func_params().getText().split(')')[0].split(',')
 			context.data.functions[name]={label:name,params,paramRefs:[]}
@@ -211,7 +224,7 @@ function handler(token, ctx, context) {
 			params.forEach((elm,i)=>{
 				var pName ='_$P'+name.slice(1,1)+name.slice(name.length-1,1)+elm
 				if(!(context.data.var.num.hasOwnProperty(pName))){
-					context.data.var.num[pName]={ name: params[i], type: "reg", val: "",ref:pName.toUpperCase()}
+					context.data.var.num.push({ name: params[i], type: "reg", val: "",ref:pName.toUpperCase()})
 					context.data.functions[name].paramRefs.push(pName.toUpperCase())
 				}else{
 					console.error(`Error: var ${pName} is reserved. Please change it.`)
@@ -237,19 +250,7 @@ function handler(token, ctx, context) {
 			}
 		},
 		"funcCall": (ctx, children, context) => {
-			context.data = context.data||{}
-			context.data.functions = context.data.functions || {}
-			context.data.functionCall=context.data.functionCall||{}
-			context.data.functionCall.tokens= context.data.functionCall.tokens || {
-				"menu":"Menu","graph.graphStyle":"GraphStyle","graph.graphColor":"GraphColor","io.openLib":"OpenLib","io.output":"Output","io.getCalc":"GetCalc","io.get":"Get","io.send":"Send","matrix.det":"det","matrix.dim":"dim","matrix.fill":"Fill",
-				"matrix.identity":"identity","matrix.randM":"randM","matrix.augment":"augment","matrix.toList":"Matr>List","matrix.fromList":"List>matr","matrix.cumSum":"cumSum","matrix.ref":"ref","matrix.rref":"rref","matrix.rowSwap":"rowSwap",
-				"matrix.rowAdd":"row+","matrix.multiplyRow":"row*","matrix.multipleRowAdd":"*row+","gfx.line":"Line","gfx.tangent":"Tangent","gfx.shade":"Shade","gfx.text":"Text","gfx.circle":"Circle","gfx.textColor":"TextColor",
-				"gfx.pointOn":"Pt-On","gfx.pointOff":"Pt-Off","gfx.pointChange":"Pt-Change","gfx.pixelOn":"Pxl-On","gfx.pixelOff":"Pxl-Off","gfx.pixelChange":"Pxl-Change","gfx.pixelIsOn":"pxl-Test","string.length":"length","string.subStr":"sub",
-				"string.toExpression":"expr","string.indexOf":"inString","string.fromEquVar":"String>Equ","math.max":"max","math.min":"min","math.gcm":"gcm","math.lcd":"lcd","math.toInt":"int","math.mod":"remainder",
-				"math.intPart":"iPart","math.floatPart":"fPart","math.abs":"abs","math.round":"round","math.solve":"solve","math.log":"log","math.sin":"sin","math.cos":"cos","math.rand.dec":"rand","math.rand":"randInt","math.rand.norm":"randNorm",
-				"math.rand.bin":"randBin","list.sortUp":"SortA","list.sortDown":"SortD","list.diff":"DeltaList","list.median":"median","list.mean":"mean","list.sum":"sum","list.product":"prod",
-				"list.stdDev":"stdDev","list.variance":"variance","list.seq":"seq","list.fromMatrix":"Matr>List","list.toMatrix":"List>matr"
-			}
+			
 			var identifier=[]
 			console.log(ctx.identifier().getText())
 			ctx.identifier().getText().split('.').forEach((elm)=>{
@@ -290,8 +291,10 @@ function handler(token, ctx, context) {
 	if (handlers.hasOwnProperty(token)) {
 		
 		if (typeof handlers[token] == "function") {
-			console.log(token+':',ctx.getText(),handlers[token](ctx, children, context))
-			return handlers[token](ctx, children, context)
+			
+			handlers.const(...arguments)
+			console.log(token+':',ctx.getText(),handlers[token](...arguments))
+			return handlers[token](...arguments)
 		} else {
 			return handlers[token]
 		}

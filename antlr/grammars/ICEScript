@@ -106,7 +106,6 @@ expression
 	| QUOTED_TEXT
 	| methodcall
 	| LIST
-	| MATRIX
 	;
 
 //Boolean expression
@@ -217,8 +216,6 @@ fragment INT
 //Data types
 QUOTED_TEXT : '"' ~ ["\r\n]* '"';
 LIST :'[' ( . )+? ']';
-MATRIX:'[' LIST (',' LIST)* ']';
-
 //Stuff we wanna ignore
 LINECOMMENT : '//' ~[\r\n]* -> skip;
 BLOCKCOMMENT : '/*' .*? '*/' -> skip;
