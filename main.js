@@ -175,11 +175,11 @@ function handler(token, ctx, context) {
 					if(listName.length>5){
 						listName=listName.slice(1,5)
 					}
-					context.data.var.push({ name: listName,scope, type: "numList", val: val.getText(), ref:listName })
+					context.data.var.push({ name: ctx.identifier().getText(),scope, type: "numList", val: val.getText(), ref:listName })
 					res = val.getText().replace('[', '{')
 					//console.log(res)
 					res[res.length - 1] = "}"
-					return `:CopyData(|L${Object.keys(context.data.var.list)[index]},${res}):`
+					return `:CopyData(|L${context.data.var[context.data.var.length-1].ref},${res}):`
 				}
 
 			}
