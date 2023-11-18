@@ -5,6 +5,20 @@ import ICEScriptLexer from "./antlr/parsers/antlr/grammars/ICEScriptLexer.js";
 import tokens from "./tokens.js";
 import { readFileSync, writeFileSync } from 'fs'
 //console.log(readFileSync(process.argv[2]))
+function hasKey(obj, key) {
+	if (obj === null || obj === undefined) {
+	  return false;
+	}
+	if (obj.hasOwnProperty(key)) {
+	  return true;
+	}
+	for (const k in obj) {
+	  if (hasKey(obj[k], key)) {
+		return true;
+	  }
+	}
+	return false;
+  }
 function indexOf(searchStr, str, caseSensitive) {
 	var searchStrLen = searchStr.length;
 	if (searchStrLen == 0) {
@@ -190,19 +204,37 @@ function handler(token, ctx, context) {
 			context.data.functions = context.data.functions ||{}
 			var name = ctx.identifier().getText()
 			var params=ctx.func_params().getText().split(')')[0].split(',')
-			context.data.functions[name]={label,params,paramRefs:[]}
+			context.data.functions[name]={label:name,params,paramRefs:[]}
 			if(name.length>20){
 				context.data.functions[name].label=name.slice(1,20)
 			}
 			params.forEach((elm,i)=>{
-				if(!(context.data.var.num.hasOwnProperty('_$P'+elm))){
-					context.data.var.num['_$P'+name.slice(1,1)+name.slice(name.length-1,1)+elm]={ name: params[i], type: "reg", val: "",ref:`${'_$P'+name.slice(1,1)+name.slice(name.length-1,1)+elm}`.toUpperCase()}
-					context.data.functions[name].paramRefs.push(`${'_$P'+elm}`.toUpperCase())
+				var pName ='_$P'+name.slice(1,1)+name.slice(name.length-1,1)+elm
+				if(!(context.data.var.num.hasOwnProperty(pName))){
+					context.data.var.num[pName]={ name: params[i], type: "reg", val: "",ref:pName.toUpperCase()}
+					context.data.functions[name].paramRefs.push(pName.toUpperCase())
 				}else{
-					console.error(`Error: var ${'_$P'+elm} is reserved. Please change it.`)
+					console.error(`Error: var ${pName} is reserved. Please change it.`)
 				}
 			})
-			return `:Label ${context.data.functions[name].label}:${context.visit(ctx.statement())}:`
+			console.log(ctx.statement().getText())
+			return `:Label ${context.data.functions[name].label}:${context.visit(ctx.statement())}:______:`
+		},
+		"varAcess":(ctx,children,context)=>{
+			if(typeof ctx.number == "function"){
+				return ctx.getText()
+			}else{
+				var ref = context.data.vars
+				if(context.data.vars.num.hasOwnProperty(ctx.identifier().getText())){
+					return ref.num[ctx.identifier().getText()].ref
+				}else if(context.data.vars.list.hasOwnProperty(ctx.identifier().getText())){
+					
+				}else if(context.data.vars.matrix.hasOwnProperty(ctx.identifier().getText())){
+
+				}else{
+					return ""
+				}
+			}
 		},
 		"funcCall": (ctx, children, context) => {
 			context.data = context.data||{}
@@ -244,6 +276,7 @@ function handler(token, ctx, context) {
                 params.forEach((pram,i)=>{
                     commands.push(`${pram}=>${context.data.functions[identifier.join('.')].paramRefs[i]}`)
                 })
+				console.log(params,commands,context.data.functions[identifier.join('.')].paramRefs)
 				return `:${commands.join(':')}:Call ${context.data.functions[identifier.join('.')].label}:`
 			}
 		}
@@ -421,7 +454,7 @@ class Visitor extends ICEScriptVisitor {
 
 	visitValue(ctx){
 		//console.log(' \x1b[33m',ctx.getText(),' \x1b[0m')
-		return ctx.getText()
+		return handler("varAcess", ctx, this);
 	}
 }
 //console.log(tree.toStringTree(parser.ruleNames))
