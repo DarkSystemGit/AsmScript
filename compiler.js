@@ -1,4 +1,4 @@
-import * as util from "./functions" 
+import * as util from "./functions.js" 
 export var handlers = {
     data: {},
     "&&": "and",

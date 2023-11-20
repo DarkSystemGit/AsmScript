@@ -21,11 +21,11 @@ scriptName
 	;
 
 include
-	: 'import:' identifier END_STMT
+	: 'import' identifier END_STMT
 	;
 
 function
-	: 'function ' identifier '(' func_params ')' statement
+	: 'function ' identifier '(' func_params ')' ':' type  statement
 	;
 func_params
 	: func_identifier || func_identifier(',' func_identifier)*
@@ -103,7 +103,7 @@ expression
 	| expression DIV expression
 	| value
 	| boolexpr
-	| QUOTED_TEXT
+	| STRING
 	| methodcall
 	| LIST
 	;
@@ -165,7 +165,6 @@ ADDASSIGN : '+=';
 SUBASSIGN : '-=';
 MULASSIGN : '*=';
 DIVASSIGN : '/=';
-STR : 'str'; //Same as Var but for strings
 IF : 'if';
 ELSE : 'else';
 //Incremental operators
@@ -199,10 +198,8 @@ number
    ;
 
 
-//Numbers
-NUMBER
-	: '-'? INT ('.' [0-9] +)?
-	;
+
+
 
 //Mathematic constants
 PI : 'pi';
@@ -214,8 +211,17 @@ fragment INT
    ;
 
 //Data types
-QUOTED_TEXT : '"' ~ ["\r\n]* '"';
+STRING : '"' ~ ["\r\n]* '"';
 LIST :'[' ( . )+? ']';
+NUMBER: '-'? INT ('.' [0-9] +)?;
+type
+	:
+	|'void'
+	|'list'
+	|'str'
+	|'int'
+	|'float'
+	;
 //Stuff we wanna ignore
 LINECOMMENT : '//' ~[\r\n]* -> skip;
 BLOCKCOMMENT : '/*' .*? '*/' -> skip;

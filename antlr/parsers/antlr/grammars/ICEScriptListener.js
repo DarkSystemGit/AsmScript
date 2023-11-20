@@ -275,5 +275,14 @@ export default class ICEScriptListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by ICEScriptParser#type.
+	enterType(ctx) {
+	}
+
+	// Exit a parse tree produced by ICEScriptParser#type.
+	exitType(ctx) {
+	}
+
+
 
 }

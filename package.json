@@ -10,8 +10,8 @@
   "scripts": {
     "codespaces":"echo export DEVDIR=/workspaces",
     "start":"node ./main.js",
-    "build": "cd $DEVDIR/ICEScript&& npm run clean; npm run compileVisitor && npm start ./tests/fakeHome.is",
-    "test":"cd $DEVDIR/ICEScript&&npm start ./tests/fakeHome.is",
+    "build": "cd $DEVDIR/ICEScript&& npm run clean; npm run compileVisitor && npm test",
+    "test":"cd $DEVDIR/ICEScript&&npm start ./tests/fakeHome.gs",
     "compileVisitor": "antlr4 -visitor -o ./antlr/parsers -lib ./antlr/grammars -Dlanguage=JavaScript ./antlr/grammars/TiB && antlr4 -o ./antlr/parsers -lib ./antlr/grammars -visitor -Dlanguage=JavaScript  ./antlr/grammars/ICEScript",
 "clean":"rm ./antlr/* && rm -r ./antlr/parsers/antlr           ",
 "compile":"antlr4  -o ./antlr/parsers -lib ./antlr/grammars -Dlanguage=JavaScript ./antlr/grammars/TiB && antlr4 -o ./antlr/parsers -lib ./antlr/grammars  -Dlanguage=JavaScript  ./antlr/grammars/ICEScript"
@@ -23,7 +23,7 @@
   "keywords": [
     "ICEScript",
     "JS",
-    "TI84"
+    "TI84PCE"
   ],
   "author": "darksystem",
   "license": "MIT",
