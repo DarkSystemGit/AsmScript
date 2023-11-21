@@ -113,7 +113,7 @@ export var handlers = {
     },
     "function":(ctx,children,context)=>{
         
-        
+        console.log(context)
         var name = ctx.identifier().getText()
         var params=ctx.func_params().getText().split(')')[0].split(',')
         context.data.functions[name]={label:name,params,paramRefs:[]}

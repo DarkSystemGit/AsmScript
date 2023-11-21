@@ -7,9 +7,9 @@ import * as util from "./functions.js"
 import { handlers } from "./compiler.js";
 import { readFileSync, writeFileSync } from 'fs'
 
-function handler(token, ctx, context) {
+function handler( ctx, context,token) {
 
-
+	console.log(context)
 	if (!token) {
 		return handlers
 	}
@@ -21,8 +21,8 @@ function handler(token, ctx, context) {
 		if (typeof handlers[token] == "function") {
 			
 			handlers.const(...arguments)
-			console.log(token+':',ctx.getText(),handlers[token]().bind(context.data,arguments)())
-			return handlers[token]().bind(context.data,arguments)()
+			console.log(token+':',ctx.getText(),handlers[token]().bind(context.data)(ctx,children,context,...Array.from(arguments).slice(2)))
+			return handlers[token]().bind(context.data)(ctx,children,context,...Array.from(arguments).slice(2))
 		} else {
 			return handlers[token]
 		}
@@ -194,6 +194,7 @@ const lexer = new ICEScriptLexer(chars);
 const tokenstr = new antlr4.CommonTokenStream(lexer);
 const parser = new ICEScriptParser(tokenstr);
 const tree = parser.script();
+console.log('Glacier Dev, v0.0.1:','\n	Tree:\n		', tree.toStringTree(parser.ruleNames),)
 var out = new Visitor().start(tree)
 //Imagine using Antlr wheen you could roll your own
 Object.keys(handler()).forEach((elm, i) => {
@@ -213,4 +214,4 @@ Object.keys(handler()).forEach((elm, i) => {
 		out = util.replaceAt(out, pos[0], handler()[Object.keys(handler())[i]], Object.keys(handler())[i].length)
 	}
 })
-console.log('\nResults:', '\n	Tree:\n		', tree.toStringTree(parser.ruleNames), '\n	TI-Basic:\n		', out.replaceAll(':','\n:'),'\n Data:',/*handler()*/)
+console.log('\n	Results:',  '\n		TI-Basic:\n		', out.replaceAll(':','\n:'),'\n Data:	',/*handler()*/)
