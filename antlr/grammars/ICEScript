@@ -31,7 +31,7 @@ func_params
 	: func_identifier || func_identifier(',' func_identifier)*
 	;
 func_identifier
-	:(identifier||expression||any)
+	:(identifier||expression||any)':'type
 	;
 statement
 	: OPEN_CURLEY statement* CLOSE_CURLEY
@@ -89,6 +89,7 @@ while_stmt
 	;
 var_stmt
 	: VAR identifier ASSIGN expression END_STMT
+	| VAR identifier ':' type ASSIGN expression END_STMT
 	;
 return_stmt
 	: RETURN expression END_STMT

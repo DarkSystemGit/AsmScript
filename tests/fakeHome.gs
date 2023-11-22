@@ -1,8 +1,9 @@
+import io;
 function input(str): str {
     io.disp(str);
-    var key =0;
+    var key= 0;
     var res="";
-    while(!!key==9){
+    while(!!(key==9)){
         res=res+io.getKey();
     };
     return res;

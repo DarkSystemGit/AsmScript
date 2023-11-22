@@ -33,62 +33,43 @@ export function handler( token,ctx, context) {
         "var": function (ctx, children,context,scope) {
             //console.log(context)
             scope =scope||context.data.currentScope||"global"
+            var children=[]
+            var val=ctx.expression()
             if ((val.getText()[0] == '"') || (
                 !isNaN(val.getText()))) {
-                var type="num"
+                //String or Number
+                var type=ctx.type().getText()||"int"
                 //Object.values(context.data.var.num).forEach((elm, i) => { if (((elm == "") && (index == 0)) || (elm == ctx.identifier().getText())) { index = i } })
                 if(val.getText()[0] == '"'){
-                    type="str"
+                    type="string"
                 }
-                context.data.var.push({ name: ctx.identifier().getText(), type, val: val.getText(),ref:ctx.identifier().getText().toUpperCase(),scope})
-    
-                return `:${val.getText()}=>${ctx.identifier().getText().toUpperCase()}:`
+                if(val.getText().split('.').length>1){
+                    type="float"
+                }
+                children.push({type,value:val.getText()})
             } else if ((val.getText()[0] == '[') && (!(val.getText()[1] == '['))) {
-                console.log("list")
-                var index = 0
-                var strIndex = 0
-                var res;
-                context.data.var.list.forEach((elm, i) => { if (((elm == "") && (index == 0) && (i <= 26)) || (elm == ctx.identifier().getText())) { index = i } })
+                //Arrays
                 //context.data.var.list.forEach((elm, i) => { if (((elm == "") && (strIndex == 0) && (i > 26)) || (elm == ctx.identifier().getText())) { strIndex = i } })
-                var list = val.getText().replace('[', '')
-                list = list.split('')
-                list.splice(list.length - 1, 1)
-                list = list.join('')
-                var strMap = util.genStrMap(list)
-                list = util.split(list, ',', strMap)
-    
-                if (isNaN(list.join(''))) {
-                    var listName=ctx.identifier().getText()
-                    if(listName.length>5){
-                        listName=listName.slice(1,5)
-                    }
-                    context.data.var.push({ name: ctx.identifier().getText(),scope, type: "strList", strRef: listName, val: val.getText(), ref: listName })
-                    var listData = context.data.var[context.data.var.length-1]
-                    var len = []
-                    var listStr = ""
-                    list.forEach((elm) => {
-                        len.push(elm.length)
-                        listStr = listStr + elm.replace('"', '').substring(0, elm.length - 1)
-                    })
-                    return `:"${listStr}"=>${listData.strRef}:CopyData(|L${listData.list},${len.join(',')}):`
-                } else {
-                    var listName=ctx.identifier().getText()
-                    if(listName.length>5){
-                        listName=listName.slice(1,5)
-                    }
-                    context.data.var.push({ name: ctx.identifier().getText(),scope, type: "numList", val: val.getText(), ref:listName })
-                    res = val.getText().replace('[', '{')
-                    //console.log(res)
-                    res[res.length - 1] = "}"
-                    return `:CopyData(|L${context.data.var[context.data.var.length-1].ref},${res}):`
-                }
-    
+                var list = val.getText().replace('[', '').slice(list.length - 1, 1)
+                list = util.split(list, ',', util.genStrMap(list))
+                var type=ctx.type().getText()||"array"
+                children.push({type,value:list})
+            }else if(val.getText().includes('(')&&val.getText().includes(')')){
+                //assume function call
+                children.push(context.visit(val))
+                var type=ctx.type().getText()||children[0].retType
+            }else if(ctx.hasOwnProperty('boolexpr')){
+                children.push({type:"bool",value:context.visit(ctx.boolexpr())})
+            }else{
+                
+                var type=ctx.type().getText()||"unknown"
+                children.push({type,value:context.visit(ctx.expression())})
             }
-            return ""
+            return {name:ctx.identifier().getText(),varType:type,children,type:"varDec"}
         },
         "while": function (ctx, children, context) {
             var body = context.visit(ctx.statement())
-            return `:While ${ctx.boolexpr().getText()}:${body.substring(1, body.length - 1)}:End:`
+            return {type:"while",condition:context.visit(ctx.boolexpr()),children:[]}
         },
         "if": (ctx, children, context) => {
             var body = context.visit(ctx.statement())
@@ -100,7 +81,7 @@ export function handler( token,ctx, context) {
             return `If ${ctx.boolexpr().getText()}:${ifBody.substring(1, ifBody.length - 1)}:Else:${elseBody.substring(1, elseBody.length - 1)}:End:`
         },
         "tib": (ctx, children, context) => {
-            return context.visit(ctx.any())
+            return {}
         },
         "funcParams":(ctx,children,context)=>{
     
@@ -116,69 +97,39 @@ export function handler( token,ctx, context) {
         "function":(ctx,children,context)=>{
             
             console.log('ctx:',ctx)
-            var name = ctx.identifier().getText()
-            var params=ctx.func_params().getText().split(')')[0].split(',')
-            context.data.functions[name]={label:name,params,paramRefs:[]}
-            if(name.length>20){
-                context.data.functions[name].label=name.slice(1,20)
-            }
-            params.forEach((elm,i)=>{
-                var pName ='_$P'+name.slice(1,1)+name.slice(name.length-1,1)+elm
-                
-                    context.data.var.push({ name: params[i], type: "reg", val: "",ref:pName.toUpperCase()})
-                    context.data.functions[name].paramRefs.push(pName.toUpperCase())
-                
-            })
-            console.log(Object.keys(ctx))
-            return `:Label ${context.data.functions[name].label}:${context.visit(ctx.statement())}:______:`
+            
+            var paramsList=ctx.func_params().getText().split(')')[0].split(',')
+            var params=[]
+            paramsList.forEach((elm)=>{params.push({name:elm.split(':')[0],type:elm.split(':')[1]})})
+            context.data.functions[ctx.identifier().getText()]={type:"function",name:ctx.identifier().getText(),params,retType:ctx.type().getText(),children:context.visit(ctx.statement())}
+            return context.data.functions[ctx.identifier().getText()]
+
+            //console.log(ctx.number())
+            //return `:Label ${context.data.functions[name].label}:${context.visit(ctx.statement())}:______:`
         },
         "varAcess":(ctx,children,context)=>{
             if(typeof ctx.number == "function"){
-                return ctx.getText()
-            }else{
-                var ref = context.data.vars
-                if(context.data.vars.num.hasOwnProperty(ctx.identifier().getText())){
-                    return ref.num[ctx.identifier().getText()].ref
-                }else if(context.data.vars.list.hasOwnProperty(ctx.identifier().getText())){
-                    
-                }else if(context.data.vars.matrix.hasOwnProperty(ctx.identifier().getText())){
-    
-                }else{
-                    return ""
+                var type="number"
+                if(ctx.getText().split('.').length>1){
+                    type="float"
                 }
+                return {type,val:ctx.getText()}
+            }else{
+                return {type:"var",children:[],name:ctx.identifier().getText(),type:context.data.var[ctx.identifier().getText()].type}
             }
         },
         "funcCall": (ctx, children, context) => {
             
-            var identifier=[]
+            var method=[]
             console.log(ctx.identifier().getText())
             ctx.identifier().getText().split('.').forEach((elm)=>{
-                identifier.push(elm)
+                method.push(elm)
             })
-            //console.log(identifier)
-            if (!(context.data.functions.hasOwnProperty(identifier.join('.')))) {
-                if(!context.data.functionCall.tokens.hasOwnProperty(identifier.join('.'))){
-                    
-                    var name=identifier[identifier.length-1]
-                    
-                    //console.log(name)
-                    
-                    var prams=context.visit(ctx.methodparams())
-                    console.log(' \x1b[34m','params:','resulting prams:',prams,'src:',ctx.methodparams().getText(),'returned:',`${name.charAt(0).toUpperCase() +name.slice(1)} ${prams}`,"\x1b[0m")
-                return `${name.charAt(0).toUpperCase() +name.slice(1)} ${prams}`
-            }else{
-                var name = context.data.functionCall.tokens[identifier.join('.')]
-                return `${name}(${context.visit(ctx.methodparams()).join()})`
+            var baseClass=[]
+            if(method.length>1){
+                baseClass=method.slice(0,-2)
             }
-            }else{
-                var params=context.visit(ctx.methodparams())
-                var commands=[]
-                params.forEach((pram,i)=>{
-                    commands.push(`${pram}=>${context.data.functions[identifier.join('.')].paramRefs[i]}`)
-                })
-                console.log(params,commands,context.data.functions[identifier.join('.')].paramRefs)
-                return `:${commands.join(':')}:Call ${context.data.functions[identifier.join('.')].label}:`
-            }
+            return  {type:"funcCall",children:[],class:baseClass,name:method[method.length-1],params:context.visit(ctx.func_params()),type:context.data.functions[method.join('.')].retType}
         }
     }
 	//console.log(context)

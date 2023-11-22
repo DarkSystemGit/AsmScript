@@ -1,5 +1,5 @@
 {
-  "name": "icescript",
+  "name": "glacier",
   "version": "1.0.0",
   "description": "A JS like language for The TI84PCE",
   "main": "main.js",
