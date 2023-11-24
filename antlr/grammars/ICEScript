@@ -103,6 +103,7 @@ expression
 	| expression MUL expression
 	| expression DIV expression
 	| value
+	| identifier
 	| boolexpr
 	| STRING
 	| methodcall
@@ -222,6 +223,7 @@ type
 	|'str'
 	|'int'
 	|'float'
+	|'bool'
 	;
 //Stuff we wanna ignore
 LINECOMMENT : '//' ~[\r\n]* -> skip;

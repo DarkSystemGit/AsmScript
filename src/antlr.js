@@ -1,9 +1,9 @@
 import antlr4 from "antlr4"
-import ICEScriptVisitor from "./antlr/parsers/antlr/grammars/ICEScriptVisitor.js";
-import ICEScriptParser from "./antlr/parsers/antlr/grammars/ICEScriptParser.js";
-import ICEScriptLexer from "./antlr/parsers/antlr/grammars/ICEScriptLexer.js";
+import ICEScriptVisitor from "../antlr/parsers/antlr/grammars/ICEScriptVisitor.js";
+import ICEScriptParser from "../antlr/parsers/antlr/grammars/ICEScriptParser.js";
+import ICEScriptLexer from "../antlr/parsers/antlr/grammars/ICEScriptLexer.js";
 import tokens from "./tokens.js";
-import * as util from "./functions.js"
+import * as util from "./util.js"
 import { handler } from "./data.js";
 import { readFileSync, writeFileSync } from 'fs'
 
@@ -170,13 +170,13 @@ class Visitor extends ICEScriptVisitor {
 //console.log(tree.toStringTree(parser.ruleNames))
 export function compile(file) {
 	file = readFileSync(file).toString().split('\n')
-
-	const chars = new antlr4.InputStream();
+	//file.forEach((elm,i)=>{if(!(elm[elm.length-1]==';')){file[i]=file[i]}})
+	const chars = new antlr4.InputStream(file.join('\n'));
 	const lexer = new ICEScriptLexer(chars);
 	const tokenstr = new antlr4.CommonTokenStream(lexer);
 	const parser = new ICEScriptParser(tokenstr);
 	const tree = parser.script();
-	console.log('Glacier Dev, v0.0.1:', '\n	Tree:\n		', tree.toStringTree(parser.ruleNames),)
+	console.log('Glacier Dev, v0.0.1:', /*'\n	Tree:\n		', tree.toStringTree(parser.ruleNames),*/)
 	var out = new Visitor().start(tree)
 	//Imagine using Antlr wheen you could roll your own
 	Object.keys(handler()).forEach((elm, i) => {

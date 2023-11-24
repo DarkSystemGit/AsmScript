@@ -1,2 +1,2 @@
-import { compile } from "./antlr.js"
+import { compile } from "./src/antlr.js"
 compile(process.argv[2])

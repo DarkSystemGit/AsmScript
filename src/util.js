@@ -1,4 +1,5 @@
 //console.log(readFileSync(process.argv[2]))
+import {writeFileSync} from 'fs'
 export function hasKey(obj, key) {
 	if (obj === null || obj === undefined) {
 	  return false;
@@ -91,4 +92,11 @@ export function strIndexOf(str, substr) {
 		}
 	})
 	return pos
+}
+export function error(err,type,ctx){
+	console.error(`[Error] ${type}Error at line ${ctx.start.line}, column: ${ctx.start.column}:`,err)
+}
+export function log(msg){
+	var time = new Date();
+	writeFileSync('./log',`Log ${time.getFullYear()}:${time.getMonth()}.${time.getDay()}:${time.getHours()}: ${msg}`)
 }
