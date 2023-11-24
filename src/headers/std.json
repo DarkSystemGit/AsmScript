@@ -1,0 +1,37 @@
+{
+    "io.getKey": {
+        "type": "function",
+        "name": "io.getKey",
+        "params": [],
+        "retType": "int",
+        "children": []
+    },
+    "io.disp": {
+        "type": "function",
+        "name": "io.disp",
+        "params": [
+            {
+                "name": "text",
+                "type": "string"
+            }
+        ],
+        "retType": "void",
+        "children": []
+    },
+    "math.rand": {
+        "type": "function",
+        "name": "math.rand",
+        "params": [
+            {
+                "name": "min",
+                "type": "int"
+            },
+            {
+                "name": "max",
+                "type": "int"
+            }
+        ],
+        "retType": "int",
+        "children": []
+    }
+}

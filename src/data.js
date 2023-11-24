@@ -1,5 +1,6 @@
 import * as util from "./util.js"
-
+import { abort } from 'process'
+import { readFileSync } from 'fs'
 export function handler(token, ctx, context) {
     var handlers = {
         data: {},
@@ -15,7 +16,7 @@ export function handler(token, ctx, context) {
         "const": (ctx, children, context) => {
             context.data = context.data || {}
             context.data.var = context.data.var || []
-            context.data.functions = context.data.functions || { "io.getKey": { type: "function", name: "io.getKey", params: [], retType: "int", children: [] }, "io.disp": { type: "function", name: "io.disp", params: [{ name: "text", type: "string" }], retType: "void", children: [] } }
+            context.data.functions = context.data.functions || JSON.parse(readFileSync('./src/headers/std.json'))
             context.data.functionCall = context.data.functionCall || {}
             context.data.functionCall.tokens = context.data.functionCall.tokens || {
                 "menu": "Menu", "graph.graphStyle": "GraphStyle", "graph.graphColor": "GraphColor", "io.openLib": "OpenLib", "io.output": "Output", "io.getCalc": "GetCalc", "io.get": "Get", "io.send": "Send", "matrix.det": "det", "matrix.dim": "dim", "matrix.fill": "Fill",
@@ -31,16 +32,16 @@ export function handler(token, ctx, context) {
             context.data.currentScope = context.data.currentScope || "global"
         },
         "var": function (ctx, children, context, scope) {
-            //console.log(context)
+            //util.log(context)
             scope = scope || context.data.currentScope || "global"
             var children = []
             var val = ctx.expression()
             if ((val.getText()[0] == '"') || (
                 !isNaN(val.getText()))) {
                 //String or Number
-                var type = "int"; 
-                if (!(ctx.type==null)&&!(ctx.type()==null)&&(ctx.type().hasOwnProperty('getText'))) {
-                    //console.log(ctx.type())
+                var type = "int";
+                if (!(ctx.type == null) && !(ctx.type() == null) && (ctx.type().hasOwnProperty('getText'))) {
+                    //util.log(ctx.type())
                     type = ctx.type().getText()
                 }
                 //Object.values(context.data.var.num).forEach((elm, i) => { if (((elm == "") && (index == 0)) || (elm == ctx.identifier().getText())) { index = i } })
@@ -57,7 +58,7 @@ export function handler(token, ctx, context) {
                 var list = val.getText().replace('[', '').slice(list.length - 1, 1)
                 list = util.split(list, ',', util.genStrMap(list))
                 var type = "array"
-                if (!(ctx.type==null)&&!(ctx.type()==null)&&(ctx.type().hasOwnProperty('getText'))) {
+                if (!(ctx.type == null) && !(ctx.type() == null) && (ctx.type().hasOwnProperty('getText'))) {
                     type = ctx.type().getText()
                 }
                 children.push({ type, value: list })
@@ -66,7 +67,7 @@ export function handler(token, ctx, context) {
                 children.push(context.visit(val))
                 var type = children[0].retType
                 //antlr madness
-                if (!(ctx.type==null)&&!(ctx.type()==null)&&(ctx.type().hasOwnProperty('getText'))) {
+                if (!(ctx.type == null) && !(ctx.type() == null) && (ctx.type().hasOwnProperty('getText'))) {
                     type = ctx.type().getText()
                 }
             } else if (ctx.hasOwnProperty('boolexpr')) {
@@ -107,7 +108,7 @@ export function handler(token, ctx, context) {
         },
         "function": (ctx, children, context) => {
 
-            console.log('ctx:', ctx)
+            //util.log('ctx:', ctx)
 
             var paramsList = ctx.func_params().getText().split(')')[0].split(',')
             var params = []
@@ -115,12 +116,12 @@ export function handler(token, ctx, context) {
             context.data.functions[ctx.identifier().getText()] = { type: "function", name: ctx.identifier().getText(), params, retType: ctx.type().getText(), children: context.visit(ctx.statement()) }
             return context.data.functions[ctx.identifier().getText()]
 
-            //console.log(ctx.number())
+            //util.log(ctx.number())
             //return `:Label ${context.data.functions[name].label}:${context.visit(ctx.statement())}:______:`
         },
         "varAcess": (ctx, children, context) => {
-            if ((typeof ctx.number == "function")&&!(ctx.number()==null)) {
-                console.log("var:",ctx.getText())
+            if ((typeof ctx.number == "function") && !(ctx.number() == null)) {
+                util.log("var:", ctx.getText())
                 var type = "number"
                 if (ctx.getText().split('.').length > 1) {
                     type = "float"
@@ -128,30 +129,40 @@ export function handler(token, ctx, context) {
                 return { type, val: ctx.getText() }
             } else {
                 try {
-                    return { type: "var", children: [], name: ctx.identifier().getText(), type: context.data.var[ctx.identifier().getText()].type }    
+                    return { type: "var", children: [], name: ctx.identifier().getText(), type: context.data.var[ctx.identifier().getText()].type }
                 } catch {
-                    
-                    util.error(`${ctx.identifier().getText()} is undefined`,'Alloc',ctx)
+
+                    util.error(`${ctx.identifier().getText()} is undefined`, 'Alloc', ctx)
                 }
-                
+
             }
         },
         "funcCall": (ctx, children, context) => {
 
             var method = []
-            //console.log(ctx.identifier().getText())
+            //util.log(ctx.identifier().getText())
             ctx.identifier().getText().split('.').forEach((elm) => {
                 method.push(elm)
             })
             var baseClass = []
             if (method.length > 1) {
-                baseClass = method.slice(0, -2)
+                baseClass = method.slice(0, -1)
             }
-            util.log("method:",method)
-            return { type: "funcCall", children: [], class: baseClass, name: method[method.length - 1], params: context.visit(ctx.methodparams()), type: context.data.functions[method.join('.')].retType }
+            util.log("method:", ctx.identifier().getText())
+            try {
+                return { type: "funcCall", children: [], class: baseClass, name: method[method.length - 1], params: context.visit(ctx.methodparams()), type: context.data.functions[method.join('.')].retType }
+            } catch (err) {
+                util.log(`ERROR: ${err}`, ctx.identifier().getText(), JSON.stringify(method), JSON.stringify(context.visit(ctx.methodparams())))
+                abort()
+            }
+        },
+        'list':(ctx,children,context)=>{
+                var list = ctx.getText().replace('[', '')
+                list = util.split(list.slice(list.length - 1, 1), ',', util.genStrMap(list.slice(list.length - 1, 1)))
+                return { type:"array", value: list }
         }
     }
-    //console.log(context)
+    //util.log(context)
     if (!token) {
         return handlers
     }
@@ -161,9 +172,9 @@ export function handler(token, ctx, context) {
     if (handlers.hasOwnProperty(token)) {
 
         if (typeof handlers[token] == "function") {
-            //console.log(Object.keys(ctx),":ctx")
+            //util.log(Object.keys(ctx),":ctx")
             handlers.const(ctx, children, context)
-            console.log(token + ':', ctx.getText(), handlers[token](ctx, children, context, ...Array.from(arguments).slice(2)))
+            util.log(true, token + ':', ctx.getText(), handlers[token](ctx, children, context, ...Array.from(arguments).slice(2)))
             return handlers[token](ctx, children, context, ...Array.from(arguments).slice(2))
         } else {
             return handlers[token]

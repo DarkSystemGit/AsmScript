@@ -1,5 +1,8 @@
 //console.log(readFileSync(process.argv[2]))
-import {writeFileSync} from 'fs'
+import {writeFileSync,readFileSync} from 'fs'
+import {cwd} from 'process'
+writeFileSync('./log','{}')
+export var dirname = cwd
 export function hasKey(obj, key) {
 	if (obj === null || obj === undefined) {
 	  return false;
@@ -94,9 +97,25 @@ export function strIndexOf(str, substr) {
 	return pos
 }
 export function error(err,type,ctx){
-	console.error(`[Error] ${type}Error at line ${ctx.start.line}, column: ${ctx.start.column}:`,err)
+	var file = JSON.parse(readFileSync('./log'))
+	file.error=file.error||{}
+	file.error[type]=file.error[type]||[]
+	file.error[type].push({line:ctx.start.line,column:ctx.start.column,err})
+	writeFileSync('./log',JSON.stringify(file))
 }
-export function log(msg){
+export function log(token){
+	var file = JSON.parse(readFileSync('./log'))
+	file.log=file.log||{main:[],parsedTokens:[]}
 	var time = new Date();
-	writeFileSync('./log',`Log ${time.getFullYear()}:${time.getMonth()}.${time.getDay()}:${time.getHours()}: ${msg}`)
+	if(!!(token==true)){
+		if(file.log.main.includes({time:`${time.getFullYear()}:${time.getMonth()}.${time.getDay()}:${time.getHours()}`,log:Array.from(arguments)}))return;
+		file.log.main.push({time:`${time.getFullYear()}:${time.getMonth()}.${time.getDay()}:${time.getHours()}`,log:Array.from(arguments)})
+	}else{
+		if(file.log.parsedTokens.includes({time:`${time.getFullYear()}:${time.getMonth()}.${time.getDay()}:${time.getHours()}`,log:Array.from(arguments)}))return;
+		file.log.parsedTokens.push({time:`${time.getFullYear()}:${time.getMonth()}.${time.getDay()}:${time.getHours()}`,log:Array.from(arguments)})
+	}
+	writeFileSync('./log',JSON.stringify(file))
+}
+export function termLog(msg){
+	console.log(`[Log]:`,msg)
 }

@@ -163,11 +163,11 @@ class Visitor extends ICEScriptVisitor {
 	}
 
 	visitValue(ctx) {
-		//console.log(' \x1b[33m',ctx.getText(),' \x1b[0m')
+		//util.log(' \x1b[33m',ctx.getText(),' \x1b[0m')
 		return handler("varAcess", ctx, this);
 	}
 }
-//console.log(tree.toStringTree(parser.ruleNames))
+//util.log(tree.toStringTree(parser.ruleNames))
 export function compile(file) {
 	file = readFileSync(file).toString().split('\n')
 	//file.forEach((elm,i)=>{if(!(elm[elm.length-1]==';')){file[i]=file[i]}})
@@ -176,27 +176,28 @@ export function compile(file) {
 	const tokenstr = new antlr4.CommonTokenStream(lexer);
 	const parser = new ICEScriptParser(tokenstr);
 	const tree = parser.script();
-	console.log('Glacier Dev, v0.0.1:', /*'\n	Tree:\n		', tree.toStringTree(parser.ruleNames),*/)
+	util.log('Glacier Dev, v0.0.1:', /*'\n	Tree:\n		', tree.toStringTree(parser.ruleNames),*/)
 	var out = new Visitor().start(tree)
 	//Imagine using Antlr wheen you could roll your own
-	Object.keys(handler()).forEach((elm, i) => {
+	//Imagine using text, so October
+	/*Object.keys(handler()).forEach((elm, i) => {
 		var pos = util.strIndexOf(out, elm)
 
 		for (var c = 0; c < pos.length; c++) {
 			//pos.push(0)
 			var index = pos[c]
 			if (typeof handler()[Object.keys(handler())[i]] == "function") { return }
-			//console.log('Pos Length:', pos.length, '\nPos:', pos, '\nToken String: ' + elm, '\n	Beggining:', out.substring(0, index), '\n	Replacement:', handler()[Object.keys(handler())[i]], '\n	End:', out.substring(index + Object.keys(handler())[i].length), '\n	Src (Est):', out.substring(index - 3, index + 3), '\n	Length:', Object.keys(handler())[i].length, '\n	Index:', index, '\n	Index Char:', out[index])
+			//util.log('Pos Length:', pos.length, '\nPos:', pos, '\nToken String: ' + elm, '\n	Beggining:', out.substring(0, index), '\n	Replacement:', handler()[Object.keys(handler())[i]], '\n	End:', out.substring(index + Object.keys(handler())[i].length), '\n	Src (Est):', out.substring(index - 3, index + 3), '\n	Length:', Object.keys(handler())[i].length, '\n	Index:', index, '\n	Index Char:', out[index])
 			out = util.replaceAt(out, index, handler()[Object.keys(handler())[i]], Object.keys(handler())[i].length)
-			//console.log(out,index,elm,handler()[Object.keys(handler())[i]],Object.keys(handler())[i].length,index + Object.keys(handler())[i].length,out.substring(index + Object.keys(handler())[i].length))
+			//util.log(out,index,elm,handler()[Object.keys(handler())[i]],Object.keys(handler())[i].length,index + Object.keys(handler())[i].length,out.substring(index + Object.keys(handler())[i].length))
 
 			pos = util.strIndexOf(out, elm)
 		}
 		if (pos.length == 1) {
 			out = util.replaceAt(out, pos[0], handler()[Object.keys(handler())[i]], Object.keys(handler())[i].length)
 		}
-	})
-	console.log('\n	Results:', '\n		TI-Basic:\n		', out.replaceAll(':', '\n:'), '\n Data:	',/*handler()*/)
+	})*/
+	util.log('\n	Results:', '\n		TI-Basic:\n		', JSON.stringify(out), '\n Data:	',/*handler()*/)
 	return out
 
 }
