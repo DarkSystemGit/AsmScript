@@ -6,15 +6,15 @@
   "directories": {
     "test": "tests"
   },
-  "type":"module",
+  "type": "module",
   "scripts": {
-    "codespaces":"echo export DEVDIR=/workspaces",
-    "start":"node ./main.js",
+    "codespaces": "echo export DEVDIR=/workspaces",
+    "start": "node ./main.js",
     "build": "cd $DEVDIR/ICEScript&& npm run clean; npm run compileVisitor && npm test",
-    "test":"cd $DEVDIR/ICEScript&&npm start ./tests/fakeHome.gs",
+    "test": "cd $DEVDIR/ICEScript&&tsc ./src/llvm.ts&&npm start ./tests/fakeHome.gs",
     "compileVisitor": "antlr4 -visitor -o ./antlr/parsers -lib ./antlr/grammars -Dlanguage=JavaScript ./antlr/grammars/TiB && antlr4 -o ./antlr/parsers -lib ./antlr/grammars -visitor -Dlanguage=JavaScript  ./antlr/grammars/ICEScript",
-"clean":"rm ./antlr/* && rm -r ./antlr/parsers/antlr           ",
-"compile":"antlr4  -o ./antlr/parsers -lib ./antlr/grammars -Dlanguage=JavaScript ./antlr/grammars/TiB && antlr4 -o ./antlr/parsers -lib ./antlr/grammars  -Dlanguage=JavaScript  ./antlr/grammars/ICEScript"
+    "clean": "rm ./antlr/* && rm -r ./antlr/parsers/antlr           ",
+    "compile": "antlr4  -o ./antlr/parsers -lib ./antlr/grammars -Dlanguage=JavaScript ./antlr/grammars/TiB && antlr4 -o ./antlr/parsers -lib ./antlr/grammars  -Dlanguage=JavaScript  ./antlr/grammars/ICEScript"
   },
   "repository": {
     "type": "git",
@@ -27,7 +27,9 @@
   ],
   "author": "darksystem",
   "license": "MIT",
-  "dependencies": {
-    "antlr4": "^4.13.1"
+  "devDependencies": {
+    "antlr4": "^4.13.1",
+    "typescript": "^5.3.2",
+    "llvm-bindings":"github:darksystemgit/llvm-bindings"
   }
 }
