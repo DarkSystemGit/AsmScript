@@ -198,9 +198,12 @@ number
    | E
    | I
    ;
-
-
-
+list
+	:LIST
+	;
+string
+	:STRING
+	;
 
 
 //Mathematic constants
