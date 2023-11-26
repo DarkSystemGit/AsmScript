@@ -12,13 +12,13 @@ class Visitor extends ICEScriptVisitor {
 
 	visitChildren(ctx) {
 
-		let code = '';
+		let code = [];
 
 		for (let i = 0; i < ctx.getChildCount(); i++) {
-			code += this.visit(ctx.getChild(i));
+			code.push(this.visit(ctx.getChild(i)));
 		}
-
-		return code.trim();
+		code.forEach((elm,i)=>{if(elm==';')delete code[i]})
+		return code;
 	}
 	start(ctx) {
 		return this.visitScript(ctx);
@@ -74,7 +74,7 @@ class Visitor extends ICEScriptVisitor {
 
 	// Visit a parse tree produced by ICEScriptParser#ti_basic_stmt.
 	visitTi_basic_stmt(ctx) {
-		return handler("tib", ctx, this);
+		return handler("asm", ctx, this);
 	}
 
 	// Visit a parse tree produced by ICEScriptParser#add_assign_stmt.
@@ -166,6 +166,15 @@ class Visitor extends ICEScriptVisitor {
 		//util.log(' \x1b[33m',ctx.getText(),' \x1b[0m')
 		return handler("varAcess", ctx, this);
 	}
+	visitNumber(ctx){
+		return handler("number", ctx, this);
+	}
+	visitString(ctx){
+		return handler("string", ctx, this);
+	}
+	visitList(ctx){
+		return handler("list", ctx, this);
+	}
 }
 //util.log(tree.toStringTree(parser.ruleNames))
 export function compile(file) {
@@ -198,6 +207,8 @@ export function compile(file) {
 		}
 	})*/
 	util.log('\n	Results:', '\n		TI-Basic:\n		', JSON.stringify(out), '\n Data:	',/*handler()*/)
+	console.log(out)
+	console.log(JSON.stringify(out))
 	return out
 
 }

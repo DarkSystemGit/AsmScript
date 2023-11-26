@@ -1,6 +1,6 @@
 import * as util from "./util.js"
 import { abort } from 'process'
-import { readFileSync } from 'fs'
+import { readFileSync,readdirSync } from 'fs'
 export function handler(token, ctx, context) {
     var handlers = {
         data: {},
@@ -14,20 +14,17 @@ export function handler(token, ctx, context) {
         "false": "0",
         "::": ":",
         "const": (ctx, children, context) => {
-            context.data = context.data || {}
-            context.data.var = context.data.var || []
-            context.data.functions = context.data.functions || JSON.parse(readFileSync('./src/headers/std.json'))
-            context.data.functionCall = context.data.functionCall || {}
-            context.data.functionCall.tokens = context.data.functionCall.tokens || {
-                "menu": "Menu", "graph.graphStyle": "GraphStyle", "graph.graphColor": "GraphColor", "io.openLib": "OpenLib", "io.output": "Output", "io.getCalc": "GetCalc", "io.get": "Get", "io.send": "Send", "matrix.det": "det", "matrix.dim": "dim", "matrix.fill": "Fill",
-                "matrix.identity": "identity", "matrix.randM": "randM", "matrix.augment": "augment", "matrix.toList": "Matr>List", "matrix.fromList": "List>matr", "matrix.cumSum": "cumSum", "matrix.ref": "ref", "matrix.rref": "rref", "matrix.rowSwap": "rowSwap",
-                "matrix.rowAdd": "row+", "matrix.multiplyRow": "row*", "matrix.multipleRowAdd": "*row+", "gfx.line": "Line", "gfx.tangent": "Tangent", "gfx.shade": "Shade", "gfx.text": "Text", "gfx.circle": "Circle", "gfx.textColor": "TextColor",
-                "gfx.pointOn": "Pt-On", "gfx.pointOff": "Pt-Off", "gfx.pointChange": "Pt-Change", "gfx.pixelOn": "Pxl-On", "gfx.pixelOff": "Pxl-Off", "gfx.pixelChange": "Pxl-Change", "gfx.pixelIsOn": "pxl-Test", "string.length": "length", "string.subStr": "sub",
-                "string.toExpression": "expr", "string.indexOf": "inString", "string.fromEquVar": "String>Equ", "math.max": "max", "math.min": "min", "math.gcm": "gcm", "math.lcd": "lcd", "math.toInt": "int", "math.mod": "remainder",
-                "math.intPart": "iPart", "math.floatPart": "fPart", "math.abs": "abs", "math.round": "round", "math.solve": "solve", "math.log": "log", "math.sin": "sin", "math.cos": "cos", "math.rand.dec": "rand", "math.rand": "randInt", "math.rand.norm": "randNorm",
-                "math.rand.bin": "randBin", "list.sortUp": "SortA", "list.sortDown": "SortD", "list.diff": "DeltaList", "list.median": "median", "list.mean": "mean", "list.sum": "sum", "list.product": "prod",
-                "list.stdDev": "stdDev", "list.variance": "variance", "list.seq": "seq", "list.fromMatrix": "Matr>List", "list.toMatrix": "List>matr"
+            var headers=context.headers=context.headers||{}
+            if(headers=={}){
+            readdirSync('./src/headers/').forEach((file)=>{
+                headers=Object.assign(headers, JSON.parse(fs.readFileSync('./src/headers/'+file)));
+            })
             }
+            context.data = context.data || {}
+            context.data.var = context.data.var || {}
+            context.data.functions = context.data.functions || headers
+            context.data.functionCall = context.data.functionCall || {}
+            context.data.types=context.data.types||['number','string','list','boolexpr','methodCall','value']
             context.data.var.strLists = context.data.var.strLists || ["Str0", "Str1", "Str2", "Str3", "Str4", "Str5", "Str6", "Str7", "Str8", "Str9"]
             context.data.currentScope = context.data.currentScope || "global"
         },
@@ -36,7 +33,7 @@ export function handler(token, ctx, context) {
             scope = scope || context.data.currentScope || "global"
             var children = []
             var val = ctx.expression()
-            if ((val.getText()[0] == '"') || (
+            /*if ((val.getText()[0] == '"') || (
                 !isNaN(val.getText()))) {
                 //String or Number
                 var type = "int";
@@ -76,23 +73,45 @@ export function handler(token, ctx, context) {
 
                 var type = ctx.type().getText() || "unknown"
                 children.push({ type, value: context.visit(ctx.expression()) })
-            }
-            return { name: ctx.identifier().getText(), varType: type, children, type: "varDec" }
+            }*/
+            var varType ="undef"
+            context.data.types.forEach((type)=>{
+                if(ctx.hasOwnProperty(type)&&(typeof ctx[type]=="function")&&(!(ctx[type]()==null))){
+                    if(['value','boolexpr','methodCall'].includes(type)){
+                        if(type=='value'){
+                            varType=context.data.var[ctx.identifier()[1].getText()].varType
+                        }else if(type=='methodCall'){
+                            varType=context.visit(val).retType
+                        }else if(type=='boolexpr'){
+                            varType='bool'
+                        }
+
+                    }else{
+                        varType=type
+                    }
+                    return
+                }
+            })
+            if(ctx.hasOwnProperty('type')&&(typeof ctx.type=="function")&&(!(ctx.type()==null)))varType=ctx.type().getText()
+            context.data.var[ctx.identifier().getText()[1]]={varType}
+            return { name: ctx.identifier().getText(), varType, children:[context.visit(ctx.expression())], type: "varDec" }
         },
         "while": function (ctx, children, context) {
             var body = context.visit(ctx.statement())
-            return { type: "while", condition: context.visit(ctx.boolexpr()), children: [] }
+            return { type: "while", condition: context.visit(ctx.boolexpr()), children: body }
         },
         "if": (ctx, children, context) => {
             var body = context.visit(ctx.statement())
-            return `If ${ctx.boolexpr().getText()}:${body.substring(1, body.length - 1)}:End:`
+            return { type: "if", condition: context.visit(ctx.boolexpr()), children: body }
+            //return `If ${ctx.boolexpr().getText()}:${body.substring(1, body.length - 1)}:End:`
         },
         "ifElse": (ctx, children, context) => {
             var ifBody = context.visit(ctx.statement()[0])
             var elseBody = context.visit(ctx.statement()[1])
-            return `If ${ctx.boolexpr().getText()}:${ifBody.substring(1, ifBody.length - 1)}:Else:${elseBody.substring(1, elseBody.length - 1)}:End:`
+            return { type: "if", condition: context.visit(ctx.boolexpr()), children: [ifBody,elseBody] }
+            //return `If ${ctx.boolexpr().getText()}:${ifBody.substring(1, ifBody.length - 1)}:Else:${elseBody.substring(1, elseBody.length - 1)}:End:`
         },
-        "tib": (ctx, children, context) => {
+        "asm": (ctx, children, context) => {
             return {}
         },
         "funcParams": (ctx, children, context) => {
@@ -129,7 +148,7 @@ export function handler(token, ctx, context) {
                 return { type, val: ctx.getText() }
             } else {
                 try {
-                    return { type: "var", children: [], name: ctx.identifier().getText(), type: context.data.var[ctx.identifier().getText()].type }
+                    return { type: "var", children: [], name: ctx.identifier().getText(), type: context.data.var[ctx.identifier().getText()].varType }
                 } catch {
 
                     util.error(`${ctx.identifier().getText()} is undefined`, 'Alloc', ctx)
@@ -150,16 +169,22 @@ export function handler(token, ctx, context) {
             }
             util.log("method:", ctx.identifier().getText())
             try {
-                return { type: "funcCall", children: [], class: baseClass, name: method[method.length - 1], params: context.visit(ctx.methodparams()), type: context.data.functions[method.join('.')].retType }
+                return { type: "funcCall", children: [], class: baseClass, name: method[method.length - 1], params: context.visit(ctx.methodparams()), retType: context.data.functions[method.join('.')].retType }
             } catch (err) {
-                util.log(`ERROR: ${err}`, ctx.identifier().getText(), JSON.stringify(method), JSON.stringify(context.visit(ctx.methodparams())))
-                abort()
+                util.termLog(`ERROR: ${err}`, ctx.identifier().getText(), JSON.stringify(method), JSON.stringify(context.visit(ctx.methodparams())))
+                //abort()
             }
         },
         'list':(ctx,children,context)=>{
                 var list = ctx.getText().replace('[', '')
                 list = util.split(list.slice(list.length - 1, 1), ',', util.genStrMap(list.slice(list.length - 1, 1)))
-                return { type:"array", value: list }
+                return { type:"array", value: list, children:context.visitChildren()}
+        },
+        'string':(ctx)=>{
+            return {type:"string",value:ctx.getText(),children:[]}
+        },
+        'number':(ctx)=>{
+            return {type:"number",value:ctx.getText(),children:[]}
         }
     }
     //util.log(context)
@@ -180,5 +205,5 @@ export function handler(token, ctx, context) {
             return handlers[token]
         }
     }
-    return ""
+    return {}
 }
