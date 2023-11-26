@@ -1,2 +1,2 @@
-import { compile } from "./src/antlr.js"
-compile(process.argv[2])
+import { buildTree } from "./src/antlr.js"
+buildTree(process.argv[2])

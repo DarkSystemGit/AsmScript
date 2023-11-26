@@ -117,5 +117,5 @@ export function log(token){
 	writeFileSync('./log',JSON.stringify(file))
 }
 export function termLog(msg){
-	console.dir(`[Log]:`,msg,{depth:null})
+	//console.dir(`[Log]:`,msg,{depth:null})
 }

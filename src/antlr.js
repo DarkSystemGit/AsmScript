@@ -17,7 +17,13 @@ class Visitor extends ICEScriptVisitor {
 		for (let i = 0; i < ctx.getChildCount(); i++) {
 			code.push(this.visit(ctx.getChild(i)));
 		}
-		code.forEach((elm,i)=>{if(elm==';')delete code[i]})
+		code.forEach((elm,i)=>{
+			if(!(['(',')','{','}',';',[null],[undefined],undefined,[]].includes(elm)))console.log(elm)
+			if(['(',')','{','}',';',[null],[undefined],undefined,[]].includes(elm)){
+				//if(!(['(',')'].includes(elm))){console.log(elm)}
+				code.splice(i,1)
+			}
+		})
 		return code;
 	}
 	start(ctx) {
@@ -140,7 +146,9 @@ class Visitor extends ICEScriptVisitor {
 	visitReturn_stmt(ctx) {
 		return handler("return", ctx, this);
 	}
-
+	visitMath(ctx){
+		return handler("math", ctx, this);
+	}
 
 
 
@@ -177,7 +185,7 @@ class Visitor extends ICEScriptVisitor {
 	}
 }
 //util.log(tree.toStringTree(parser.ruleNames))
-export function compile(file) {
+export function buildTree(file) {
 	file = readFileSync(file).toString().split('\n')
 	//file.forEach((elm,i)=>{if(!(elm[elm.length-1]==';')){file[i]=file[i]}})
 	const chars = new antlr4.InputStream(file.join('\n'));
@@ -207,7 +215,7 @@ export function compile(file) {
 		}
 	})*/
 	util.log('\n	Results:', '\n		TI-Basic:\n		', JSON.stringify(out), '\n Data:	',/*handler()*/)
-	console.log(out)
+	//console.log(out)
 	console.log(JSON.stringify(out))
 	return out
 

@@ -56,7 +56,7 @@ assign_stmt
 	: identifier ASSIGN expression END_STMT
 	;
 ti_basic_stmt
-    : '__ICE' '{' any '}'
+    : '__ASM' '{' any '}'
     ;
 
 any : ( . )+?;
@@ -98,10 +98,6 @@ return_stmt
 //Expression
 expression
 	: OPEN_BRACKET expression CLOSE_BRACKET
-	| expression ADD expression
-	| expression SUB expression
-	| expression MUL expression
-	| expression DIV expression
 	| value
 	| identifier
 	| boolexpr
@@ -109,7 +105,12 @@ expression
 	| methodcall
 	| LIST
 	;
-
+math
+	: expression ADD expression
+	| expression SUB expression
+	| expression MUL expression
+	| expression DIV expression
+	;
 //Boolean expression
 boolexpr
 	: value

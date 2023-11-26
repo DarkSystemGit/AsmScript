@@ -221,6 +221,15 @@ export default class ICEScriptListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by ICEScriptParser#math.
+	enterMath(ctx) {
+	}
+
+	// Exit a parse tree produced by ICEScriptParser#math.
+	exitMath(ctx) {
+	}
+
+
 	// Enter a parse tree produced by ICEScriptParser#boolexpr.
 	enterBoolexpr(ctx) {
 	}

@@ -150,6 +150,12 @@ export default class ICEScriptVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
+	// Visit a parse tree produced by ICEScriptParser#math.
+	visitMath(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
 	// Visit a parse tree produced by ICEScriptParser#boolexpr.
 	visitBoolexpr(ctx) {
 	  return this.visitChildren(ctx);

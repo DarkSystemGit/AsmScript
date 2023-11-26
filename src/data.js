@@ -33,66 +33,20 @@ export function handler(token, ctx, context) {
             scope = scope || context.data.currentScope || "global"
             var children = []
             var val = ctx.expression()
-            /*if ((val.getText()[0] == '"') || (
-                !isNaN(val.getText()))) {
-                //String or Number
-                var type = "int";
-                if (!(ctx.type == null) && !(ctx.type() == null) && (ctx.type().hasOwnProperty('getText'))) {
-                    //util.log(ctx.type())
-                    type = ctx.type().getText()
-                }
-                //Object.values(context.data.var.num).forEach((elm, i) => { if (((elm == "") && (index == 0)) || (elm == ctx.identifier().getText())) { index = i } })
-                if (val.getText()[0] == '"') {
-                    type = "string"
-                }
-                if (val.getText().split('.').length > 1) {
-                    type = "float"
-                }
-                children.push({ type, value: val.getText() })
-            } else if ((val.getText()[0] == '[') && (!(val.getText()[1] == '['))) {
-                //Arrays
-                //context.data.var.list.forEach((elm, i) => { if (((elm == "") && (strIndex == 0) && (i > 26)) || (elm == ctx.identifier().getText())) { strIndex = i } })
-                var list = val.getText().replace('[', '').slice(list.length - 1, 1)
-                list = util.split(list, ',', util.genStrMap(list))
-                var type = "array"
-                if (!(ctx.type == null) && !(ctx.type() == null) && (ctx.type().hasOwnProperty('getText'))) {
-                    type = ctx.type().getText()
-                }
-                children.push({ type, value: list })
-            } else if (val.getText().includes('(') && val.getText().includes(')')) {
-                //assume function call
-                children.push(context.visit(val))
-                var type = children[0].retType
-                //antlr madness
-                if (!(ctx.type == null) && !(ctx.type() == null) && (ctx.type().hasOwnProperty('getText'))) {
-                    type = ctx.type().getText()
-                }
-            } else if (ctx.hasOwnProperty('boolexpr')) {
-                children.push({ type: "bool", value: context.visit(ctx.boolexpr()) })
-            } else {
-
-                var type = ctx.type().getText() || "unknown"
-                children.push({ type, value: context.visit(ctx.expression()) })
-            }*/
-            var varType ="undef"
-            context.data.types.forEach((type)=>{
-                if(ctx.hasOwnProperty(type)&&(typeof ctx[type]=="function")&&(!(ctx[type]()==null))){
-                    if(['value','boolexpr','methodCall'].includes(type)){
-                        if(type=='value'){
-                            varType=context.data.var[ctx.identifier()[1].getText()].varType
-                        }else if(type=='methodCall'){
-                            varType=context.visit(val).retType
-                        }else if(type=='boolexpr'){
-                            varType='bool'
-                        }
-
-                    }else{
-                        varType=type
-                    }
-                    return
-                }
-            })
+            var varType =context.visit(ctx.expression())
+            if(typeof varType=="Array"){
+                varType=varType[0].type
+            }else{
+                varType=varType.type
+            }
+            if(varType=="funcCall"){
+                var varType =context.visit(ctx.expression())[0].retType
+            }
+            if(varType=="array"){
+                var varType =context.visit(ctx.expression())[0].listType
+            }
             if(ctx.hasOwnProperty('type')&&(typeof ctx.type=="function")&&(!(ctx.type()==null)))varType=ctx.type().getText()
+            if(varType==undefined){varType="undef"}
             context.data.var[ctx.identifier().getText()[1]]={varType}
             return { name: ctx.identifier().getText(), varType, children:[context.visit(ctx.expression())], type: "varDec" }
         },
@@ -112,7 +66,7 @@ export function handler(token, ctx, context) {
             //return `If ${ctx.boolexpr().getText()}:${ifBody.substring(1, ifBody.length - 1)}:Else:${elseBody.substring(1, elseBody.length - 1)}:End:`
         },
         "asm": (ctx, children, context) => {
-            return {}
+            return {type:"asm",children:[],contents:ctx.any().getText()}
         },
         "funcParams": (ctx, children, context) => {
 
@@ -139,13 +93,8 @@ export function handler(token, ctx, context) {
             //return `:Label ${context.data.functions[name].label}:${context.visit(ctx.statement())}:______:`
         },
         "varAcess": (ctx, children, context) => {
-            if ((typeof ctx.number == "function") && !(ctx.number() == null)) {
-                util.log("var:", ctx.getText())
-                var type = "number"
-                if (ctx.getText().split('.').length > 1) {
-                    type = "float"
-                }
-                return { type, val: ctx.getText() }
+            if (context.visitChildren(ctx)[0].type=="number") {
+                return {type:"number",value:ctx.getText(),children:[]}
             } else {
                 try {
                     return { type: "var", children: [], name: ctx.identifier().getText(), type: context.data.var[ctx.identifier().getText()].varType }
@@ -178,13 +127,35 @@ export function handler(token, ctx, context) {
         'list':(ctx,children,context)=>{
                 var list = ctx.getText().replace('[', '')
                 list = util.split(list.slice(list.length - 1, 1), ',', util.genStrMap(list.slice(list.length - 1, 1)))
-                return { type:"array", value: list, children:context.visitChildren()}
+                return { type:"array", value: list, children:context.visitChildren(),listType:context.visitChildren()[0].type}
         },
         'string':(ctx)=>{
             return {type:"string",value:ctx.getText(),children:[]}
         },
         'number':(ctx)=>{
             return {type:"number",value:ctx.getText(),children:[]}
+        },
+        'bool':(ctx,children,context)=>{
+            var src=ctx.getText()
+            var comparisons=[]
+            var types=["||","<",">","==","!=","<=",">=","&&","!","true","false"]
+            types.forEach((elm)=>{
+                if(src.split(elm).length - 1>1){
+                    comparisons.push(elm)
+                }
+            })
+            return {type:"bool",condition:ctx.getText(),children:[],comparisons}
+        },
+        'math':(ctx,children,context)=>{
+            var ops=["+","/","-","*"]
+            var src=ctx.getText()
+            var operations=[]
+            ops.forEach((elm)=>{
+                if(src.split(elm).length - 1>1){
+                    operations.push(elm)
+                }
+            })
+            return {type:"math",children:context.visit(ctx),operations}
         }
     }
     //util.log(context)
