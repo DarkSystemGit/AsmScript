@@ -1,0 +1,3 @@
+libzstd
+libcurl
+llvm (jacobly0's fork)
