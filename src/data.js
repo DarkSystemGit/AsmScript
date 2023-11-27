@@ -34,6 +34,7 @@ export function handler(token, ctx, context) {
             var children = []
             var val = ctx.expression()
             var varType =context.visit(ctx.expression())
+            console.log(varType)
             if(typeof varType=="Array"){
                 varType=varType[0].type
             }else{
@@ -176,5 +177,5 @@ export function handler(token, ctx, context) {
             return handlers[token]
         }
     }
-    return {}
+    return {children}
 }

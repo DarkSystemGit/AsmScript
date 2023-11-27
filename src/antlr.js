@@ -11,7 +11,6 @@ import { readFileSync, writeFileSync } from 'fs'
 class Visitor extends ICEScriptVisitor {
 
 	visitChildren(ctx) {
-
 		let code = [];
 
 		for (let i = 0; i < ctx.getChildCount(); i++) {
