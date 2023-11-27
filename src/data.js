@@ -140,7 +140,7 @@ export function handler(token, ctx, context) {
             var comparisons=[]
             var types=["||","<",">","==","!=","<=",">=","&&","!","true","false"]
             types.forEach((elm)=>{
-                if(src.split(elm).length - 1>1){
+                if((src.split(elm).length - 1)>1){
                     comparisons.push(elm)
                 }
             })
