@@ -17,7 +17,7 @@ class Visitor extends ICEScriptVisitor {
 			code.push(this.visit(ctx.getChild(i)));
 		}
 		code.forEach((elm,i)=>{
-			if(!(['(',')','{','}',';',[null],[undefined],undefined,[]].includes(elm)))console.log(elm)
+			//if(!(['(',')','{','}',';',[null],[undefined],undefined,[]].includes(elm)))console.log(elm)
 			if(['(',')','{','}',';',[null],[undefined],undefined,[]].includes(elm)){
 				//if(!(['(',')'].includes(elm))){console.log(elm)}
 				code.splice(i,1)

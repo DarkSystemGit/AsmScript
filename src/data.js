@@ -35,7 +35,7 @@ export function handler(token, ctx, context) {
             var val = ctx.expression()
             var varType =context.visit(ctx.expression())
             console.log(varType)
-            if(typeof varType=="Array"){
+            if(typeof varType=="array"){
                 varType=varType[0].type
             }else{
                 varType=varType.type
