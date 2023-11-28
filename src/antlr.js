@@ -39,6 +39,10 @@ class Visitor extends ICEScriptVisitor {
 
 		return handler("head", ctx, this);
 	}
+	visitExpression(ctx){
+		
+		return handler("expr",ctx,this)
+	}
 
 
 	// Visit a parse tree produced by ICEScriptParser#meta.
@@ -214,8 +218,8 @@ export function buildTree(file) {
 		}
 	})*/
 	util.log('\n	Results:', '\n		TI-Basic:\n		', JSON.stringify(out), '\n Data:	',/*handler()*/)
-	//console.log(out)
-	console.log(JSON.stringify(out))
+	console.log(tree.toStringTree(parser.ruleNames))
+	//console.log(JSON.stringify(out))
 	return out
 
 }

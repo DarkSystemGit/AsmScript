@@ -1,0 +1,148 @@
+[
+  {
+    "children": [
+      {
+        "children": [
+          "import",
+          [
+            "io"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "type": "function",
+    "name": "input",
+    "params": [
+      {
+        "name": "str",
+        "type": "str"
+      }
+    ],
+    "retType": "str",
+    "children": [
+      [
+        []
+      ],
+      [
+        [
+          []
+        ]
+      ],
+      [
+        {
+          "name": "key",
+          "varType": "number",
+          "children": [
+            [
+              {
+                "type": "number",
+                "value": "0",
+                "children": []
+              }
+            ]
+          ],
+          "type": "varDec"
+        }
+      ],
+      [
+        {
+          "name": "res",
+          "varType": "undef",
+          "children": [
+            [
+              "\"\""
+            ]
+          ],
+          "type": "varDec"
+        }
+      ],
+      [
+        {
+          "type": "while",
+          "condition": {
+            "type": "bool",
+            "condition": "!key==9",
+            "children": [],
+            "comparisons": []
+          },
+          "children": [
+            [
+              {
+                "name": "res",
+                "varType": "undef",
+                "children": [
+                  []
+                ],
+                "type": "varDec"
+              }
+            ],
+            [],
+            [
+              null
+            ],
+            [
+              []
+            ]
+          ]
+        }
+      ],
+      [],
+      [
+        {
+          "children": [
+            "return",
+            []
+          ]
+        }
+      ]
+    ]
+  },
+  [],
+  [
+    {
+      "type": "while",
+      "condition": {
+        "type": "bool",
+        "condition": "true",
+        "children": [],
+        "comparisons": []
+      },
+      "children": [
+        [
+          {
+            "name": "input",
+            "varType": "str",
+            "children": [
+              [
+                {
+                  "type": "funcCall",
+                  "children": [],
+                  "class": [],
+                  "name": "input",
+                  "params": [
+                    [
+                      "\"\""
+                    ]
+                  ],
+                  "retType": "str"
+                }
+              ]
+            ],
+            "type": "varDec"
+          }
+        ],
+        [
+          []
+        ],
+        [],
+        [
+          null
+        ],
+        []
+      ]
+    }
+  ],
+  []
+]

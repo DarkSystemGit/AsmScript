@@ -32,14 +32,19 @@ export function handler(token, ctx, context) {
             //util.log(context)
             scope = scope || context.data.currentScope || "global"
             var children = []
-            var val = ctx.expression()
+            
             var varType =context.visit(ctx.expression())
-            console.log(varType)
-            if(typeof varType=="array"){
-                varType=varType[0].type
-            }else{
+            //console.log(varType)
+            
+            if(!varType.type){
+                varType=varType[0]
+                if(!(varType==undefined)){
+                    varType = varType.type
+                }
+            }else if(typeof varType.type=="string"){
                 varType=varType.type
             }
+            //console.log(varType)
             if(varType=="funcCall"){
                 var varType =context.visit(ctx.expression())[0].retType
             }
@@ -157,6 +162,21 @@ export function handler(token, ctx, context) {
                 }
             })
             return {type:"math",children:context.visit(ctx),operations}
+        },
+        "expr":(ctx,children,context)=>{
+            var res= context.visitChildren(ctx)
+            if((res==[undefined])||(res==[])||(res==[[]])){
+                res=[{children:[]}]
+            }
+            //antlr hacks
+            res.forEach((elm,i)=>{
+                if(typeof elm=="string"){
+                if(elm.startsWith('"')){
+                    res[i]=handler('string',ctx,context)
+                }}
+            })
+            
+            return res
         }
     }
     //util.log(context)
