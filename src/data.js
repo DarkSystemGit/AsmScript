@@ -13,7 +13,7 @@ export function handler(token, ctx, context) {
         "true": "1",
         "false": "0",
         "::": ":",
-        "const": (ctx, children, context) => {
+        "const": (ctx,  context) => {
             var headers=context.headers=context.headers||{}
             if(headers=={}){
             readdirSync('./src/headers/').forEach((file)=>{
@@ -28,7 +28,7 @@ export function handler(token, ctx, context) {
             context.data.var.strLists = context.data.var.strLists || ["Str0", "Str1", "Str2", "Str3", "Str4", "Str5", "Str6", "Str7", "Str8", "Str9"]
             context.data.currentScope = context.data.currentScope || "global"
         },
-        "var": function (ctx, children, context, scope) {
+        "var": function (ctx,  context, scope) {
             //util.log(context)
             scope = scope || context.data.currentScope || "global"
             var children = []
@@ -56,25 +56,25 @@ export function handler(token, ctx, context) {
             context.data.var[ctx.identifier().getText()[1]]={varType}
             return { name: ctx.identifier().getText(), varType, children:[context.visit(ctx.expression())], type: "varDec" }
         },
-        "while": function (ctx, children, context) {
+        "while": function (ctx,  context) {
             var body = context.visit(ctx.statement())
             return { type: "while", condition: context.visit(ctx.boolexpr()), children: body }
         },
-        "if": (ctx, children, context) => {
+        "if": (ctx,  context) => {
             var body = context.visit(ctx.statement())
             return { type: "if", condition: context.visit(ctx.boolexpr()), children: body }
             //return `If ${ctx.boolexpr().getText()}:${body.substring(1, body.length - 1)}:End:`
         },
-        "ifElse": (ctx, children, context) => {
+        "ifElse": (ctx,  context) => {
             var ifBody = context.visit(ctx.statement()[0])
             var elseBody = context.visit(ctx.statement()[1])
             return { type: "if", condition: context.visit(ctx.boolexpr()), children: [ifBody,elseBody] }
             //return `If ${ctx.boolexpr().getText()}:${ifBody.substring(1, ifBody.length - 1)}:Else:${elseBody.substring(1, elseBody.length - 1)}:End:`
         },
-        "asm": (ctx, children, context) => {
+        "asm": (ctx,  context) => {
             return {type:"asm",children:[],contents:ctx.any().getText()}
         },
-        "funcParams": (ctx, children, context) => {
+        "funcParams": (ctx,  context) => {
 
             let code = [];
 
@@ -85,7 +85,7 @@ export function handler(token, ctx, context) {
 
             return code;
         },
-        "function": (ctx, children, context) => {
+        "function": (ctx,  context) => {
 
             //util.log('ctx:', ctx)
 
@@ -98,7 +98,7 @@ export function handler(token, ctx, context) {
             //util.log(ctx.number())
             //return `:Label ${context.data.functions[name].label}:${context.visit(ctx.statement())}:______:`
         },
-        "varAcess": (ctx, children, context) => {
+        "varAcess": (ctx,  context) => {
             if (context.visitChildren(ctx)[0].type=="number") {
                 return {type:"number",value:ctx.getText(),children:[]}
             } else {
@@ -111,7 +111,7 @@ export function handler(token, ctx, context) {
 
             }
         },
-        "funcCall": (ctx, children, context) => {
+        "funcCall": (ctx,  context) => {
 
             var method = []
             //util.log(ctx.identifier().getText())
@@ -130,7 +130,7 @@ export function handler(token, ctx, context) {
                 //abort()
             }
         },
-        'list':(ctx,children,context)=>{
+        'list':(ctx,context)=>{
                 var list = ctx.getText().replace('[', '')
                 list = util.split(list.slice(list.length - 1, 1), ',', util.genStrMap(list.slice(list.length - 1, 1)))
                 return { type:"array", value: list, children:context.visitChildren(),listType:context.visitChildren()[0].type}
@@ -141,29 +141,30 @@ export function handler(token, ctx, context) {
         'number':(ctx)=>{
             return {type:"number",value:ctx.getText(),children:[]}
         },
-        'bool':(ctx,children,context)=>{
+        'bool':(ctx,context)=>{
             var src=ctx.getText()
             var comparisons=[]
             var types=["||","<",">","==","!=","<=",">=","&&","!","true","false"]
             types.forEach((elm)=>{
-                if((src.split(elm).length - 1)>1){
+                if((src.split(elm).length)>1){
                     comparisons.push(elm)
                 }
             })
+            console.log({type:"bool",condition:ctx.getText(),children:[],comparisons})
             return {type:"bool",condition:ctx.getText(),children:[],comparisons}
         },
-        'math':(ctx,children,context)=>{
+        'math':(ctx,context)=>{
             var ops=["+","/","-","*"]
             var src=ctx.getText()
             var operations=[]
             ops.forEach((elm)=>{
-                if(src.split(elm).length - 1>1){
+                if(src.split(elm).length>1){
                     operations.push(elm)
                 }
             })
             return {type:"math",children:context.visit(ctx),operations}
         },
-        "expr":(ctx,children,context)=>{
+        "expr":(ctx,context)=>{
             var res= context.visitChildren(ctx)
             if((res==[undefined])||(res==[])||(res==[[]])){
                 res=[{children:[]}]
@@ -177,25 +178,29 @@ export function handler(token, ctx, context) {
             })
             
             return res
+        },
+        return:(ctx,context)=>{
+            return {type:'return',value:context.visit(ctx.expression)}
         }
     }
+    
     //util.log(context)
     if (!token) {
         return handlers
     }
-    var children = context.visitChildren(ctx)
+    //var children = context.visitChildren(ctx)
 
 
     if (handlers.hasOwnProperty(token)) {
 
         if (typeof handlers[token] == "function") {
             //util.log(Object.keys(ctx),":ctx")
-            handlers.const(ctx, children, context)
-            util.log(true, token + ':', ctx.getText(), handlers[token](ctx, children, context, ...Array.from(arguments).slice(2)))
-            return handlers[token](ctx, children, context, ...Array.from(arguments).slice(2))
+            handlers.const(ctx,  context)
+            util.log(true, token + ':', ctx.getText(), handlers[token](ctx, context, ...Array.from(arguments).slice(2)))
+            return handlers[token](ctx, context, ...Array.from(arguments).slice(2))
         } else {
             return handlers[token]
         }
     }
-    return {children}
+    return {children:context.visitChildren(ctx)}
 }

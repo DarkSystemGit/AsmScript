@@ -49,10 +49,14 @@
       [
         {
           "name": "res",
-          "varType": "undef",
+          "varType": "string",
           "children": [
             [
-              "\"\""
+              {
+                "type": "string",
+                "value": "\"\"",
+                "children": []
+              }
             ]
           ],
           "type": "varDec"
@@ -65,7 +69,10 @@
             "type": "bool",
             "condition": "!key==9",
             "children": [],
-            "comparisons": []
+            "comparisons": [
+              "==",
+              "!"
+            ]
           },
           "children": [
             [
@@ -107,7 +114,9 @@
         "type": "bool",
         "condition": "true",
         "children": [],
-        "comparisons": []
+        "comparisons": [
+          "true"
+        ]
       },
       "children": [
         [
@@ -123,7 +132,11 @@
                   "name": "input",
                   "params": [
                     [
-                      "\"\""
+                      {
+                        "type": "string",
+                        "value": "\"\"",
+                        "children": []
+                      }
                     ]
                   ],
                   "retType": "str"
