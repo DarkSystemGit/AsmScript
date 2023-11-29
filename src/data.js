@@ -52,8 +52,8 @@ export function handler(token, ctx, context) {
                 var varType =context.visit(ctx.expression())[0].listType
             }
             if(ctx.hasOwnProperty('type')&&(typeof ctx.type=="function")&&(!(ctx.type()==null)))varType=ctx.type().getText()
-            if(varType==undefined){varType="undef"}
-            context.data.var[ctx.identifier().getText()[1]]={varType}
+            if(varType==undefined){varType="undef";util.warn(`${ctx.identifier().getText()} is undefined! A type could not be infered! This may be bad!`,ctx)}
+            context.data.var[ctx.identifier().getText()]={varType}
             return { name: ctx.identifier().getText(), varType, children:[context.visit(ctx.expression())], type: "varDec" }
         },
         "while": function (ctx,  context) {
@@ -150,7 +150,7 @@ export function handler(token, ctx, context) {
                     comparisons.push(elm)
                 }
             })
-            console.log({type:"bool",condition:ctx.getText(),children:[],comparisons})
+            //console.log({type:"bool",condition:ctx.getText(),children:[],comparisons})
             return {type:"bool",condition:ctx.getText(),children:[],comparisons}
         },
         'math':(ctx,context)=>{
@@ -179,8 +179,11 @@ export function handler(token, ctx, context) {
             
             return res
         },
-        return:(ctx,context)=>{
-            return {type:'return',value:context.visit(ctx.expression)}
+        "return":(ctx,context)=>{
+            return {type:"return",value:context.visit(ctx.expression())}
+        },
+        "import":(ctx,context)=>{
+            return {type:"import",name:ctx.identifier().getText()}
         }
     }
     

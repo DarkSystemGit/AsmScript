@@ -130,7 +130,7 @@ boolexpr
 
 
 methodcall
-	: identifier OPEN_BRACKET methodparams CLOSE_BRACKET
+	: identifier '(' methodparams ')'
 	;
 
 methodparams

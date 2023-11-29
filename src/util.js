@@ -2,6 +2,7 @@
 import {writeFileSync,readFileSync} from 'fs'
 import {cwd} from 'process'
 writeFileSync('./log','{}')
+var data={}
 export var dirname = cwd
 export function hasKey(obj, key) {
 	if (obj === null || obj === undefined) {
@@ -98,10 +99,23 @@ export function strIndexOf(str, substr) {
 }
 export function error(err,type,ctx){
 	var file = JSON.parse(readFileSync('./log'))
+	data.errs=data.errs||[]
 	file.error=file.error||{}
 	file.error[type]=file.error[type]||[]
 	file.error[type].push({line:ctx.start.line,column:ctx.start.column,err})
 	writeFileSync('./log',JSON.stringify(file))
+	if(!data.errs.includes(`[Error]: ${type} at line:${ctx.start.line}, column:${ctx.start.column};\n${err} `)){
+	console.log('\x1b[31m%s\x1b[0m',`[Error]: ${type} at line:${ctx.start.line}, column:${ctx.start.column};\n${err} `)
+	data.errs.push(`[Error]: ${type} at line:${ctx.start.line}, column:${ctx.start.column};\n${err} `)
+	}
+}
+export function warn(warn,ctx){
+	data.warns=data.warns||[]
+	if(!data.warns.includes(`[Warning]: Warning at line:${ctx.start.line}, column:${ctx.start.column};\n${warn}`)){
+	console.log('\x1b[33m%s\x1b[0m',`[Warning]: Warning at line:${ctx.start.line}, column:${ctx.start.column};\n${warn}`)
+	data.warns.push(`[Warning]: Warning at line:${ctx.start.line}, column:${ctx.start.column};\n${warn}`)	
+}
+	
 }
 export function log(token){
 	var file = JSON.parse(readFileSync('./log'))

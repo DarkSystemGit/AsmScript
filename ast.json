@@ -2,12 +2,8 @@
   {
     "children": [
       {
-        "children": [
-          "import",
-          [
-            "io"
-          ]
-        ]
+        "type": "import",
+        "name": "io"
       }
     ]
   },
@@ -98,9 +94,13 @@
       [],
       [
         {
-          "children": [
-            "return",
-            []
+          "type": "return",
+          "value": [
+            {
+              "type": "undef",
+              "children": [],
+              "name": "res"
+            }
           ]
         }
       ]

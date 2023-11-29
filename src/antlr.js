@@ -218,7 +218,7 @@ export function buildTree(file) {
 		}
 	})*/
 	util.log('\n	Results:', '\n		TI-Basic:\n		', JSON.stringify(out), '\n Data:	',/*handler()*/)
-	console.log(tree.toStringTree(parser.ruleNames))
+	//console.log(tree.toStringTree(parser.ruleNames))
 	//console.log(JSON.stringify(out))
 	return out
 
