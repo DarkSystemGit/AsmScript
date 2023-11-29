@@ -105,7 +105,7 @@ export function handler(token, ctx, context) {
                 try {
                     return { type: "var", children: [], name: ctx.identifier().getText(), type: context.data.var[ctx.identifier().getText()].varType }
                 } catch {
-
+                    if(Object.keys(context.data.functions).includes(ctx.identifier().getText()))return handler("function",ctx,context)
                     util.error(`${ctx.identifier().getText()} is undefined`, 'Alloc', ctx)
                 }
 
