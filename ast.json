@@ -86,7 +86,18 @@
               null
             ],
             [
-              []
+              [
+                {
+                  "type": "funcCall",
+                  "children": [],
+                  "class": [
+                    "io"
+                  ],
+                  "name": "getKey",
+                  "params": [],
+                  "retType": "int"
+                }
+              ]
             ]
           ]
         }
@@ -147,7 +158,34 @@
           }
         ],
         [
-          []
+          [
+            {
+              "type": "funcCall",
+              "children": [],
+              "class": [
+                "io"
+              ],
+              "name": "disp",
+              "params": [
+                [
+                  {
+                    "type": "str",
+                    "children": [],
+                    "name": "input"
+                  }
+                ],
+                ",",
+                [
+                  {
+                    "type": "str",
+                    "children": [],
+                    "name": "input"
+                  }
+                ]
+              ],
+              "retType": "void"
+            }
+          ]
         ],
         [],
         [

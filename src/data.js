@@ -15,11 +15,14 @@ export function handler(token, ctx, context) {
         "::": ":",
         "const": (ctx,  context) => {
             var headers=context.headers=context.headers||{}
-            if(headers=={}){
+            
+            
+                
             readdirSync('./src/headers/').forEach((file)=>{
-                headers=Object.assign(headers, JSON.parse(fs.readFileSync('./src/headers/'+file)));
+                //console.log(headers,JSON.parse(readFileSync('./src/headers/'+file),readdirSync('./src/headers/')))
+                headers=Object.assign(headers, JSON.parse(readFileSync('./src/headers/'+file)));
             })
-            }
+            
             context.data = context.data || {}
             context.data.var = context.data.var || {}
             context.data.functions = context.data.functions || headers
@@ -88,7 +91,6 @@ export function handler(token, ctx, context) {
         "function": (ctx,  context) => {
 
             //util.log('ctx:', ctx)
-
             var paramsList = ctx.func_params().getText().split(')')[0].split(',')
             var params = []
             paramsList.forEach((elm) => { params.push({ name: elm.split(':')[0], type: elm.split(':')[1] }) })
@@ -105,7 +107,8 @@ export function handler(token, ctx, context) {
                 try {
                     return { type: "var", children: [], name: ctx.identifier().getText(), type: context.data.var[ctx.identifier().getText()].varType }
                 } catch {
-                    if(Object.keys(context.data.functions).includes(ctx.identifier().getText()))return handler("function",ctx,context)
+                    //if(Object.keys(context.data.functions).includes(ctx.identifier().getText()))return handler("funcCall",ctx,context)
+                    //console.log(context)
                     util.error(`${ctx.identifier().getText()} is undefined`, 'Alloc', ctx)
                 }
 
@@ -126,6 +129,7 @@ export function handler(token, ctx, context) {
             try {
                 return { type: "funcCall", children: [], class: baseClass, name: method[method.length - 1], params: context.visit(ctx.methodparams()), retType: context.data.functions[method.join('.')].retType }
             } catch (err) {
+                //console.log(ctx.getText())
                 util.termLog(`ERROR: ${err}`, ctx.identifier().getText(), JSON.stringify(method), JSON.stringify(context.visit(ctx.methodparams())))
                 //abort()
             }
