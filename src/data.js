@@ -4,15 +4,6 @@ import { readFileSync,readdirSync } from 'fs'
 export function handler(token, ctx, context) {
     var handlers = {
         data: {},
-        "&&": "and",
-        "||": "or",
-        "!!": "not(",
-        ";": ":",
-        "===": "=",
-        "==": "=",
-        "true": "1",
-        "false": "0",
-        "::": ":",
         "const": (ctx,  context) => {
             var headers=context.headers=context.headers||{}
             

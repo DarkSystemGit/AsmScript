@@ -1,6 +1,5 @@
 # Glacier
 A JavaScript-like language for TI-83/84 Calculators.
-Glacier is a transpiler, to convert a JavaScript-like language to Hybrid Basic (or maybe ICE). 
 # Features
 - Full on Arrays (that support strings),
 - Functions,
@@ -13,8 +12,8 @@ Glacier is a transpiler, to convert a JavaScript-like language to Hybrid Basic (
 # Build
 Clone the repo and enter it,
 ```
-git clone https://www.github.com/DarkSystemGit/ICEScript.git
-cd ./ICEScript
+git clone https://www.github.com/DarkSystemGit/Glacier.git
+cd ./Glacier
 ```
 Install dependcies and build.
 ```
