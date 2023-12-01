@@ -1,7 +1,7 @@
 # Glacier
 A JavaScript-like language for TI-83/84 Calculators.
 # Features
-- Full on Arrays (that support strings),
+- Full on Arrays,
 - Functions,
 - Multipurpose variables,
 - Packages,
