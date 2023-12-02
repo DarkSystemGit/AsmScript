@@ -186,6 +186,9 @@ class Visitor extends ICEScriptVisitor {
 	visitList(ctx){
 		return handler("list", ctx, this);
 	}
+	visitFor(ctx){
+		return handler("for",ctx,this)
+	}
 }
 //util.log(tree.toStringTree(parser.ruleNames))
 export function buildTree(file) {

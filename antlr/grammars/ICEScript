@@ -89,7 +89,7 @@ while_stmt
 	: WHILE OPEN_BRACKET boolexpr CLOSE_BRACKET statement
 	;
 for_stmt
-	:FOR OPEN_BRACKET var_stmt boolexpr END_STMT inc_stmt CLOSE_BRACKET statement
+	:FOR OPEN_BRACKET var_stmt boolexpr END_STMT (inc_stmt||dec_stmt) CLOSE_BRACKET statement
 	|FOR OPEN_BRACKET var_stmt 'in' value CLOSE_BRACKET statement
 	;
 var_stmt
@@ -106,9 +106,10 @@ expression
 	| value
 	| identifier
 	| boolexpr
-	| STRING
+	| string
+	| object
 	| methodcall
-	| LIST
+	| list
 	| expression ADD expression
 	| expression SUB expression
 	| expression MUL expression
@@ -210,10 +211,20 @@ number
 list
 	:'['expression* (',' expression)*']'
 	;
+object
+	:'{' (string ':' data)* (',' (string ':' data)*) '}'
+	;
 string
 	:STRING
 	;
-
+data
+	:string
+	|list
+	|number
+	|boolexpr
+	|object
+	|value
+	;
 
 //Mathematic constants
 PI : '$pi';
@@ -225,10 +236,11 @@ fragment INT
 
 //Data types
 STRING : '"' ~ ["\r\n]* '"';
-LIST :'[' ( . )+? ']';
+LIST : '[' ( . )+? ']';
 NUMBER: '-'? INT ('.' [0-9] +)?;
 type
 	:
+	|'object'
 	|'void'
 	|'list'
 	|'str'

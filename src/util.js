@@ -133,3 +133,11 @@ export function log(token){
 export function termLog(msg){
 	//console.dir(`[Log]:`,msg,{depth:null})
 }
+export function childExists(ctx,child){
+	try{
+		ctx[child]().getText()
+		return true
+	}catch{
+		return false
+	}
+}

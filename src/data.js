@@ -118,7 +118,7 @@ export function handler(token, ctx, context) {
             }
             util.log("method:", ctx.identifier().getText())
             try {
-                return { type: "funcCall", children: [], class: baseClass, name: method[method.length - 1], params: context.visit(ctx.methodparams()), retType: context.data.functions[method.join('.')].retType }
+                return { type: "funcCall", children: [], class: baseClass, name: method[method.length - 1], params: context.visit(ctx.methodparams()).filter(i => i !== ","), retType: context.data.functions[method.join('.')].retType }
             } catch (err) {
                 //console.log(ctx.getText())
                 util.termLog(`ERROR: ${err}`, ctx.identifier().getText(), JSON.stringify(method), JSON.stringify(context.visit(ctx.methodparams())))
@@ -152,12 +152,14 @@ export function handler(token, ctx, context) {
             var ops=["+","/","-","*"]
             var src=ctx.getText()
             var operations=[]
+            var children=context.visitChildren()
             ops.forEach((elm)=>{
                 if(src.split(elm).length>1){
                     operations.push(elm)
                 }
+                children.filter(i=>i!==elm)
             })
-            return {type:"math",children:context.visit(ctx),operations}
+            return {type:"math",children,operations}
         },
         "expr":(ctx,context)=>{
             var res= context.visitChildren(ctx)
@@ -181,7 +183,25 @@ export function handler(token, ctx, context) {
             return {type:"import",name:ctx.identifier().getText()}
         },
         "for":(ctx,context)=>{
+            if(util.childExists(ctx,'boolexpr')){
+                var condition = context.visit(ctx.boolexpr())
+                if(util.childExists(ctx,'inc_stmt')){
+                    var afterCond=context.visit(ctx.inc_stmt())
+                }else{
+                    var afterCond=context.visit(ctx.dec_stmt())
+                }
+                return {type:"for",condition,counter:context.visit(ctx.var_stmt()),afterCond,children:[context.visit(ctx.statement())]}
+            }else{
+                return {type:"foreach",iterator:context.visit(ctx.var_stmt()),iterated:context.visit(ctx.value()),children:[context.visit(ctx.statement())]}
+            }
             
+            
+        },
+        "object":(ctx,context)=>{
+            var children=[]
+            var obj =context.visitChildren()
+            obj.forEach((elm,i)=>{if(elm==":"){children.push({type:"prop",key:obj[i-1],value:obj[i+1]})}})
+            return {type:"object",children}
         }
     }
     
