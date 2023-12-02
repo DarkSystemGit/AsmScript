@@ -17,7 +17,7 @@ function parseArgs(keys) {
     //console.dir(res)
     return res
 }
-var params = { flags: ['tokens','error', 'listKeys', 'logs', 'list'], options: [] }
+var params = { flags: ['tokens','error', 'listKeys', 'logs', 'list','parsedTokens'], options: [] }
 var errorTypes = []
 Object.keys(log.error).forEach((elm) => {
     params.flags.push(elm)

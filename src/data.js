@@ -96,7 +96,7 @@ export function handler(token, ctx, context) {
                 return {type:"number",value:ctx.getText(),children:[]}
             } else {
                 try {
-                    return { type: "var", children: [], name: ctx.identifier().getText(), type: context.data.var[ctx.identifier().getText()].varType }
+                    return { type: "var", children: [], name: ctx.identifier().getText(), varType: context.data.var[ctx.identifier().getText()].varType }
                 } catch {
                     //if(Object.keys(context.data.functions).includes(ctx.identifier().getText()))return handler("funcCall",ctx,context)
                     //console.log(context)

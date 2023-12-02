@@ -121,7 +121,7 @@ export function log(token){
 	var file = JSON.parse(readFileSync('./log'))
 	file.log=file.log||{main:[],parsedTokens:[]}
 	var time = new Date();
-	if(!!(token==true)){
+	if(token!==true){
 		if(file.log.main.includes({time:`${time.getFullYear()}:${time.getMonth()}.${time.getDay()}:${time.getHours()}`,log:Array.from(arguments)}))return;
 		file.log.main.push({time:`${time.getFullYear()}:${time.getMonth()}.${time.getDay()}:${time.getHours()}`,log:Array.from(arguments)})
 	}else{
