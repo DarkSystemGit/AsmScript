@@ -186,6 +186,9 @@ class Visitor extends ICEScriptVisitor {
 	visitList(ctx){
 		return handler("list", ctx, this);
 	}
+	visitObject(ctx){
+		return handler("object", ctx, this);
+	}
 	visitFor(ctx){
 		return handler("for",ctx,this)
 	}
