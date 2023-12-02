@@ -77,6 +77,24 @@ export default class ICEScriptListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by ICEScriptParser#methodcall.
+	enterMethodcall(ctx) {
+	}
+
+	// Exit a parse tree produced by ICEScriptParser#methodcall.
+	exitMethodcall(ctx) {
+	}
+
+
+	// Enter a parse tree produced by ICEScriptParser#methodparams.
+	enterMethodparams(ctx) {
+	}
+
+	// Exit a parse tree produced by ICEScriptParser#methodparams.
+	exitMethodparams(ctx) {
+	}
+
+
 	// Enter a parse tree produced by ICEScriptParser#statement.
 	enterStatement(ctx) {
 	}
@@ -95,12 +113,12 @@ export default class ICEScriptListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by ICEScriptParser#ti_basic_stmt.
-	enterTi_basic_stmt(ctx) {
+	// Enter a parse tree produced by ICEScriptParser#asm_stmt.
+	enterAsm_stmt(ctx) {
 	}
 
-	// Exit a parse tree produced by ICEScriptParser#ti_basic_stmt.
-	exitTi_basic_stmt(ctx) {
+	// Exit a parse tree produced by ICEScriptParser#asm_stmt.
+	exitAsm_stmt(ctx) {
 	}
 
 
@@ -248,24 +266,6 @@ export default class ICEScriptListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by ICEScriptParser#methodcall.
-	enterMethodcall(ctx) {
-	}
-
-	// Exit a parse tree produced by ICEScriptParser#methodcall.
-	exitMethodcall(ctx) {
-	}
-
-
-	// Enter a parse tree produced by ICEScriptParser#methodparams.
-	enterMethodparams(ctx) {
-	}
-
-	// Exit a parse tree produced by ICEScriptParser#methodparams.
-	exitMethodparams(ctx) {
-	}
-
-
 	// Enter a parse tree produced by ICEScriptParser#value.
 	enterValue(ctx) {
 	}
@@ -317,6 +317,15 @@ export default class ICEScriptListener extends antlr4.tree.ParseTreeListener {
 
 	// Exit a parse tree produced by ICEScriptParser#string.
 	exitString(ctx) {
+	}
+
+
+	// Enter a parse tree produced by ICEScriptParser#string_concat.
+	enterString_concat(ctx) {
+	}
+
+	// Exit a parse tree produced by ICEScriptParser#string_concat.
+	exitString_concat(ctx) {
 	}
 
 

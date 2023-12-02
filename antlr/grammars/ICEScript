@@ -33,10 +33,16 @@ func_params
 func_identifier
 	:(identifier||expression||any)':'type
 	;
+methodcall
+	: identifier OPEN_BRACKET methodparams CLOSE_BRACKET
+	;
+methodparams
+	: expression* (',' expression)*
+	;
 statement
 	: OPEN_CURLEY statement* CLOSE_CURLEY
 	| assign_stmt
-	| ti_basic_stmt
+	| asm_stmt
 	| add_assign_stmt
 	| sub_assign_stmt
 	| mul_assign_stmt
@@ -56,8 +62,8 @@ statement
 assign_stmt
 	: identifier ASSIGN expression END_STMT
 	;
-ti_basic_stmt
-    : '__ASM' '{' any '}'
+asm_stmt
+    : '__LLVM' '{' any '}'
     ;
 
 any : ( . )+?;
@@ -103,13 +109,14 @@ return_stmt
 //Expression
 expression
 	: OPEN_BRACKET expression CLOSE_BRACKET
+	| methodcall
 	| value
 	| identifier
 	| boolexpr
 	| string
 	| object
-	| methodcall
 	| list
+	| string_concat
 	| expression ADD expression
 	| expression SUB expression
 	| expression MUL expression
@@ -139,13 +146,7 @@ boolexpr
 
 
 
-methodcall
-	: identifier OPEN_BRACKET methodparams CLOSE_BRACKET
-	;
 
-methodparams
-	: expression* (',' expression)*
-	;
 
 //Syntax operators
 OPEN_BRACKET : '(';
@@ -217,6 +218,9 @@ object
 string
 	:STRING
 	;
+string_concat
+	:(string||data)'+'(string||data)('+'(string||data))*
+	;
 data
 	:string
 	|list
@@ -224,6 +228,7 @@ data
 	|boolexpr
 	|object
 	|value
+	|methodcall
 	;
 
 //Mathematic constants

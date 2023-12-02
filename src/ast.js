@@ -205,6 +205,9 @@ export function handler(token, ctx, context) {
             var obj =context.visitChildren()
             obj.forEach((elm,i)=>{if(elm==":"){children.push({type:"prop",key:obj[i-1],value:obj[i+1]})}})
             return {type:"object",children}
+        },
+        "strConcat":(ctx,context)=>{
+            return {type:"concat",children:context.visitChildren().filter(i=>i!=='+')}
         }
     }
     
@@ -220,8 +223,9 @@ export function handler(token, ctx, context) {
         if (typeof handlers[token] == "function") {
             //util.log(Object.keys(ctx),":ctx")
             handlers.const(ctx,  context)
-            util.log(true, token + ':', ctx.getText(), handlers[token](ctx, context, ...Array.from(arguments).slice(2)))
-            return handlers[token](ctx, context, ...Array.from(arguments).slice(2))
+            var ret=handlers[token](ctx, context, ...Array.from(arguments).slice(2))
+            util.log(true, token + ':', ctx.getText(), ret)
+            return ret
         } else {
             return handlers[token]
         }

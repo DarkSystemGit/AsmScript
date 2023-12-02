@@ -4,7 +4,7 @@ import ICEScriptParser from "../antlr/parsers/antlr/grammars/ICEScriptParser.js"
 import ICEScriptLexer from "../antlr/parsers/antlr/grammars/ICEScriptLexer.js";
 import tokens from "./tokens.js";
 import * as util from "./util.js"
-import { handler } from "./data.js";
+import { handler } from "./ast.js";
 import { readFileSync, writeFileSync } from 'fs'
 
 
@@ -82,7 +82,7 @@ class Visitor extends ICEScriptVisitor {
 
 
 	// Visit a parse tree produced by ICEScriptParser#ti_basic_stmt.
-	visitTi_basic_stmt(ctx) {
+	visitAsm_stmt(ctx) {
 		return handler("asm", ctx, this);
 	}
 
@@ -188,6 +188,9 @@ class Visitor extends ICEScriptVisitor {
 	}
 	visitObject(ctx){
 		return handler("object", ctx, this);
+	}
+	visitString_concat(ctx){
+		return handler("strConcat", ctx, this);
 	}
 	visitFor(ctx){
 		return handler("for",ctx,this)

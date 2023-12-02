@@ -1,7 +1,8 @@
 const fs = require('fs')
 const path = require('path')
+try{
 var log = JSON.parse(fs.readFileSync(path.join(__dirname, 'log')))
-
+}catch{console.log('file is being written to, try again.');process.abort()}
 function parseArgs(keys) {
     var args = process.argv.slice(2)
     var res = { flags: [] }
@@ -19,10 +20,11 @@ function parseArgs(keys) {
 }
 var params = { flags: ['tokens','error', 'listKeys', 'logs', 'list','parsedTokens'], options: [] }
 var errorTypes = []
+try{
 Object.keys(log.error).forEach((elm) => {
     params.flags.push(elm)
     errorTypes.push(elm)
-})
+})}catch{console.log('no errs!')}
 params = parseArgs(params)
 if (params.flags.includes('listKeys')) {
     if (params.flags.includes('error')) {

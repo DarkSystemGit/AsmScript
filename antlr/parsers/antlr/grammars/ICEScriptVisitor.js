@@ -54,6 +54,18 @@ export default class ICEScriptVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
+	// Visit a parse tree produced by ICEScriptParser#methodcall.
+	visitMethodcall(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by ICEScriptParser#methodparams.
+	visitMethodparams(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
 	// Visit a parse tree produced by ICEScriptParser#statement.
 	visitStatement(ctx) {
 	  return this.visitChildren(ctx);
@@ -66,8 +78,8 @@ export default class ICEScriptVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
-	// Visit a parse tree produced by ICEScriptParser#ti_basic_stmt.
-	visitTi_basic_stmt(ctx) {
+	// Visit a parse tree produced by ICEScriptParser#asm_stmt.
+	visitAsm_stmt(ctx) {
 	  return this.visitChildren(ctx);
 	}
 
@@ -168,18 +180,6 @@ export default class ICEScriptVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
-	// Visit a parse tree produced by ICEScriptParser#methodcall.
-	visitMethodcall(ctx) {
-	  return this.visitChildren(ctx);
-	}
-
-
-	// Visit a parse tree produced by ICEScriptParser#methodparams.
-	visitMethodparams(ctx) {
-	  return this.visitChildren(ctx);
-	}
-
-
 	// Visit a parse tree produced by ICEScriptParser#value.
 	visitValue(ctx) {
 	  return this.visitChildren(ctx);
@@ -212,6 +212,12 @@ export default class ICEScriptVisitor extends antlr4.tree.ParseTreeVisitor {
 
 	// Visit a parse tree produced by ICEScriptParser#string.
 	visitString(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by ICEScriptParser#string_concat.
+	visitString_concat(ctx) {
 	  return this.visitChildren(ctx);
 	}
 
