@@ -26,7 +26,7 @@ export function handler(token, ctx, context) {
             //util.log(context)
             scope = scope || context.data.currentScope || "global"
             var children = []
-            
+            if(!context.data.var.hasOwnProperty(ctx.identifier().getText())){
             var varType =context.visit(ctx.expression())
             //console.log(varType)
             
@@ -46,6 +46,9 @@ export function handler(token, ctx, context) {
                 var varType =context.visit(ctx.expression())[0].listType
             }
             if(ctx.hasOwnProperty('type')&&(typeof ctx.type=="function")&&(!(ctx.type()==null)))varType=ctx.type().getText()
+            }else{
+                var varType=context.data.var[ctx.identifier().getText()].varType
+            }
             if(varType==undefined){varType="undef";util.warn(`${ctx.identifier().getText()} is undefined! A type could not be infered! This may be bad!`,ctx)}
             context.data.var[ctx.identifier().getText()]={varType}
             return { name: ctx.identifier().getText(), varType, children:[context.visit(ctx.expression())], type: "varDec" }
