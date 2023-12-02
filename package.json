@@ -10,7 +10,7 @@
   "scripts": {
     "codespaces": "echo export DEVDIR=/workspaces",
     "start": "node ./main.js",
-    "log":"node ./logviewer.cjs -list",
+    "log":"node ./logviewer.cjs -list \"$@\"",
     "build": "cd $DEVDIR/ICEScript&& npm run clean; npm run compileVisitor && npm test",
     "buildDbg": "cd $DEVDIR/ICEScript&& npm run clean; npm run compileDbg && npm test",
     "test": "cd $DEVDIR/ICEScript&&tsc ./src/llvm.ts&&npm start ./tests/fakeHome.gs",
