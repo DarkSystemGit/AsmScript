@@ -1,1642 +1,338 @@
-// Generated from ./antlr/grammars/ICEScript by ANTLR 4.13.1
+// Generated from ./antlr/grammars/ICEScript by ANTLR 4.7.2
 // jshint ignore: start
-import antlr4 from 'antlr4';
-import ICEScriptListener from './ICEScriptListener.js';
-import ICEScriptVisitor from './ICEScriptVisitor.js';
-
-const serializedATN = [4,1,54,363,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
-4,2,5,7,5,2,6,7,6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,
-2,13,7,13,2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,
-20,7,20,2,21,7,21,2,22,7,22,2,23,7,23,2,24,7,24,2,25,7,25,2,26,7,26,2,27,
-7,27,2,28,7,28,2,29,7,29,2,30,7,30,2,31,7,31,2,32,7,32,2,33,7,33,1,0,1,0,
-5,0,71,8,0,10,0,12,0,74,9,0,1,0,5,0,77,8,0,10,0,12,0,80,9,0,1,0,3,0,83,8,
-0,1,1,5,1,86,8,1,10,1,12,1,89,9,1,1,2,1,2,1,3,1,3,1,3,1,3,1,4,1,4,1,4,1,
-4,1,5,1,5,1,5,1,5,1,5,1,5,1,5,1,5,1,5,1,6,1,6,1,6,1,6,1,6,5,6,115,8,6,10,
-6,12,6,118,9,6,3,6,120,8,6,1,7,1,7,1,7,1,7,1,7,3,7,127,8,7,1,7,1,7,1,7,1,
-8,1,8,5,8,134,8,8,10,8,12,8,137,9,8,1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,8,
-1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,8,3,8,157,8,8,1,9,1,9,1,9,1,9,1,9,1,10,
-1,10,1,10,1,10,1,10,1,11,4,11,170,8,11,11,11,12,11,171,1,12,1,12,1,12,1,
-12,1,12,1,13,1,13,1,13,1,13,1,13,1,14,1,14,1,14,1,14,1,14,1,15,1,15,1,15,
-1,15,1,15,1,16,1,16,1,16,1,16,1,17,1,17,1,17,1,17,1,18,1,18,1,18,1,18,1,
-18,1,18,1,19,1,19,1,19,1,19,1,19,1,19,1,19,1,19,1,20,1,20,1,20,1,20,1,20,
-1,20,1,21,1,21,1,21,1,21,1,21,1,21,1,21,1,21,1,21,1,21,1,21,1,21,1,21,1,
-21,3,21,236,8,21,1,22,1,22,1,22,1,22,1,23,1,23,1,23,1,23,1,23,1,23,1,23,
-1,23,1,23,1,23,3,23,252,8,23,1,24,1,24,1,24,1,24,1,24,1,24,1,24,1,24,1,24,
-1,24,1,24,1,24,1,24,1,24,1,24,1,24,3,24,270,8,24,1,25,1,25,1,25,1,25,1,25,
-1,25,1,25,1,25,1,25,1,25,1,25,1,25,1,25,1,25,1,25,1,25,1,25,1,25,1,25,1,
-25,1,25,1,25,1,25,1,25,1,25,1,25,1,25,1,25,1,25,1,25,1,25,1,25,1,25,1,25,
-1,25,1,25,1,25,3,25,309,8,25,1,26,1,26,1,26,1,26,1,26,1,27,5,27,317,8,27,
-10,27,12,27,320,9,27,1,27,1,27,5,27,324,8,27,10,27,12,27,327,9,27,1,28,1,
-28,3,28,331,8,28,1,29,1,29,1,30,1,30,1,31,1,31,5,31,339,8,31,10,31,12,31,
-342,9,31,1,31,1,31,5,31,346,8,31,10,31,12,31,349,9,31,1,31,1,31,1,32,1,32,
-1,33,1,33,1,33,1,33,1,33,1,33,3,33,361,8,33,1,33,1,171,0,34,0,2,4,6,8,10,
-12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,
-60,62,64,66,0,1,2,0,48,48,51,51,387,0,82,1,0,0,0,2,87,1,0,0,0,4,90,1,0,0,
-0,6,92,1,0,0,0,8,96,1,0,0,0,10,100,1,0,0,0,12,119,1,0,0,0,14,126,1,0,0,0,
-16,156,1,0,0,0,18,158,1,0,0,0,20,163,1,0,0,0,22,169,1,0,0,0,24,173,1,0,0,
-0,26,178,1,0,0,0,28,183,1,0,0,0,30,188,1,0,0,0,32,193,1,0,0,0,34,197,1,0,
-0,0,36,201,1,0,0,0,38,207,1,0,0,0,40,215,1,0,0,0,42,235,1,0,0,0,44,237,1,
-0,0,0,46,251,1,0,0,0,48,269,1,0,0,0,50,308,1,0,0,0,52,310,1,0,0,0,54,318,
-1,0,0,0,56,330,1,0,0,0,58,332,1,0,0,0,60,334,1,0,0,0,62,336,1,0,0,0,64,352,
-1,0,0,0,66,360,1,0,0,0,68,72,3,2,1,0,69,71,3,10,5,0,70,69,1,0,0,0,71,74,
-1,0,0,0,72,70,1,0,0,0,72,73,1,0,0,0,73,78,1,0,0,0,74,72,1,0,0,0,75,77,3,
-16,8,0,76,75,1,0,0,0,77,80,1,0,0,0,78,76,1,0,0,0,78,79,1,0,0,0,79,83,1,0,
-0,0,80,78,1,0,0,0,81,83,5,0,0,1,82,68,1,0,0,0,82,81,1,0,0,0,83,1,1,0,0,0,
-84,86,3,8,4,0,85,84,1,0,0,0,86,89,1,0,0,0,87,85,1,0,0,0,87,88,1,0,0,0,88,
-3,1,0,0,0,89,87,1,0,0,0,90,91,3,6,3,0,91,5,1,0,0,0,92,93,5,1,0,0,93,94,3,
-58,29,0,94,95,5,18,0,0,95,7,1,0,0,0,96,97,5,2,0,0,97,98,3,58,29,0,98,99,
-5,18,0,0,99,9,1,0,0,0,100,101,5,3,0,0,101,102,3,58,29,0,102,103,5,14,0,0,
-103,104,3,12,6,0,104,105,5,15,0,0,105,106,5,4,0,0,106,107,3,66,33,0,107,
-108,3,16,8,0,108,11,1,0,0,0,109,120,3,14,7,0,110,120,1,0,0,0,111,116,3,14,
-7,0,112,113,5,5,0,0,113,115,3,14,7,0,114,112,1,0,0,0,115,118,1,0,0,0,116,
-114,1,0,0,0,116,117,1,0,0,0,117,120,1,0,0,0,118,116,1,0,0,0,119,109,1,0,
-0,0,119,110,1,0,0,0,119,111,1,0,0,0,120,13,1,0,0,0,121,127,3,58,29,0,122,
-127,1,0,0,0,123,127,3,46,23,0,124,127,1,0,0,0,125,127,3,22,11,0,126,121,
-1,0,0,0,126,122,1,0,0,0,126,123,1,0,0,0,126,124,1,0,0,0,126,125,1,0,0,0,
-127,128,1,0,0,0,128,129,5,4,0,0,129,130,3,66,33,0,130,15,1,0,0,0,131,135,
-5,16,0,0,132,134,3,16,8,0,133,132,1,0,0,0,134,137,1,0,0,0,135,133,1,0,0,
-0,135,136,1,0,0,0,136,138,1,0,0,0,137,135,1,0,0,0,138,157,5,17,0,0,139,157,
-3,18,9,0,140,157,3,20,10,0,141,157,3,24,12,0,142,157,3,26,13,0,143,157,3,
-28,14,0,144,157,3,30,15,0,145,157,3,32,16,0,146,157,3,34,17,0,147,157,3,
-36,18,0,148,157,3,38,19,0,149,157,3,40,20,0,150,157,3,42,21,0,151,157,3,
-44,22,0,152,153,3,46,23,0,153,154,5,18,0,0,154,157,1,0,0,0,155,157,5,18,
-0,0,156,131,1,0,0,0,156,139,1,0,0,0,156,140,1,0,0,0,156,141,1,0,0,0,156,
-142,1,0,0,0,156,143,1,0,0,0,156,144,1,0,0,0,156,145,1,0,0,0,156,146,1,0,
-0,0,156,147,1,0,0,0,156,148,1,0,0,0,156,149,1,0,0,0,156,150,1,0,0,0,156,
-151,1,0,0,0,156,152,1,0,0,0,156,155,1,0,0,0,157,17,1,0,0,0,158,159,3,58,
-29,0,159,160,5,32,0,0,160,161,3,46,23,0,161,162,5,18,0,0,162,19,1,0,0,0,
-163,164,5,6,0,0,164,165,5,16,0,0,165,166,3,22,11,0,166,167,5,17,0,0,167,
-21,1,0,0,0,168,170,9,0,0,0,169,168,1,0,0,0,170,171,1,0,0,0,171,172,1,0,0,
-0,171,169,1,0,0,0,172,23,1,0,0,0,173,174,3,58,29,0,174,175,5,33,0,0,175,
-176,3,56,28,0,176,177,5,18,0,0,177,25,1,0,0,0,178,179,3,58,29,0,179,180,
-5,34,0,0,180,181,3,56,28,0,181,182,5,18,0,0,182,27,1,0,0,0,183,184,3,58,
-29,0,184,185,5,35,0,0,185,186,3,56,28,0,186,187,5,18,0,0,187,29,1,0,0,0,
-188,189,3,58,29,0,189,190,5,36,0,0,190,191,3,56,28,0,191,192,5,18,0,0,192,
-31,1,0,0,0,193,194,3,58,29,0,194,195,5,39,0,0,195,196,5,18,0,0,196,33,1,
-0,0,0,197,198,3,58,29,0,198,199,5,40,0,0,199,200,5,18,0,0,200,35,1,0,0,0,
-201,202,5,37,0,0,202,203,5,14,0,0,203,204,3,50,25,0,204,205,5,15,0,0,205,
-206,3,16,8,0,206,37,1,0,0,0,207,208,5,37,0,0,208,209,5,14,0,0,209,210,3,
-50,25,0,210,211,5,15,0,0,211,212,3,16,8,0,212,213,5,38,0,0,213,214,3,16,
-8,0,214,39,1,0,0,0,215,216,5,43,0,0,216,217,5,14,0,0,217,218,3,50,25,0,218,
-219,5,15,0,0,219,220,3,16,8,0,220,41,1,0,0,0,221,222,5,42,0,0,222,223,3,
-58,29,0,223,224,5,32,0,0,224,225,3,46,23,0,225,226,5,18,0,0,226,236,1,0,
-0,0,227,228,5,42,0,0,228,229,3,58,29,0,229,230,5,4,0,0,230,231,3,66,33,0,
-231,232,5,32,0,0,232,233,3,46,23,0,233,234,5,18,0,0,234,236,1,0,0,0,235,
-221,1,0,0,0,235,227,1,0,0,0,236,43,1,0,0,0,237,238,5,44,0,0,238,239,3,46,
-23,0,239,240,5,18,0,0,240,45,1,0,0,0,241,242,5,14,0,0,242,243,3,46,23,0,
-243,244,5,15,0,0,244,252,1,0,0,0,245,252,3,56,28,0,246,252,3,58,29,0,247,
-252,3,50,25,0,248,252,5,49,0,0,249,252,3,52,26,0,250,252,5,50,0,0,251,241,
-1,0,0,0,251,245,1,0,0,0,251,246,1,0,0,0,251,247,1,0,0,0,251,248,1,0,0,0,
-251,249,1,0,0,0,251,250,1,0,0,0,252,47,1,0,0,0,253,254,3,46,23,0,254,255,
-5,19,0,0,255,256,3,46,23,0,256,270,1,0,0,0,257,258,3,46,23,0,258,259,5,20,
-0,0,259,260,3,46,23,0,260,270,1,0,0,0,261,262,3,46,23,0,262,263,5,21,0,0,
-263,264,3,46,23,0,264,270,1,0,0,0,265,266,3,46,23,0,266,267,5,22,0,0,267,
-268,3,46,23,0,268,270,1,0,0,0,269,253,1,0,0,0,269,257,1,0,0,0,269,261,1,
-0,0,0,269,265,1,0,0,0,270,49,1,0,0,0,271,309,3,56,28,0,272,309,5,45,0,0,
-273,309,5,46,0,0,274,275,3,56,28,0,275,276,5,23,0,0,276,277,3,50,25,0,277,
-309,1,0,0,0,278,279,3,56,28,0,279,280,5,24,0,0,280,281,3,50,25,0,281,309,
-1,0,0,0,282,283,3,56,28,0,283,284,5,25,0,0,284,285,3,50,25,0,285,309,1,0,
-0,0,286,287,3,56,28,0,287,288,5,26,0,0,288,289,3,50,25,0,289,309,1,0,0,0,
-290,291,3,56,28,0,291,292,5,27,0,0,292,293,3,50,25,0,293,309,1,0,0,0,294,
-295,3,56,28,0,295,296,5,28,0,0,296,297,3,50,25,0,297,309,1,0,0,0,298,299,
-3,56,28,0,299,300,5,29,0,0,300,301,3,50,25,0,301,309,1,0,0,0,302,303,3,56,
-28,0,303,304,5,30,0,0,304,305,3,50,25,0,305,309,1,0,0,0,306,307,5,31,0,0,
-307,309,3,50,25,0,308,271,1,0,0,0,308,272,1,0,0,0,308,273,1,0,0,0,308,274,
-1,0,0,0,308,278,1,0,0,0,308,282,1,0,0,0,308,286,1,0,0,0,308,290,1,0,0,0,
-308,294,1,0,0,0,308,298,1,0,0,0,308,302,1,0,0,0,308,306,1,0,0,0,309,51,1,
-0,0,0,310,311,3,58,29,0,311,312,5,14,0,0,312,313,3,54,27,0,313,314,5,15,
-0,0,314,53,1,0,0,0,315,317,3,46,23,0,316,315,1,0,0,0,317,320,1,0,0,0,318,
-316,1,0,0,0,318,319,1,0,0,0,319,325,1,0,0,0,320,318,1,0,0,0,321,322,5,5,
-0,0,322,324,3,46,23,0,323,321,1,0,0,0,324,327,1,0,0,0,325,323,1,0,0,0,325,
-326,1,0,0,0,326,55,1,0,0,0,327,325,1,0,0,0,328,331,3,58,29,0,329,331,3,60,
-30,0,330,328,1,0,0,0,330,329,1,0,0,0,331,57,1,0,0,0,332,333,5,47,0,0,333,
-59,1,0,0,0,334,335,7,0,0,0,335,61,1,0,0,0,336,340,5,7,0,0,337,339,3,46,23,
-0,338,337,1,0,0,0,339,342,1,0,0,0,340,338,1,0,0,0,340,341,1,0,0,0,341,347,
-1,0,0,0,342,340,1,0,0,0,343,344,5,5,0,0,344,346,3,46,23,0,345,343,1,0,0,
-0,346,349,1,0,0,0,347,345,1,0,0,0,347,348,1,0,0,0,348,350,1,0,0,0,349,347,
-1,0,0,0,350,351,5,8,0,0,351,63,1,0,0,0,352,353,5,49,0,0,353,65,1,0,0,0,354,
-361,1,0,0,0,355,361,5,9,0,0,356,361,5,10,0,0,357,361,5,11,0,0,358,361,5,
-12,0,0,359,361,5,13,0,0,360,354,1,0,0,0,360,355,1,0,0,0,360,356,1,0,0,0,
-360,357,1,0,0,0,360,358,1,0,0,0,360,359,1,0,0,0,361,67,1,0,0,0,20,72,78,
-82,87,116,119,126,135,156,171,235,251,269,308,318,325,330,340,347,360];
-
-
-const atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
-
-const decisionsToDFA = atn.decisionToState.map( (ds, index) => new antlr4.dfa.DFA(ds, index) );
-
-const sharedContextCache = new antlr4.atn.PredictionContextCache();
-
-export default class ICEScriptParser extends antlr4.Parser {
-
-    static grammarFileName = "ICEScript";
-    static literalNames = [ null, "'name:'", "'import'", "'function '", 
-                            "':'", "','", "'__ASM'", "'['", "']'", "'void'", 
-                            "'list'", "'str'", "'number'", "'bool'", "'('", 
-                            "')'", "'{'", "'}'", "';'", "'+'", "'-'", "'*'", 
-                            "'/'", "'>'", "'<'", "'=='", "'!='", "'>='", 
-                            "'<='", "'||'", "'&&'", "'!'", "'='", "'+='", 
-                            "'-='", "'*='", "'/='", "'if'", "'else'", "'++'", 
-                            "'--'", "'function'", "'var'", "'while'", "'return'", 
-                            "'true'", "'false'", null, "'$pi'" ];
-    static symbolicNames = [ null, null, null, null, null, null, null, null, 
-                             null, null, null, null, null, null, "OPEN_BRACKET", 
-                             "CLOSE_BRACKET", "OPEN_CURLEY", "CLOSE_CURLEY", 
-                             "END_STMT", "ADD", "SUB", "MUL", "DIV", "GREATER_THAN", 
-                             "LESS_THAN", "EQUAL_TO", "NOT_EQUAL_TO", "GREATER_THAN_OR_EQUAL", 
-                             "LESS_THAN_OR_EQUAL", "OR", "AND", "NOT", "ASSIGN", 
-                             "ADDASSIGN", "SUBASSIGN", "MULASSIGN", "DIVASSIGN", 
-                             "IF", "ELSE", "INCREMENT", "DECREMENT", "DEF", 
-                             "VAR", "WHILE", "RETURN", "TRUE", "FALSE", 
-                             "IDENTIFIER", "PI", "STRING", "LIST", "NUMBER", 
-                             "LINECOMMENT", "BLOCKCOMMENT", "WHITESPACE" ];
-    static ruleNames = [ "script", "header", "meta", "scriptName", "include", 
-                         "function", "func_params", "func_identifier", "statement", 
-                         "assign_stmt", "ti_basic_stmt", "any", "add_assign_stmt", 
-                         "sub_assign_stmt", "mul_assign_stmt", "div_assign_stmt", 
-                         "inc_stmt", "dec_stmt", "if_stmt", "if_else_stmt", 
-                         "while_stmt", "var_stmt", "return_stmt", "expression", 
-                         "math", "boolexpr", "methodcall", "methodparams", 
-                         "value", "identifier", "number", "list", "string", 
-                         "type" ];
-
-    constructor(input) {
-        super(input);
-        this._interp = new antlr4.atn.ParserATNSimulator(this, atn, decisionsToDFA, sharedContextCache);
-        this.ruleNames = ICEScriptParser.ruleNames;
-        this.literalNames = ICEScriptParser.literalNames;
-        this.symbolicNames = ICEScriptParser.symbolicNames;
-    }
-
-
-
-	script() {
-	    let localctx = new ScriptContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 0, ICEScriptParser.RULE_script);
-	    var _la = 0;
-	    try {
-	        this.state = 82;
-	        this._errHandler.sync(this);
-	        var la_ = this._interp.adaptivePredict(this._input,2,this._ctx);
-	        switch(la_) {
-	        case 1:
-	            this.enterOuterAlt(localctx, 1);
-	            this.state = 68;
-	            this.header();
-	            this.state = 72;
-	            this._errHandler.sync(this);
-	            _la = this._input.LA(1);
-	            while(_la===3) {
-	                this.state = 69;
-	                this.function_();
-	                this.state = 74;
-	                this._errHandler.sync(this);
-	                _la = this._input.LA(1);
-	            }
-	            this.state = 78;
-	            this._errHandler.sync(this);
-	            _la = this._input.LA(1);
-	            while((((_la) & ~0x1f) === 0 && ((1 << _la) & 2147827776) !== 0) || ((((_la - 37)) & ~0x1f) === 0 && ((1 << (_la - 37)) & 32737) !== 0)) {
-	                this.state = 75;
-	                this.statement();
-	                this.state = 80;
-	                this._errHandler.sync(this);
-	                _la = this._input.LA(1);
-	            }
-	            break;
-
-	        case 2:
-	            this.enterOuterAlt(localctx, 2);
-	            this.state = 81;
-	            this.match(ICEScriptParser.EOF);
-	            break;
-
-	        }
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	header() {
-	    let localctx = new HeaderContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 2, ICEScriptParser.RULE_header);
-	    var _la = 0;
-	    try {
-	        this.enterOuterAlt(localctx, 1);
-	        this.state = 87;
-	        this._errHandler.sync(this);
-	        _la = this._input.LA(1);
-	        while(_la===2) {
-	            this.state = 84;
-	            this.include();
-	            this.state = 89;
-	            this._errHandler.sync(this);
-	            _la = this._input.LA(1);
-	        }
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	meta() {
-	    let localctx = new MetaContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 4, ICEScriptParser.RULE_meta);
-	    try {
-	        this.enterOuterAlt(localctx, 1);
-	        this.state = 90;
-	        this.scriptName();
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	scriptName() {
-	    let localctx = new ScriptNameContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 6, ICEScriptParser.RULE_scriptName);
-	    try {
-	        this.enterOuterAlt(localctx, 1);
-	        this.state = 92;
-	        this.match(ICEScriptParser.T__0);
-	        this.state = 93;
-	        this.identifier();
-	        this.state = 94;
-	        this.match(ICEScriptParser.END_STMT);
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	include() {
-	    let localctx = new IncludeContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 8, ICEScriptParser.RULE_include);
-	    try {
-	        this.enterOuterAlt(localctx, 1);
-	        this.state = 96;
-	        this.match(ICEScriptParser.T__1);
-	        this.state = 97;
-	        this.identifier();
-	        this.state = 98;
-	        this.match(ICEScriptParser.END_STMT);
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	function_() {
-	    let localctx = new FunctionContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 10, ICEScriptParser.RULE_function);
-	    try {
-	        this.enterOuterAlt(localctx, 1);
-	        this.state = 100;
-	        this.match(ICEScriptParser.T__2);
-	        this.state = 101;
-	        this.identifier();
-	        this.state = 102;
-	        this.match(ICEScriptParser.OPEN_BRACKET);
-	        this.state = 103;
-	        this.func_params();
-	        this.state = 104;
-	        this.match(ICEScriptParser.CLOSE_BRACKET);
-	        this.state = 105;
-	        this.match(ICEScriptParser.T__3);
-	        this.state = 106;
-	        this.type();
-	        this.state = 107;
-	        this.statement();
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	func_params() {
-	    let localctx = new Func_paramsContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 12, ICEScriptParser.RULE_func_params);
-	    var _la = 0;
-	    try {
-	        this.state = 119;
-	        this._errHandler.sync(this);
-	        var la_ = this._interp.adaptivePredict(this._input,5,this._ctx);
-	        switch(la_) {
-	        case 1:
-	            this.enterOuterAlt(localctx, 1);
-	            this.state = 109;
-	            this.func_identifier();
-	            break;
-
-	        case 2:
-	            this.enterOuterAlt(localctx, 2);
-
-	            break;
-
-	        case 3:
-	            this.enterOuterAlt(localctx, 3);
-	            this.state = 111;
-	            this.func_identifier();
-	            this.state = 116;
-	            this._errHandler.sync(this);
-	            _la = this._input.LA(1);
-	            while(_la===5) {
-	                this.state = 112;
-	                this.match(ICEScriptParser.T__4);
-	                this.state = 113;
-	                this.func_identifier();
-	                this.state = 118;
-	                this._errHandler.sync(this);
-	                _la = this._input.LA(1);
-	            }
-	            break;
-
-	        }
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	func_identifier() {
-	    let localctx = new Func_identifierContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 14, ICEScriptParser.RULE_func_identifier);
-	    try {
-	        this.enterOuterAlt(localctx, 1);
-	        this.state = 126;
-	        this._errHandler.sync(this);
-	        var la_ = this._interp.adaptivePredict(this._input,6,this._ctx);
-	        switch(la_) {
-	        case 1:
-	            this.state = 121;
-	            this.identifier();
-	            break;
-
-	        case 2:
-	            break;
-
-	        case 3:
-	            this.state = 123;
-	            this.expression();
-	            break;
-
-	        case 4:
-	            break;
-
-	        case 5:
-	            this.state = 125;
-	            this.any();
-	            break;
-
-	        }
-	        this.state = 128;
-	        this.match(ICEScriptParser.T__3);
-	        this.state = 129;
-	        this.type();
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	statement() {
-	    let localctx = new StatementContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 16, ICEScriptParser.RULE_statement);
-	    var _la = 0;
-	    try {
-	        this.state = 156;
-	        this._errHandler.sync(this);
-	        var la_ = this._interp.adaptivePredict(this._input,8,this._ctx);
-	        switch(la_) {
-	        case 1:
-	            this.enterOuterAlt(localctx, 1);
-	            this.state = 131;
-	            this.match(ICEScriptParser.OPEN_CURLEY);
-	            this.state = 135;
-	            this._errHandler.sync(this);
-	            _la = this._input.LA(1);
-	            while((((_la) & ~0x1f) === 0 && ((1 << _la) & 2147827776) !== 0) || ((((_la - 37)) & ~0x1f) === 0 && ((1 << (_la - 37)) & 32737) !== 0)) {
-	                this.state = 132;
-	                this.statement();
-	                this.state = 137;
-	                this._errHandler.sync(this);
-	                _la = this._input.LA(1);
-	            }
-	            this.state = 138;
-	            this.match(ICEScriptParser.CLOSE_CURLEY);
-	            break;
-
-	        case 2:
-	            this.enterOuterAlt(localctx, 2);
-	            this.state = 139;
-	            this.assign_stmt();
-	            break;
-
-	        case 3:
-	            this.enterOuterAlt(localctx, 3);
-	            this.state = 140;
-	            this.ti_basic_stmt();
-	            break;
-
-	        case 4:
-	            this.enterOuterAlt(localctx, 4);
-	            this.state = 141;
-	            this.add_assign_stmt();
-	            break;
-
-	        case 5:
-	            this.enterOuterAlt(localctx, 5);
-	            this.state = 142;
-	            this.sub_assign_stmt();
-	            break;
-
-	        case 6:
-	            this.enterOuterAlt(localctx, 6);
-	            this.state = 143;
-	            this.mul_assign_stmt();
-	            break;
-
-	        case 7:
-	            this.enterOuterAlt(localctx, 7);
-	            this.state = 144;
-	            this.div_assign_stmt();
-	            break;
-
-	        case 8:
-	            this.enterOuterAlt(localctx, 8);
-	            this.state = 145;
-	            this.inc_stmt();
-	            break;
-
-	        case 9:
-	            this.enterOuterAlt(localctx, 9);
-	            this.state = 146;
-	            this.dec_stmt();
-	            break;
-
-	        case 10:
-	            this.enterOuterAlt(localctx, 10);
-	            this.state = 147;
-	            this.if_stmt();
-	            break;
-
-	        case 11:
-	            this.enterOuterAlt(localctx, 11);
-	            this.state = 148;
-	            this.if_else_stmt();
-	            break;
-
-	        case 12:
-	            this.enterOuterAlt(localctx, 12);
-	            this.state = 149;
-	            this.while_stmt();
-	            break;
-
-	        case 13:
-	            this.enterOuterAlt(localctx, 13);
-	            this.state = 150;
-	            this.var_stmt();
-	            break;
-
-	        case 14:
-	            this.enterOuterAlt(localctx, 14);
-	            this.state = 151;
-	            this.return_stmt();
-	            break;
-
-	        case 15:
-	            this.enterOuterAlt(localctx, 15);
-	            this.state = 152;
-	            this.expression();
-	            this.state = 153;
-	            this.match(ICEScriptParser.END_STMT);
-	            break;
-
-	        case 16:
-	            this.enterOuterAlt(localctx, 16);
-	            this.state = 155;
-	            this.match(ICEScriptParser.END_STMT);
-	            break;
-
-	        }
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	assign_stmt() {
-	    let localctx = new Assign_stmtContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 18, ICEScriptParser.RULE_assign_stmt);
-	    try {
-	        this.enterOuterAlt(localctx, 1);
-	        this.state = 158;
-	        this.identifier();
-	        this.state = 159;
-	        this.match(ICEScriptParser.ASSIGN);
-	        this.state = 160;
-	        this.expression();
-	        this.state = 161;
-	        this.match(ICEScriptParser.END_STMT);
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	ti_basic_stmt() {
-	    let localctx = new Ti_basic_stmtContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 20, ICEScriptParser.RULE_ti_basic_stmt);
-	    try {
-	        this.enterOuterAlt(localctx, 1);
-	        this.state = 163;
-	        this.match(ICEScriptParser.T__5);
-	        this.state = 164;
-	        this.match(ICEScriptParser.OPEN_CURLEY);
-	        this.state = 165;
-	        this.any();
-	        this.state = 166;
-	        this.match(ICEScriptParser.CLOSE_CURLEY);
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	any() {
-	    let localctx = new AnyContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 22, ICEScriptParser.RULE_any);
-	    try {
-	        this.enterOuterAlt(localctx, 1);
-	        this.state = 169; 
-	        this._errHandler.sync(this);
-	        var _alt = 1+1;
-	        do {
-	        	switch (_alt) {
-	        	case 1+1:
-	        		this.state = 168;
-	        		this.matchWildcard();
-	        		break;
-	        	default:
-	        		throw new antlr4.error.NoViableAltException(this);
-	        	}
-	        	this.state = 171; 
-	        	this._errHandler.sync(this);
-	        	_alt = this._interp.adaptivePredict(this._input,9, this._ctx);
-	        } while ( _alt!=1 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER );
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	add_assign_stmt() {
-	    let localctx = new Add_assign_stmtContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 24, ICEScriptParser.RULE_add_assign_stmt);
-	    try {
-	        this.enterOuterAlt(localctx, 1);
-	        this.state = 173;
-	        this.identifier();
-	        this.state = 174;
-	        this.match(ICEScriptParser.ADDASSIGN);
-	        this.state = 175;
-	        this.value();
-	        this.state = 176;
-	        this.match(ICEScriptParser.END_STMT);
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	sub_assign_stmt() {
-	    let localctx = new Sub_assign_stmtContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 26, ICEScriptParser.RULE_sub_assign_stmt);
-	    try {
-	        this.enterOuterAlt(localctx, 1);
-	        this.state = 178;
-	        this.identifier();
-	        this.state = 179;
-	        this.match(ICEScriptParser.SUBASSIGN);
-	        this.state = 180;
-	        this.value();
-	        this.state = 181;
-	        this.match(ICEScriptParser.END_STMT);
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	mul_assign_stmt() {
-	    let localctx = new Mul_assign_stmtContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 28, ICEScriptParser.RULE_mul_assign_stmt);
-	    try {
-	        this.enterOuterAlt(localctx, 1);
-	        this.state = 183;
-	        this.identifier();
-	        this.state = 184;
-	        this.match(ICEScriptParser.MULASSIGN);
-	        this.state = 185;
-	        this.value();
-	        this.state = 186;
-	        this.match(ICEScriptParser.END_STMT);
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	div_assign_stmt() {
-	    let localctx = new Div_assign_stmtContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 30, ICEScriptParser.RULE_div_assign_stmt);
-	    try {
-	        this.enterOuterAlt(localctx, 1);
-	        this.state = 188;
-	        this.identifier();
-	        this.state = 189;
-	        this.match(ICEScriptParser.DIVASSIGN);
-	        this.state = 190;
-	        this.value();
-	        this.state = 191;
-	        this.match(ICEScriptParser.END_STMT);
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	inc_stmt() {
-	    let localctx = new Inc_stmtContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 32, ICEScriptParser.RULE_inc_stmt);
-	    try {
-	        this.enterOuterAlt(localctx, 1);
-	        this.state = 193;
-	        this.identifier();
-	        this.state = 194;
-	        this.match(ICEScriptParser.INCREMENT);
-	        this.state = 195;
-	        this.match(ICEScriptParser.END_STMT);
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	dec_stmt() {
-	    let localctx = new Dec_stmtContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 34, ICEScriptParser.RULE_dec_stmt);
-	    try {
-	        this.enterOuterAlt(localctx, 1);
-	        this.state = 197;
-	        this.identifier();
-	        this.state = 198;
-	        this.match(ICEScriptParser.DECREMENT);
-	        this.state = 199;
-	        this.match(ICEScriptParser.END_STMT);
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	if_stmt() {
-	    let localctx = new If_stmtContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 36, ICEScriptParser.RULE_if_stmt);
-	    try {
-	        this.enterOuterAlt(localctx, 1);
-	        this.state = 201;
-	        this.match(ICEScriptParser.IF);
-	        this.state = 202;
-	        this.match(ICEScriptParser.OPEN_BRACKET);
-	        this.state = 203;
-	        this.boolexpr();
-	        this.state = 204;
-	        this.match(ICEScriptParser.CLOSE_BRACKET);
-	        this.state = 205;
-	        this.statement();
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	if_else_stmt() {
-	    let localctx = new If_else_stmtContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 38, ICEScriptParser.RULE_if_else_stmt);
-	    try {
-	        this.enterOuterAlt(localctx, 1);
-	        this.state = 207;
-	        this.match(ICEScriptParser.IF);
-	        this.state = 208;
-	        this.match(ICEScriptParser.OPEN_BRACKET);
-	        this.state = 209;
-	        this.boolexpr();
-	        this.state = 210;
-	        this.match(ICEScriptParser.CLOSE_BRACKET);
-	        this.state = 211;
-	        this.statement();
-	        this.state = 212;
-	        this.match(ICEScriptParser.ELSE);
-	        this.state = 213;
-	        this.statement();
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	while_stmt() {
-	    let localctx = new While_stmtContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 40, ICEScriptParser.RULE_while_stmt);
-	    try {
-	        this.enterOuterAlt(localctx, 1);
-	        this.state = 215;
-	        this.match(ICEScriptParser.WHILE);
-	        this.state = 216;
-	        this.match(ICEScriptParser.OPEN_BRACKET);
-	        this.state = 217;
-	        this.boolexpr();
-	        this.state = 218;
-	        this.match(ICEScriptParser.CLOSE_BRACKET);
-	        this.state = 219;
-	        this.statement();
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	var_stmt() {
-	    let localctx = new Var_stmtContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 42, ICEScriptParser.RULE_var_stmt);
-	    try {
-	        this.state = 235;
-	        this._errHandler.sync(this);
-	        var la_ = this._interp.adaptivePredict(this._input,10,this._ctx);
-	        switch(la_) {
-	        case 1:
-	            this.enterOuterAlt(localctx, 1);
-	            this.state = 221;
-	            this.match(ICEScriptParser.VAR);
-	            this.state = 222;
-	            this.identifier();
-	            this.state = 223;
-	            this.match(ICEScriptParser.ASSIGN);
-	            this.state = 224;
-	            this.expression();
-	            this.state = 225;
-	            this.match(ICEScriptParser.END_STMT);
-	            break;
-
-	        case 2:
-	            this.enterOuterAlt(localctx, 2);
-	            this.state = 227;
-	            this.match(ICEScriptParser.VAR);
-	            this.state = 228;
-	            this.identifier();
-	            this.state = 229;
-	            this.match(ICEScriptParser.T__3);
-	            this.state = 230;
-	            this.type();
-	            this.state = 231;
-	            this.match(ICEScriptParser.ASSIGN);
-	            this.state = 232;
-	            this.expression();
-	            this.state = 233;
-	            this.match(ICEScriptParser.END_STMT);
-	            break;
-
-	        }
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	return_stmt() {
-	    let localctx = new Return_stmtContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 44, ICEScriptParser.RULE_return_stmt);
-	    try {
-	        this.enterOuterAlt(localctx, 1);
-	        this.state = 237;
-	        this.match(ICEScriptParser.RETURN);
-	        this.state = 238;
-	        this.expression();
-	        this.state = 239;
-	        this.match(ICEScriptParser.END_STMT);
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	expression() {
-	    let localctx = new ExpressionContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 46, ICEScriptParser.RULE_expression);
-	    try {
-	        this.state = 251;
-	        this._errHandler.sync(this);
-	        var la_ = this._interp.adaptivePredict(this._input,11,this._ctx);
-	        switch(la_) {
-	        case 1:
-	            this.enterOuterAlt(localctx, 1);
-	            this.state = 241;
-	            this.match(ICEScriptParser.OPEN_BRACKET);
-	            this.state = 242;
-	            this.expression();
-	            this.state = 243;
-	            this.match(ICEScriptParser.CLOSE_BRACKET);
-	            break;
-
-	        case 2:
-	            this.enterOuterAlt(localctx, 2);
-	            this.state = 245;
-	            this.value();
-	            break;
-
-	        case 3:
-	            this.enterOuterAlt(localctx, 3);
-	            this.state = 246;
-	            this.identifier();
-	            break;
-
-	        case 4:
-	            this.enterOuterAlt(localctx, 4);
-	            this.state = 247;
-	            this.boolexpr();
-	            break;
-
-	        case 5:
-	            this.enterOuterAlt(localctx, 5);
-	            this.state = 248;
-	            this.match(ICEScriptParser.STRING);
-	            break;
-
-	        case 6:
-	            this.enterOuterAlt(localctx, 6);
-	            this.state = 249;
-	            this.methodcall();
-	            break;
-
-	        case 7:
-	            this.enterOuterAlt(localctx, 7);
-	            this.state = 250;
-	            this.match(ICEScriptParser.LIST);
-	            break;
-
-	        }
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	math() {
-	    let localctx = new MathContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 48, ICEScriptParser.RULE_math);
-	    try {
-	        this.state = 269;
-	        this._errHandler.sync(this);
-	        var la_ = this._interp.adaptivePredict(this._input,12,this._ctx);
-	        switch(la_) {
-	        case 1:
-	            this.enterOuterAlt(localctx, 1);
-	            this.state = 253;
-	            this.expression();
-	            this.state = 254;
-	            this.match(ICEScriptParser.ADD);
-	            this.state = 255;
-	            this.expression();
-	            break;
-
-	        case 2:
-	            this.enterOuterAlt(localctx, 2);
-	            this.state = 257;
-	            this.expression();
-	            this.state = 258;
-	            this.match(ICEScriptParser.SUB);
-	            this.state = 259;
-	            this.expression();
-	            break;
-
-	        case 3:
-	            this.enterOuterAlt(localctx, 3);
-	            this.state = 261;
-	            this.expression();
-	            this.state = 262;
-	            this.match(ICEScriptParser.MUL);
-	            this.state = 263;
-	            this.expression();
-	            break;
-
-	        case 4:
-	            this.enterOuterAlt(localctx, 4);
-	            this.state = 265;
-	            this.expression();
-	            this.state = 266;
-	            this.match(ICEScriptParser.DIV);
-	            this.state = 267;
-	            this.expression();
-	            break;
-
-	        }
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	boolexpr() {
-	    let localctx = new BoolexprContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 50, ICEScriptParser.RULE_boolexpr);
-	    try {
-	        this.state = 308;
-	        this._errHandler.sync(this);
-	        var la_ = this._interp.adaptivePredict(this._input,13,this._ctx);
-	        switch(la_) {
-	        case 1:
-	            this.enterOuterAlt(localctx, 1);
-	            this.state = 271;
-	            this.value();
-	            break;
-
-	        case 2:
-	            this.enterOuterAlt(localctx, 2);
-	            this.state = 272;
-	            this.match(ICEScriptParser.TRUE);
-	            break;
-
-	        case 3:
-	            this.enterOuterAlt(localctx, 3);
-	            this.state = 273;
-	            this.match(ICEScriptParser.FALSE);
-	            break;
-
-	        case 4:
-	            this.enterOuterAlt(localctx, 4);
-	            this.state = 274;
-	            this.value();
-	            this.state = 275;
-	            this.match(ICEScriptParser.GREATER_THAN);
-	            this.state = 276;
-	            this.boolexpr();
-	            break;
-
-	        case 5:
-	            this.enterOuterAlt(localctx, 5);
-	            this.state = 278;
-	            this.value();
-	            this.state = 279;
-	            this.match(ICEScriptParser.LESS_THAN);
-	            this.state = 280;
-	            this.boolexpr();
-	            break;
-
-	        case 6:
-	            this.enterOuterAlt(localctx, 6);
-	            this.state = 282;
-	            this.value();
-	            this.state = 283;
-	            this.match(ICEScriptParser.EQUAL_TO);
-	            this.state = 284;
-	            this.boolexpr();
-	            break;
-
-	        case 7:
-	            this.enterOuterAlt(localctx, 7);
-	            this.state = 286;
-	            this.value();
-	            this.state = 287;
-	            this.match(ICEScriptParser.NOT_EQUAL_TO);
-	            this.state = 288;
-	            this.boolexpr();
-	            break;
-
-	        case 8:
-	            this.enterOuterAlt(localctx, 8);
-	            this.state = 290;
-	            this.value();
-	            this.state = 291;
-	            this.match(ICEScriptParser.GREATER_THAN_OR_EQUAL);
-	            this.state = 292;
-	            this.boolexpr();
-	            break;
-
-	        case 9:
-	            this.enterOuterAlt(localctx, 9);
-	            this.state = 294;
-	            this.value();
-	            this.state = 295;
-	            this.match(ICEScriptParser.LESS_THAN_OR_EQUAL);
-	            this.state = 296;
-	            this.boolexpr();
-	            break;
-
-	        case 10:
-	            this.enterOuterAlt(localctx, 10);
-	            this.state = 298;
-	            this.value();
-	            this.state = 299;
-	            this.match(ICEScriptParser.OR);
-	            this.state = 300;
-	            this.boolexpr();
-	            break;
-
-	        case 11:
-	            this.enterOuterAlt(localctx, 11);
-	            this.state = 302;
-	            this.value();
-	            this.state = 303;
-	            this.match(ICEScriptParser.AND);
-	            this.state = 304;
-	            this.boolexpr();
-	            break;
-
-	        case 12:
-	            this.enterOuterAlt(localctx, 12);
-	            this.state = 306;
-	            this.match(ICEScriptParser.NOT);
-	            this.state = 307;
-	            this.boolexpr();
-	            break;
-
-	        }
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	methodcall() {
-	    let localctx = new MethodcallContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 52, ICEScriptParser.RULE_methodcall);
-	    try {
-	        this.enterOuterAlt(localctx, 1);
-	        this.state = 310;
-	        this.identifier();
-	        this.state = 311;
-	        this.match(ICEScriptParser.OPEN_BRACKET);
-	        this.state = 312;
-	        this.methodparams();
-	        this.state = 313;
-	        this.match(ICEScriptParser.CLOSE_BRACKET);
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	methodparams() {
-	    let localctx = new MethodparamsContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 54, ICEScriptParser.RULE_methodparams);
-	    var _la = 0;
-	    try {
-	        this.enterOuterAlt(localctx, 1);
-	        this.state = 318;
-	        this._errHandler.sync(this);
-	        _la = this._input.LA(1);
-	        while(_la===14 || _la===31 || ((((_la - 45)) & ~0x1f) === 0 && ((1 << (_la - 45)) & 127) !== 0)) {
-	            this.state = 315;
-	            this.expression();
-	            this.state = 320;
-	            this._errHandler.sync(this);
-	            _la = this._input.LA(1);
-	        }
-	        this.state = 325;
-	        this._errHandler.sync(this);
-	        _la = this._input.LA(1);
-	        while(_la===5) {
-	            this.state = 321;
-	            this.match(ICEScriptParser.T__4);
-	            this.state = 322;
-	            this.expression();
-	            this.state = 327;
-	            this._errHandler.sync(this);
-	            _la = this._input.LA(1);
-	        }
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	value() {
-	    let localctx = new ValueContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 56, ICEScriptParser.RULE_value);
-	    try {
-	        this.state = 330;
-	        this._errHandler.sync(this);
-	        switch(this._input.LA(1)) {
-	        case 47:
-	            this.enterOuterAlt(localctx, 1);
-	            this.state = 328;
-	            this.identifier();
-	            break;
-	        case 48:
-	        case 51:
-	            this.enterOuterAlt(localctx, 2);
-	            this.state = 329;
-	            this.number();
-	            break;
-	        default:
-	            throw new antlr4.error.NoViableAltException(this);
-	        }
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	identifier() {
-	    let localctx = new IdentifierContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 58, ICEScriptParser.RULE_identifier);
-	    try {
-	        this.enterOuterAlt(localctx, 1);
-	        this.state = 332;
-	        this.match(ICEScriptParser.IDENTIFIER);
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	number() {
-	    let localctx = new NumberContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 60, ICEScriptParser.RULE_number);
-	    var _la = 0;
-	    try {
-	        this.enterOuterAlt(localctx, 1);
-	        this.state = 334;
-	        _la = this._input.LA(1);
-	        if(!(_la===48 || _la===51)) {
-	        this._errHandler.recoverInline(this);
-	        }
-	        else {
-	        	this._errHandler.reportMatch(this);
-	            this.consume();
-	        }
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	list() {
-	    let localctx = new ListContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 62, ICEScriptParser.RULE_list);
-	    var _la = 0;
-	    try {
-	        this.enterOuterAlt(localctx, 1);
-	        this.state = 336;
-	        this.match(ICEScriptParser.T__6);
-	        this.state = 340;
-	        this._errHandler.sync(this);
-	        _la = this._input.LA(1);
-	        while(_la===14 || _la===31 || ((((_la - 45)) & ~0x1f) === 0 && ((1 << (_la - 45)) & 127) !== 0)) {
-	            this.state = 337;
-	            this.expression();
-	            this.state = 342;
-	            this._errHandler.sync(this);
-	            _la = this._input.LA(1);
-	        }
-	        this.state = 347;
-	        this._errHandler.sync(this);
-	        _la = this._input.LA(1);
-	        while(_la===5) {
-	            this.state = 343;
-	            this.match(ICEScriptParser.T__4);
-	            this.state = 344;
-	            this.expression();
-	            this.state = 349;
-	            this._errHandler.sync(this);
-	            _la = this._input.LA(1);
-	        }
-	        this.state = 350;
-	        this.match(ICEScriptParser.T__7);
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	string() {
-	    let localctx = new StringContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 64, ICEScriptParser.RULE_string);
-	    try {
-	        this.enterOuterAlt(localctx, 1);
-	        this.state = 352;
-	        this.match(ICEScriptParser.STRING);
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
-
-	type() {
-	    let localctx = new TypeContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 66, ICEScriptParser.RULE_type);
-	    try {
-	        this.state = 360;
-	        this._errHandler.sync(this);
-	        switch(this._input.LA(1)) {
-	        case 5:
-	        case 6:
-	        case 14:
-	        case 15:
-	        case 16:
-	        case 18:
-	        case 31:
-	        case 32:
-	        case 37:
-	        case 42:
-	        case 43:
-	        case 44:
-	        case 45:
-	        case 46:
-	        case 47:
-	        case 48:
-	        case 49:
-	        case 50:
-	        case 51:
-	            this.enterOuterAlt(localctx, 1);
-
-	            break;
-	        case 9:
-	            this.enterOuterAlt(localctx, 2);
-	            this.state = 355;
-	            this.match(ICEScriptParser.T__8);
-	            break;
-	        case 10:
-	            this.enterOuterAlt(localctx, 3);
-	            this.state = 356;
-	            this.match(ICEScriptParser.T__9);
-	            break;
-	        case 11:
-	            this.enterOuterAlt(localctx, 4);
-	            this.state = 357;
-	            this.match(ICEScriptParser.T__10);
-	            break;
-	        case 12:
-	            this.enterOuterAlt(localctx, 5);
-	            this.state = 358;
-	            this.match(ICEScriptParser.T__11);
-	            break;
-	        case 13:
-	            this.enterOuterAlt(localctx, 6);
-	            this.state = 359;
-	            this.match(ICEScriptParser.T__12);
-	            break;
-	        default:
-	            throw new antlr4.error.NoViableAltException(this);
-	        }
-	    } catch (re) {
-	    	if(re instanceof antlr4.error.RecognitionException) {
-		        localctx.exception = re;
-		        this._errHandler.reportError(this, re);
-		        this._errHandler.recover(this, re);
-		    } else {
-		    	throw re;
-		    }
-	    } finally {
-	        this.exitRule();
-	    }
-	    return localctx;
-	}
-
-
+var antlr4 = require('antlr4/index');
+var ICEScriptListener = require('./ICEScriptListener').ICEScriptListener;
+var ICEScriptVisitor = require('./ICEScriptVisitor').ICEScriptVisitor;
+
+var grammarFileName = "ICEScript";
+
+var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
+    "\u0003;\u019c\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004\t",
+    "\u0004\u0004\u0005\t\u0005\u0004\u0006\t\u0006\u0004\u0007\t\u0007\u0004",
+    "\b\t\b\u0004\t\t\t\u0004\n\t\n\u0004\u000b\t\u000b\u0004\f\t\f\u0004",
+    "\r\t\r\u0004\u000e\t\u000e\u0004\u000f\t\u000f\u0004\u0010\t\u0010\u0004",
+    "\u0011\t\u0011\u0004\u0012\t\u0012\u0004\u0013\t\u0013\u0004\u0014\t",
+    "\u0014\u0004\u0015\t\u0015\u0004\u0016\t\u0016\u0004\u0017\t\u0017\u0004",
+    "\u0018\t\u0018\u0004\u0019\t\u0019\u0004\u001a\t\u001a\u0004\u001b\t",
+    "\u001b\u0004\u001c\t\u001c\u0004\u001d\t\u001d\u0004\u001e\t\u001e\u0004",
+    "\u001f\t\u001f\u0004 \t \u0004!\t!\u0004\"\t\"\u0004#\t#\u0004$\t$\u0003",
+    "\u0002\u0003\u0002\u0007\u0002K\n\u0002\f\u0002\u000e\u0002N\u000b\u0002",
+    "\u0003\u0002\u0007\u0002Q\n\u0002\f\u0002\u000e\u0002T\u000b\u0002\u0003",
+    "\u0002\u0005\u0002W\n\u0002\u0003\u0003\u0007\u0003Z\n\u0003\f\u0003",
+    "\u000e\u0003]\u000b\u0003\u0003\u0004\u0003\u0004\u0003\u0005\u0003",
+    "\u0005\u0003\u0005\u0003\u0005\u0003\u0006\u0003\u0006\u0003\u0006\u0003",
+    "\u0006\u0003\u0007\u0003\u0007\u0003\u0007\u0003\u0007\u0003\u0007\u0003",
+    "\u0007\u0003\u0007\u0003\u0007\u0003\u0007\u0003\b\u0003\b\u0003\b\u0003",
+    "\b\u0003\b\u0007\bw\n\b\f\b\u000e\bz\u000b\b\u0005\b|\n\b\u0003\t\u0003",
+    "\t\u0003\t\u0003\t\u0003\t\u0005\t\u0083\n\t\u0003\t\u0003\t\u0003\t",
+    "\u0003\n\u0003\n\u0007\n\u008a\n\n\f\n\u000e\n\u008d\u000b\n\u0003\n",
+    "\u0003\n\u0003\n\u0003\n\u0003\n\u0003\n\u0003\n\u0003\n\u0003\n\u0003",
+    "\n\u0003\n\u0003\n\u0003\n\u0003\n\u0003\n\u0003\n\u0003\n\u0003\n\u0003",
+    "\n\u0005\n\u00a2\n\n\u0003\u000b\u0003\u000b\u0003\u000b\u0003\u000b",
+    "\u0003\u000b\u0003\f\u0003\f\u0003\f\u0003\f\u0003\f\u0003\r\u0006\r",
+    "\u00af\n\r\r\r\u000e\r\u00b0\u0003\u000e\u0003\u000e\u0003\u000e\u0003",
+    "\u000e\u0003\u000e\u0003\u000f\u0003\u000f\u0003\u000f\u0003\u000f\u0003",
+    "\u000f\u0003\u0010\u0003\u0010\u0003\u0010\u0003\u0010\u0003\u0010\u0003",
+    "\u0011\u0003\u0011\u0003\u0011\u0003\u0011\u0003\u0011\u0003\u0012\u0003",
+    "\u0012\u0003\u0012\u0003\u0012\u0003\u0013\u0003\u0013\u0003\u0013\u0003",
+    "\u0013\u0003\u0014\u0003\u0014\u0003\u0014\u0003\u0014\u0003\u0014\u0003",
+    "\u0014\u0003\u0015\u0003\u0015\u0003\u0015\u0003\u0015\u0003\u0015\u0003",
+    "\u0015\u0003\u0015\u0003\u0015\u0003\u0016\u0003\u0016\u0003\u0016\u0003",
+    "\u0016\u0003\u0016\u0003\u0016\u0003\u0017\u0003\u0017\u0003\u0017\u0003",
+    "\u0017\u0003\u0017\u0003\u0017\u0003\u0017\u0003\u0017\u0003\u0017\u0003",
+    "\u0017\u0003\u0017\u0003\u0017\u0003\u0017\u0003\u0017\u0003\u0017\u0003",
+    "\u0017\u0003\u0017\u0005\u0017\u00f4\n\u0017\u0003\u0018\u0003\u0018",
+    "\u0003\u0018\u0003\u0018\u0003\u0018\u0003\u0018\u0003\u0018\u0003\u0018",
+    "\u0003\u0018\u0003\u0018\u0003\u0018\u0003\u0018\u0003\u0018\u0003\u0018",
+    "\u0005\u0018\u0104\n\u0018\u0003\u0019\u0003\u0019\u0003\u0019\u0003",
+    "\u0019\u0003\u001a\u0003\u001a\u0003\u001a\u0003\u001a\u0003\u001a\u0003",
+    "\u001a\u0003\u001a\u0003\u001a\u0003\u001a\u0003\u001a\u0003\u001a\u0005",
+    "\u001a\u0115\n\u001a\u0003\u001a\u0003\u001a\u0003\u001a\u0003\u001a",
+    "\u0003\u001a\u0003\u001a\u0003\u001a\u0003\u001a\u0003\u001a\u0003\u001a",
+    "\u0003\u001a\u0003\u001a\u0007\u001a\u0123\n\u001a\f\u001a\u000e\u001a",
+    "\u0126\u000b\u001a\u0003\u001b\u0003\u001b\u0003\u001b\u0003\u001b\u0003",
+    "\u001b\u0003\u001b\u0003\u001b\u0003\u001b\u0003\u001b\u0003\u001b\u0003",
+    "\u001b\u0003\u001b\u0003\u001b\u0003\u001b\u0003\u001b\u0003\u001b\u0005",
+    "\u001b\u0138\n\u001b\u0003\u001c\u0003\u001c\u0003\u001c\u0003\u001c",
+    "\u0003\u001c\u0003\u001c\u0003\u001c\u0003\u001c\u0003\u001c\u0003\u001c",
+    "\u0003\u001c\u0003\u001c\u0003\u001c\u0003\u001c\u0003\u001c\u0003\u001c",
+    "\u0003\u001c\u0003\u001c\u0003\u001c\u0003\u001c\u0003\u001c\u0003\u001c",
+    "\u0003\u001c\u0003\u001c\u0003\u001c\u0003\u001c\u0003\u001c\u0003\u001c",
+    "\u0003\u001c\u0003\u001c\u0003\u001c\u0003\u001c\u0003\u001c\u0003\u001c",
+    "\u0003\u001c\u0003\u001c\u0003\u001c\u0005\u001c\u015f\n\u001c\u0003",
+    "\u001d\u0003\u001d\u0003\u001d\u0003\u001d\u0003\u001d\u0003\u001e\u0007",
+    "\u001e\u0167\n\u001e\f\u001e\u000e\u001e\u016a\u000b\u001e\u0003\u001e",
+    "\u0003\u001e\u0007\u001e\u016e\n\u001e\f\u001e\u000e\u001e\u0171\u000b",
+    "\u001e\u0003\u001f\u0003\u001f\u0005\u001f\u0175\n\u001f\u0003 \u0003",
+    " \u0003!\u0003!\u0003\"\u0003\"\u0007\"\u017d\n\"\f\"\u000e\"\u0180",
+    "\u000b\"\u0003\"\u0003\"\u0007\"\u0184\n\"\f\"\u000e\"\u0187\u000b\"",
+    "\u0003\"\u0003\"\u0003#\u0003#\u0003$\u0003$\u0003$\u0003$\u0003$\u0003",
+    "$\u0005$\u0193\n$\u0003$\u0003$\u0007$\u0197\n$\f$\u000e$\u019a\u000b",
+    "$\u0003$\u0003\u00b0\u00042F%\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012",
+    "\u0014\u0016\u0018\u001a\u001c\u001e \"$&(*,.02468:<>@BDF\u0002\u0003",
+    "\u0004\u00025588\u0002\u01ba\u0002V\u0003\u0002\u0002\u0002\u0004[\u0003",
+    "\u0002\u0002\u0002\u0006^\u0003\u0002\u0002\u0002\b`\u0003\u0002\u0002",
+    "\u0002\nd\u0003\u0002\u0002\u0002\fh\u0003\u0002\u0002\u0002\u000e{",
+    "\u0003\u0002\u0002\u0002\u0010\u0082\u0003\u0002\u0002\u0002\u0012\u00a1",
+    "\u0003\u0002\u0002\u0002\u0014\u00a3\u0003\u0002\u0002\u0002\u0016\u00a8",
+    "\u0003\u0002\u0002\u0002\u0018\u00ae\u0003\u0002\u0002\u0002\u001a\u00b2",
+    "\u0003\u0002\u0002\u0002\u001c\u00b7\u0003\u0002\u0002\u0002\u001e\u00bc",
+    "\u0003\u0002\u0002\u0002 \u00c1\u0003\u0002\u0002\u0002\"\u00c6\u0003",
+    "\u0002\u0002\u0002$\u00ca\u0003\u0002\u0002\u0002&\u00ce\u0003\u0002",
+    "\u0002\u0002(\u00d4\u0003\u0002\u0002\u0002*\u00dc\u0003\u0002\u0002",
+    "\u0002,\u00f3\u0003\u0002\u0002\u0002.\u0103\u0003\u0002\u0002\u0002",
+    "0\u0105\u0003\u0002\u0002\u00022\u0114\u0003\u0002\u0002\u00024\u0137",
+    "\u0003\u0002\u0002\u00026\u015e\u0003\u0002\u0002\u00028\u0160\u0003",
+    "\u0002\u0002\u0002:\u0168\u0003\u0002\u0002\u0002<\u0174\u0003\u0002",
+    "\u0002\u0002>\u0176\u0003\u0002\u0002\u0002@\u0178\u0003\u0002\u0002",
+    "\u0002B\u017a\u0003\u0002\u0002\u0002D\u018a\u0003\u0002\u0002\u0002",
+    "F\u0192\u0003\u0002\u0002\u0002HL\u0005\u0004\u0003\u0002IK\u0005\f",
+    "\u0007\u0002JI\u0003\u0002\u0002\u0002KN\u0003\u0002\u0002\u0002LJ\u0003",
+    "\u0002\u0002\u0002LM\u0003\u0002\u0002\u0002MR\u0003\u0002\u0002\u0002",
+    "NL\u0003\u0002\u0002\u0002OQ\u0005\u0012\n\u0002PO\u0003\u0002\u0002",
+    "\u0002QT\u0003\u0002\u0002\u0002RP\u0003\u0002\u0002\u0002RS\u0003\u0002",
+    "\u0002\u0002SW\u0003\u0002\u0002\u0002TR\u0003\u0002\u0002\u0002UW\u0007",
+    "\u0002\u0002\u0003VH\u0003\u0002\u0002\u0002VU\u0003\u0002\u0002\u0002",
+    "W\u0003\u0003\u0002\u0002\u0002XZ\u0005\n\u0006\u0002YX\u0003\u0002",
+    "\u0002\u0002Z]\u0003\u0002\u0002\u0002[Y\u0003\u0002\u0002\u0002[\\",
+    "\u0003\u0002\u0002\u0002\\\u0005\u0003\u0002\u0002\u0002][\u0003\u0002",
+    "\u0002\u0002^_\u0005\b\u0005\u0002_\u0007\u0003\u0002\u0002\u0002`a",
+    "\u0007\u0003\u0002\u0002ab\u0005> \u0002bc\u0007\u0016\u0002\u0002c",
+    "\t\u0003\u0002\u0002\u0002de\u0007\u0004\u0002\u0002ef\u0005> \u0002",
+    "fg\u0007\u0016\u0002\u0002g\u000b\u0003\u0002\u0002\u0002hi\u0007\u0005",
+    "\u0002\u0002ij\u0005> \u0002jk\u0007\u0012\u0002\u0002kl\u0005\u000e",
+    "\b\u0002lm\u0007\u0013\u0002\u0002mn\u0007\u0006\u0002\u0002no\u0005",
+    "F$\u0002op\u0005\u0012\n\u0002p\r\u0003\u0002\u0002\u0002q|\u0005\u0010",
+    "\t\u0002r|\u0003\u0002\u0002\u0002sx\u0005\u0010\t\u0002tu\u0007\u0007",
+    "\u0002\u0002uw\u0005\u0010\t\u0002vt\u0003\u0002\u0002\u0002wz\u0003",
+    "\u0002\u0002\u0002xv\u0003\u0002\u0002\u0002xy\u0003\u0002\u0002\u0002",
+    "y|\u0003\u0002\u0002\u0002zx\u0003\u0002\u0002\u0002{q\u0003\u0002\u0002",
+    "\u0002{r\u0003\u0002\u0002\u0002{s\u0003\u0002\u0002\u0002|\u000f\u0003",
+    "\u0002\u0002\u0002}\u0083\u0005> \u0002~\u0083\u0003\u0002\u0002\u0002",
+    "\u007f\u0083\u00052\u001a\u0002\u0080\u0083\u0003\u0002\u0002\u0002",
+    "\u0081\u0083\u0005\u0018\r\u0002\u0082}\u0003\u0002\u0002\u0002\u0082",
+    "~\u0003\u0002\u0002\u0002\u0082\u007f\u0003\u0002\u0002\u0002\u0082",
+    "\u0080\u0003\u0002\u0002\u0002\u0082\u0081\u0003\u0002\u0002\u0002\u0083",
+    "\u0084\u0003\u0002\u0002\u0002\u0084\u0085\u0007\u0006\u0002\u0002\u0085",
+    "\u0086\u0005F$\u0002\u0086\u0011\u0003\u0002\u0002\u0002\u0087\u008b",
+    "\u0007\u0014\u0002\u0002\u0088\u008a\u0005\u0012\n\u0002\u0089\u0088",
+    "\u0003\u0002\u0002\u0002\u008a\u008d\u0003\u0002\u0002\u0002\u008b\u0089",
+    "\u0003\u0002\u0002\u0002\u008b\u008c\u0003\u0002\u0002\u0002\u008c\u008e",
+    "\u0003\u0002\u0002\u0002\u008d\u008b\u0003\u0002\u0002\u0002\u008e\u00a2",
+    "\u0007\u0015\u0002\u0002\u008f\u00a2\u0005\u0014\u000b\u0002\u0090\u00a2",
+    "\u0005\u0016\f\u0002\u0091\u00a2\u0005\u001a\u000e\u0002\u0092\u00a2",
+    "\u0005\u001c\u000f\u0002\u0093\u00a2\u0005\u001e\u0010\u0002\u0094\u00a2",
+    "\u0005 \u0011\u0002\u0095\u00a2\u0005\"\u0012\u0002\u0096\u00a2\u0005",
+    "$\u0013\u0002\u0097\u00a2\u0005&\u0014\u0002\u0098\u00a2\u0005(\u0015",
+    "\u0002\u0099\u00a2\u0005*\u0016\u0002\u009a\u00a2\u0005,\u0017\u0002",
+    "\u009b\u00a2\u0005.\u0018\u0002\u009c\u00a2\u00050\u0019\u0002\u009d",
+    "\u009e\u00052\u001a\u0002\u009e\u009f\u0007\u0016\u0002\u0002\u009f",
+    "\u00a2\u0003\u0002\u0002\u0002\u00a0\u00a2\u0007\u0016\u0002\u0002\u00a1",
+    "\u0087\u0003\u0002\u0002\u0002\u00a1\u008f\u0003\u0002\u0002\u0002\u00a1",
+    "\u0090\u0003\u0002\u0002\u0002\u00a1\u0091\u0003\u0002\u0002\u0002\u00a1",
+    "\u0092\u0003\u0002\u0002\u0002\u00a1\u0093\u0003\u0002\u0002\u0002\u00a1",
+    "\u0094\u0003\u0002\u0002\u0002\u00a1\u0095\u0003\u0002\u0002\u0002\u00a1",
+    "\u0096\u0003\u0002\u0002\u0002\u00a1\u0097\u0003\u0002\u0002\u0002\u00a1",
+    "\u0098\u0003\u0002\u0002\u0002\u00a1\u0099\u0003\u0002\u0002\u0002\u00a1",
+    "\u009a\u0003\u0002\u0002\u0002\u00a1\u009b\u0003\u0002\u0002\u0002\u00a1",
+    "\u009c\u0003\u0002\u0002\u0002\u00a1\u009d\u0003\u0002\u0002\u0002\u00a1",
+    "\u00a0\u0003\u0002\u0002\u0002\u00a2\u0013\u0003\u0002\u0002\u0002\u00a3",
+    "\u00a4\u0005> \u0002\u00a4\u00a5\u0007$\u0002\u0002\u00a5\u00a6\u0005",
+    "2\u001a\u0002\u00a6\u00a7\u0007\u0016\u0002\u0002\u00a7\u0015\u0003",
+    "\u0002\u0002\u0002\u00a8\u00a9\u0007\b\u0002\u0002\u00a9\u00aa\u0007",
+    "\u0014\u0002\u0002\u00aa\u00ab\u0005\u0018\r\u0002\u00ab\u00ac\u0007",
+    "\u0015\u0002\u0002\u00ac\u0017\u0003\u0002\u0002\u0002\u00ad\u00af\u000b",
+    "\u0002\u0002\u0002\u00ae\u00ad\u0003\u0002\u0002\u0002\u00af\u00b0\u0003",
+    "\u0002\u0002\u0002\u00b0\u00b1\u0003\u0002\u0002\u0002\u00b0\u00ae\u0003",
+    "\u0002\u0002\u0002\u00b1\u0019\u0003\u0002\u0002\u0002\u00b2\u00b3\u0005",
+    "> \u0002\u00b3\u00b4\u0007%\u0002\u0002\u00b4\u00b5\u0005<\u001f\u0002",
+    "\u00b5\u00b6\u0007\u0016\u0002\u0002\u00b6\u001b\u0003\u0002\u0002\u0002",
+    "\u00b7\u00b8\u0005> \u0002\u00b8\u00b9\u0007&\u0002\u0002\u00b9\u00ba",
+    "\u0005<\u001f\u0002\u00ba\u00bb\u0007\u0016\u0002\u0002\u00bb\u001d",
+    "\u0003\u0002\u0002\u0002\u00bc\u00bd\u0005> \u0002\u00bd\u00be\u0007",
+    "\'\u0002\u0002\u00be\u00bf\u0005<\u001f\u0002\u00bf\u00c0\u0007\u0016",
+    "\u0002\u0002\u00c0\u001f\u0003\u0002\u0002\u0002\u00c1\u00c2\u0005>",
+    " \u0002\u00c2\u00c3\u0007(\u0002\u0002\u00c3\u00c4\u0005<\u001f\u0002",
+    "\u00c4\u00c5\u0007\u0016\u0002\u0002\u00c5!\u0003\u0002\u0002\u0002",
+    "\u00c6\u00c7\u0005> \u0002\u00c7\u00c8\u0007+\u0002\u0002\u00c8\u00c9",
+    "\u0007\u0016\u0002\u0002\u00c9#\u0003\u0002\u0002\u0002\u00ca\u00cb",
+    "\u0005> \u0002\u00cb\u00cc\u0007,\u0002\u0002\u00cc\u00cd\u0007\u0016",
+    "\u0002\u0002\u00cd%\u0003\u0002\u0002\u0002\u00ce\u00cf\u0007)\u0002",
+    "\u0002\u00cf\u00d0\u0007\u0012\u0002\u0002\u00d0\u00d1\u00056\u001c",
+    "\u0002\u00d1\u00d2\u0007\u0013\u0002\u0002\u00d2\u00d3\u0005\u0012\n",
+    "\u0002\u00d3\'\u0003\u0002\u0002\u0002\u00d4\u00d5\u0007)\u0002\u0002",
+    "\u00d5\u00d6\u0007\u0012\u0002\u0002\u00d6\u00d7\u00056\u001c\u0002",
+    "\u00d7\u00d8\u0007\u0013\u0002\u0002\u00d8\u00d9\u0005\u0012\n\u0002",
+    "\u00d9\u00da\u0007*\u0002\u0002\u00da\u00db\u0005\u0012\n\u0002\u00db",
+    ")\u0003\u0002\u0002\u0002\u00dc\u00dd\u0007/\u0002\u0002\u00dd\u00de",
+    "\u0007\u0012\u0002\u0002\u00de\u00df\u00056\u001c\u0002\u00df\u00e0",
+    "\u0007\u0013\u0002\u0002\u00e0\u00e1\u0005\u0012\n\u0002\u00e1+\u0003",
+    "\u0002\u0002\u0002\u00e2\u00e3\u00070\u0002\u0002\u00e3\u00e4\u0007",
+    "\u0012\u0002\u0002\u00e4\u00e5\u0005.\u0018\u0002\u00e5\u00e6\u0005",
+    "6\u001c\u0002\u00e6\u00e7\u0007\u0016\u0002\u0002\u00e7\u00e8\u0005",
+    "\"\u0012\u0002\u00e8\u00e9\u0007\u0013\u0002\u0002\u00e9\u00ea\u0005",
+    "\u0012\n\u0002\u00ea\u00f4\u0003\u0002\u0002\u0002\u00eb\u00ec\u0007",
+    "0\u0002\u0002\u00ec\u00ed\u0007\u0012\u0002\u0002\u00ed\u00ee\u0005",
+    ".\u0018\u0002\u00ee\u00ef\u0007\t\u0002\u0002\u00ef\u00f0\u0005<\u001f",
+    "\u0002\u00f0\u00f1\u0007\u0013\u0002\u0002\u00f1\u00f2\u0005\u0012\n",
+    "\u0002\u00f2\u00f4\u0003\u0002\u0002\u0002\u00f3\u00e2\u0003\u0002\u0002",
+    "\u0002\u00f3\u00eb\u0003\u0002\u0002\u0002\u00f4-\u0003\u0002\u0002",
+    "\u0002\u00f5\u00f6\u0007.\u0002\u0002\u00f6\u00f7\u0005> \u0002\u00f7",
+    "\u00f8\u0007$\u0002\u0002\u00f8\u00f9\u00052\u001a\u0002\u00f9\u00fa",
+    "\u0007\u0016\u0002\u0002\u00fa\u0104\u0003\u0002\u0002\u0002\u00fb\u00fc",
+    "\u0007.\u0002\u0002\u00fc\u00fd\u0005> \u0002\u00fd\u00fe\u0007\u0006",
+    "\u0002\u0002\u00fe\u00ff\u0005F$\u0002\u00ff\u0100\u0007$\u0002\u0002",
+    "\u0100\u0101\u00052\u001a\u0002\u0101\u0102\u0007\u0016\u0002\u0002",
+    "\u0102\u0104\u0003\u0002\u0002\u0002\u0103\u00f5\u0003\u0002\u0002\u0002",
+    "\u0103\u00fb\u0003\u0002\u0002\u0002\u0104/\u0003\u0002\u0002\u0002",
+    "\u0105\u0106\u00071\u0002\u0002\u0106\u0107\u00052\u001a\u0002\u0107",
+    "\u0108\u0007\u0016\u0002\u0002\u01081\u0003\u0002\u0002\u0002\u0109",
+    "\u010a\b\u001a\u0001\u0002\u010a\u010b\u0007\u0012\u0002\u0002\u010b",
+    "\u010c\u00052\u001a\u0002\u010c\u010d\u0007\u0013\u0002\u0002\u010d",
+    "\u0115\u0003\u0002\u0002\u0002\u010e\u0115\u0005<\u001f\u0002\u010f",
+    "\u0115\u0005> \u0002\u0110\u0115\u00056\u001c\u0002\u0111\u0115\u0007",
+    "6\u0002\u0002\u0112\u0115\u00058\u001d\u0002\u0113\u0115\u00077\u0002",
+    "\u0002\u0114\u0109\u0003\u0002\u0002\u0002\u0114\u010e\u0003\u0002\u0002",
+    "\u0002\u0114\u010f\u0003\u0002\u0002\u0002\u0114\u0110\u0003\u0002\u0002",
+    "\u0002\u0114\u0111\u0003\u0002\u0002\u0002\u0114\u0112\u0003\u0002\u0002",
+    "\u0002\u0114\u0113\u0003\u0002\u0002\u0002\u0115\u0124\u0003\u0002\u0002",
+    "\u0002\u0116\u0117\f\u0006\u0002\u0002\u0117\u0118\u0007\u0017\u0002",
+    "\u0002\u0118\u0123\u00052\u001a\u0007\u0119\u011a\f\u0005\u0002\u0002",
+    "\u011a\u011b\u0007\u0018\u0002\u0002\u011b\u0123\u00052\u001a\u0006",
+    "\u011c\u011d\f\u0004\u0002\u0002\u011d\u011e\u0007\u0019\u0002\u0002",
+    "\u011e\u0123\u00052\u001a\u0005\u011f\u0120\f\u0003\u0002\u0002\u0120",
+    "\u0121\u0007\u001a\u0002\u0002\u0121\u0123\u00052\u001a\u0004\u0122",
+    "\u0116\u0003\u0002\u0002\u0002\u0122\u0119\u0003\u0002\u0002\u0002\u0122",
+    "\u011c\u0003\u0002\u0002\u0002\u0122\u011f\u0003\u0002\u0002\u0002\u0123",
+    "\u0126\u0003\u0002\u0002\u0002\u0124\u0122\u0003\u0002\u0002\u0002\u0124",
+    "\u0125\u0003\u0002\u0002\u0002\u01253\u0003\u0002\u0002\u0002\u0126",
+    "\u0124\u0003\u0002\u0002\u0002\u0127\u0128\u00052\u001a\u0002\u0128",
+    "\u0129\u0007\u0017\u0002\u0002\u0129\u012a\u00052\u001a\u0002\u012a",
+    "\u0138\u0003\u0002\u0002\u0002\u012b\u012c\u00052\u001a\u0002\u012c",
+    "\u012d\u0007\u0018\u0002\u0002\u012d\u012e\u00052\u001a\u0002\u012e",
+    "\u0138\u0003\u0002\u0002\u0002\u012f\u0130\u00052\u001a\u0002\u0130",
+    "\u0131\u0007\u0019\u0002\u0002\u0131\u0132\u00052\u001a\u0002\u0132",
+    "\u0138\u0003\u0002\u0002\u0002\u0133\u0134\u00052\u001a\u0002\u0134",
+    "\u0135\u0007\u001a\u0002\u0002\u0135\u0136\u00052\u001a\u0002\u0136",
+    "\u0138\u0003\u0002\u0002\u0002\u0137\u0127\u0003\u0002\u0002\u0002\u0137",
+    "\u012b\u0003\u0002\u0002\u0002\u0137\u012f\u0003\u0002\u0002\u0002\u0137",
+    "\u0133\u0003\u0002\u0002\u0002\u01385\u0003\u0002\u0002\u0002\u0139",
+    "\u015f\u0005<\u001f\u0002\u013a\u015f\u00072\u0002\u0002\u013b\u015f",
+    "\u00073\u0002\u0002\u013c\u013d\u0005<\u001f\u0002\u013d\u013e\u0007",
+    "\u001b\u0002\u0002\u013e\u013f\u00056\u001c\u0002\u013f\u015f\u0003",
+    "\u0002\u0002\u0002\u0140\u0141\u0005<\u001f\u0002\u0141\u0142\u0007",
+    "\u001c\u0002\u0002\u0142\u0143\u00056\u001c\u0002\u0143\u015f\u0003",
+    "\u0002\u0002\u0002\u0144\u0145\u0005<\u001f\u0002\u0145\u0146\u0007",
+    "\u001d\u0002\u0002\u0146\u0147\u00056\u001c\u0002\u0147\u015f\u0003",
+    "\u0002\u0002\u0002\u0148\u0149\u0005<\u001f\u0002\u0149\u014a\u0007",
+    "\u001e\u0002\u0002\u014a\u014b\u00056\u001c\u0002\u014b\u015f\u0003",
+    "\u0002\u0002\u0002\u014c\u014d\u0005<\u001f\u0002\u014d\u014e\u0007",
+    "\u001f\u0002\u0002\u014e\u014f\u00056\u001c\u0002\u014f\u015f\u0003",
+    "\u0002\u0002\u0002\u0150\u0151\u0005<\u001f\u0002\u0151\u0152\u0007",
+    " \u0002\u0002\u0152\u0153\u00056\u001c\u0002\u0153\u015f\u0003\u0002",
+    "\u0002\u0002\u0154\u0155\u0005<\u001f\u0002\u0155\u0156\u0007!\u0002",
+    "\u0002\u0156\u0157\u00056\u001c\u0002\u0157\u015f\u0003\u0002\u0002",
+    "\u0002\u0158\u0159\u0005<\u001f\u0002\u0159\u015a\u0007\"\u0002\u0002",
+    "\u015a\u015b\u00056\u001c\u0002\u015b\u015f\u0003\u0002\u0002\u0002",
+    "\u015c\u015d\u0007#\u0002\u0002\u015d\u015f\u00056\u001c\u0002\u015e",
+    "\u0139\u0003\u0002\u0002\u0002\u015e\u013a\u0003\u0002\u0002\u0002\u015e",
+    "\u013b\u0003\u0002\u0002\u0002\u015e\u013c\u0003\u0002\u0002\u0002\u015e",
+    "\u0140\u0003\u0002\u0002\u0002\u015e\u0144\u0003\u0002\u0002\u0002\u015e",
+    "\u0148\u0003\u0002\u0002\u0002\u015e\u014c\u0003\u0002\u0002\u0002\u015e",
+    "\u0150\u0003\u0002\u0002\u0002\u015e\u0154\u0003\u0002\u0002\u0002\u015e",
+    "\u0158\u0003\u0002\u0002\u0002\u015e\u015c\u0003\u0002\u0002\u0002\u015f",
+    "7\u0003\u0002\u0002\u0002\u0160\u0161\u0005> \u0002\u0161\u0162\u0007",
+    "\u0012\u0002\u0002\u0162\u0163\u0005:\u001e\u0002\u0163\u0164\u0007",
+    "\u0013\u0002\u0002\u01649\u0003\u0002\u0002\u0002\u0165\u0167\u0005",
+    "2\u001a\u0002\u0166\u0165\u0003\u0002\u0002\u0002\u0167\u016a\u0003",
+    "\u0002\u0002\u0002\u0168\u0166\u0003\u0002\u0002\u0002\u0168\u0169\u0003",
+    "\u0002\u0002\u0002\u0169\u016f\u0003\u0002\u0002\u0002\u016a\u0168\u0003",
+    "\u0002\u0002\u0002\u016b\u016c\u0007\u0007\u0002\u0002\u016c\u016e\u0005",
+    "2\u001a\u0002\u016d\u016b\u0003\u0002\u0002\u0002\u016e\u0171\u0003",
+    "\u0002\u0002\u0002\u016f\u016d\u0003\u0002\u0002\u0002\u016f\u0170\u0003",
+    "\u0002\u0002\u0002\u0170;\u0003\u0002\u0002\u0002\u0171\u016f\u0003",
+    "\u0002\u0002\u0002\u0172\u0175\u0005> \u0002\u0173\u0175\u0005@!\u0002",
+    "\u0174\u0172\u0003\u0002\u0002\u0002\u0174\u0173\u0003\u0002\u0002\u0002",
+    "\u0175=\u0003\u0002\u0002\u0002\u0176\u0177\u00074\u0002\u0002\u0177",
+    "?\u0003\u0002\u0002\u0002\u0178\u0179\t\u0002\u0002\u0002\u0179A\u0003",
+    "\u0002\u0002\u0002\u017a\u017e\u0007\n\u0002\u0002\u017b\u017d\u0005",
+    "2\u001a\u0002\u017c\u017b\u0003\u0002\u0002\u0002\u017d\u0180\u0003",
+    "\u0002\u0002\u0002\u017e\u017c\u0003\u0002\u0002\u0002\u017e\u017f\u0003",
+    "\u0002\u0002\u0002\u017f\u0185\u0003\u0002\u0002\u0002\u0180\u017e\u0003",
+    "\u0002\u0002\u0002\u0181\u0182\u0007\u0007\u0002\u0002\u0182\u0184\u0005",
+    "2\u001a\u0002\u0183\u0181\u0003\u0002\u0002\u0002\u0184\u0187\u0003",
+    "\u0002\u0002\u0002\u0185\u0183\u0003\u0002\u0002\u0002\u0185\u0186\u0003",
+    "\u0002\u0002\u0002\u0186\u0188\u0003\u0002\u0002\u0002\u0187\u0185\u0003",
+    "\u0002\u0002\u0002\u0188\u0189\u0007\u000b\u0002\u0002\u0189C\u0003",
+    "\u0002\u0002\u0002\u018a\u018b\u00076\u0002\u0002\u018bE\u0003\u0002",
+    "\u0002\u0002\u018c\u0193\b$\u0001\u0002\u018d\u0193\u0007\f\u0002\u0002",
+    "\u018e\u0193\u0007\r\u0002\u0002\u018f\u0193\u0007\u000e\u0002\u0002",
+    "\u0190\u0193\u0007\u000f\u0002\u0002\u0191\u0193\u0007\u0010\u0002\u0002",
+    "\u0192\u018c\u0003\u0002\u0002\u0002\u0192\u018d\u0003\u0002\u0002\u0002",
+    "\u0192\u018e\u0003\u0002\u0002\u0002\u0192\u018f\u0003\u0002\u0002\u0002",
+    "\u0192\u0190\u0003\u0002\u0002\u0002\u0192\u0191\u0003\u0002\u0002\u0002",
+    "\u0193\u0198\u0003\u0002\u0002\u0002\u0194\u0195\f\u0003\u0002\u0002",
+    "\u0195\u0197\u0007\u0011\u0002\u0002\u0196\u0194\u0003\u0002\u0002\u0002",
+    "\u0197\u019a\u0003\u0002\u0002\u0002\u0198\u0196\u0003\u0002\u0002\u0002",
+    "\u0198\u0199\u0003\u0002\u0002\u0002\u0199G\u0003\u0002\u0002\u0002",
+    "\u019a\u0198\u0003\u0002\u0002\u0002\u001aLRV[x{\u0082\u008b\u00a1\u00b0",
+    "\u00f3\u0103\u0114\u0122\u0124\u0137\u015e\u0168\u016f\u0174\u017e\u0185",
+    "\u0192\u0198"].join("");
+
+
+var atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
+
+var decisionsToDFA = atn.decisionToState.map( function(ds, index) { return new antlr4.dfa.DFA(ds, index); });
+
+var sharedContextCache = new antlr4.PredictionContextCache();
+
+var literalNames = [ null, "'name:'", "'import'", "'function '", "':'", 
+                     "','", "'__ASM'", "'in'", "'['", "']'", "'void'", "'list'", 
+                     "'str'", "'number'", "'bool'", "'[]'", "'('", "')'", 
+                     "'{'", "'}'", "';'", "'+'", "'-'", "'*'", "'/'", "'>'", 
+                     "'<'", "'=='", "'!='", "'>='", "'<='", "'||'", "'&&'", 
+                     "'!'", "'='", "'+='", "'-='", "'*='", "'/='", "'if'", 
+                     "'else'", "'++'", "'--'", "'function'", "'var'", "'while'", 
+                     "'for'", "'return'", "'true'", "'false'", null, "'$pi'" ];
+
+var symbolicNames = [ null, null, null, null, null, null, null, null, null, 
+                      null, null, null, null, null, null, null, "OPEN_BRACKET", 
+                      "CLOSE_BRACKET", "OPEN_CURLEY", "CLOSE_CURLEY", "END_STMT", 
+                      "ADD", "SUB", "MUL", "DIV", "GREATER_THAN", "LESS_THAN", 
+                      "EQUAL_TO", "NOT_EQUAL_TO", "GREATER_THAN_OR_EQUAL", 
+                      "LESS_THAN_OR_EQUAL", "OR", "AND", "NOT", "ASSIGN", 
+                      "ADDASSIGN", "SUBASSIGN", "MULASSIGN", "DIVASSIGN", 
+                      "IF", "ELSE", "INCREMENT", "DECREMENT", "DEF", "VAR", 
+                      "WHILE", "FOR", "RETURN", "TRUE", "FALSE", "IDENTIFIER", 
+                      "PI", "STRING", "LIST", "NUMBER", "LINECOMMENT", "BLOCKCOMMENT", 
+                      "WHITESPACE" ];
+
+var ruleNames =  [ "script", "header", "meta", "scriptName", "include", 
+                   "functionDef", "func_params", "func_identifier", "statement", 
+                   "assign_stmt", "ti_basic_stmt", "any", "add_assign_stmt", 
+                   "sub_assign_stmt", "mul_assign_stmt", "div_assign_stmt", 
+                   "inc_stmt", "dec_stmt", "if_stmt", "if_else_stmt", "while_stmt", 
+                   "for_stmt", "var_stmt", "return_stmt", "expression", 
+                   "math", "boolexpr", "methodcall", "methodparams", "value", 
+                   "identifier", "number", "list", "string", "type" ];
+
+function ICEScriptParser (input) {
+	antlr4.Parser.call(this, input);
+    this._interp = new antlr4.atn.ParserATNSimulator(this, atn, decisionsToDFA, sharedContextCache);
+    this.ruleNames = ruleNames;
+    this.literalNames = literalNames;
+    this.symbolicNames = symbolicNames;
+    return this;
 }
+
+ICEScriptParser.prototype = Object.create(antlr4.Parser.prototype);
+ICEScriptParser.prototype.constructor = ICEScriptParser;
+
+Object.defineProperty(ICEScriptParser.prototype, "atn", {
+	get : function() {
+		return atn;
+	}
+});
 
 ICEScriptParser.EOF = antlr4.Token.EOF;
 ICEScriptParser.T__0 = 1;
@@ -1652,54 +348,57 @@ ICEScriptParser.T__9 = 10;
 ICEScriptParser.T__10 = 11;
 ICEScriptParser.T__11 = 12;
 ICEScriptParser.T__12 = 13;
-ICEScriptParser.OPEN_BRACKET = 14;
-ICEScriptParser.CLOSE_BRACKET = 15;
-ICEScriptParser.OPEN_CURLEY = 16;
-ICEScriptParser.CLOSE_CURLEY = 17;
-ICEScriptParser.END_STMT = 18;
-ICEScriptParser.ADD = 19;
-ICEScriptParser.SUB = 20;
-ICEScriptParser.MUL = 21;
-ICEScriptParser.DIV = 22;
-ICEScriptParser.GREATER_THAN = 23;
-ICEScriptParser.LESS_THAN = 24;
-ICEScriptParser.EQUAL_TO = 25;
-ICEScriptParser.NOT_EQUAL_TO = 26;
-ICEScriptParser.GREATER_THAN_OR_EQUAL = 27;
-ICEScriptParser.LESS_THAN_OR_EQUAL = 28;
-ICEScriptParser.OR = 29;
-ICEScriptParser.AND = 30;
-ICEScriptParser.NOT = 31;
-ICEScriptParser.ASSIGN = 32;
-ICEScriptParser.ADDASSIGN = 33;
-ICEScriptParser.SUBASSIGN = 34;
-ICEScriptParser.MULASSIGN = 35;
-ICEScriptParser.DIVASSIGN = 36;
-ICEScriptParser.IF = 37;
-ICEScriptParser.ELSE = 38;
-ICEScriptParser.INCREMENT = 39;
-ICEScriptParser.DECREMENT = 40;
-ICEScriptParser.DEF = 41;
-ICEScriptParser.VAR = 42;
-ICEScriptParser.WHILE = 43;
-ICEScriptParser.RETURN = 44;
-ICEScriptParser.TRUE = 45;
-ICEScriptParser.FALSE = 46;
-ICEScriptParser.IDENTIFIER = 47;
-ICEScriptParser.PI = 48;
-ICEScriptParser.STRING = 49;
-ICEScriptParser.LIST = 50;
-ICEScriptParser.NUMBER = 51;
-ICEScriptParser.LINECOMMENT = 52;
-ICEScriptParser.BLOCKCOMMENT = 53;
-ICEScriptParser.WHITESPACE = 54;
+ICEScriptParser.T__13 = 14;
+ICEScriptParser.T__14 = 15;
+ICEScriptParser.OPEN_BRACKET = 16;
+ICEScriptParser.CLOSE_BRACKET = 17;
+ICEScriptParser.OPEN_CURLEY = 18;
+ICEScriptParser.CLOSE_CURLEY = 19;
+ICEScriptParser.END_STMT = 20;
+ICEScriptParser.ADD = 21;
+ICEScriptParser.SUB = 22;
+ICEScriptParser.MUL = 23;
+ICEScriptParser.DIV = 24;
+ICEScriptParser.GREATER_THAN = 25;
+ICEScriptParser.LESS_THAN = 26;
+ICEScriptParser.EQUAL_TO = 27;
+ICEScriptParser.NOT_EQUAL_TO = 28;
+ICEScriptParser.GREATER_THAN_OR_EQUAL = 29;
+ICEScriptParser.LESS_THAN_OR_EQUAL = 30;
+ICEScriptParser.OR = 31;
+ICEScriptParser.AND = 32;
+ICEScriptParser.NOT = 33;
+ICEScriptParser.ASSIGN = 34;
+ICEScriptParser.ADDASSIGN = 35;
+ICEScriptParser.SUBASSIGN = 36;
+ICEScriptParser.MULASSIGN = 37;
+ICEScriptParser.DIVASSIGN = 38;
+ICEScriptParser.IF = 39;
+ICEScriptParser.ELSE = 40;
+ICEScriptParser.INCREMENT = 41;
+ICEScriptParser.DECREMENT = 42;
+ICEScriptParser.DEF = 43;
+ICEScriptParser.VAR = 44;
+ICEScriptParser.WHILE = 45;
+ICEScriptParser.FOR = 46;
+ICEScriptParser.RETURN = 47;
+ICEScriptParser.TRUE = 48;
+ICEScriptParser.FALSE = 49;
+ICEScriptParser.IDENTIFIER = 50;
+ICEScriptParser.PI = 51;
+ICEScriptParser.STRING = 52;
+ICEScriptParser.LIST = 53;
+ICEScriptParser.NUMBER = 54;
+ICEScriptParser.LINECOMMENT = 55;
+ICEScriptParser.BLOCKCOMMENT = 56;
+ICEScriptParser.WHITESPACE = 57;
 
 ICEScriptParser.RULE_script = 0;
 ICEScriptParser.RULE_header = 1;
 ICEScriptParser.RULE_meta = 2;
 ICEScriptParser.RULE_scriptName = 3;
 ICEScriptParser.RULE_include = 4;
-ICEScriptParser.RULE_function = 5;
+ICEScriptParser.RULE_functionDef = 5;
 ICEScriptParser.RULE_func_params = 6;
 ICEScriptParser.RULE_func_identifier = 7;
 ICEScriptParser.RULE_statement = 8;
@@ -1715,1971 +414,3729 @@ ICEScriptParser.RULE_dec_stmt = 17;
 ICEScriptParser.RULE_if_stmt = 18;
 ICEScriptParser.RULE_if_else_stmt = 19;
 ICEScriptParser.RULE_while_stmt = 20;
-ICEScriptParser.RULE_var_stmt = 21;
-ICEScriptParser.RULE_return_stmt = 22;
-ICEScriptParser.RULE_expression = 23;
-ICEScriptParser.RULE_math = 24;
-ICEScriptParser.RULE_boolexpr = 25;
-ICEScriptParser.RULE_methodcall = 26;
-ICEScriptParser.RULE_methodparams = 27;
-ICEScriptParser.RULE_value = 28;
-ICEScriptParser.RULE_identifier = 29;
-ICEScriptParser.RULE_number = 30;
-ICEScriptParser.RULE_list = 31;
-ICEScriptParser.RULE_string = 32;
-ICEScriptParser.RULE_type = 33;
+ICEScriptParser.RULE_for_stmt = 21;
+ICEScriptParser.RULE_var_stmt = 22;
+ICEScriptParser.RULE_return_stmt = 23;
+ICEScriptParser.RULE_expression = 24;
+ICEScriptParser.RULE_math = 25;
+ICEScriptParser.RULE_boolexpr = 26;
+ICEScriptParser.RULE_methodcall = 27;
+ICEScriptParser.RULE_methodparams = 28;
+ICEScriptParser.RULE_value = 29;
+ICEScriptParser.RULE_identifier = 30;
+ICEScriptParser.RULE_number = 31;
+ICEScriptParser.RULE_list = 32;
+ICEScriptParser.RULE_string = 33;
+ICEScriptParser.RULE_type = 34;
 
-class ScriptContext extends antlr4.ParserRuleContext {
-
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_script;
-    }
-
-	header() {
-	    return this.getTypedRuleContext(HeaderContext,0);
-	};
-
-	function_ = function(i) {
-	    if(i===undefined) {
-	        i = null;
-	    }
-	    if(i===null) {
-	        return this.getTypedRuleContexts(FunctionContext);
-	    } else {
-	        return this.getTypedRuleContext(FunctionContext,i);
-	    }
-	};
-
-	statement = function(i) {
-	    if(i===undefined) {
-	        i = null;
-	    }
-	    if(i===null) {
-	        return this.getTypedRuleContexts(StatementContext);
-	    } else {
-	        return this.getTypedRuleContext(StatementContext,i);
-	    }
-	};
-
-	EOF() {
-	    return this.getToken(ICEScriptParser.EOF, 0);
-	};
-
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterScript(this);
-		}
+function ScriptContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitScript(this);
-		}
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
 	}
-
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitScript(this);
-	    } else {
-	        return visitor.visitChildren(this);
-	    }
-	}
-
-
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_script;
+    return this;
 }
 
+ScriptContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+ScriptContext.prototype.constructor = ScriptContext;
 
+ScriptContext.prototype.header = function() {
+    return this.getTypedRuleContext(HeaderContext,0);
+};
 
-class HeaderContext extends antlr4.ParserRuleContext {
-
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_header;
+ScriptContext.prototype.functionDef = function(i) {
+    if(i===undefined) {
+        i = null;
     }
+    if(i===null) {
+        return this.getTypedRuleContexts(FunctionDefContext);
+    } else {
+        return this.getTypedRuleContext(FunctionDefContext,i);
+    }
+};
 
-	include = function(i) {
-	    if(i===undefined) {
-	        i = null;
-	    }
-	    if(i===null) {
-	        return this.getTypedRuleContexts(IncludeContext);
+ScriptContext.prototype.statement = function(i) {
+    if(i===undefined) {
+        i = null;
+    }
+    if(i===null) {
+        return this.getTypedRuleContexts(StatementContext);
+    } else {
+        return this.getTypedRuleContext(StatementContext,i);
+    }
+};
+
+ScriptContext.prototype.EOF = function() {
+    return this.getToken(ICEScriptParser.EOF, 0);
+};
+
+ScriptContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterScript(this);
+	}
+};
+
+ScriptContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitScript(this);
+	}
+};
+
+ScriptContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitScript(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
+
+
+
+ICEScriptParser.ScriptContext = ScriptContext;
+
+ICEScriptParser.prototype.script = function() {
+
+    var localctx = new ScriptContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 0, ICEScriptParser.RULE_script);
+    var _la = 0; // Token type
+    try {
+        this.state = 84;
+        this._errHandler.sync(this);
+        var la_ = this._interp.adaptivePredict(this._input,2,this._ctx);
+        switch(la_) {
+        case 1:
+            this.enterOuterAlt(localctx, 1);
+            this.state = 70;
+            this.header();
+            this.state = 74;
+            this._errHandler.sync(this);
+            _la = this._input.LA(1);
+            while(_la===ICEScriptParser.T__2) {
+                this.state = 71;
+                this.functionDef();
+                this.state = 76;
+                this._errHandler.sync(this);
+                _la = this._input.LA(1);
+            }
+            this.state = 80;
+            this._errHandler.sync(this);
+            _la = this._input.LA(1);
+            while((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << ICEScriptParser.T__5) | (1 << ICEScriptParser.OPEN_BRACKET) | (1 << ICEScriptParser.OPEN_CURLEY) | (1 << ICEScriptParser.END_STMT))) !== 0) || ((((_la - 33)) & ~0x1f) == 0 && ((1 << (_la - 33)) & ((1 << (ICEScriptParser.NOT - 33)) | (1 << (ICEScriptParser.IF - 33)) | (1 << (ICEScriptParser.VAR - 33)) | (1 << (ICEScriptParser.WHILE - 33)) | (1 << (ICEScriptParser.FOR - 33)) | (1 << (ICEScriptParser.RETURN - 33)) | (1 << (ICEScriptParser.TRUE - 33)) | (1 << (ICEScriptParser.FALSE - 33)) | (1 << (ICEScriptParser.IDENTIFIER - 33)) | (1 << (ICEScriptParser.PI - 33)) | (1 << (ICEScriptParser.STRING - 33)) | (1 << (ICEScriptParser.LIST - 33)) | (1 << (ICEScriptParser.NUMBER - 33)))) !== 0)) {
+                this.state = 77;
+                this.statement();
+                this.state = 82;
+                this._errHandler.sync(this);
+                _la = this._input.LA(1);
+            }
+            break;
+
+        case 2:
+            this.enterOuterAlt(localctx, 2);
+            this.state = 83;
+            this.match(ICEScriptParser.EOF);
+            break;
+
+        }
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return this.getTypedRuleContext(IncludeContext,i);
+	    	throw re;
 	    }
-	};
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
 
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterHeader(this);
-		}
+function HeaderContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitHeader(this);
-		}
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
 	}
-
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitHeader(this);
-	    } else {
-	        return visitor.visitChildren(this);
-	    }
-	}
-
-
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_header;
+    return this;
 }
 
+HeaderContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+HeaderContext.prototype.constructor = HeaderContext;
 
-
-class MetaContext extends antlr4.ParserRuleContext {
-
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_meta;
+HeaderContext.prototype.include = function(i) {
+    if(i===undefined) {
+        i = null;
     }
+    if(i===null) {
+        return this.getTypedRuleContexts(IncludeContext);
+    } else {
+        return this.getTypedRuleContext(IncludeContext,i);
+    }
+};
 
-	scriptName() {
-	    return this.getTypedRuleContext(ScriptNameContext,0);
-	};
-
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterMeta(this);
-		}
+HeaderContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterHeader(this);
 	}
+};
 
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitMeta(this);
-		}
+HeaderContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitHeader(this);
 	}
+};
 
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitMeta(this);
+HeaderContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitHeader(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
+
+
+
+ICEScriptParser.HeaderContext = HeaderContext;
+
+ICEScriptParser.prototype.header = function() {
+
+    var localctx = new HeaderContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 2, ICEScriptParser.RULE_header);
+    var _la = 0; // Token type
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 89;
+        this._errHandler.sync(this);
+        _la = this._input.LA(1);
+        while(_la===ICEScriptParser.T__1) {
+            this.state = 86;
+            this.include();
+            this.state = 91;
+            this._errHandler.sync(this);
+            _la = this._input.LA(1);
+        }
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return visitor.visitChildren(this);
+	    	throw re;
 	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function MetaContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_meta;
+    return this;
 }
 
+MetaContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+MetaContext.prototype.constructor = MetaContext;
 
+MetaContext.prototype.scriptName = function() {
+    return this.getTypedRuleContext(ScriptNameContext,0);
+};
 
-class ScriptNameContext extends antlr4.ParserRuleContext {
+MetaContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterMeta(this);
+	}
+};
 
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_scriptName;
+MetaContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitMeta(this);
+	}
+};
+
+MetaContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitMeta(this);
+    } else {
+        return visitor.visitChildren(this);
     }
+};
 
-	identifier() {
-	    return this.getTypedRuleContext(IdentifierContext,0);
-	};
 
-	END_STMT() {
-	    return this.getToken(ICEScriptParser.END_STMT, 0);
-	};
 
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterScriptName(this);
-		}
-	}
 
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitScriptName(this);
-		}
-	}
+ICEScriptParser.MetaContext = MetaContext;
 
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitScriptName(this);
+ICEScriptParser.prototype.meta = function() {
+
+    var localctx = new MetaContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 4, ICEScriptParser.RULE_meta);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 92;
+        this.scriptName();
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return visitor.visitChildren(this);
+	    	throw re;
 	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function ScriptNameContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_scriptName;
+    return this;
 }
 
+ScriptNameContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+ScriptNameContext.prototype.constructor = ScriptNameContext;
 
+ScriptNameContext.prototype.identifier = function() {
+    return this.getTypedRuleContext(IdentifierContext,0);
+};
 
-class IncludeContext extends antlr4.ParserRuleContext {
+ScriptNameContext.prototype.END_STMT = function() {
+    return this.getToken(ICEScriptParser.END_STMT, 0);
+};
 
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_include;
+ScriptNameContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterScriptName(this);
+	}
+};
+
+ScriptNameContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitScriptName(this);
+	}
+};
+
+ScriptNameContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitScriptName(this);
+    } else {
+        return visitor.visitChildren(this);
     }
+};
 
-	identifier() {
-	    return this.getTypedRuleContext(IdentifierContext,0);
-	};
 
-	END_STMT() {
-	    return this.getToken(ICEScriptParser.END_STMT, 0);
-	};
 
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterInclude(this);
-		}
-	}
 
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitInclude(this);
-		}
-	}
+ICEScriptParser.ScriptNameContext = ScriptNameContext;
 
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitInclude(this);
+ICEScriptParser.prototype.scriptName = function() {
+
+    var localctx = new ScriptNameContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 6, ICEScriptParser.RULE_scriptName);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 94;
+        this.match(ICEScriptParser.T__0);
+        this.state = 95;
+        this.identifier();
+        this.state = 96;
+        this.match(ICEScriptParser.END_STMT);
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return visitor.visitChildren(this);
+	    	throw re;
 	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function IncludeContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_include;
+    return this;
 }
 
+IncludeContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+IncludeContext.prototype.constructor = IncludeContext;
 
+IncludeContext.prototype.identifier = function() {
+    return this.getTypedRuleContext(IdentifierContext,0);
+};
 
-class FunctionContext extends antlr4.ParserRuleContext {
+IncludeContext.prototype.END_STMT = function() {
+    return this.getToken(ICEScriptParser.END_STMT, 0);
+};
 
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_function;
+IncludeContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterInclude(this);
+	}
+};
+
+IncludeContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitInclude(this);
+	}
+};
+
+IncludeContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitInclude(this);
+    } else {
+        return visitor.visitChildren(this);
     }
+};
 
-	identifier() {
-	    return this.getTypedRuleContext(IdentifierContext,0);
-	};
 
-	OPEN_BRACKET() {
-	    return this.getToken(ICEScriptParser.OPEN_BRACKET, 0);
-	};
 
-	func_params() {
-	    return this.getTypedRuleContext(Func_paramsContext,0);
-	};
 
-	CLOSE_BRACKET() {
-	    return this.getToken(ICEScriptParser.CLOSE_BRACKET, 0);
-	};
+ICEScriptParser.IncludeContext = IncludeContext;
 
-	type() {
-	    return this.getTypedRuleContext(TypeContext,0);
-	};
+ICEScriptParser.prototype.include = function() {
 
-	statement() {
-	    return this.getTypedRuleContext(StatementContext,0);
-	};
-
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterFunction(this);
-		}
-	}
-
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitFunction(this);
-		}
-	}
-
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitFunction(this);
+    var localctx = new IncludeContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 8, ICEScriptParser.RULE_include);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 98;
+        this.match(ICEScriptParser.T__1);
+        this.state = 99;
+        this.identifier();
+        this.state = 100;
+        this.match(ICEScriptParser.END_STMT);
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return visitor.visitChildren(this);
+	    	throw re;
 	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function FunctionDefContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_functionDef;
+    return this;
 }
 
+FunctionDefContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+FunctionDefContext.prototype.constructor = FunctionDefContext;
 
+FunctionDefContext.prototype.identifier = function() {
+    return this.getTypedRuleContext(IdentifierContext,0);
+};
 
-class Func_paramsContext extends antlr4.ParserRuleContext {
+FunctionDefContext.prototype.OPEN_BRACKET = function() {
+    return this.getToken(ICEScriptParser.OPEN_BRACKET, 0);
+};
 
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_func_params;
+FunctionDefContext.prototype.func_params = function() {
+    return this.getTypedRuleContext(Func_paramsContext,0);
+};
+
+FunctionDefContext.prototype.CLOSE_BRACKET = function() {
+    return this.getToken(ICEScriptParser.CLOSE_BRACKET, 0);
+};
+
+FunctionDefContext.prototype.type = function() {
+    return this.getTypedRuleContext(TypeContext,0);
+};
+
+FunctionDefContext.prototype.statement = function() {
+    return this.getTypedRuleContext(StatementContext,0);
+};
+
+FunctionDefContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterFunctionDef(this);
+	}
+};
+
+FunctionDefContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitFunctionDef(this);
+	}
+};
+
+FunctionDefContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitFunctionDef(this);
+    } else {
+        return visitor.visitChildren(this);
     }
+};
 
-	func_identifier = function(i) {
-	    if(i===undefined) {
-	        i = null;
-	    }
-	    if(i===null) {
-	        return this.getTypedRuleContexts(Func_identifierContext);
+
+
+
+ICEScriptParser.FunctionDefContext = FunctionDefContext;
+
+ICEScriptParser.prototype.functionDef = function() {
+
+    var localctx = new FunctionDefContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 10, ICEScriptParser.RULE_functionDef);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 102;
+        this.match(ICEScriptParser.T__2);
+        this.state = 103;
+        this.identifier();
+        this.state = 104;
+        this.match(ICEScriptParser.OPEN_BRACKET);
+        this.state = 105;
+        this.func_params();
+        this.state = 106;
+        this.match(ICEScriptParser.CLOSE_BRACKET);
+        this.state = 107;
+        this.match(ICEScriptParser.T__3);
+        this.state = 108;
+        this.type(0);
+        this.state = 109;
+        this.statement();
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return this.getTypedRuleContext(Func_identifierContext,i);
+	    	throw re;
 	    }
-	};
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
 
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterFunc_params(this);
-		}
+function Func_paramsContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitFunc_params(this);
-		}
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
 	}
-
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitFunc_params(this);
-	    } else {
-	        return visitor.visitChildren(this);
-	    }
-	}
-
-
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_func_params;
+    return this;
 }
 
+Func_paramsContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+Func_paramsContext.prototype.constructor = Func_paramsContext;
 
-
-class Func_identifierContext extends antlr4.ParserRuleContext {
-
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_func_identifier;
+Func_paramsContext.prototype.func_identifier = function(i) {
+    if(i===undefined) {
+        i = null;
     }
+    if(i===null) {
+        return this.getTypedRuleContexts(Func_identifierContext);
+    } else {
+        return this.getTypedRuleContext(Func_identifierContext,i);
+    }
+};
 
-	type() {
-	    return this.getTypedRuleContext(TypeContext,0);
-	};
-
-	identifier() {
-	    return this.getTypedRuleContext(IdentifierContext,0);
-	};
-
-	expression() {
-	    return this.getTypedRuleContext(ExpressionContext,0);
-	};
-
-	any() {
-	    return this.getTypedRuleContext(AnyContext,0);
-	};
-
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterFunc_identifier(this);
-		}
+Func_paramsContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterFunc_params(this);
 	}
+};
 
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitFunc_identifier(this);
-		}
+Func_paramsContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitFunc_params(this);
 	}
+};
 
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitFunc_identifier(this);
+Func_paramsContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitFunc_params(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
+
+
+
+ICEScriptParser.Func_paramsContext = Func_paramsContext;
+
+ICEScriptParser.prototype.func_params = function() {
+
+    var localctx = new Func_paramsContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 12, ICEScriptParser.RULE_func_params);
+    var _la = 0; // Token type
+    try {
+        this.state = 121;
+        this._errHandler.sync(this);
+        var la_ = this._interp.adaptivePredict(this._input,5,this._ctx);
+        switch(la_) {
+        case 1:
+            this.enterOuterAlt(localctx, 1);
+            this.state = 111;
+            this.func_identifier();
+            break;
+
+        case 2:
+            this.enterOuterAlt(localctx, 2);
+
+            break;
+
+        case 3:
+            this.enterOuterAlt(localctx, 3);
+            this.state = 113;
+            this.func_identifier();
+            this.state = 118;
+            this._errHandler.sync(this);
+            _la = this._input.LA(1);
+            while(_la===ICEScriptParser.T__4) {
+                this.state = 114;
+                this.match(ICEScriptParser.T__4);
+                this.state = 115;
+                this.func_identifier();
+                this.state = 120;
+                this._errHandler.sync(this);
+                _la = this._input.LA(1);
+            }
+            break;
+
+        }
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return visitor.visitChildren(this);
+	    	throw re;
 	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function Func_identifierContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_func_identifier;
+    return this;
 }
 
+Func_identifierContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+Func_identifierContext.prototype.constructor = Func_identifierContext;
 
+Func_identifierContext.prototype.type = function() {
+    return this.getTypedRuleContext(TypeContext,0);
+};
 
-class StatementContext extends antlr4.ParserRuleContext {
+Func_identifierContext.prototype.identifier = function() {
+    return this.getTypedRuleContext(IdentifierContext,0);
+};
 
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_statement;
+Func_identifierContext.prototype.expression = function() {
+    return this.getTypedRuleContext(ExpressionContext,0);
+};
+
+Func_identifierContext.prototype.any = function() {
+    return this.getTypedRuleContext(AnyContext,0);
+};
+
+Func_identifierContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterFunc_identifier(this);
+	}
+};
+
+Func_identifierContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitFunc_identifier(this);
+	}
+};
+
+Func_identifierContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitFunc_identifier(this);
+    } else {
+        return visitor.visitChildren(this);
     }
+};
 
-	OPEN_CURLEY() {
-	    return this.getToken(ICEScriptParser.OPEN_CURLEY, 0);
-	};
 
-	CLOSE_CURLEY() {
-	    return this.getToken(ICEScriptParser.CLOSE_CURLEY, 0);
-	};
 
-	statement = function(i) {
-	    if(i===undefined) {
-	        i = null;
-	    }
-	    if(i===null) {
-	        return this.getTypedRuleContexts(StatementContext);
+
+ICEScriptParser.Func_identifierContext = Func_identifierContext;
+
+ICEScriptParser.prototype.func_identifier = function() {
+
+    var localctx = new Func_identifierContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 14, ICEScriptParser.RULE_func_identifier);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 128;
+        this._errHandler.sync(this);
+        var la_ = this._interp.adaptivePredict(this._input,6,this._ctx);
+        switch(la_) {
+        case 1:
+            this.state = 123;
+            this.identifier();
+            break;
+
+        case 2:
+            break;
+
+        case 3:
+            this.state = 125;
+            this.expression(0);
+            break;
+
+        case 4:
+            break;
+
+        case 5:
+            this.state = 127;
+            this.any();
+            break;
+
+        }
+        this.state = 130;
+        this.match(ICEScriptParser.T__3);
+        this.state = 131;
+        this.type(0);
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return this.getTypedRuleContext(StatementContext,i);
+	    	throw re;
 	    }
-	};
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
 
-	assign_stmt() {
-	    return this.getTypedRuleContext(Assign_stmtContext,0);
-	};
-
-	ti_basic_stmt() {
-	    return this.getTypedRuleContext(Ti_basic_stmtContext,0);
-	};
-
-	add_assign_stmt() {
-	    return this.getTypedRuleContext(Add_assign_stmtContext,0);
-	};
-
-	sub_assign_stmt() {
-	    return this.getTypedRuleContext(Sub_assign_stmtContext,0);
-	};
-
-	mul_assign_stmt() {
-	    return this.getTypedRuleContext(Mul_assign_stmtContext,0);
-	};
-
-	div_assign_stmt() {
-	    return this.getTypedRuleContext(Div_assign_stmtContext,0);
-	};
-
-	inc_stmt() {
-	    return this.getTypedRuleContext(Inc_stmtContext,0);
-	};
-
-	dec_stmt() {
-	    return this.getTypedRuleContext(Dec_stmtContext,0);
-	};
-
-	if_stmt() {
-	    return this.getTypedRuleContext(If_stmtContext,0);
-	};
-
-	if_else_stmt() {
-	    return this.getTypedRuleContext(If_else_stmtContext,0);
-	};
-
-	while_stmt() {
-	    return this.getTypedRuleContext(While_stmtContext,0);
-	};
-
-	var_stmt() {
-	    return this.getTypedRuleContext(Var_stmtContext,0);
-	};
-
-	return_stmt() {
-	    return this.getTypedRuleContext(Return_stmtContext,0);
-	};
-
-	expression() {
-	    return this.getTypedRuleContext(ExpressionContext,0);
-	};
-
-	END_STMT() {
-	    return this.getToken(ICEScriptParser.END_STMT, 0);
-	};
-
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterStatement(this);
-		}
+function StatementContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitStatement(this);
-		}
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
 	}
-
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitStatement(this);
-	    } else {
-	        return visitor.visitChildren(this);
-	    }
-	}
-
-
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_statement;
+    return this;
 }
 
+StatementContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+StatementContext.prototype.constructor = StatementContext;
 
+StatementContext.prototype.OPEN_CURLEY = function() {
+    return this.getToken(ICEScriptParser.OPEN_CURLEY, 0);
+};
 
-class Assign_stmtContext extends antlr4.ParserRuleContext {
+StatementContext.prototype.CLOSE_CURLEY = function() {
+    return this.getToken(ICEScriptParser.CLOSE_CURLEY, 0);
+};
 
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_assign_stmt;
+StatementContext.prototype.statement = function(i) {
+    if(i===undefined) {
+        i = null;
     }
+    if(i===null) {
+        return this.getTypedRuleContexts(StatementContext);
+    } else {
+        return this.getTypedRuleContext(StatementContext,i);
+    }
+};
 
-	identifier() {
-	    return this.getTypedRuleContext(IdentifierContext,0);
-	};
+StatementContext.prototype.assign_stmt = function() {
+    return this.getTypedRuleContext(Assign_stmtContext,0);
+};
 
-	ASSIGN() {
-	    return this.getToken(ICEScriptParser.ASSIGN, 0);
-	};
+StatementContext.prototype.ti_basic_stmt = function() {
+    return this.getTypedRuleContext(Ti_basic_stmtContext,0);
+};
 
-	expression() {
-	    return this.getTypedRuleContext(ExpressionContext,0);
-	};
+StatementContext.prototype.add_assign_stmt = function() {
+    return this.getTypedRuleContext(Add_assign_stmtContext,0);
+};
 
-	END_STMT() {
-	    return this.getToken(ICEScriptParser.END_STMT, 0);
-	};
+StatementContext.prototype.sub_assign_stmt = function() {
+    return this.getTypedRuleContext(Sub_assign_stmtContext,0);
+};
 
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterAssign_stmt(this);
-		}
+StatementContext.prototype.mul_assign_stmt = function() {
+    return this.getTypedRuleContext(Mul_assign_stmtContext,0);
+};
+
+StatementContext.prototype.div_assign_stmt = function() {
+    return this.getTypedRuleContext(Div_assign_stmtContext,0);
+};
+
+StatementContext.prototype.inc_stmt = function() {
+    return this.getTypedRuleContext(Inc_stmtContext,0);
+};
+
+StatementContext.prototype.dec_stmt = function() {
+    return this.getTypedRuleContext(Dec_stmtContext,0);
+};
+
+StatementContext.prototype.if_stmt = function() {
+    return this.getTypedRuleContext(If_stmtContext,0);
+};
+
+StatementContext.prototype.if_else_stmt = function() {
+    return this.getTypedRuleContext(If_else_stmtContext,0);
+};
+
+StatementContext.prototype.while_stmt = function() {
+    return this.getTypedRuleContext(While_stmtContext,0);
+};
+
+StatementContext.prototype.for_stmt = function() {
+    return this.getTypedRuleContext(For_stmtContext,0);
+};
+
+StatementContext.prototype.var_stmt = function() {
+    return this.getTypedRuleContext(Var_stmtContext,0);
+};
+
+StatementContext.prototype.return_stmt = function() {
+    return this.getTypedRuleContext(Return_stmtContext,0);
+};
+
+StatementContext.prototype.expression = function() {
+    return this.getTypedRuleContext(ExpressionContext,0);
+};
+
+StatementContext.prototype.END_STMT = function() {
+    return this.getToken(ICEScriptParser.END_STMT, 0);
+};
+
+StatementContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterStatement(this);
 	}
+};
 
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitAssign_stmt(this);
-		}
+StatementContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitStatement(this);
 	}
+};
 
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitAssign_stmt(this);
+StatementContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitStatement(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
+
+
+
+ICEScriptParser.StatementContext = StatementContext;
+
+ICEScriptParser.prototype.statement = function() {
+
+    var localctx = new StatementContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 16, ICEScriptParser.RULE_statement);
+    var _la = 0; // Token type
+    try {
+        this.state = 159;
+        this._errHandler.sync(this);
+        var la_ = this._interp.adaptivePredict(this._input,8,this._ctx);
+        switch(la_) {
+        case 1:
+            this.enterOuterAlt(localctx, 1);
+            this.state = 133;
+            this.match(ICEScriptParser.OPEN_CURLEY);
+            this.state = 137;
+            this._errHandler.sync(this);
+            _la = this._input.LA(1);
+            while((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << ICEScriptParser.T__5) | (1 << ICEScriptParser.OPEN_BRACKET) | (1 << ICEScriptParser.OPEN_CURLEY) | (1 << ICEScriptParser.END_STMT))) !== 0) || ((((_la - 33)) & ~0x1f) == 0 && ((1 << (_la - 33)) & ((1 << (ICEScriptParser.NOT - 33)) | (1 << (ICEScriptParser.IF - 33)) | (1 << (ICEScriptParser.VAR - 33)) | (1 << (ICEScriptParser.WHILE - 33)) | (1 << (ICEScriptParser.FOR - 33)) | (1 << (ICEScriptParser.RETURN - 33)) | (1 << (ICEScriptParser.TRUE - 33)) | (1 << (ICEScriptParser.FALSE - 33)) | (1 << (ICEScriptParser.IDENTIFIER - 33)) | (1 << (ICEScriptParser.PI - 33)) | (1 << (ICEScriptParser.STRING - 33)) | (1 << (ICEScriptParser.LIST - 33)) | (1 << (ICEScriptParser.NUMBER - 33)))) !== 0)) {
+                this.state = 134;
+                this.statement();
+                this.state = 139;
+                this._errHandler.sync(this);
+                _la = this._input.LA(1);
+            }
+            this.state = 140;
+            this.match(ICEScriptParser.CLOSE_CURLEY);
+            break;
+
+        case 2:
+            this.enterOuterAlt(localctx, 2);
+            this.state = 141;
+            this.assign_stmt();
+            break;
+
+        case 3:
+            this.enterOuterAlt(localctx, 3);
+            this.state = 142;
+            this.ti_basic_stmt();
+            break;
+
+        case 4:
+            this.enterOuterAlt(localctx, 4);
+            this.state = 143;
+            this.add_assign_stmt();
+            break;
+
+        case 5:
+            this.enterOuterAlt(localctx, 5);
+            this.state = 144;
+            this.sub_assign_stmt();
+            break;
+
+        case 6:
+            this.enterOuterAlt(localctx, 6);
+            this.state = 145;
+            this.mul_assign_stmt();
+            break;
+
+        case 7:
+            this.enterOuterAlt(localctx, 7);
+            this.state = 146;
+            this.div_assign_stmt();
+            break;
+
+        case 8:
+            this.enterOuterAlt(localctx, 8);
+            this.state = 147;
+            this.inc_stmt();
+            break;
+
+        case 9:
+            this.enterOuterAlt(localctx, 9);
+            this.state = 148;
+            this.dec_stmt();
+            break;
+
+        case 10:
+            this.enterOuterAlt(localctx, 10);
+            this.state = 149;
+            this.if_stmt();
+            break;
+
+        case 11:
+            this.enterOuterAlt(localctx, 11);
+            this.state = 150;
+            this.if_else_stmt();
+            break;
+
+        case 12:
+            this.enterOuterAlt(localctx, 12);
+            this.state = 151;
+            this.while_stmt();
+            break;
+
+        case 13:
+            this.enterOuterAlt(localctx, 13);
+            this.state = 152;
+            this.for_stmt();
+            break;
+
+        case 14:
+            this.enterOuterAlt(localctx, 14);
+            this.state = 153;
+            this.var_stmt();
+            break;
+
+        case 15:
+            this.enterOuterAlt(localctx, 15);
+            this.state = 154;
+            this.return_stmt();
+            break;
+
+        case 16:
+            this.enterOuterAlt(localctx, 16);
+            this.state = 155;
+            this.expression(0);
+            this.state = 156;
+            this.match(ICEScriptParser.END_STMT);
+            break;
+
+        case 17:
+            this.enterOuterAlt(localctx, 17);
+            this.state = 158;
+            this.match(ICEScriptParser.END_STMT);
+            break;
+
+        }
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return visitor.visitChildren(this);
+	    	throw re;
 	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function Assign_stmtContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_assign_stmt;
+    return this;
 }
 
+Assign_stmtContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+Assign_stmtContext.prototype.constructor = Assign_stmtContext;
 
+Assign_stmtContext.prototype.identifier = function() {
+    return this.getTypedRuleContext(IdentifierContext,0);
+};
 
-class Ti_basic_stmtContext extends antlr4.ParserRuleContext {
+Assign_stmtContext.prototype.ASSIGN = function() {
+    return this.getToken(ICEScriptParser.ASSIGN, 0);
+};
 
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_ti_basic_stmt;
+Assign_stmtContext.prototype.expression = function() {
+    return this.getTypedRuleContext(ExpressionContext,0);
+};
+
+Assign_stmtContext.prototype.END_STMT = function() {
+    return this.getToken(ICEScriptParser.END_STMT, 0);
+};
+
+Assign_stmtContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterAssign_stmt(this);
+	}
+};
+
+Assign_stmtContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitAssign_stmt(this);
+	}
+};
+
+Assign_stmtContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitAssign_stmt(this);
+    } else {
+        return visitor.visitChildren(this);
     }
+};
 
-	OPEN_CURLEY() {
-	    return this.getToken(ICEScriptParser.OPEN_CURLEY, 0);
-	};
 
-	any() {
-	    return this.getTypedRuleContext(AnyContext,0);
-	};
 
-	CLOSE_CURLEY() {
-	    return this.getToken(ICEScriptParser.CLOSE_CURLEY, 0);
-	};
 
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterTi_basic_stmt(this);
-		}
-	}
+ICEScriptParser.Assign_stmtContext = Assign_stmtContext;
 
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitTi_basic_stmt(this);
-		}
-	}
+ICEScriptParser.prototype.assign_stmt = function() {
 
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitTi_basic_stmt(this);
+    var localctx = new Assign_stmtContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 18, ICEScriptParser.RULE_assign_stmt);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 161;
+        this.identifier();
+        this.state = 162;
+        this.match(ICEScriptParser.ASSIGN);
+        this.state = 163;
+        this.expression(0);
+        this.state = 164;
+        this.match(ICEScriptParser.END_STMT);
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return visitor.visitChildren(this);
+	    	throw re;
 	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function Ti_basic_stmtContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_ti_basic_stmt;
+    return this;
 }
 
+Ti_basic_stmtContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+Ti_basic_stmtContext.prototype.constructor = Ti_basic_stmtContext;
 
+Ti_basic_stmtContext.prototype.OPEN_CURLEY = function() {
+    return this.getToken(ICEScriptParser.OPEN_CURLEY, 0);
+};
 
-class AnyContext extends antlr4.ParserRuleContext {
+Ti_basic_stmtContext.prototype.any = function() {
+    return this.getTypedRuleContext(AnyContext,0);
+};
 
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_any;
+Ti_basic_stmtContext.prototype.CLOSE_CURLEY = function() {
+    return this.getToken(ICEScriptParser.CLOSE_CURLEY, 0);
+};
+
+Ti_basic_stmtContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterTi_basic_stmt(this);
+	}
+};
+
+Ti_basic_stmtContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitTi_basic_stmt(this);
+	}
+};
+
+Ti_basic_stmtContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitTi_basic_stmt(this);
+    } else {
+        return visitor.visitChildren(this);
     }
+};
 
 
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterAny(this);
-		}
-	}
 
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitAny(this);
-		}
-	}
 
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitAny(this);
+ICEScriptParser.Ti_basic_stmtContext = Ti_basic_stmtContext;
+
+ICEScriptParser.prototype.ti_basic_stmt = function() {
+
+    var localctx = new Ti_basic_stmtContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 20, ICEScriptParser.RULE_ti_basic_stmt);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 166;
+        this.match(ICEScriptParser.T__5);
+        this.state = 167;
+        this.match(ICEScriptParser.OPEN_CURLEY);
+        this.state = 168;
+        this.any();
+        this.state = 169;
+        this.match(ICEScriptParser.CLOSE_CURLEY);
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return visitor.visitChildren(this);
+	    	throw re;
 	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function AnyContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_any;
+    return this;
 }
 
+AnyContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+AnyContext.prototype.constructor = AnyContext;
 
 
-class Add_assign_stmtContext extends antlr4.ParserRuleContext {
+AnyContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterAny(this);
+	}
+};
 
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_add_assign_stmt;
+AnyContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitAny(this);
+	}
+};
+
+AnyContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitAny(this);
+    } else {
+        return visitor.visitChildren(this);
     }
+};
 
-	identifier() {
-	    return this.getTypedRuleContext(IdentifierContext,0);
-	};
 
-	ADDASSIGN() {
-	    return this.getToken(ICEScriptParser.ADDASSIGN, 0);
-	};
 
-	value() {
-	    return this.getTypedRuleContext(ValueContext,0);
-	};
 
-	END_STMT() {
-	    return this.getToken(ICEScriptParser.END_STMT, 0);
-	};
+ICEScriptParser.AnyContext = AnyContext;
 
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterAdd_assign_stmt(this);
-		}
-	}
+ICEScriptParser.prototype.any = function() {
 
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitAdd_assign_stmt(this);
-		}
-	}
-
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitAdd_assign_stmt(this);
+    var localctx = new AnyContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 22, ICEScriptParser.RULE_any);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 172; 
+        this._errHandler.sync(this);
+        var _alt = 1+1;
+        do {
+        	switch (_alt) {
+        	case 1+1:
+        		this.state = 171;
+        		this.matchWildcard();
+        		break;
+        	default:
+        		throw new antlr4.error.NoViableAltException(this);
+        	}
+        	this.state = 174; 
+        	this._errHandler.sync(this);
+        	_alt = this._interp.adaptivePredict(this._input,9, this._ctx);
+        } while ( _alt!=1 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER );
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return visitor.visitChildren(this);
+	    	throw re;
 	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function Add_assign_stmtContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_add_assign_stmt;
+    return this;
 }
 
+Add_assign_stmtContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+Add_assign_stmtContext.prototype.constructor = Add_assign_stmtContext;
 
+Add_assign_stmtContext.prototype.identifier = function() {
+    return this.getTypedRuleContext(IdentifierContext,0);
+};
 
-class Sub_assign_stmtContext extends antlr4.ParserRuleContext {
+Add_assign_stmtContext.prototype.ADDASSIGN = function() {
+    return this.getToken(ICEScriptParser.ADDASSIGN, 0);
+};
 
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_sub_assign_stmt;
+Add_assign_stmtContext.prototype.value = function() {
+    return this.getTypedRuleContext(ValueContext,0);
+};
+
+Add_assign_stmtContext.prototype.END_STMT = function() {
+    return this.getToken(ICEScriptParser.END_STMT, 0);
+};
+
+Add_assign_stmtContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterAdd_assign_stmt(this);
+	}
+};
+
+Add_assign_stmtContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitAdd_assign_stmt(this);
+	}
+};
+
+Add_assign_stmtContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitAdd_assign_stmt(this);
+    } else {
+        return visitor.visitChildren(this);
     }
+};
 
-	identifier() {
-	    return this.getTypedRuleContext(IdentifierContext,0);
-	};
 
-	SUBASSIGN() {
-	    return this.getToken(ICEScriptParser.SUBASSIGN, 0);
-	};
 
-	value() {
-	    return this.getTypedRuleContext(ValueContext,0);
-	};
 
-	END_STMT() {
-	    return this.getToken(ICEScriptParser.END_STMT, 0);
-	};
+ICEScriptParser.Add_assign_stmtContext = Add_assign_stmtContext;
 
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterSub_assign_stmt(this);
-		}
-	}
+ICEScriptParser.prototype.add_assign_stmt = function() {
 
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitSub_assign_stmt(this);
-		}
-	}
-
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitSub_assign_stmt(this);
+    var localctx = new Add_assign_stmtContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 24, ICEScriptParser.RULE_add_assign_stmt);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 176;
+        this.identifier();
+        this.state = 177;
+        this.match(ICEScriptParser.ADDASSIGN);
+        this.state = 178;
+        this.value();
+        this.state = 179;
+        this.match(ICEScriptParser.END_STMT);
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return visitor.visitChildren(this);
+	    	throw re;
 	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function Sub_assign_stmtContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_sub_assign_stmt;
+    return this;
 }
 
+Sub_assign_stmtContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+Sub_assign_stmtContext.prototype.constructor = Sub_assign_stmtContext;
 
+Sub_assign_stmtContext.prototype.identifier = function() {
+    return this.getTypedRuleContext(IdentifierContext,0);
+};
 
-class Mul_assign_stmtContext extends antlr4.ParserRuleContext {
+Sub_assign_stmtContext.prototype.SUBASSIGN = function() {
+    return this.getToken(ICEScriptParser.SUBASSIGN, 0);
+};
 
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_mul_assign_stmt;
+Sub_assign_stmtContext.prototype.value = function() {
+    return this.getTypedRuleContext(ValueContext,0);
+};
+
+Sub_assign_stmtContext.prototype.END_STMT = function() {
+    return this.getToken(ICEScriptParser.END_STMT, 0);
+};
+
+Sub_assign_stmtContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterSub_assign_stmt(this);
+	}
+};
+
+Sub_assign_stmtContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitSub_assign_stmt(this);
+	}
+};
+
+Sub_assign_stmtContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitSub_assign_stmt(this);
+    } else {
+        return visitor.visitChildren(this);
     }
+};
 
-	identifier() {
-	    return this.getTypedRuleContext(IdentifierContext,0);
-	};
 
-	MULASSIGN() {
-	    return this.getToken(ICEScriptParser.MULASSIGN, 0);
-	};
 
-	value() {
-	    return this.getTypedRuleContext(ValueContext,0);
-	};
 
-	END_STMT() {
-	    return this.getToken(ICEScriptParser.END_STMT, 0);
-	};
+ICEScriptParser.Sub_assign_stmtContext = Sub_assign_stmtContext;
 
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterMul_assign_stmt(this);
-		}
-	}
+ICEScriptParser.prototype.sub_assign_stmt = function() {
 
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitMul_assign_stmt(this);
-		}
-	}
-
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitMul_assign_stmt(this);
+    var localctx = new Sub_assign_stmtContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 26, ICEScriptParser.RULE_sub_assign_stmt);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 181;
+        this.identifier();
+        this.state = 182;
+        this.match(ICEScriptParser.SUBASSIGN);
+        this.state = 183;
+        this.value();
+        this.state = 184;
+        this.match(ICEScriptParser.END_STMT);
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return visitor.visitChildren(this);
+	    	throw re;
 	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function Mul_assign_stmtContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_mul_assign_stmt;
+    return this;
 }
 
+Mul_assign_stmtContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+Mul_assign_stmtContext.prototype.constructor = Mul_assign_stmtContext;
 
+Mul_assign_stmtContext.prototype.identifier = function() {
+    return this.getTypedRuleContext(IdentifierContext,0);
+};
 
-class Div_assign_stmtContext extends antlr4.ParserRuleContext {
+Mul_assign_stmtContext.prototype.MULASSIGN = function() {
+    return this.getToken(ICEScriptParser.MULASSIGN, 0);
+};
 
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_div_assign_stmt;
+Mul_assign_stmtContext.prototype.value = function() {
+    return this.getTypedRuleContext(ValueContext,0);
+};
+
+Mul_assign_stmtContext.prototype.END_STMT = function() {
+    return this.getToken(ICEScriptParser.END_STMT, 0);
+};
+
+Mul_assign_stmtContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterMul_assign_stmt(this);
+	}
+};
+
+Mul_assign_stmtContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitMul_assign_stmt(this);
+	}
+};
+
+Mul_assign_stmtContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitMul_assign_stmt(this);
+    } else {
+        return visitor.visitChildren(this);
     }
+};
 
-	identifier() {
-	    return this.getTypedRuleContext(IdentifierContext,0);
-	};
 
-	DIVASSIGN() {
-	    return this.getToken(ICEScriptParser.DIVASSIGN, 0);
-	};
 
-	value() {
-	    return this.getTypedRuleContext(ValueContext,0);
-	};
 
-	END_STMT() {
-	    return this.getToken(ICEScriptParser.END_STMT, 0);
-	};
+ICEScriptParser.Mul_assign_stmtContext = Mul_assign_stmtContext;
 
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterDiv_assign_stmt(this);
-		}
-	}
+ICEScriptParser.prototype.mul_assign_stmt = function() {
 
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitDiv_assign_stmt(this);
-		}
-	}
-
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitDiv_assign_stmt(this);
+    var localctx = new Mul_assign_stmtContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 28, ICEScriptParser.RULE_mul_assign_stmt);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 186;
+        this.identifier();
+        this.state = 187;
+        this.match(ICEScriptParser.MULASSIGN);
+        this.state = 188;
+        this.value();
+        this.state = 189;
+        this.match(ICEScriptParser.END_STMT);
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return visitor.visitChildren(this);
+	    	throw re;
 	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function Div_assign_stmtContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_div_assign_stmt;
+    return this;
 }
 
+Div_assign_stmtContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+Div_assign_stmtContext.prototype.constructor = Div_assign_stmtContext;
 
+Div_assign_stmtContext.prototype.identifier = function() {
+    return this.getTypedRuleContext(IdentifierContext,0);
+};
 
-class Inc_stmtContext extends antlr4.ParserRuleContext {
+Div_assign_stmtContext.prototype.DIVASSIGN = function() {
+    return this.getToken(ICEScriptParser.DIVASSIGN, 0);
+};
 
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_inc_stmt;
+Div_assign_stmtContext.prototype.value = function() {
+    return this.getTypedRuleContext(ValueContext,0);
+};
+
+Div_assign_stmtContext.prototype.END_STMT = function() {
+    return this.getToken(ICEScriptParser.END_STMT, 0);
+};
+
+Div_assign_stmtContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterDiv_assign_stmt(this);
+	}
+};
+
+Div_assign_stmtContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitDiv_assign_stmt(this);
+	}
+};
+
+Div_assign_stmtContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitDiv_assign_stmt(this);
+    } else {
+        return visitor.visitChildren(this);
     }
+};
 
-	identifier() {
-	    return this.getTypedRuleContext(IdentifierContext,0);
-	};
 
-	INCREMENT() {
-	    return this.getToken(ICEScriptParser.INCREMENT, 0);
-	};
 
-	END_STMT() {
-	    return this.getToken(ICEScriptParser.END_STMT, 0);
-	};
 
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterInc_stmt(this);
-		}
-	}
+ICEScriptParser.Div_assign_stmtContext = Div_assign_stmtContext;
 
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitInc_stmt(this);
-		}
-	}
+ICEScriptParser.prototype.div_assign_stmt = function() {
 
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitInc_stmt(this);
+    var localctx = new Div_assign_stmtContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 30, ICEScriptParser.RULE_div_assign_stmt);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 191;
+        this.identifier();
+        this.state = 192;
+        this.match(ICEScriptParser.DIVASSIGN);
+        this.state = 193;
+        this.value();
+        this.state = 194;
+        this.match(ICEScriptParser.END_STMT);
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return visitor.visitChildren(this);
+	    	throw re;
 	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function Inc_stmtContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_inc_stmt;
+    return this;
 }
 
+Inc_stmtContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+Inc_stmtContext.prototype.constructor = Inc_stmtContext;
 
+Inc_stmtContext.prototype.identifier = function() {
+    return this.getTypedRuleContext(IdentifierContext,0);
+};
 
-class Dec_stmtContext extends antlr4.ParserRuleContext {
+Inc_stmtContext.prototype.INCREMENT = function() {
+    return this.getToken(ICEScriptParser.INCREMENT, 0);
+};
 
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_dec_stmt;
+Inc_stmtContext.prototype.END_STMT = function() {
+    return this.getToken(ICEScriptParser.END_STMT, 0);
+};
+
+Inc_stmtContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterInc_stmt(this);
+	}
+};
+
+Inc_stmtContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitInc_stmt(this);
+	}
+};
+
+Inc_stmtContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitInc_stmt(this);
+    } else {
+        return visitor.visitChildren(this);
     }
+};
 
-	identifier() {
-	    return this.getTypedRuleContext(IdentifierContext,0);
-	};
 
-	DECREMENT() {
-	    return this.getToken(ICEScriptParser.DECREMENT, 0);
-	};
 
-	END_STMT() {
-	    return this.getToken(ICEScriptParser.END_STMT, 0);
-	};
 
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterDec_stmt(this);
-		}
-	}
+ICEScriptParser.Inc_stmtContext = Inc_stmtContext;
 
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitDec_stmt(this);
-		}
-	}
+ICEScriptParser.prototype.inc_stmt = function() {
 
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitDec_stmt(this);
+    var localctx = new Inc_stmtContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 32, ICEScriptParser.RULE_inc_stmt);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 196;
+        this.identifier();
+        this.state = 197;
+        this.match(ICEScriptParser.INCREMENT);
+        this.state = 198;
+        this.match(ICEScriptParser.END_STMT);
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return visitor.visitChildren(this);
+	    	throw re;
 	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function Dec_stmtContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_dec_stmt;
+    return this;
 }
 
+Dec_stmtContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+Dec_stmtContext.prototype.constructor = Dec_stmtContext;
 
+Dec_stmtContext.prototype.identifier = function() {
+    return this.getTypedRuleContext(IdentifierContext,0);
+};
 
-class If_stmtContext extends antlr4.ParserRuleContext {
+Dec_stmtContext.prototype.DECREMENT = function() {
+    return this.getToken(ICEScriptParser.DECREMENT, 0);
+};
 
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_if_stmt;
+Dec_stmtContext.prototype.END_STMT = function() {
+    return this.getToken(ICEScriptParser.END_STMT, 0);
+};
+
+Dec_stmtContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterDec_stmt(this);
+	}
+};
+
+Dec_stmtContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitDec_stmt(this);
+	}
+};
+
+Dec_stmtContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitDec_stmt(this);
+    } else {
+        return visitor.visitChildren(this);
     }
+};
 
-	IF() {
-	    return this.getToken(ICEScriptParser.IF, 0);
-	};
 
-	OPEN_BRACKET() {
-	    return this.getToken(ICEScriptParser.OPEN_BRACKET, 0);
-	};
 
-	boolexpr() {
-	    return this.getTypedRuleContext(BoolexprContext,0);
-	};
 
-	CLOSE_BRACKET() {
-	    return this.getToken(ICEScriptParser.CLOSE_BRACKET, 0);
-	};
+ICEScriptParser.Dec_stmtContext = Dec_stmtContext;
 
-	statement() {
-	    return this.getTypedRuleContext(StatementContext,0);
-	};
+ICEScriptParser.prototype.dec_stmt = function() {
 
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterIf_stmt(this);
-		}
-	}
-
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitIf_stmt(this);
-		}
-	}
-
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitIf_stmt(this);
+    var localctx = new Dec_stmtContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 34, ICEScriptParser.RULE_dec_stmt);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 200;
+        this.identifier();
+        this.state = 201;
+        this.match(ICEScriptParser.DECREMENT);
+        this.state = 202;
+        this.match(ICEScriptParser.END_STMT);
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return visitor.visitChildren(this);
+	    	throw re;
 	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function If_stmtContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_if_stmt;
+    return this;
 }
 
+If_stmtContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+If_stmtContext.prototype.constructor = If_stmtContext;
 
+If_stmtContext.prototype.IF = function() {
+    return this.getToken(ICEScriptParser.IF, 0);
+};
 
-class If_else_stmtContext extends antlr4.ParserRuleContext {
+If_stmtContext.prototype.OPEN_BRACKET = function() {
+    return this.getToken(ICEScriptParser.OPEN_BRACKET, 0);
+};
 
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_if_else_stmt;
+If_stmtContext.prototype.boolexpr = function() {
+    return this.getTypedRuleContext(BoolexprContext,0);
+};
+
+If_stmtContext.prototype.CLOSE_BRACKET = function() {
+    return this.getToken(ICEScriptParser.CLOSE_BRACKET, 0);
+};
+
+If_stmtContext.prototype.statement = function() {
+    return this.getTypedRuleContext(StatementContext,0);
+};
+
+If_stmtContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterIf_stmt(this);
+	}
+};
+
+If_stmtContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitIf_stmt(this);
+	}
+};
+
+If_stmtContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitIf_stmt(this);
+    } else {
+        return visitor.visitChildren(this);
     }
+};
 
-	IF() {
-	    return this.getToken(ICEScriptParser.IF, 0);
-	};
 
-	OPEN_BRACKET() {
-	    return this.getToken(ICEScriptParser.OPEN_BRACKET, 0);
-	};
 
-	boolexpr() {
-	    return this.getTypedRuleContext(BoolexprContext,0);
-	};
 
-	CLOSE_BRACKET() {
-	    return this.getToken(ICEScriptParser.CLOSE_BRACKET, 0);
-	};
+ICEScriptParser.If_stmtContext = If_stmtContext;
 
-	statement = function(i) {
-	    if(i===undefined) {
-	        i = null;
-	    }
-	    if(i===null) {
-	        return this.getTypedRuleContexts(StatementContext);
+ICEScriptParser.prototype.if_stmt = function() {
+
+    var localctx = new If_stmtContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 36, ICEScriptParser.RULE_if_stmt);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 204;
+        this.match(ICEScriptParser.IF);
+        this.state = 205;
+        this.match(ICEScriptParser.OPEN_BRACKET);
+        this.state = 206;
+        this.boolexpr();
+        this.state = 207;
+        this.match(ICEScriptParser.CLOSE_BRACKET);
+        this.state = 208;
+        this.statement();
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return this.getTypedRuleContext(StatementContext,i);
+	    	throw re;
 	    }
-	};
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
 
-	ELSE() {
-	    return this.getToken(ICEScriptParser.ELSE, 0);
-	};
-
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterIf_else_stmt(this);
-		}
+function If_else_stmtContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitIf_else_stmt(this);
-		}
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
 	}
-
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitIf_else_stmt(this);
-	    } else {
-	        return visitor.visitChildren(this);
-	    }
-	}
-
-
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_if_else_stmt;
+    return this;
 }
 
+If_else_stmtContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+If_else_stmtContext.prototype.constructor = If_else_stmtContext;
 
+If_else_stmtContext.prototype.IF = function() {
+    return this.getToken(ICEScriptParser.IF, 0);
+};
 
-class While_stmtContext extends antlr4.ParserRuleContext {
+If_else_stmtContext.prototype.OPEN_BRACKET = function() {
+    return this.getToken(ICEScriptParser.OPEN_BRACKET, 0);
+};
 
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_while_stmt;
+If_else_stmtContext.prototype.boolexpr = function() {
+    return this.getTypedRuleContext(BoolexprContext,0);
+};
+
+If_else_stmtContext.prototype.CLOSE_BRACKET = function() {
+    return this.getToken(ICEScriptParser.CLOSE_BRACKET, 0);
+};
+
+If_else_stmtContext.prototype.statement = function(i) {
+    if(i===undefined) {
+        i = null;
     }
+    if(i===null) {
+        return this.getTypedRuleContexts(StatementContext);
+    } else {
+        return this.getTypedRuleContext(StatementContext,i);
+    }
+};
 
-	WHILE() {
-	    return this.getToken(ICEScriptParser.WHILE, 0);
-	};
+If_else_stmtContext.prototype.ELSE = function() {
+    return this.getToken(ICEScriptParser.ELSE, 0);
+};
 
-	OPEN_BRACKET() {
-	    return this.getToken(ICEScriptParser.OPEN_BRACKET, 0);
-	};
-
-	boolexpr() {
-	    return this.getTypedRuleContext(BoolexprContext,0);
-	};
-
-	CLOSE_BRACKET() {
-	    return this.getToken(ICEScriptParser.CLOSE_BRACKET, 0);
-	};
-
-	statement() {
-	    return this.getTypedRuleContext(StatementContext,0);
-	};
-
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterWhile_stmt(this);
-		}
+If_else_stmtContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterIf_else_stmt(this);
 	}
+};
 
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitWhile_stmt(this);
-		}
+If_else_stmtContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitIf_else_stmt(this);
 	}
+};
 
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitWhile_stmt(this);
+If_else_stmtContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitIf_else_stmt(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
+
+
+
+ICEScriptParser.If_else_stmtContext = If_else_stmtContext;
+
+ICEScriptParser.prototype.if_else_stmt = function() {
+
+    var localctx = new If_else_stmtContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 38, ICEScriptParser.RULE_if_else_stmt);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 210;
+        this.match(ICEScriptParser.IF);
+        this.state = 211;
+        this.match(ICEScriptParser.OPEN_BRACKET);
+        this.state = 212;
+        this.boolexpr();
+        this.state = 213;
+        this.match(ICEScriptParser.CLOSE_BRACKET);
+        this.state = 214;
+        this.statement();
+        this.state = 215;
+        this.match(ICEScriptParser.ELSE);
+        this.state = 216;
+        this.statement();
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return visitor.visitChildren(this);
+	    	throw re;
 	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function While_stmtContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_while_stmt;
+    return this;
 }
 
+While_stmtContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+While_stmtContext.prototype.constructor = While_stmtContext;
 
+While_stmtContext.prototype.WHILE = function() {
+    return this.getToken(ICEScriptParser.WHILE, 0);
+};
 
-class Var_stmtContext extends antlr4.ParserRuleContext {
+While_stmtContext.prototype.OPEN_BRACKET = function() {
+    return this.getToken(ICEScriptParser.OPEN_BRACKET, 0);
+};
 
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_var_stmt;
+While_stmtContext.prototype.boolexpr = function() {
+    return this.getTypedRuleContext(BoolexprContext,0);
+};
+
+While_stmtContext.prototype.CLOSE_BRACKET = function() {
+    return this.getToken(ICEScriptParser.CLOSE_BRACKET, 0);
+};
+
+While_stmtContext.prototype.statement = function() {
+    return this.getTypedRuleContext(StatementContext,0);
+};
+
+While_stmtContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterWhile_stmt(this);
+	}
+};
+
+While_stmtContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitWhile_stmt(this);
+	}
+};
+
+While_stmtContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitWhile_stmt(this);
+    } else {
+        return visitor.visitChildren(this);
     }
+};
 
-	VAR() {
-	    return this.getToken(ICEScriptParser.VAR, 0);
-	};
 
-	identifier() {
-	    return this.getTypedRuleContext(IdentifierContext,0);
-	};
 
-	ASSIGN() {
-	    return this.getToken(ICEScriptParser.ASSIGN, 0);
-	};
 
-	expression() {
-	    return this.getTypedRuleContext(ExpressionContext,0);
-	};
+ICEScriptParser.While_stmtContext = While_stmtContext;
 
-	END_STMT() {
-	    return this.getToken(ICEScriptParser.END_STMT, 0);
-	};
+ICEScriptParser.prototype.while_stmt = function() {
 
-	type() {
-	    return this.getTypedRuleContext(TypeContext,0);
-	};
-
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterVar_stmt(this);
-		}
-	}
-
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitVar_stmt(this);
-		}
-	}
-
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitVar_stmt(this);
+    var localctx = new While_stmtContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 40, ICEScriptParser.RULE_while_stmt);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 218;
+        this.match(ICEScriptParser.WHILE);
+        this.state = 219;
+        this.match(ICEScriptParser.OPEN_BRACKET);
+        this.state = 220;
+        this.boolexpr();
+        this.state = 221;
+        this.match(ICEScriptParser.CLOSE_BRACKET);
+        this.state = 222;
+        this.statement();
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return visitor.visitChildren(this);
+	    	throw re;
 	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function For_stmtContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_for_stmt;
+    return this;
 }
 
+For_stmtContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+For_stmtContext.prototype.constructor = For_stmtContext;
 
+For_stmtContext.prototype.FOR = function() {
+    return this.getToken(ICEScriptParser.FOR, 0);
+};
 
-class Return_stmtContext extends antlr4.ParserRuleContext {
+For_stmtContext.prototype.OPEN_BRACKET = function() {
+    return this.getToken(ICEScriptParser.OPEN_BRACKET, 0);
+};
 
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_return_stmt;
+For_stmtContext.prototype.var_stmt = function() {
+    return this.getTypedRuleContext(Var_stmtContext,0);
+};
+
+For_stmtContext.prototype.boolexpr = function() {
+    return this.getTypedRuleContext(BoolexprContext,0);
+};
+
+For_stmtContext.prototype.END_STMT = function() {
+    return this.getToken(ICEScriptParser.END_STMT, 0);
+};
+
+For_stmtContext.prototype.inc_stmt = function() {
+    return this.getTypedRuleContext(Inc_stmtContext,0);
+};
+
+For_stmtContext.prototype.CLOSE_BRACKET = function() {
+    return this.getToken(ICEScriptParser.CLOSE_BRACKET, 0);
+};
+
+For_stmtContext.prototype.statement = function() {
+    return this.getTypedRuleContext(StatementContext,0);
+};
+
+For_stmtContext.prototype.value = function() {
+    return this.getTypedRuleContext(ValueContext,0);
+};
+
+For_stmtContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterFor_stmt(this);
+	}
+};
+
+For_stmtContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitFor_stmt(this);
+	}
+};
+
+For_stmtContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitFor_stmt(this);
+    } else {
+        return visitor.visitChildren(this);
     }
+};
 
-	RETURN() {
-	    return this.getToken(ICEScriptParser.RETURN, 0);
-	};
 
-	expression() {
-	    return this.getTypedRuleContext(ExpressionContext,0);
-	};
 
-	END_STMT() {
-	    return this.getToken(ICEScriptParser.END_STMT, 0);
-	};
 
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterReturn_stmt(this);
-		}
-	}
+ICEScriptParser.For_stmtContext = For_stmtContext;
 
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitReturn_stmt(this);
-		}
-	}
+ICEScriptParser.prototype.for_stmt = function() {
 
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitReturn_stmt(this);
+    var localctx = new For_stmtContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 42, ICEScriptParser.RULE_for_stmt);
+    try {
+        this.state = 241;
+        this._errHandler.sync(this);
+        var la_ = this._interp.adaptivePredict(this._input,10,this._ctx);
+        switch(la_) {
+        case 1:
+            this.enterOuterAlt(localctx, 1);
+            this.state = 224;
+            this.match(ICEScriptParser.FOR);
+            this.state = 225;
+            this.match(ICEScriptParser.OPEN_BRACKET);
+            this.state = 226;
+            this.var_stmt();
+            this.state = 227;
+            this.boolexpr();
+            this.state = 228;
+            this.match(ICEScriptParser.END_STMT);
+            this.state = 229;
+            this.inc_stmt();
+            this.state = 230;
+            this.match(ICEScriptParser.CLOSE_BRACKET);
+            this.state = 231;
+            this.statement();
+            break;
+
+        case 2:
+            this.enterOuterAlt(localctx, 2);
+            this.state = 233;
+            this.match(ICEScriptParser.FOR);
+            this.state = 234;
+            this.match(ICEScriptParser.OPEN_BRACKET);
+            this.state = 235;
+            this.var_stmt();
+            this.state = 236;
+            this.match(ICEScriptParser.T__6);
+            this.state = 237;
+            this.value();
+            this.state = 238;
+            this.match(ICEScriptParser.CLOSE_BRACKET);
+            this.state = 239;
+            this.statement();
+            break;
+
+        }
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return visitor.visitChildren(this);
+	    	throw re;
 	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function Var_stmtContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_var_stmt;
+    return this;
 }
 
+Var_stmtContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+Var_stmtContext.prototype.constructor = Var_stmtContext;
 
+Var_stmtContext.prototype.VAR = function() {
+    return this.getToken(ICEScriptParser.VAR, 0);
+};
 
-class ExpressionContext extends antlr4.ParserRuleContext {
+Var_stmtContext.prototype.identifier = function() {
+    return this.getTypedRuleContext(IdentifierContext,0);
+};
 
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_expression;
+Var_stmtContext.prototype.ASSIGN = function() {
+    return this.getToken(ICEScriptParser.ASSIGN, 0);
+};
+
+Var_stmtContext.prototype.expression = function() {
+    return this.getTypedRuleContext(ExpressionContext,0);
+};
+
+Var_stmtContext.prototype.END_STMT = function() {
+    return this.getToken(ICEScriptParser.END_STMT, 0);
+};
+
+Var_stmtContext.prototype.type = function() {
+    return this.getTypedRuleContext(TypeContext,0);
+};
+
+Var_stmtContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterVar_stmt(this);
+	}
+};
+
+Var_stmtContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitVar_stmt(this);
+	}
+};
+
+Var_stmtContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitVar_stmt(this);
+    } else {
+        return visitor.visitChildren(this);
     }
+};
 
-	OPEN_BRACKET() {
-	    return this.getToken(ICEScriptParser.OPEN_BRACKET, 0);
-	};
 
-	expression() {
-	    return this.getTypedRuleContext(ExpressionContext,0);
-	};
 
-	CLOSE_BRACKET() {
-	    return this.getToken(ICEScriptParser.CLOSE_BRACKET, 0);
-	};
 
-	value() {
-	    return this.getTypedRuleContext(ValueContext,0);
-	};
+ICEScriptParser.Var_stmtContext = Var_stmtContext;
 
-	identifier() {
-	    return this.getTypedRuleContext(IdentifierContext,0);
-	};
+ICEScriptParser.prototype.var_stmt = function() {
 
-	boolexpr() {
-	    return this.getTypedRuleContext(BoolexprContext,0);
-	};
+    var localctx = new Var_stmtContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 44, ICEScriptParser.RULE_var_stmt);
+    try {
+        this.state = 257;
+        this._errHandler.sync(this);
+        var la_ = this._interp.adaptivePredict(this._input,11,this._ctx);
+        switch(la_) {
+        case 1:
+            this.enterOuterAlt(localctx, 1);
+            this.state = 243;
+            this.match(ICEScriptParser.VAR);
+            this.state = 244;
+            this.identifier();
+            this.state = 245;
+            this.match(ICEScriptParser.ASSIGN);
+            this.state = 246;
+            this.expression(0);
+            this.state = 247;
+            this.match(ICEScriptParser.END_STMT);
+            break;
 
-	STRING() {
-	    return this.getToken(ICEScriptParser.STRING, 0);
-	};
+        case 2:
+            this.enterOuterAlt(localctx, 2);
+            this.state = 249;
+            this.match(ICEScriptParser.VAR);
+            this.state = 250;
+            this.identifier();
+            this.state = 251;
+            this.match(ICEScriptParser.T__3);
+            this.state = 252;
+            this.type(0);
+            this.state = 253;
+            this.match(ICEScriptParser.ASSIGN);
+            this.state = 254;
+            this.expression(0);
+            this.state = 255;
+            this.match(ICEScriptParser.END_STMT);
+            break;
 
-	methodcall() {
-	    return this.getTypedRuleContext(MethodcallContext,0);
-	};
-
-	LIST() {
-	    return this.getToken(ICEScriptParser.LIST, 0);
-	};
-
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterExpression(this);
-		}
-	}
-
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitExpression(this);
-		}
-	}
-
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitExpression(this);
+        }
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return visitor.visitChildren(this);
+	    	throw re;
 	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function Return_stmtContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_return_stmt;
+    return this;
 }
 
+Return_stmtContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+Return_stmtContext.prototype.constructor = Return_stmtContext;
 
+Return_stmtContext.prototype.RETURN = function() {
+    return this.getToken(ICEScriptParser.RETURN, 0);
+};
 
-class MathContext extends antlr4.ParserRuleContext {
+Return_stmtContext.prototype.expression = function() {
+    return this.getTypedRuleContext(ExpressionContext,0);
+};
 
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_math;
+Return_stmtContext.prototype.END_STMT = function() {
+    return this.getToken(ICEScriptParser.END_STMT, 0);
+};
+
+Return_stmtContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterReturn_stmt(this);
+	}
+};
+
+Return_stmtContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitReturn_stmt(this);
+	}
+};
+
+Return_stmtContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitReturn_stmt(this);
+    } else {
+        return visitor.visitChildren(this);
     }
+};
 
-	expression = function(i) {
-	    if(i===undefined) {
-	        i = null;
-	    }
-	    if(i===null) {
-	        return this.getTypedRuleContexts(ExpressionContext);
+
+
+
+ICEScriptParser.Return_stmtContext = Return_stmtContext;
+
+ICEScriptParser.prototype.return_stmt = function() {
+
+    var localctx = new Return_stmtContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 46, ICEScriptParser.RULE_return_stmt);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 259;
+        this.match(ICEScriptParser.RETURN);
+        this.state = 260;
+        this.expression(0);
+        this.state = 261;
+        this.match(ICEScriptParser.END_STMT);
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return this.getTypedRuleContext(ExpressionContext,i);
+	    	throw re;
 	    }
-	};
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
 
-	ADD() {
-	    return this.getToken(ICEScriptParser.ADD, 0);
-	};
-
-	SUB() {
-	    return this.getToken(ICEScriptParser.SUB, 0);
-	};
-
-	MUL() {
-	    return this.getToken(ICEScriptParser.MUL, 0);
-	};
-
-	DIV() {
-	    return this.getToken(ICEScriptParser.DIV, 0);
-	};
-
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterMath(this);
-		}
+function ExpressionContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitMath(this);
-		}
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
 	}
-
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitMath(this);
-	    } else {
-	        return visitor.visitChildren(this);
-	    }
-	}
-
-
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_expression;
+    return this;
 }
 
+ExpressionContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+ExpressionContext.prototype.constructor = ExpressionContext;
 
+ExpressionContext.prototype.OPEN_BRACKET = function() {
+    return this.getToken(ICEScriptParser.OPEN_BRACKET, 0);
+};
 
-class BoolexprContext extends antlr4.ParserRuleContext {
-
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_boolexpr;
+ExpressionContext.prototype.expression = function(i) {
+    if(i===undefined) {
+        i = null;
     }
+    if(i===null) {
+        return this.getTypedRuleContexts(ExpressionContext);
+    } else {
+        return this.getTypedRuleContext(ExpressionContext,i);
+    }
+};
 
-	value() {
-	    return this.getTypedRuleContext(ValueContext,0);
-	};
+ExpressionContext.prototype.CLOSE_BRACKET = function() {
+    return this.getToken(ICEScriptParser.CLOSE_BRACKET, 0);
+};
 
-	TRUE() {
-	    return this.getToken(ICEScriptParser.TRUE, 0);
-	};
+ExpressionContext.prototype.value = function() {
+    return this.getTypedRuleContext(ValueContext,0);
+};
 
-	FALSE() {
-	    return this.getToken(ICEScriptParser.FALSE, 0);
-	};
+ExpressionContext.prototype.identifier = function() {
+    return this.getTypedRuleContext(IdentifierContext,0);
+};
 
-	GREATER_THAN() {
-	    return this.getToken(ICEScriptParser.GREATER_THAN, 0);
-	};
+ExpressionContext.prototype.boolexpr = function() {
+    return this.getTypedRuleContext(BoolexprContext,0);
+};
 
-	boolexpr() {
-	    return this.getTypedRuleContext(BoolexprContext,0);
-	};
+ExpressionContext.prototype.STRING = function() {
+    return this.getToken(ICEScriptParser.STRING, 0);
+};
 
-	LESS_THAN() {
-	    return this.getToken(ICEScriptParser.LESS_THAN, 0);
-	};
+ExpressionContext.prototype.methodcall = function() {
+    return this.getTypedRuleContext(MethodcallContext,0);
+};
 
-	EQUAL_TO() {
-	    return this.getToken(ICEScriptParser.EQUAL_TO, 0);
-	};
+ExpressionContext.prototype.LIST = function() {
+    return this.getToken(ICEScriptParser.LIST, 0);
+};
 
-	NOT_EQUAL_TO() {
-	    return this.getToken(ICEScriptParser.NOT_EQUAL_TO, 0);
-	};
+ExpressionContext.prototype.ADD = function() {
+    return this.getToken(ICEScriptParser.ADD, 0);
+};
 
-	GREATER_THAN_OR_EQUAL() {
-	    return this.getToken(ICEScriptParser.GREATER_THAN_OR_EQUAL, 0);
-	};
+ExpressionContext.prototype.SUB = function() {
+    return this.getToken(ICEScriptParser.SUB, 0);
+};
 
-	LESS_THAN_OR_EQUAL() {
-	    return this.getToken(ICEScriptParser.LESS_THAN_OR_EQUAL, 0);
-	};
+ExpressionContext.prototype.MUL = function() {
+    return this.getToken(ICEScriptParser.MUL, 0);
+};
 
-	OR() {
-	    return this.getToken(ICEScriptParser.OR, 0);
-	};
+ExpressionContext.prototype.DIV = function() {
+    return this.getToken(ICEScriptParser.DIV, 0);
+};
 
-	AND() {
-	    return this.getToken(ICEScriptParser.AND, 0);
-	};
-
-	NOT() {
-	    return this.getToken(ICEScriptParser.NOT, 0);
-	};
-
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterBoolexpr(this);
-		}
+ExpressionContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterExpression(this);
 	}
+};
 
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitBoolexpr(this);
-		}
+ExpressionContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitExpression(this);
 	}
+};
 
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitBoolexpr(this);
+ExpressionContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitExpression(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
+
+
+ICEScriptParser.prototype.expression = function(_p) {
+	if(_p===undefined) {
+	    _p = 0;
+	}
+    var _parentctx = this._ctx;
+    var _parentState = this.state;
+    var localctx = new ExpressionContext(this, this._ctx, _parentState);
+    var _prevctx = localctx;
+    var _startState = 48;
+    this.enterRecursionRule(localctx, 48, ICEScriptParser.RULE_expression, _p);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 274;
+        this._errHandler.sync(this);
+        var la_ = this._interp.adaptivePredict(this._input,12,this._ctx);
+        switch(la_) {
+        case 1:
+            this.state = 264;
+            this.match(ICEScriptParser.OPEN_BRACKET);
+            this.state = 265;
+            this.expression(0);
+            this.state = 266;
+            this.match(ICEScriptParser.CLOSE_BRACKET);
+            break;
+
+        case 2:
+            this.state = 268;
+            this.value();
+            break;
+
+        case 3:
+            this.state = 269;
+            this.identifier();
+            break;
+
+        case 4:
+            this.state = 270;
+            this.boolexpr();
+            break;
+
+        case 5:
+            this.state = 271;
+            this.match(ICEScriptParser.STRING);
+            break;
+
+        case 6:
+            this.state = 272;
+            this.methodcall();
+            break;
+
+        case 7:
+            this.state = 273;
+            this.match(ICEScriptParser.LIST);
+            break;
+
+        }
+        this._ctx.stop = this._input.LT(-1);
+        this.state = 290;
+        this._errHandler.sync(this);
+        var _alt = this._interp.adaptivePredict(this._input,14,this._ctx)
+        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+            if(_alt===1) {
+                if(this._parseListeners!==null) {
+                    this.triggerExitRuleEvent();
+                }
+                _prevctx = localctx;
+                this.state = 288;
+                this._errHandler.sync(this);
+                var la_ = this._interp.adaptivePredict(this._input,13,this._ctx);
+                switch(la_) {
+                case 1:
+                    localctx = new ExpressionContext(this, _parentctx, _parentState);
+                    this.pushNewRecursionContext(localctx, _startState, ICEScriptParser.RULE_expression);
+                    this.state = 276;
+                    if (!( this.precpred(this._ctx, 4))) {
+                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 4)");
+                    }
+                    this.state = 277;
+                    this.match(ICEScriptParser.ADD);
+                    this.state = 278;
+                    this.expression(5);
+                    break;
+
+                case 2:
+                    localctx = new ExpressionContext(this, _parentctx, _parentState);
+                    this.pushNewRecursionContext(localctx, _startState, ICEScriptParser.RULE_expression);
+                    this.state = 279;
+                    if (!( this.precpred(this._ctx, 3))) {
+                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 3)");
+                    }
+                    this.state = 280;
+                    this.match(ICEScriptParser.SUB);
+                    this.state = 281;
+                    this.expression(4);
+                    break;
+
+                case 3:
+                    localctx = new ExpressionContext(this, _parentctx, _parentState);
+                    this.pushNewRecursionContext(localctx, _startState, ICEScriptParser.RULE_expression);
+                    this.state = 282;
+                    if (!( this.precpred(this._ctx, 2))) {
+                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 2)");
+                    }
+                    this.state = 283;
+                    this.match(ICEScriptParser.MUL);
+                    this.state = 284;
+                    this.expression(3);
+                    break;
+
+                case 4:
+                    localctx = new ExpressionContext(this, _parentctx, _parentState);
+                    this.pushNewRecursionContext(localctx, _startState, ICEScriptParser.RULE_expression);
+                    this.state = 285;
+                    if (!( this.precpred(this._ctx, 1))) {
+                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 1)");
+                    }
+                    this.state = 286;
+                    this.match(ICEScriptParser.DIV);
+                    this.state = 287;
+                    this.expression(2);
+                    break;
+
+                } 
+            }
+            this.state = 292;
+            this._errHandler.sync(this);
+            _alt = this._interp.adaptivePredict(this._input,14,this._ctx);
+        }
+
+    } catch( error) {
+        if(error instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = error;
+	        this._errHandler.reportError(this, error);
+	        this._errHandler.recover(this, error);
 	    } else {
-	        return visitor.visitChildren(this);
+	    	throw error;
 	    }
+    } finally {
+        this.unrollRecursionContexts(_parentctx)
+    }
+    return localctx;
+};
+
+function MathContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_math;
+    return this;
 }
 
+MathContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+MathContext.prototype.constructor = MathContext;
 
-
-class MethodcallContext extends antlr4.ParserRuleContext {
-
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_methodcall;
+MathContext.prototype.expression = function(i) {
+    if(i===undefined) {
+        i = null;
     }
+    if(i===null) {
+        return this.getTypedRuleContexts(ExpressionContext);
+    } else {
+        return this.getTypedRuleContext(ExpressionContext,i);
+    }
+};
 
-	identifier() {
-	    return this.getTypedRuleContext(IdentifierContext,0);
-	};
+MathContext.prototype.ADD = function() {
+    return this.getToken(ICEScriptParser.ADD, 0);
+};
 
-	OPEN_BRACKET() {
-	    return this.getToken(ICEScriptParser.OPEN_BRACKET, 0);
-	};
+MathContext.prototype.SUB = function() {
+    return this.getToken(ICEScriptParser.SUB, 0);
+};
 
-	methodparams() {
-	    return this.getTypedRuleContext(MethodparamsContext,0);
-	};
+MathContext.prototype.MUL = function() {
+    return this.getToken(ICEScriptParser.MUL, 0);
+};
 
-	CLOSE_BRACKET() {
-	    return this.getToken(ICEScriptParser.CLOSE_BRACKET, 0);
-	};
+MathContext.prototype.DIV = function() {
+    return this.getToken(ICEScriptParser.DIV, 0);
+};
 
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterMethodcall(this);
-		}
+MathContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterMath(this);
 	}
+};
 
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitMethodcall(this);
-		}
+MathContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitMath(this);
 	}
+};
 
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitMethodcall(this);
+MathContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitMath(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
+
+
+
+ICEScriptParser.MathContext = MathContext;
+
+ICEScriptParser.prototype.math = function() {
+
+    var localctx = new MathContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 50, ICEScriptParser.RULE_math);
+    try {
+        this.state = 309;
+        this._errHandler.sync(this);
+        var la_ = this._interp.adaptivePredict(this._input,15,this._ctx);
+        switch(la_) {
+        case 1:
+            this.enterOuterAlt(localctx, 1);
+            this.state = 293;
+            this.expression(0);
+            this.state = 294;
+            this.match(ICEScriptParser.ADD);
+            this.state = 295;
+            this.expression(0);
+            break;
+
+        case 2:
+            this.enterOuterAlt(localctx, 2);
+            this.state = 297;
+            this.expression(0);
+            this.state = 298;
+            this.match(ICEScriptParser.SUB);
+            this.state = 299;
+            this.expression(0);
+            break;
+
+        case 3:
+            this.enterOuterAlt(localctx, 3);
+            this.state = 301;
+            this.expression(0);
+            this.state = 302;
+            this.match(ICEScriptParser.MUL);
+            this.state = 303;
+            this.expression(0);
+            break;
+
+        case 4:
+            this.enterOuterAlt(localctx, 4);
+            this.state = 305;
+            this.expression(0);
+            this.state = 306;
+            this.match(ICEScriptParser.DIV);
+            this.state = 307;
+            this.expression(0);
+            break;
+
+        }
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return visitor.visitChildren(this);
+	    	throw re;
 	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function BoolexprContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_boolexpr;
+    return this;
 }
 
+BoolexprContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+BoolexprContext.prototype.constructor = BoolexprContext;
 
+BoolexprContext.prototype.value = function() {
+    return this.getTypedRuleContext(ValueContext,0);
+};
 
-class MethodparamsContext extends antlr4.ParserRuleContext {
+BoolexprContext.prototype.TRUE = function() {
+    return this.getToken(ICEScriptParser.TRUE, 0);
+};
 
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_methodparams;
+BoolexprContext.prototype.FALSE = function() {
+    return this.getToken(ICEScriptParser.FALSE, 0);
+};
+
+BoolexprContext.prototype.GREATER_THAN = function() {
+    return this.getToken(ICEScriptParser.GREATER_THAN, 0);
+};
+
+BoolexprContext.prototype.boolexpr = function() {
+    return this.getTypedRuleContext(BoolexprContext,0);
+};
+
+BoolexprContext.prototype.LESS_THAN = function() {
+    return this.getToken(ICEScriptParser.LESS_THAN, 0);
+};
+
+BoolexprContext.prototype.EQUAL_TO = function() {
+    return this.getToken(ICEScriptParser.EQUAL_TO, 0);
+};
+
+BoolexprContext.prototype.NOT_EQUAL_TO = function() {
+    return this.getToken(ICEScriptParser.NOT_EQUAL_TO, 0);
+};
+
+BoolexprContext.prototype.GREATER_THAN_OR_EQUAL = function() {
+    return this.getToken(ICEScriptParser.GREATER_THAN_OR_EQUAL, 0);
+};
+
+BoolexprContext.prototype.LESS_THAN_OR_EQUAL = function() {
+    return this.getToken(ICEScriptParser.LESS_THAN_OR_EQUAL, 0);
+};
+
+BoolexprContext.prototype.OR = function() {
+    return this.getToken(ICEScriptParser.OR, 0);
+};
+
+BoolexprContext.prototype.AND = function() {
+    return this.getToken(ICEScriptParser.AND, 0);
+};
+
+BoolexprContext.prototype.NOT = function() {
+    return this.getToken(ICEScriptParser.NOT, 0);
+};
+
+BoolexprContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterBoolexpr(this);
+	}
+};
+
+BoolexprContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitBoolexpr(this);
+	}
+};
+
+BoolexprContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitBoolexpr(this);
+    } else {
+        return visitor.visitChildren(this);
     }
+};
 
-	expression = function(i) {
-	    if(i===undefined) {
-	        i = null;
-	    }
-	    if(i===null) {
-	        return this.getTypedRuleContexts(ExpressionContext);
+
+
+
+ICEScriptParser.BoolexprContext = BoolexprContext;
+
+ICEScriptParser.prototype.boolexpr = function() {
+
+    var localctx = new BoolexprContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 52, ICEScriptParser.RULE_boolexpr);
+    try {
+        this.state = 348;
+        this._errHandler.sync(this);
+        var la_ = this._interp.adaptivePredict(this._input,16,this._ctx);
+        switch(la_) {
+        case 1:
+            this.enterOuterAlt(localctx, 1);
+            this.state = 311;
+            this.value();
+            break;
+
+        case 2:
+            this.enterOuterAlt(localctx, 2);
+            this.state = 312;
+            this.match(ICEScriptParser.TRUE);
+            break;
+
+        case 3:
+            this.enterOuterAlt(localctx, 3);
+            this.state = 313;
+            this.match(ICEScriptParser.FALSE);
+            break;
+
+        case 4:
+            this.enterOuterAlt(localctx, 4);
+            this.state = 314;
+            this.value();
+            this.state = 315;
+            this.match(ICEScriptParser.GREATER_THAN);
+            this.state = 316;
+            this.boolexpr();
+            break;
+
+        case 5:
+            this.enterOuterAlt(localctx, 5);
+            this.state = 318;
+            this.value();
+            this.state = 319;
+            this.match(ICEScriptParser.LESS_THAN);
+            this.state = 320;
+            this.boolexpr();
+            break;
+
+        case 6:
+            this.enterOuterAlt(localctx, 6);
+            this.state = 322;
+            this.value();
+            this.state = 323;
+            this.match(ICEScriptParser.EQUAL_TO);
+            this.state = 324;
+            this.boolexpr();
+            break;
+
+        case 7:
+            this.enterOuterAlt(localctx, 7);
+            this.state = 326;
+            this.value();
+            this.state = 327;
+            this.match(ICEScriptParser.NOT_EQUAL_TO);
+            this.state = 328;
+            this.boolexpr();
+            break;
+
+        case 8:
+            this.enterOuterAlt(localctx, 8);
+            this.state = 330;
+            this.value();
+            this.state = 331;
+            this.match(ICEScriptParser.GREATER_THAN_OR_EQUAL);
+            this.state = 332;
+            this.boolexpr();
+            break;
+
+        case 9:
+            this.enterOuterAlt(localctx, 9);
+            this.state = 334;
+            this.value();
+            this.state = 335;
+            this.match(ICEScriptParser.LESS_THAN_OR_EQUAL);
+            this.state = 336;
+            this.boolexpr();
+            break;
+
+        case 10:
+            this.enterOuterAlt(localctx, 10);
+            this.state = 338;
+            this.value();
+            this.state = 339;
+            this.match(ICEScriptParser.OR);
+            this.state = 340;
+            this.boolexpr();
+            break;
+
+        case 11:
+            this.enterOuterAlt(localctx, 11);
+            this.state = 342;
+            this.value();
+            this.state = 343;
+            this.match(ICEScriptParser.AND);
+            this.state = 344;
+            this.boolexpr();
+            break;
+
+        case 12:
+            this.enterOuterAlt(localctx, 12);
+            this.state = 346;
+            this.match(ICEScriptParser.NOT);
+            this.state = 347;
+            this.boolexpr();
+            break;
+
+        }
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return this.getTypedRuleContext(ExpressionContext,i);
+	    	throw re;
 	    }
-	};
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
 
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterMethodparams(this);
-		}
+function MethodcallContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitMethodparams(this);
-		}
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
 	}
-
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitMethodparams(this);
-	    } else {
-	        return visitor.visitChildren(this);
-	    }
-	}
-
-
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_methodcall;
+    return this;
 }
 
+MethodcallContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+MethodcallContext.prototype.constructor = MethodcallContext;
 
+MethodcallContext.prototype.identifier = function() {
+    return this.getTypedRuleContext(IdentifierContext,0);
+};
 
-class ValueContext extends antlr4.ParserRuleContext {
+MethodcallContext.prototype.OPEN_BRACKET = function() {
+    return this.getToken(ICEScriptParser.OPEN_BRACKET, 0);
+};
 
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_value;
+MethodcallContext.prototype.methodparams = function() {
+    return this.getTypedRuleContext(MethodparamsContext,0);
+};
+
+MethodcallContext.prototype.CLOSE_BRACKET = function() {
+    return this.getToken(ICEScriptParser.CLOSE_BRACKET, 0);
+};
+
+MethodcallContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterMethodcall(this);
+	}
+};
+
+MethodcallContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitMethodcall(this);
+	}
+};
+
+MethodcallContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitMethodcall(this);
+    } else {
+        return visitor.visitChildren(this);
     }
+};
 
-	identifier() {
-	    return this.getTypedRuleContext(IdentifierContext,0);
-	};
 
-	number() {
-	    return this.getTypedRuleContext(NumberContext,0);
-	};
 
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterValue(this);
-		}
-	}
 
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitValue(this);
-		}
-	}
+ICEScriptParser.MethodcallContext = MethodcallContext;
 
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitValue(this);
+ICEScriptParser.prototype.methodcall = function() {
+
+    var localctx = new MethodcallContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 54, ICEScriptParser.RULE_methodcall);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 350;
+        this.identifier();
+        this.state = 351;
+        this.match(ICEScriptParser.OPEN_BRACKET);
+        this.state = 352;
+        this.methodparams();
+        this.state = 353;
+        this.match(ICEScriptParser.CLOSE_BRACKET);
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return visitor.visitChildren(this);
+	    	throw re;
 	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function MethodparamsContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_methodparams;
+    return this;
 }
 
+MethodparamsContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+MethodparamsContext.prototype.constructor = MethodparamsContext;
 
-
-class IdentifierContext extends antlr4.ParserRuleContext {
-
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_identifier;
+MethodparamsContext.prototype.expression = function(i) {
+    if(i===undefined) {
+        i = null;
     }
+    if(i===null) {
+        return this.getTypedRuleContexts(ExpressionContext);
+    } else {
+        return this.getTypedRuleContext(ExpressionContext,i);
+    }
+};
 
-	IDENTIFIER() {
-	    return this.getToken(ICEScriptParser.IDENTIFIER, 0);
-	};
-
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterIdentifier(this);
-		}
+MethodparamsContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterMethodparams(this);
 	}
+};
 
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitIdentifier(this);
-		}
+MethodparamsContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitMethodparams(this);
 	}
+};
 
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitIdentifier(this);
+MethodparamsContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitMethodparams(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
+
+
+
+ICEScriptParser.MethodparamsContext = MethodparamsContext;
+
+ICEScriptParser.prototype.methodparams = function() {
+
+    var localctx = new MethodparamsContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 56, ICEScriptParser.RULE_methodparams);
+    var _la = 0; // Token type
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 358;
+        this._errHandler.sync(this);
+        _la = this._input.LA(1);
+        while(_la===ICEScriptParser.OPEN_BRACKET || ((((_la - 33)) & ~0x1f) == 0 && ((1 << (_la - 33)) & ((1 << (ICEScriptParser.NOT - 33)) | (1 << (ICEScriptParser.TRUE - 33)) | (1 << (ICEScriptParser.FALSE - 33)) | (1 << (ICEScriptParser.IDENTIFIER - 33)) | (1 << (ICEScriptParser.PI - 33)) | (1 << (ICEScriptParser.STRING - 33)) | (1 << (ICEScriptParser.LIST - 33)) | (1 << (ICEScriptParser.NUMBER - 33)))) !== 0)) {
+            this.state = 355;
+            this.expression(0);
+            this.state = 360;
+            this._errHandler.sync(this);
+            _la = this._input.LA(1);
+        }
+        this.state = 365;
+        this._errHandler.sync(this);
+        _la = this._input.LA(1);
+        while(_la===ICEScriptParser.T__4) {
+            this.state = 361;
+            this.match(ICEScriptParser.T__4);
+            this.state = 362;
+            this.expression(0);
+            this.state = 367;
+            this._errHandler.sync(this);
+            _la = this._input.LA(1);
+        }
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return visitor.visitChildren(this);
+	    	throw re;
 	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function ValueContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_value;
+    return this;
 }
 
+ValueContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+ValueContext.prototype.constructor = ValueContext;
 
+ValueContext.prototype.identifier = function() {
+    return this.getTypedRuleContext(IdentifierContext,0);
+};
 
-class NumberContext extends antlr4.ParserRuleContext {
+ValueContext.prototype.number = function() {
+    return this.getTypedRuleContext(NumberContext,0);
+};
 
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_number;
+ValueContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterValue(this);
+	}
+};
+
+ValueContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitValue(this);
+	}
+};
+
+ValueContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitValue(this);
+    } else {
+        return visitor.visitChildren(this);
     }
+};
 
-	NUMBER() {
-	    return this.getToken(ICEScriptParser.NUMBER, 0);
-	};
 
-	PI() {
-	    return this.getToken(ICEScriptParser.PI, 0);
-	};
 
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterNumber(this);
-		}
-	}
 
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitNumber(this);
-		}
-	}
+ICEScriptParser.ValueContext = ValueContext;
 
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitNumber(this);
+ICEScriptParser.prototype.value = function() {
+
+    var localctx = new ValueContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 58, ICEScriptParser.RULE_value);
+    try {
+        this.state = 370;
+        this._errHandler.sync(this);
+        switch(this._input.LA(1)) {
+        case ICEScriptParser.IDENTIFIER:
+            this.enterOuterAlt(localctx, 1);
+            this.state = 368;
+            this.identifier();
+            break;
+        case ICEScriptParser.PI:
+        case ICEScriptParser.NUMBER:
+            this.enterOuterAlt(localctx, 2);
+            this.state = 369;
+            this.number();
+            break;
+        default:
+            throw new antlr4.error.NoViableAltException(this);
+        }
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return visitor.visitChildren(this);
+	    	throw re;
 	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function IdentifierContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_identifier;
+    return this;
 }
 
+IdentifierContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+IdentifierContext.prototype.constructor = IdentifierContext;
 
+IdentifierContext.prototype.IDENTIFIER = function() {
+    return this.getToken(ICEScriptParser.IDENTIFIER, 0);
+};
 
-class ListContext extends antlr4.ParserRuleContext {
+IdentifierContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterIdentifier(this);
+	}
+};
 
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_list;
+IdentifierContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitIdentifier(this);
+	}
+};
+
+IdentifierContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitIdentifier(this);
+    } else {
+        return visitor.visitChildren(this);
     }
+};
 
-	expression = function(i) {
-	    if(i===undefined) {
-	        i = null;
-	    }
-	    if(i===null) {
-	        return this.getTypedRuleContexts(ExpressionContext);
+
+
+
+ICEScriptParser.IdentifierContext = IdentifierContext;
+
+ICEScriptParser.prototype.identifier = function() {
+
+    var localctx = new IdentifierContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 60, ICEScriptParser.RULE_identifier);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 372;
+        this.match(ICEScriptParser.IDENTIFIER);
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return this.getTypedRuleContext(ExpressionContext,i);
+	    	throw re;
 	    }
-	};
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
 
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterList(this);
-		}
+function NumberContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitList(this);
-		}
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
 	}
-
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitList(this);
-	    } else {
-	        return visitor.visitChildren(this);
-	    }
-	}
-
-
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_number;
+    return this;
 }
 
+NumberContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+NumberContext.prototype.constructor = NumberContext;
 
+NumberContext.prototype.NUMBER = function() {
+    return this.getToken(ICEScriptParser.NUMBER, 0);
+};
 
-class StringContext extends antlr4.ParserRuleContext {
+NumberContext.prototype.PI = function() {
+    return this.getToken(ICEScriptParser.PI, 0);
+};
 
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_string;
+NumberContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterNumber(this);
+	}
+};
+
+NumberContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitNumber(this);
+	}
+};
+
+NumberContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitNumber(this);
+    } else {
+        return visitor.visitChildren(this);
     }
+};
 
-	STRING() {
-	    return this.getToken(ICEScriptParser.STRING, 0);
-	};
 
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterString(this);
-		}
-	}
 
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitString(this);
-		}
-	}
 
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitString(this);
+ICEScriptParser.NumberContext = NumberContext;
+
+ICEScriptParser.prototype.number = function() {
+
+    var localctx = new NumberContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 62, ICEScriptParser.RULE_number);
+    var _la = 0; // Token type
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 374;
+        _la = this._input.LA(1);
+        if(!(_la===ICEScriptParser.PI || _la===ICEScriptParser.NUMBER)) {
+        this._errHandler.recoverInline(this);
+        }
+        else {
+        	this._errHandler.reportMatch(this);
+            this.consume();
+        }
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return visitor.visitChildren(this);
+	    	throw re;
 	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function ListContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_list;
+    return this;
 }
 
+ListContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+ListContext.prototype.constructor = ListContext;
 
-
-class TypeContext extends antlr4.ParserRuleContext {
-
-    constructor(parser, parent, invokingState) {
-        if(parent===undefined) {
-            parent = null;
-        }
-        if(invokingState===undefined || invokingState===null) {
-            invokingState = -1;
-        }
-        super(parent, invokingState);
-        this.parser = parser;
-        this.ruleIndex = ICEScriptParser.RULE_type;
+ListContext.prototype.expression = function(i) {
+    if(i===undefined) {
+        i = null;
     }
+    if(i===null) {
+        return this.getTypedRuleContexts(ExpressionContext);
+    } else {
+        return this.getTypedRuleContext(ExpressionContext,i);
+    }
+};
 
-
-	enterRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.enterType(this);
-		}
+ListContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterList(this);
 	}
+};
 
-	exitRule(listener) {
-	    if(listener instanceof ICEScriptListener ) {
-	        listener.exitType(this);
-		}
+ListContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitList(this);
 	}
+};
 
-	accept(visitor) {
-	    if ( visitor instanceof ICEScriptVisitor ) {
-	        return visitor.visitType(this);
+ListContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitList(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
+
+
+
+ICEScriptParser.ListContext = ListContext;
+
+ICEScriptParser.prototype.list = function() {
+
+    var localctx = new ListContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 64, ICEScriptParser.RULE_list);
+    var _la = 0; // Token type
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 376;
+        this.match(ICEScriptParser.T__7);
+        this.state = 380;
+        this._errHandler.sync(this);
+        _la = this._input.LA(1);
+        while(_la===ICEScriptParser.OPEN_BRACKET || ((((_la - 33)) & ~0x1f) == 0 && ((1 << (_la - 33)) & ((1 << (ICEScriptParser.NOT - 33)) | (1 << (ICEScriptParser.TRUE - 33)) | (1 << (ICEScriptParser.FALSE - 33)) | (1 << (ICEScriptParser.IDENTIFIER - 33)) | (1 << (ICEScriptParser.PI - 33)) | (1 << (ICEScriptParser.STRING - 33)) | (1 << (ICEScriptParser.LIST - 33)) | (1 << (ICEScriptParser.NUMBER - 33)))) !== 0)) {
+            this.state = 377;
+            this.expression(0);
+            this.state = 382;
+            this._errHandler.sync(this);
+            _la = this._input.LA(1);
+        }
+        this.state = 387;
+        this._errHandler.sync(this);
+        _la = this._input.LA(1);
+        while(_la===ICEScriptParser.T__4) {
+            this.state = 383;
+            this.match(ICEScriptParser.T__4);
+            this.state = 384;
+            this.expression(0);
+            this.state = 389;
+            this._errHandler.sync(this);
+            _la = this._input.LA(1);
+        }
+        this.state = 390;
+        this.match(ICEScriptParser.T__8);
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
 	    } else {
-	        return visitor.visitChildren(this);
+	    	throw re;
 	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function StringContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
 	}
-
-
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_string;
+    return this;
 }
 
+StringContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+StringContext.prototype.constructor = StringContext;
+
+StringContext.prototype.STRING = function() {
+    return this.getToken(ICEScriptParser.STRING, 0);
+};
+
+StringContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterString(this);
+	}
+};
+
+StringContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitString(this);
+	}
+};
+
+StringContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitString(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
 
 
 
-ICEScriptParser.ScriptContext = ScriptContext; 
-ICEScriptParser.HeaderContext = HeaderContext; 
-ICEScriptParser.MetaContext = MetaContext; 
-ICEScriptParser.ScriptNameContext = ScriptNameContext; 
-ICEScriptParser.IncludeContext = IncludeContext; 
-ICEScriptParser.FunctionContext = FunctionContext; 
-ICEScriptParser.Func_paramsContext = Func_paramsContext; 
-ICEScriptParser.Func_identifierContext = Func_identifierContext; 
-ICEScriptParser.StatementContext = StatementContext; 
-ICEScriptParser.Assign_stmtContext = Assign_stmtContext; 
-ICEScriptParser.Ti_basic_stmtContext = Ti_basic_stmtContext; 
-ICEScriptParser.AnyContext = AnyContext; 
-ICEScriptParser.Add_assign_stmtContext = Add_assign_stmtContext; 
-ICEScriptParser.Sub_assign_stmtContext = Sub_assign_stmtContext; 
-ICEScriptParser.Mul_assign_stmtContext = Mul_assign_stmtContext; 
-ICEScriptParser.Div_assign_stmtContext = Div_assign_stmtContext; 
-ICEScriptParser.Inc_stmtContext = Inc_stmtContext; 
-ICEScriptParser.Dec_stmtContext = Dec_stmtContext; 
-ICEScriptParser.If_stmtContext = If_stmtContext; 
-ICEScriptParser.If_else_stmtContext = If_else_stmtContext; 
-ICEScriptParser.While_stmtContext = While_stmtContext; 
-ICEScriptParser.Var_stmtContext = Var_stmtContext; 
-ICEScriptParser.Return_stmtContext = Return_stmtContext; 
-ICEScriptParser.ExpressionContext = ExpressionContext; 
-ICEScriptParser.MathContext = MathContext; 
-ICEScriptParser.BoolexprContext = BoolexprContext; 
-ICEScriptParser.MethodcallContext = MethodcallContext; 
-ICEScriptParser.MethodparamsContext = MethodparamsContext; 
-ICEScriptParser.ValueContext = ValueContext; 
-ICEScriptParser.IdentifierContext = IdentifierContext; 
-ICEScriptParser.NumberContext = NumberContext; 
-ICEScriptParser.ListContext = ListContext; 
-ICEScriptParser.StringContext = StringContext; 
-ICEScriptParser.TypeContext = TypeContext; 
+
+ICEScriptParser.StringContext = StringContext;
+
+ICEScriptParser.prototype.string = function() {
+
+    var localctx = new StringContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 66, ICEScriptParser.RULE_string);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 392;
+        this.match(ICEScriptParser.STRING);
+    } catch (re) {
+    	if(re instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = re;
+	        this._errHandler.reportError(this, re);
+	        this._errHandler.recover(this, re);
+	    } else {
+	    	throw re;
+	    }
+    } finally {
+        this.exitRule();
+    }
+    return localctx;
+};
+
+function TypeContext(parser, parent, invokingState) {
+	if(parent===undefined) {
+	    parent = null;
+	}
+	if(invokingState===undefined || invokingState===null) {
+		invokingState = -1;
+	}
+	antlr4.ParserRuleContext.call(this, parent, invokingState);
+    this.parser = parser;
+    this.ruleIndex = ICEScriptParser.RULE_type;
+    return this;
+}
+
+TypeContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+TypeContext.prototype.constructor = TypeContext;
+
+TypeContext.prototype.type = function() {
+    return this.getTypedRuleContext(TypeContext,0);
+};
+
+TypeContext.prototype.enterRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.enterType(this);
+	}
+};
+
+TypeContext.prototype.exitRule = function(listener) {
+    if(listener instanceof ICEScriptListener ) {
+        listener.exitType(this);
+	}
+};
+
+TypeContext.prototype.accept = function(visitor) {
+    if ( visitor instanceof ICEScriptVisitor ) {
+        return visitor.visitType(this);
+    } else {
+        return visitor.visitChildren(this);
+    }
+};
+
+
+
+ICEScriptParser.prototype.type = function(_p) {
+	if(_p===undefined) {
+	    _p = 0;
+	}
+    var _parentctx = this._ctx;
+    var _parentState = this.state;
+    var localctx = new TypeContext(this, this._ctx, _parentState);
+    var _prevctx = localctx;
+    var _startState = 68;
+    this.enterRecursionRule(localctx, 68, ICEScriptParser.RULE_type, _p);
+    try {
+        this.enterOuterAlt(localctx, 1);
+        this.state = 400;
+        this._errHandler.sync(this);
+        var la_ = this._interp.adaptivePredict(this._input,22,this._ctx);
+        switch(la_) {
+        case 1:
+            break;
+
+        case 2:
+            this.state = 395;
+            this.match(ICEScriptParser.T__9);
+            break;
+
+        case 3:
+            this.state = 396;
+            this.match(ICEScriptParser.T__10);
+            break;
+
+        case 4:
+            this.state = 397;
+            this.match(ICEScriptParser.T__11);
+            break;
+
+        case 5:
+            this.state = 398;
+            this.match(ICEScriptParser.T__12);
+            break;
+
+        case 6:
+            this.state = 399;
+            this.match(ICEScriptParser.T__13);
+            break;
+
+        }
+        this._ctx.stop = this._input.LT(-1);
+        this.state = 406;
+        this._errHandler.sync(this);
+        var _alt = this._interp.adaptivePredict(this._input,23,this._ctx)
+        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
+            if(_alt===1) {
+                if(this._parseListeners!==null) {
+                    this.triggerExitRuleEvent();
+                }
+                _prevctx = localctx;
+                localctx = new TypeContext(this, _parentctx, _parentState);
+                this.pushNewRecursionContext(localctx, _startState, ICEScriptParser.RULE_type);
+                this.state = 402;
+                if (!( this.precpred(this._ctx, 1))) {
+                    throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 1)");
+                }
+                this.state = 403;
+                this.match(ICEScriptParser.T__14); 
+            }
+            this.state = 408;
+            this._errHandler.sync(this);
+            _alt = this._interp.adaptivePredict(this._input,23,this._ctx);
+        }
+
+    } catch( error) {
+        if(error instanceof antlr4.error.RecognitionException) {
+	        localctx.exception = error;
+	        this._errHandler.reportError(this, error);
+	        this._errHandler.recover(this, error);
+	    } else {
+	    	throw error;
+	    }
+    } finally {
+        this.unrollRecursionContexts(_parentctx)
+    }
+    return localctx;
+};
+
+
+ICEScriptParser.prototype.sempred = function(localctx, ruleIndex, predIndex) {
+	switch(ruleIndex) {
+	case 24:
+			return this.expression_sempred(localctx, predIndex);
+	case 34:
+			return this.type_sempred(localctx, predIndex);
+    default:
+        throw "No predicate with index:" + ruleIndex;
+   }
+};
+
+ICEScriptParser.prototype.expression_sempred = function(localctx, predIndex) {
+	switch(predIndex) {
+		case 0:
+			return this.precpred(this._ctx, 4);
+		case 1:
+			return this.precpred(this._ctx, 3);
+		case 2:
+			return this.precpred(this._ctx, 2);
+		case 3:
+			return this.precpred(this._ctx, 1);
+		default:
+			throw "No predicate with index:" + predIndex;
+	}
+};
+
+ICEScriptParser.prototype.type_sempred = function(localctx, predIndex) {
+	switch(predIndex) {
+		case 4:
+			return this.precpred(this._ctx, 1);
+		default:
+			throw "No predicate with index:" + predIndex;
+	}
+};
+
+
+exports.ICEScriptParser = ICEScriptParser;

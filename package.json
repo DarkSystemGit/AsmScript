@@ -11,10 +11,11 @@
     "codespaces": "echo export DEVDIR=/workspaces",
     "start": "node ./main.js",
     "build": "cd $DEVDIR/ICEScript&& npm run clean; npm run compileVisitor && npm test",
+    "buildDbg": "cd $DEVDIR/ICEScript&& npm run clean; npm run compileDbg && npm test",
     "test": "cd $DEVDIR/ICEScript&&tsc ./src/llvm.ts&&npm start ./tests/fakeHome.gs",
     "compileVisitor": "antlr4 -visitor -o ./antlr/parsers -lib ./antlr/grammars -Dlanguage=JavaScript ./antlr/grammars/TiB && antlr4 -o ./antlr/parsers -lib ./antlr/grammars -visitor -Dlanguage=JavaScript  ./antlr/grammars/ICEScript",
     "clean": "rm ./antlr/* && rm -r ./antlr/parsers/antlr           ",
-    "compile": "antlr4  -o ./antlr/parsers -lib ./antlr/grammars -Dlanguage=JavaScript ./antlr/grammars/TiB && antlr4 -o ./antlr/parsers -lib ./antlr/grammars  -Dlanguage=JavaScript  ./antlr/grammars/ICEScript"
+    "compileDbg":  "antlr4 -visitor -XdbgST -o ./antlr/parsers -lib ./antlr/grammars -Dlanguage=JavaScript ./antlr/grammars/TiB && antlr4 -XdbgST -o ./antlr/parsers -lib ./antlr/grammars -visitor -Dlanguage=JavaScript  ./antlr/grammars/ICEScript"
   },
   "repository": {
     "type": "git",

@@ -179,6 +179,9 @@ export function handler(token, ctx, context) {
         },
         "import":(ctx,context)=>{
             return {type:"import",name:ctx.identifier().getText()}
+        },
+        "for":(ctx,context)=>{
+            
         }
     }
     

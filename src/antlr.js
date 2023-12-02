@@ -64,7 +64,7 @@ class Visitor extends ICEScriptVisitor {
 
 
 	// Visit a parse tree produced by ICEScriptParser#function.
-	visitFunction(ctx) {
+	visitFunctionDef(ctx) {
 		return handler("function", ctx, this);
 	}
 

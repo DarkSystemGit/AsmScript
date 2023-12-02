@@ -4,7 +4,7 @@ grammar ICEScript;
 
 
 script
-	: header function* statement*
+	: header functionDef* statement*
 	| EOF
 	;
 
@@ -24,8 +24,8 @@ include
 	: 'import' identifier END_STMT
 	;
 
-function
-	: 'function ' identifier '(' func_params ')' ':' type statement
+functionDef
+	: 'function ' identifier OPEN_BRACKET func_params CLOSE_BRACKET ':' type statement
 	;
 func_params
 	: func_identifier || func_identifier(',' func_identifier)*
@@ -46,6 +46,7 @@ statement
 	| if_stmt
 	| if_else_stmt
 	| while_stmt
+	| for_stmt
 	| var_stmt
 	| return_stmt
 	| expression END_STMT
@@ -87,6 +88,10 @@ if_else_stmt
 while_stmt
 	: WHILE OPEN_BRACKET boolexpr CLOSE_BRACKET statement
 	;
+for_stmt
+	:FOR OPEN_BRACKET var_stmt boolexpr END_STMT inc_stmt CLOSE_BRACKET statement
+	|FOR OPEN_BRACKET var_stmt 'in' value CLOSE_BRACKET statement
+	;
 var_stmt
 	: VAR identifier ASSIGN expression END_STMT
 	| VAR identifier ':' type ASSIGN expression END_STMT
@@ -104,6 +109,10 @@ expression
 	| STRING
 	| methodcall
 	| LIST
+	| expression ADD expression
+	| expression SUB expression
+	| expression MUL expression
+	| expression DIV expression
 	;
 math
 	: expression ADD expression
@@ -130,7 +139,7 @@ boolexpr
 
 
 methodcall
-	: identifier '(' methodparams ')'
+	: identifier OPEN_BRACKET methodparams CLOSE_BRACKET
 	;
 
 methodparams
@@ -178,6 +187,7 @@ DECREMENT : '--';
 DEF : 'function';
 VAR : 'var';
 WHILE : 'while';
+FOR : 'for';
 RETURN : 'return';
 TRUE : 'true';
 FALSE : 'false';
@@ -224,6 +234,7 @@ type
 	|'str'
 	|'number'
 	|'bool'
+	| type '[]'
 	;
 //Stuff we wanna ignore
 LINECOMMENT : '//' ~[\r\n]* -> skip;
