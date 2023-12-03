@@ -1,5 +1,6 @@
 import * as util from "./util.js"
 import { abort } from 'process'
+import {buildAst} from './antlr.js'
 import { readFileSync,readdirSync } from 'fs'
 export function handler(token, ctx, context) {
     var handlers = {
@@ -183,7 +184,12 @@ export function handler(token, ctx, context) {
             return {type:"return",value:context.visit(ctx.expression())}
         },
         "import":(ctx,context)=>{
-            return {type:"import",name:ctx.identifier().getText()}
+            var name=ctx.identifier().getText()
+            if(!readdirSync('./src/headers').includes(name+'.json')){
+                var file= readFileSync(path.join(process.argv[2],name))
+                context.headers=Object.assign(buildAst(file).header,context.headers) 
+            }
+            return {type:"import",name}
         },
         "for":(ctx,context)=>{
             if(util.childExists(ctx,'boolexpr')){

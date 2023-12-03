@@ -12,4 +12,3 @@ while(true){
     var input=input("");
     io.disp(math.rand(0-input,input)+input);
 };
-//wohoh

@@ -9,7 +9,6 @@ import { readFileSync, writeFileSync } from 'fs'
 
 
 class Visitor extends ICEScriptVisitor {
-
 	visitChildren(ctx) {
 		let code = [];
 
@@ -18,7 +17,7 @@ class Visitor extends ICEScriptVisitor {
 		}
 		code.forEach((elm,i)=>{
 			//if(!(['(',')','{','}',';',[null],[undefined],undefined,[]].includes(elm)))console.log(elm)
-			if(['(',')','{','}',';',[null],[undefined],undefined,[]].includes(elm)){
+			if(['(',')','{','}',';',[null],[undefined],undefined,null,[]].includes(elm)){
 				//if(!(['(',')'].includes(elm))){console.log(elm)}
 				code.splice(i,1)
 			}
@@ -197,14 +196,14 @@ class Visitor extends ICEScriptVisitor {
 	}
 }
 //util.log(tree.toStringTree(parser.ruleNames))
-export function buildTree(file) {
+export function buildAst(file) {
 	file = readFileSync(file).toString().split('\n')
 	//file.forEach((elm,i)=>{if(!(elm[elm.length-1]==';')){file[i]=file[i]}})
 	const chars = new antlr4.InputStream(file.join('\n'));
 	const lexer = new ICEScriptLexer(chars);
 	const tokenstr = new antlr4.CommonTokenStream(lexer);
 	const parser = new ICEScriptParser(tokenstr);
-	const tree = parser.script();
+	var tree= parser.script()
 	util.log('Glacier Dev, v0.0.1:', /*'\n	Tree:\n		', tree.toStringTree(parser.ruleNames),*/)
 	var out = new Visitor().start(tree)
 	//Imagine using Antlr wheen you could roll your own
@@ -227,8 +226,23 @@ export function buildTree(file) {
 		}
 	})*/
 	util.log('\n	Results:', '\n		TI-Basic:\n		', JSON.stringify(out), '\n Data:	',/*handler()*/)
+	var header=[]
+	function traverse(children){
+		children.forEach(elm=>{
+			if(elm.children){
+				traverse(elm.children)
+			}else if(elm.constructor === Array){
+				traverse(elm)
+			}
+			if(elm.type=="function"){
+				elm.children=[]
+				header.push(elm)
+			}
+		})
+	}
+	traverse(out)
 	//console.log(tree.toStringTree(parser.ruleNames))
 	//console.log(JSON.stringify(out))
-	return out
+	return {ast:out,header}
 
 }
