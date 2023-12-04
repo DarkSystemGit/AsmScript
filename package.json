@@ -10,13 +10,13 @@
   "scripts": {
     "codespaces": "echo export DEVDIR=/workspaces",
     "start": "node ./main.js",
-    "log":"node ./logviewer.cjs -list ",
+    "log": "node ./logviewer.cjs -list ",
     "build": "cd $DEVDIR/ICEScript&& npm run clean; npm run compileVisitor && npm test",
     "buildDbg": "cd $DEVDIR/ICEScript&& npm run clean; npm run compileDbg && npm test",
     "test": "cd $DEVDIR/ICEScript&&tsc ./src/llvm.ts&&npm start ./tests/fakeHome.gs",
     "compileVisitor": "antlr4 -o ./antlr/parsers -lib ./antlr/grammars -visitor -Dlanguage=JavaScript  ./antlr/grammars/ICEScript",
     "clean": "rm ./antlr/* && rm -r ./antlr/parsers/antlr           ",
-    "compileDbg":  "antlr4 -XdbgST -o ./antlr/parsers -lib ./antlr/grammars -visitor -Dlanguage=JavaScript  ./antlr/grammars/ICEScript"
+    "compileDbg": "antlr4 -XdbgST -o ./antlr/parsers -lib ./antlr/grammars -visitor -Dlanguage=JavaScript  ./antlr/grammars/ICEScript"
   },
   "repository": {
     "type": "git",
@@ -32,6 +32,8 @@
   "devDependencies": {
     "antlr4": "^4.13.1",
     "typescript": "^5.3.2"
-    
+  },
+  "dependencies": {
+    "json5": "^2.2.3"
   }
 }
