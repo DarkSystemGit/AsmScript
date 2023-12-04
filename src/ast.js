@@ -226,8 +226,8 @@ export function handler(token, ctx, context) {
             if(util.childExists(ctx,'identifier',1)){
                 context.data.scope=context.data.scope+ctx.identifier()[1].getText()
             }
-            children
-            
+            var children
+            context.data.scope=oldScope
             return {type:"class",name:ctx.identifier().getText(),children}
         }
     }
