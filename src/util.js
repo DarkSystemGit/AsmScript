@@ -1,9 +1,12 @@
 //console.log(readFileSync(process.argv[2]))
 import {writeFileSync,readFileSync} from 'fs'
-import {cwd} from 'process'
+import * as path from 'path'
+import { fileURLToPath } from 'url';
+export const __filename = fileURLToPath(import.meta.url);
+export const __dirname = path.dirname(__filename);
 writeFileSync('./log','{}')
-var data={}
-export var dirname = cwd
+export var data=globalThis.data={}
+
 export function hasKey(obj, key) {
 	if (obj === null || obj === undefined) {
 	  return false;
@@ -133,11 +136,43 @@ export function log(token){
 export function termLog(msg){
 	//console.dir(`[Log]:`,msg,{depth:null})
 }
-export function childExists(ctx,child){
+export function childExists(ctx,child,index){
 	try{
-		ctx[child]().getText()
+		if(index){
+			ctx[child][index]().getText()
+		}else{
+			ctx[child]().getText()
+		}
 		return true
 	}catch{
 		return false
 	}
+}
+export function getNode(children,node,depth,remChildren){
+	if(depth!==0){
+	children.forEach(elm=>{
+		if(elm.children){
+			getNode(elm.children,node,depth-1,remChildren)
+		}else if(elm.constructor === Array){
+			getNode(elm,node,depth-1,remChildren)
+		}
+		if(elm.type==node){
+			if(remChildren){
+			elm.children=[]
+		}
+			data.header=data.header||[]
+			data.header.push(elm)
+		}
+	})
+}
+return data.header
+}
+export function registerFile(ast,name){
+	data.asts=data.asts||{}
+	data.asts[name]=ast
+}
+export function isRegisteredAst(name){
+	data.asts=data.asts||{}
+	if(data.asts.hasOwnProperty(name))return true
+	return false
 }

@@ -26,12 +26,16 @@ include
 
 functionDef
 	: 'function ' identifier OPEN_BRACKET func_params CLOSE_BRACKET ':' type statement
+	| identifier OPEN_BRACKET func_params CLOSE_BRACKET ':' type statement
 	;
 func_params
 	: func_identifier || func_identifier(',' func_identifier)*
 	;
 func_identifier
 	:(identifier||expression||any)':'type
+	;
+classDef
+	:'class' identifier ('extends' identifier)* OPEN_CURLEY functionDef* CLOSE_CURLEY
 	;
 methodcall
 	: identifier OPEN_BRACKET methodparams CLOSE_BRACKET

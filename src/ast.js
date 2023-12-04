@@ -86,10 +86,15 @@ export function handler(token, ctx, context) {
         "function": (ctx,  context) => {
 
             //util.log('ctx:', ctx)
+            //console.log(ctx.type())
+            
             var paramsList = ctx.func_params().getText().split(')')[0].split(',')
             var params = []
             paramsList.forEach((elm) => { params.push({ name: elm.split(':')[0], type: elm.split(':')[1] }) })
             context.data.functions[ctx.identifier().getText()] = { type: "function", name: ctx.identifier().getText(), params, retType: ctx.type().getText(), children: context.visit(ctx.statement()) }
+            if(context.data.scope.split('.')[0]=="class"){
+                context.data.functions[ctx.identifier().getText()].class=context.data.scope.split('.').slice(2)
+            }
             return context.data.functions[ctx.identifier().getText()]
 
             //util.log(ctx.number())
@@ -186,7 +191,7 @@ export function handler(token, ctx, context) {
         "import":(ctx,context)=>{
             var name=ctx.identifier().getText()
             if(!readdirSync('./src/headers').includes(name+'.json')){
-                var file= readFileSync(path.join(process.argv[2],name))
+                var file= readFileSync(path.join(util.data.file,name))
                 context.headers=Object.assign(buildAst(file).header,context.headers) 
             }
             return {type:"import",name}
@@ -214,6 +219,16 @@ export function handler(token, ctx, context) {
         },
         "strConcat":(ctx,context)=>{
             return {type:"concat",children:context.visitChildren().filter(i=>i!=='+')}
+        },
+        "class":(ctx,context)=>{
+            var oldScope=JSON.parse(JSON.stringify(context.data.scope ))
+            context.data.scope=`class.${ctx.identifier()[0].getText()}`
+            if(util.childExists(ctx,'identifier',1)){
+                context.data.scope=context.data.scope+ctx.identifier()[1].getText()
+            }
+            children
+            
+            return {type:"class",name:ctx.identifier().getText(),children}
         }
     }
     

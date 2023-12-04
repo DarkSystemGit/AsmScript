@@ -54,6 +54,12 @@ export default class ICEScriptVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
+	// Visit a parse tree produced by ICEScriptParser#classDef.
+	visitClassDef(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
 	// Visit a parse tree produced by ICEScriptParser#methodcall.
 	visitMethodcall(ctx) {
 	  return this.visitChildren(ctx);

@@ -1,94 +1,104 @@
 {
-  "ast": [
-    {
-      "children": [
-        {
-          "type": "import",
-          "name": "io"
-        }
-      ]
-    },
-    {
-      "type": "function",
-      "name": "input",
-      "params": [
-        {
-          "name": "str",
-          "type": "str"
-        }
-      ],
-      "retType": "str",
-      "children": []
-    },
-    [],
-    [
+  "fakeHome": {
+    "ast": [
       {
-        "type": "while",
-        "condition": {
-          "type": "bool",
-          "condition": "true",
-          "children": [],
-          "comparisons": [
-            "true"
-          ]
-        },
         "children": [
-          [
-            {
-              "name": "input",
-              "varType": "str",
-              "children": [
-                [
-                  {
-                    "type": "funcCall",
-                    "children": [],
-                    "class": [],
-                    "name": "input",
-                    "params": [
-                      [
-                        {
-                          "type": "string",
-                          "value": "\"\"",
-                          "children": []
-                        }
-                      ]
-                    ],
-                    "retType": "str"
-                  }
-                ]
-              ],
-              "type": "varDec"
-            }
-          ],
-          [
+          {
+            "type": "import",
+            "name": "io"
+          }
+        ]
+      },
+      {
+        "type": "function",
+        "name": "input",
+        "params": [
+          {
+            "name": "str",
+            "type": "str"
+          }
+        ],
+        "retType": "str",
+        "children": []
+      },
+      [],
+      [
+        {
+          "type": "while",
+          "condition": {
+            "type": "bool",
+            "condition": "true",
+            "children": [],
+            "comparisons": [
+              "true"
+            ]
+          },
+          "children": [
             [
               {
-                "type": "funcCall",
-                "children": [],
-                "class": [
-                  "io"
-                ],
-                "name": "disp",
-                "params": [
+                "name": "input",
+                "varType": "str",
+                "children": [
                   [
+                    {
+                      "type": "funcCall",
+                      "children": [],
+                      "class": [],
+                      "name": "input",
+                      "params": [
+                        [
+                          {
+                            "type": "string",
+                            "value": "\"\"",
+                            "children": []
+                          }
+                        ]
+                      ],
+                      "retType": "str"
+                    }
+                  ]
+                ],
+                "type": "varDec"
+              }
+            ],
+            [
+              [
+                {
+                  "type": "funcCall",
+                  "children": [],
+                  "class": [
+                    "io"
+                  ],
+                  "name": "disp",
+                  "params": [
                     [
-                      {
-                        "type": "funcCall",
-                        "children": [],
-                        "class": [
-                          "math"
-                        ],
-                        "name": "rand",
-                        "params": [
-                          [
+                      [
+                        {
+                          "type": "funcCall",
+                          "children": [],
+                          "class": [
+                            "math"
+                          ],
+                          "name": "rand",
+                          "params": [
                             [
-                              {
-                                "type": "number",
-                                "value": "0",
-                                "children": []
-                              }
+                              [
+                                {
+                                  "type": "number",
+                                  "value": "0",
+                                  "children": []
+                                }
+                              ],
+                              "-",
+                              [
+                                {
+                                  "type": "var",
+                                  "children": [],
+                                  "name": "input",
+                                  "varType": "str"
+                                }
+                              ]
                             ],
-                            "-",
                             [
                               {
                                 "type": "var",
@@ -98,50 +108,42 @@
                               }
                             ]
                           ],
-                          [
-                            {
-                              "type": "var",
-                              "children": [],
-                              "name": "input",
-                              "varType": "str"
-                            }
-                          ]
-                        ],
-                        "retType": "int"
-                      }
-                    ],
-                    "+",
-                    [
-                      {
-                        "type": "var",
-                        "children": [],
-                        "name": "input",
-                        "varType": "str"
-                      }
+                          "retType": "int"
+                        }
+                      ],
+                      "+",
+                      [
+                        {
+                          "type": "var",
+                          "children": [],
+                          "name": "input",
+                          "varType": "str"
+                        }
+                      ]
                     ]
-                  ]
-                ],
-                "retType": "void"
-              }
+                  ],
+                  "retType": "void"
+                }
+              ]
             ]
           ]
-        ]
-      }
-    ],
-    []
-  ],
-  "header": [
-    {
-      "type": "function",
-      "name": "input",
-      "params": [
-        {
-          "name": "str",
-          "type": "str"
         }
       ],
-      "retType": "str",
-      "children": []
-    }
-  ]
+      []
+    ],
+    "header": [
+      {
+        "type": "function",
+        "name": "input",
+        "params": [
+          {
+            "name": "str",
+            "type": "str"
+          }
+        ],
+        "retType": "str",
+        "children": []
+      }
+    ]
+  }
 }

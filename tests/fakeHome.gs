@@ -1,5 +1,5 @@
 import io;
-function input(str: str): str{
+function input(str:str): str{
     io.disp(str);
     var key= 0;
     var res="";

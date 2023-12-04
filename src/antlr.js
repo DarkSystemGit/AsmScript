@@ -6,7 +6,7 @@ import tokens from "./tokens.js";
 import * as util from "./util.js"
 import { handler } from "./ast.js";
 import { readFileSync, writeFileSync } from 'fs'
-
+import * as path from 'path'
 
 class Visitor extends ICEScriptVisitor {
 	visitChildren(ctx) {
@@ -197,6 +197,8 @@ class Visitor extends ICEScriptVisitor {
 }
 //util.log(tree.toStringTree(parser.ruleNames))
 export function buildAst(file) {
+	if(!util.isRegisteredAst(file)){
+	util.data.file=file
 	file = readFileSync(file).toString().split('\n')
 	//file.forEach((elm,i)=>{if(!(elm[elm.length-1]==';')){file[i]=file[i]}})
 	const chars = new antlr4.InputStream(file.join('\n'));
@@ -226,23 +228,12 @@ export function buildAst(file) {
 		}
 	})*/
 	util.log('\n	Results:', '\n		TI-Basic:\n		', JSON.stringify(out), '\n Data:	',/*handler()*/)
-	var header=[]
-	function traverse(children){
-		children.forEach(elm=>{
-			if(elm.children){
-				traverse(elm.children)
-			}else if(elm.constructor === Array){
-				traverse(elm)
-			}
-			if(elm.type=="function"){
-				elm.children=[]
-				header.push(elm)
-			}
-		})
-	}
-	traverse(out)
+	
+	var header=util.getNode(out,"function",1,true)
 	//console.log(tree.toStringTree(parser.ruleNames))
 	//console.log(JSON.stringify(out))
-	return {ast:out,header}
+	util.registerFile({ast:out,header},path.basename(util.data.file).split('.')[0])
+
+}
 
 }
