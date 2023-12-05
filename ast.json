@@ -6,6 +6,10 @@
           {
             "type": "import",
             "name": "io"
+          },
+          {
+            "type": "import",
+            "name": "math"
           }
         ]
       },

@@ -21,11 +21,11 @@ export function handler(token, ctx, context) {
             context.data.functionCall = context.data.functionCall || {}
             context.data.types=context.data.types||['number','string','list','boolexpr','methodCall','value']
             context.data.var.strLists = context.data.var.strLists || ["Str0", "Str1", "Str2", "Str3", "Str4", "Str5", "Str6", "Str7", "Str8", "Str9"]
-            context.data.currentScope = context.data.currentScope || "global"
+            context.data.scope = context.data.scope || "function.global"
         },
         "var": function (ctx,  context, scope) {
             //util.log(context)
-            scope = scope || context.data.currentScope || "global"
+            scope = scope || context.data.scope || "global"
             var children = []
             if(!context.data.var.hasOwnProperty(ctx.identifier().getText())){
             var varType =context.visit(ctx.expression())
