@@ -24,7 +24,7 @@ npm install && npm run build
 ```
 node ./main.js FILE
 ```
-
+For an example program, look at tests/snake.gs
 
 The project is meant to be an alternative to ICE, and was inspired by ICE in the first place.
 Glacier is a work in progress, so don't expect much from it right now. I'll probably be done by February (No promises though).
