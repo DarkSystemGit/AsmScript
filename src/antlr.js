@@ -229,7 +229,7 @@ export function buildAst(file) {
 	})*/
 	util.log('\n	Results:', '\n		TI-Basic:\n		', JSON.stringify(out), '\n Data:	',/*handler()*/)
 	
-	var header=util.getNode(out,"function",1,true)
+	var header=util.getNode(out,["function","var"],1,true)
 	//console.log(tree.toStringTree(parser.ruleNames))
 	//console.log(JSON.stringify(out))
 	util.registerFile({ast:out,header},path.basename(util.data.file).split('.')[0])

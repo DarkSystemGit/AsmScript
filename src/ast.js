@@ -10,22 +10,18 @@ export function handler(token, ctx, context) {
             
             
                 
-            readdirSync('./src/headers/').forEach((file)=>{
-                //console.log(headers,JSON.parse(readFileSync('./src/headers/'+file),readdirSync('./src/headers/')))
-                headers=Object.assign(headers, JSON.parse(readFileSync('./src/headers/'+file)));
-            })
             
             context.data = context.data || {}
             context.data.var = context.data.var || {}
-            context.data.functions = context.data.functions || headers
+            context.data.functions = context.data.functions || {}
             context.data.functionCall = context.data.functionCall || {}
             context.data.types=context.data.types||['number','string','list','boolexpr','methodCall','value']
             context.data.var.strLists = context.data.var.strLists || ["Str0", "Str1", "Str2", "Str3", "Str4", "Str5", "Str6", "Str7", "Str8", "Str9"]
-            context.data.scope = context.data.scope || "function.global"
+            context.data.scope = context.data.scope || "function:global"
         },
         "var": function (ctx,  context, scope) {
             //util.log(context)
-            scope = scope || context.data.scope || "global"
+            scope = scope||context.data.scope 
             var children = []
             if(!context.data.var.hasOwnProperty(ctx.identifier().getText())){
             var varType =context.visit(ctx.expression())
@@ -51,8 +47,8 @@ export function handler(token, ctx, context) {
                 var varType=context.data.var[ctx.identifier().getText()].varType
             }
             if(varType==undefined){varType="undef";util.warn(`${ctx.identifier().getText()} is undefined! A type could not be infered! This may be bad!`,ctx)}
-            context.data.var[ctx.identifier().getText()]={varType}
-            return { name: ctx.identifier().getText(), varType, children:[context.visit(ctx.expression())], type: "varDec" }
+            context.data.var[ctx.identifier().getText()+'|'+scope]={varType}
+            return { name: ctx.identifier().getText(), varType, children:[context.visit(ctx.expression())], type: "varDec",scope:scope }
         },
         "while": function (ctx,  context) {
             var body = context.visit(ctx.statement())
@@ -91,11 +87,11 @@ export function handler(token, ctx, context) {
             var paramsList = ctx.func_params().getText().split(')')[0].split(',')
             var params = []
             paramsList.forEach((elm) => { params.push({ name: elm.split(':')[0], type: elm.split(':')[1] }) })
-            context.data.functions[ctx.identifier().getText()] = { type: "function", name: ctx.identifier().getText(), params, retType: ctx.type().getText(), children: context.visit(ctx.statement()) }
-            if(context.data.scope.split('.')[0]=="class"){
-                context.data.functions[ctx.identifier().getText()].class=context.data.scope.split('.').slice(2)
-            }
-            return context.data.functions[ctx.identifier().getText()]
+            var oldScope=util.copy(context.data.scope)
+            context.data.scope=`${oldScope}.function:${ctx.identifier().getText()}`
+            context.data.functions[ctx.identifier().getText()+`|${oldScope}`] = { type: "function", scope:oldScope,name: ctx.identifier().getText(), params, retType: ctx.type().getText(), children: context.visit(ctx.statement()) }
+            context.data.scope=oldScope
+            return context.data.functions[ctx.identifier().getText()+`|${oldScope}`]
 
             //util.log(ctx.number())
             //return `:Label ${context.data.functions[name].label}:${context.visit(ctx.statement())}:______:`
@@ -105,7 +101,7 @@ export function handler(token, ctx, context) {
                 return {type:"number",value:ctx.getText(),children:[]}
             } else {
                 try {
-                    return { type: "var", children: [], name: ctx.identifier().getText(), varType: context.data.var[ctx.identifier().getText()].varType }
+                    return { type: "var", children: [], name: ctx.identifier().getText(), varType: context.data.var[ctx.identifier().getText()+context.data.scope].varType }
                 } catch {
                     //if(Object.keys(context.data.functions).includes(ctx.identifier().getText()))return handler("funcCall",ctx,context)
                     //console.log(context)
@@ -127,10 +123,10 @@ export function handler(token, ctx, context) {
             }
             util.log("method:", ctx.identifier().getText())
             try {
-                return { type: "funcCall", children: [], class: baseClass, name: method[method.length - 1], params: context.visit(ctx.methodparams()).filter(i => i !== ","), retType: context.data.functions[method.join('.')].retType }
+                return { type: "funcCall", children: [], class: baseClass, name: method[method.length - 1], params: context.visit(ctx.methodparams()).filter(i => i !== ","), retType: context.data.functions[method.join('.')+`|${context.data.scope}`].retType }
             } catch (err) {
                 //console.log(ctx.getText())
-                util.termLog(`ERROR: ${err}`, ctx.identifier().getText(), JSON.stringify(method), JSON.stringify(context.visit(ctx.methodparams())))
+                util.error('No such function: '+method.join('.'),'TypeError',ctx)
                 //abort()
             }
         },
@@ -191,8 +187,14 @@ export function handler(token, ctx, context) {
         "import":(ctx,context)=>{
             var name=ctx.identifier().getText()
             if(!readdirSync('./src/headers').includes(name+'.json')){
-                var file= readFileSync(path.join(util.data.file,name))
-                context.headers=Object.assign(buildAst(file).header,context.headers) 
+                var file= JSON.parse(readFileSync(path.join(util.data.file,name)))
+                file[path.basename(util.data.file).split('.')[0]].headers.forEach(elm=>{
+                    if(elm.type=="function"){
+                        context.data.functions[elm.name]=elm
+                    }else if(elm.type=="varDec"){
+                        context.data.var[elm.name]=elm.varType
+                    }
+                })
             }
             return {type:"import",name}
         },
@@ -222,9 +224,9 @@ export function handler(token, ctx, context) {
         },
         "class":(ctx,context)=>{
             var oldScope=JSON.parse(JSON.stringify(context.data.scope ))
-            context.data.scope=`class.${ctx.identifier()[0].getText()}`
+            context.data.scope=`${oldScope}.class.${ctx.identifier()[0].getText()}`
             if(util.childExists(ctx,'identifier',1)){
-                context.data.scope=context.data.scope+ctx.identifier()[1].getText()
+                context.data.scope=context.data.scope+'.'+ctx.identifier()[1].getText()
             }
             var children
             context.data.scope=oldScope

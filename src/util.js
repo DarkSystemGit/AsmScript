@@ -148,13 +148,14 @@ export function childExists(ctx,child,index){
 		return false
 	}
 }
-export function getNode(children,node,depth,remChildren){
+export function getNode(children,nodes,depth,remChildren){
 	if(depth!==0){
+	nodes.forEach(node=>{
 	children.forEach(elm=>{
 		if(elm.children){
-			getNode(elm.children,node,depth-1,remChildren)
+			getNode(elm.children,nodes,depth-1,remChildren)
 		}else if(elm.constructor === Array){
-			getNode(elm,node,depth-1,remChildren)
+			getNode(elm,nodes,depth-1,remChildren)
 		}
 		if(elm.type==node){
 			if(remChildren){
@@ -163,13 +164,16 @@ export function getNode(children,node,depth,remChildren){
 			data.header=data.header||[]
 			data.header.push(elm)
 		}
-	})
+	})})
 }
 return data.header
 }
 export function registerFile(ast,name){
 	data.asts=data.asts||{}
 	data.asts[name]=ast
+}
+export function copy(obj){
+	return JSON.parse(JSON.stringify(obj))
 }
 export function isRegisteredAst(name){
 	data.asts=data.asts||{}
