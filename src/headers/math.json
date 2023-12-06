@@ -1,5 +1,5 @@
-{
-    "math.rand": {
+[
+   {
         "type": "function",
         "name": "math.rand",
         "params": [
@@ -15,4 +15,4 @@
         "retType": "int",
         "children": []
     }
-}
+]

@@ -2,6 +2,7 @@
 import {writeFileSync,readFileSync} from 'fs'
 import * as path from 'path'
 import { fileURLToPath } from 'url';
+import { isGeneratorFunction } from 'util/types';
 export const __filename = fileURLToPath(import.meta.url);
 export const __dirname = path.dirname(__filename);
 writeFileSync('./log','{}')
@@ -179,4 +180,9 @@ export function isRegisteredAst(name){
 	data.asts=data.asts||{}
 	if(data.asts.hasOwnProperty(name))return true
 	return false
+}
+export function getFunction(name,scope,functionList){
+	if(functionList.hasOwnProperty(`${name}|${scope}`)){
+		return functionList[`${name}|${scope}`]
+	}
 }

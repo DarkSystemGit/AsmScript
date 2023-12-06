@@ -1,21 +1,21 @@
-{
-    "io.getKey": {
+[
+    {
         "type": "function",
         "name": "io.getKey",
         "params": [],
         "retType": "int",
         "children": []
     },
-    "io.disp": {
-        "type": "function",
-        "name": "io.disp",
-        "params": [
+    {
+        "type": "varDec",
+        "varType": "number",
+        "children": [
             {
-                "name": "text",
-                "type": "string"
+                "type": "number",
+                "value": "9",
+                "children": []
             }
         ],
-        "retType": "void",
-        "children": []
+        "name": "io.keys.enter"
     }
-}
+]

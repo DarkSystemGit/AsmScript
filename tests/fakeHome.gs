@@ -1,7 +1,8 @@
 import io;
 import math;
+import gfx;
 function input(str:str): str{
-    io.disp(str);
+    gfx.log(str);
     var key= 0;
     var res="";
     while(!key==io.keys.enter){
@@ -11,5 +12,5 @@ function input(str:str): str{
 };
 while(true){
     var input=input("");
-    io.disp(math.rand(0-input,input)+input);
+    gfx.log(math.rand(0-input,input)+input);
 };

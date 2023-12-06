@@ -122,8 +122,10 @@ export function handler(token, ctx, context) {
                 baseClass = method.slice(0, -1)
             }
             util.log("method:", ctx.identifier().getText())
+            
             try {
-                return { type: "funcCall", children: [], class: baseClass, name: method[method.length - 1], params: context.visit(ctx.methodparams()).filter(i => i !== ","), retType: context.data.functions[method.join('.')+`|${context.data.scope}`].retType }
+                var retType=util.getFunction(method.join('.'),context.data.scope,context.data.function).retType
+                return { type: "funcCall", children: [], class: baseClass, name: method[method.length - 1], params: context.visit(ctx.methodparams()).filter(i => i !== ","), retType}
             } catch (err) {
                 //console.log(ctx.getText())
                 util.error('No such function: '+method.join('.'),'TypeError',ctx)
@@ -186,6 +188,7 @@ export function handler(token, ctx, context) {
         },
         "import":(ctx,context)=>{
             var name=ctx.identifier().getText()
+            console.log(name)
             if(!readdirSync('./src/headers').includes(name+'.json')){
                 var file= JSON.parse(readFileSync(path.join(util.data.file,name)))
                 file[path.basename(util.data.file).split('.')[0]].headers.forEach(elm=>{
@@ -195,7 +198,20 @@ export function handler(token, ctx, context) {
                         context.data.var[elm.name]=elm.varType
                     }
                 })
+            }else{
+                JSON.parse(readFileSync(`./src/headers/${name}.json`)).forEach(elm=>{
+                    if(elm.type=="function"){
+                        elm.name=elm.name=`|function:global`
+                        context.data.functions[elm.name]=elm
+                        context.data.functions[elm.name].scope=`function:global`
+                    }else if(elm.type=="varDec"){
+                        elm.name=elm.name=`|function:global`
+                        context.data.var[elm.name]=elm.varType
+                        context.data.var[elm.name].scope=`function:global`
+                    }
+                })
             }
+            console.log(context.data)
             return {type:"import",name}
         },
         "for":(ctx,context)=>{

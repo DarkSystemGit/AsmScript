@@ -1,1 +1,14 @@
-{}
+[
+    {
+        "type": "function",
+        "name": "gfx.disp",
+        "params": [
+            {
+                "name": "text",
+                "type": "string"
+            }
+        ],
+        "retType": "void",
+        "children": []
+    }
+]
