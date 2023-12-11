@@ -17,5 +17,53 @@
             }
         ],
         "name": "io.keys.enter"
+    },
+    {
+        "type": "varDec",
+        "varType": "number",
+        "children": [
+            {
+                "type": "number",
+                "value": "3",
+                "children": []
+            }
+        ],
+        "name": "io.keys.right"
+    },
+    {
+        "type": "varDec",
+        "varType": "number",
+        "children": [
+            {
+                "type": "number",
+                "value": "2",
+                "children": []
+            }
+        ],
+        "name": "io.keys.left"
+    },
+    {
+        "type": "varDec",
+        "varType": "number",
+        "children": [
+            {
+                "type": "number",
+                "value": "4",
+                "children": []
+            }
+        ],
+        "name": "io.keys.up"
+    },
+    {
+        "type": "varDec",
+        "varType": "number",
+        "children": [
+            {
+                "type": "number",
+                "value": "1",
+                "children": []
+            }
+        ],
+        "name": "io.keys.down"
     }
 ]

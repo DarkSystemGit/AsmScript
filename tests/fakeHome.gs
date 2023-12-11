@@ -2,7 +2,7 @@ import io;
 import math;
 import gfx;
 function input(str:str): str{
-    gfx.log(str);
+    gfx.text(str);
     var key= 0;
     var res="";
     while(!key==io.keys.enter){
@@ -12,5 +12,5 @@ function input(str:str): str{
 };
 while(true){
     var input=input("");
-    gfx.log(math.rand(0-input,input)+input);
+    gfx.text(math.rand(0-input,input)+input);
 };

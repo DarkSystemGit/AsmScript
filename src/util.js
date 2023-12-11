@@ -184,5 +184,13 @@ export function isRegisteredAst(name){
 export function getFunction(name,scope,functionList){
 	if(functionList.hasOwnProperty(`${name}|${scope}`)){
 		return functionList[`${name}|${scope}`]
+	}else{
+		scope.split('.').forEach((elm,i,arr)=>{
+			var current=arr.slice(0,i).join('.')
+			if(functionList.hasOwnProperty(`${name}|${current}`)){
+				return functionList[`${name}|${current}`]
+			}
+		})
 	}
+	return null
 }

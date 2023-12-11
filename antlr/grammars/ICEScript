@@ -25,7 +25,7 @@ include
 	;
 
 functionDef
-	: 'function ' identifier OPEN_BRACKET func_params CLOSE_BRACKET ':' type statement
+	: 'function' identifier OPEN_BRACKET func_params CLOSE_BRACKET ':' type statement
 	| identifier OPEN_BRACKET func_params CLOSE_BRACKET ':' type statement
 	;
 func_params

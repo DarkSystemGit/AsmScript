@@ -47,7 +47,7 @@ export function handler(token, ctx, context) {
                 var varType=context.data.var[ctx.identifier().getText()].varType
             }
             if(varType==undefined){varType="undef";util.warn(`${ctx.identifier().getText()} is undefined! A type could not be infered! This may be bad!`,ctx)}
-            context.data.var[ctx.identifier().getText()+'|'+scope]={varType}
+            context.data.var[ctx.identifier().getText()+'|'+scope]={varType,scope}
             return { name: ctx.identifier().getText(), varType, children:[context.visit(ctx.expression())], type: "varDec",scope:scope }
         },
         "while": function (ctx,  context) {
@@ -201,12 +201,12 @@ export function handler(token, ctx, context) {
             }else{
                 JSON.parse(readFileSync(`./src/headers/${name}.json`)).forEach(elm=>{
                     if(elm.type=="function"){
-                        elm.name=elm.name=`|function:global`
+                        elm.name=elm.name+`|function:global`
                         context.data.functions[elm.name]=elm
                         context.data.functions[elm.name].scope=`function:global`
                     }else if(elm.type=="varDec"){
-                        elm.name=elm.name=`|function:global`
-                        context.data.var[elm.name]=elm.varType
+                        elm.name=elm.name+`|function:global`
+                        context.data.var[elm.name]={type:elm.varType}
                         context.data.var[elm.name].scope=`function:global`
                     }
                 })

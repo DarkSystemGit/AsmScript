@@ -1,7 +1,43 @@
 [
     {
         "type": "function",
-        "name": "gfx.disp",
+        "name": "gfx.text",
+        "params": [
+            {
+                "name": "text",
+                "type": "string"
+            }
+        ],
+        "retType": "void",
+        "children": []
+    },
+    {
+        "type": "function",
+        "name": "gfx.draw",
+        "params": [
+            {
+                "name": "text",
+                "type": "string"
+            }
+        ],
+        "retType": "void",
+        "children": []
+    },
+    {
+        "type": "function",
+        "name": "gfx.clear",
+        "params": [
+            {
+                "name": "text",
+                "type": "string"
+            }
+        ],
+        "retType": "void",
+        "children": []
+    },
+    {
+        "type": "function",
+        "name": "gfx.clearScreen",
         "params": [
             {
                 "name": "text",
