@@ -27,7 +27,7 @@ export function handler(token, ctx, context) {
             //scope=JSON.stringify(scope) 
             
             var children = []
-            if(!context.data.var.hasOwnProperty(ctx.identifier().getText())){
+            if(!context.data.var.hasOwnProperty(ctx.identifier().getText())+'|'+scope){
             var varType =context.visit(ctx.expression())
             //console.log(varType)
             
@@ -46,9 +46,12 @@ export function handler(token, ctx, context) {
             if(varType=="array"){
                 var varType =context.visit(ctx.expression())[0].listType
             }
+            if(varType=="var"){
+                var varType =context.visit(ctx.expression())[0].varType
+            }
             if(ctx.hasOwnProperty('type')&&(typeof ctx.type=="function")&&(!(ctx.type()==null)))varType=ctx.type().getText()
             }else{
-                var varType=context.data.var[ctx.identifier().getText()].varType
+                var varType=context.data.var[ctx.identifier().getText()+'|'+scope].varType
             }
             if(varType==undefined){varType="undef";util.warn(`${ctx.identifier().getText()} is undefined! A type could not be infered! This may be bad!`,ctx)}
             context.data.var[ctx.identifier().getText()+'|'+scope]={varType,scope}

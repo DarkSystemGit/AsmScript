@@ -2,15 +2,16 @@ function getScopedChild(name,scope,nodeList){
     if(nodeList.hasOwnProperty(`${name}|${scope}`)){
 		return nodeList[`${name}|${scope}`]
 	}else{
+		var ret=null
 		scope.split('.').forEach((elm,i,arr)=>{
-			var current=arr.slice(0,i).join('.')
-            console.log(current)
+			var current=arr.slice(0,i+1).join('.')
+            //console.log(current)
 			if(nodeList.hasOwnProperty(`${name}|${current}`)){
-				return nodeList[`${name}|${current}`]
+				ret=nodeList[`${name}|${current}`]
 			}
 		})
 	}
-	return null
+	return ret
 }
 export function getFunction(name,scope,nodeList){
 	return getScopedChild(...Array.from(arguments))
