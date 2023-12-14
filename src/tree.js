@@ -13,6 +13,9 @@ function getScopedChild(name,scope,nodeList){
 	}
 	return ret
 }
+export function parseScope(scope){
+    return scope.split('.').map(elm=>elm.split(':'))
+}
 export function getFunction(name,scope,nodeList){
 	return getScopedChild(...Array.from(arguments))
 }

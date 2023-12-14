@@ -27,7 +27,7 @@ export function handler(token, ctx, context) {
             //scope=JSON.stringify(scope) 
             
             var children = []
-            if(!context.data.var.hasOwnProperty(ctx.identifier().getText())+'|'+scope){
+            if(!context.data.var.hasOwnProperty(ctx.identifier().getText()+'|'+scope)){
             var varType =context.visit(ctx.expression())
             //console.log(varType)
             
