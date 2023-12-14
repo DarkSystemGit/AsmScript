@@ -95,8 +95,9 @@ export function handler(token, ctx, context) {
             var params = []
             paramsList.forEach((elm) => { params.push({ name: elm.split(':')[0], type: elm.split(':')[1] }) })
             var oldScope=util.copy(context.data.scope)
+            var children=context.visit(ctx.statement()) 
             context.data.scope=`${oldScope}.function:${ctx.identifier().getText()}`
-            context.data.functions[ctx.identifier().getText()+`|${oldScope}`] = { type: "function", scope:oldScope,name: ctx.identifier().getText(), params, retType: ctx.type().getText(), children: context.visit(ctx.statement()) }
+            context.data.functions[ctx.identifier().getText()+`|${oldScope}`] = { type: "function", scope:oldScope,name: ctx.identifier().getText(), params, retType: ctx.type().getText(), children}
             context.data.scope=oldScope
             return context.data.functions[ctx.identifier().getText()+`|${oldScope}`]
 
