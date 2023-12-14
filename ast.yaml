@@ -79,3 +79,4 @@ fakeHome:
           type: str
       retType: str
       children: []
+#about half the size of the json
