@@ -4,7 +4,7 @@ grammar ICEScript;
 
 
 script
-	: header functionDef*||classDef* statement*
+	: header functionDef* statement*
 	| EOF
 	;
 

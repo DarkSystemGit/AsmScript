@@ -90,7 +90,6 @@ export function handler(token, ctx, context) {
 
             //util.log('ctx:', ctx)
             //console.log(ctx.type())
-            
             var paramsList = ctx.func_params().getText().split(')')[0].split(',')
             var params = []
             paramsList.forEach((elm) => { params.push({ name: elm.split(':')[0], type: elm.split(':')[1] }) })
