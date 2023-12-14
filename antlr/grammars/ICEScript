@@ -4,7 +4,7 @@ grammar ICEScript;
 
 
 script
-	: header functionDef* statement*
+	: header functionDef*||classDef* statement*
 	| EOF
 	;
 
@@ -35,8 +35,14 @@ func_identifier
 	:(identifier||expression||any)':'type
 	;
 classDef
-	:'class' identifier ('extends' identifier)* OPEN_CURLEY functionDef* CLOSE_CURLEY
+	:'class' identifier ('extends' identifier)* OPEN_CURLEY classBody CLOSE_CURLEY
 	;
+classBody
+	:functionDef*
+	;
+classInit
+	:'new' methodcall  
+	;	
 methodcall
 	: identifier OPEN_BRACKET methodparams CLOSE_BRACKET
 	;
@@ -113,6 +119,7 @@ return_stmt
 //Expression
 expression
 	: OPEN_BRACKET expression CLOSE_BRACKET
+	| classInit
 	| methodcall
 	| value
 	| identifier
@@ -232,6 +239,7 @@ data
 	|boolexpr
 	|object
 	|value
+	|classInit
 	|methodcall
 	;
 

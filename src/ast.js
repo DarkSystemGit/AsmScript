@@ -239,21 +239,31 @@ export function handler(token, ctx, context) {
         "object":(ctx,context)=>{
             var children=[]
             var obj =context.visitChildren()
-            obj.forEach((elm,i)=>{if(elm==":"){children.push({type:"prop",key:obj[i-1],value:obj[i+1]})}})
-            return {type:"object",children}
+            obj.forEach((elm,i)=>{if(elm==":"){children.push({type:"array",children:[obj[i-1],obj[i+1]]})}})
+            return {type:"classInit",name:"Object",params:children,children:[]}
         },
         "strConcat":(ctx,context)=>{
             return {type:"concat",children:context.visitChildren().filter(i=>i!=='+')}
         },
         "class":(ctx,context)=>{
-            var oldScope=JSON.parse(JSON.stringify(context.data.scope ))
-            context.data.scope=`${oldScope}.class.${ctx.identifier()[0].getText()}`
+            var oldScope=util.copy(context.data.scope)
+            var extension=["base"]
             if(util.childExists(ctx,'identifier',1)){
                 context.data.scope=context.data.scope+'.'+ctx.identifier()[1].getText()
+                ctx.identifier()[1].getText().split('.').forEach(elm=>extension.push(elm))
             }
-            var children
+            context.data.scope=`${oldScope}.class.${ctx.identifier()[0].getText()}`
+
+            var children=context.visit(ctx.classBody())
+            children.forEach(elm=>{
+                context.data.functions[elm.name]=elm
+                elm.scope=context.data.scope
+            })
             context.data.scope=oldScope
-            return {type:"class",name:ctx.identifier().getText(),children}
+            return {type:"class",name:ctx.identifier().getText(),children,extends:extension}
+        },
+        "classInit":(ctx,context)=>{
+            return {type:"classInit",name:ctx.identifier().getText(),children:[],params:context.visit(ctx.methodparams()).filter(i => i !== ",")}
         }
     }
     
