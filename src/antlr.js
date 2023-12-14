@@ -4,6 +4,7 @@ import ICEScriptParser from "../antlr/parsers/antlr/grammars/ICEScriptParser.js"
 import ICEScriptLexer from "../antlr/parsers/antlr/grammars/ICEScriptLexer.js";
 import tokens from "./tokens.js";
 import * as util from "./util.js"
+import * as tree from "./tree.js"
 import { handler } from "./ast.js";
 import { readFileSync, writeFileSync } from 'fs'
 import * as path from 'path'
@@ -201,13 +202,9 @@ export function buildAst(file) {
 	util.data.file=file
 	file = readFileSync(file).toString().split('\n')
 	//file.forEach((elm,i)=>{if(!(elm[elm.length-1]==';')){file[i]=file[i]}})
-	const chars = new antlr4.InputStream(file.join('\n'));
-	const lexer = new ICEScriptLexer(chars);
-	const tokenstr = new antlr4.CommonTokenStream(lexer);
-	const parser = new ICEScriptParser(tokenstr);
-	var tree= parser.script()
+	const lexer = new ICEScriptLexer(new antlr4.InputStream(file.join('\n')));
 	util.log('Glacier Dev, v0.0.1:', /*'\n	Tree:\n		', tree.toStringTree(parser.ruleNames),*/)
-	var out = new Visitor().start(tree)
+	var out = new Visitor().start(new ICEScriptParser(new antlr4.CommonTokenStream(lexer)).script())
 	//Imagine using Antlr wheen you could roll your own
 	//Imagine using text, so October
 	/*Object.keys(handler()).forEach((elm, i) => {
@@ -229,7 +226,7 @@ export function buildAst(file) {
 	})*/
 	util.log('\n	Results:', '\n		TI-Basic:\n		', JSON.stringify(out), '\n Data:	',/*handler()*/)
 	
-	var header=util.getNode(out,["function","var"],1,true)
+	var header=tree.getNode(out,["function","var"],1,true)
 	//console.log(tree.toStringTree(parser.ruleNames))
 	//console.log(JSON.stringify(out))
 	util.registerFile({ast:out,header},path.basename(util.data.file).split('.')[0])

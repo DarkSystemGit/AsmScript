@@ -12,7 +12,7 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}/main.js",
-            "args": ["${workspaceFolder}/tests/fakeHome.gs"]
+            "args": ["/tests/fakeHome.gs"]
         }
     ]
 }

@@ -149,26 +149,6 @@ export function childExists(ctx,child,index){
 		return false
 	}
 }
-export function getNode(children,nodes,depth,remChildren){
-	if(depth!==0){
-	nodes.forEach(node=>{
-	children.forEach(elm=>{
-		if(elm.children){
-			getNode(elm.children,nodes,depth-1,remChildren)
-		}else if(elm.constructor === Array){
-			getNode(elm,nodes,depth-1,remChildren)
-		}
-		if(elm.type==node){
-			if(remChildren){
-			elm.children=[]
-		}
-			data.header=data.header||[]
-			data.header.push(elm)
-		}
-	})})
-}
-return data.header
-}
 export function registerFile(ast,name){
 	data.asts=data.asts||{}
 	data.asts[name]=ast
@@ -180,17 +160,4 @@ export function isRegisteredAst(name){
 	data.asts=data.asts||{}
 	if(data.asts.hasOwnProperty(name))return true
 	return false
-}
-export function getFunction(name,scope,functionList){
-	if(functionList.hasOwnProperty(`${name}|${scope}`)){
-		return functionList[`${name}|${scope}`]
-	}else{
-		scope.split('.').forEach((elm,i,arr)=>{
-			var current=arr.slice(0,i).join('.')
-			if(functionList.hasOwnProperty(`${name}|${current}`)){
-				return functionList[`${name}|${current}`]
-			}
-		})
-	}
-	return null
 }

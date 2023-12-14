@@ -1,4 +1,5 @@
 import * as util from "./util.js"
+import * as tree from "./tree.js"
 import { abort } from 'process'
 import {buildAst} from './antlr.js'
 import { readFileSync,readdirSync } from 'fs'
@@ -19,9 +20,12 @@ export function handler(token, ctx, context) {
             context.data.var.strLists = context.data.var.strLists || ["Str0", "Str1", "Str2", "Str3", "Str4", "Str5", "Str6", "Str7", "Str8", "Str9"]
             context.data.scope = context.data.scope || "function:global"
         },
-        "var": function (ctx,  context, scope) {
+        "var": function (ctx,  context) {
             //util.log(context)
-            scope = scope||context.data.scope 
+            var scope = context.data.scope
+            //console.log('SCOPE: ',scope)
+            //scope=JSON.stringify(scope) 
+            
             var children = []
             if(!context.data.var.hasOwnProperty(ctx.identifier().getText())){
             var varType =context.visit(ctx.expression())
@@ -101,7 +105,7 @@ export function handler(token, ctx, context) {
                 return {type:"number",value:ctx.getText(),children:[]}
             } else {
                 try {
-                    return { type: "var", children: [], name: ctx.identifier().getText(), varType: context.data.var[ctx.identifier().getText()+context.data.scope].varType }
+                    return { type: "var", children: [], name: ctx.identifier().getText(), varType: tree.getVar(ctx.identifier().getText(),context.data.scope,context.data.var).varType }
                 } catch {
                     //if(Object.keys(context.data.functions).includes(ctx.identifier().getText()))return handler("funcCall",ctx,context)
                     //console.log(context)
@@ -124,7 +128,7 @@ export function handler(token, ctx, context) {
             util.log("method:", ctx.identifier().getText())
             
             try {
-                var retType=util.getFunction(method.join('.'),context.data.scope,context.data.function).retType
+                var retType=tree.getFunction(method.join('.'),context.data.scope,context.data.functions).retType
                 return { type: "funcCall", children: [], class: baseClass, name: method[method.length - 1], params: context.visit(ctx.methodparams()).filter(i => i !== ","), retType}
             } catch (err) {
                 //console.log(ctx.getText())
@@ -188,7 +192,7 @@ export function handler(token, ctx, context) {
         },
         "import":(ctx,context)=>{
             var name=ctx.identifier().getText()
-            console.log(name)
+            //console.log(name)
             if(!readdirSync('./src/headers').includes(name+'.json')){
                 var file= JSON.parse(readFileSync(path.join(util.data.file,name)))
                 file[path.basename(util.data.file).split('.')[0]].headers.forEach(elm=>{
@@ -211,7 +215,7 @@ export function handler(token, ctx, context) {
                     }
                 })
             }
-            console.log(context.data)
+            //console.log(context.data)
             return {type:"import",name}
         },
         "for":(ctx,context)=>{
