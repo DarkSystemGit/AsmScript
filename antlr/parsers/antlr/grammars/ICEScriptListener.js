@@ -95,6 +95,15 @@ export default class ICEScriptListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by ICEScriptParser#classInit.
+	enterClassInit(ctx) {
+	}
+
+	// Exit a parse tree produced by ICEScriptParser#classInit.
+	exitClassInit(ctx) {
+	}
+
+
 	// Enter a parse tree produced by ICEScriptParser#methodcall.
 	enterMethodcall(ctx) {
 	}
