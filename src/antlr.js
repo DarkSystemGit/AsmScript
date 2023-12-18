@@ -17,9 +17,9 @@ class Visitor extends ICEScriptVisitor {
 			code.push(this.visit(ctx.getChild(i)));
 		}
 		code.forEach((elm,i)=>{
-			//if(!(['(',')','{','}',';',[null],[undefined],undefined,[]].includes(elm)))console.log(elm)
+			//if(!(['(',')','{','}',';',[null],[undefined],undefined,[]].includes(elm)))util.termLog(elm)
 			if(['(',')','{','}',';'].includes(elm)){
-				//if(!(['(',')'].includes(elm))){console.log(elm)}
+				//if(!(['(',')'].includes(elm))){util.termLog(elm)}
 				code.splice(i,1)
 			}
 		})
@@ -198,7 +198,7 @@ class Visitor extends ICEScriptVisitor {
 }
 //util.log(tree.toStringTree(parser.ruleNames))
 export function buildAst(file) {
-	//console.log(util.isRegisteredAst(file))
+	//util.termLog(util.isRegisteredAst(file))
 	if(!util.isRegisteredAst(file)){
 	util.data.file=file
 	file = readFileSync(file).toString()
@@ -229,7 +229,7 @@ export function buildAst(file) {
 	util.log('\n	Results:', '\n		TI-Basic:\n		', JSON.stringify(out), '\n Data:	',/*handler()*/)
 
 	var header=tree.getNode(out,["function","var","class"],1,true)
-	//console.log(tree.toStringTree(parser.ruleNames))
+	//util.termLog(tree.toStringTree(parser.ruleNames))
 	//console.dir(out,{depth:null})
 	util.registerFile({ast:out,header},path.basename(util.data.file).split('.')[0])
 

@@ -23,13 +23,13 @@ export function handler(token, ctx, context) {
         "var": function (ctx,  context) {
             //util.log(context)
             var scope = context.data.scope
-            //console.log('SCOPE: ',scope)
+            //util.termLog('SCOPE: ',scope)
             //scope=JSON.stringify(scope) 
             
             var children = []
             if(!context.data.var.hasOwnProperty(ctx.identifier().getText()+'|'+scope)){
             var varType =context.visit(ctx.expression())
-            //console.log(varType)
+            //util.termLog(varType)
             
             if(!varType.type){
                 varType=varType[0]
@@ -39,7 +39,7 @@ export function handler(token, ctx, context) {
             }else if(typeof varType.type=="string"){
                 varType=varType.type
             }
-            //console.log(varType)
+            //util.termLog(varType)
             if(varType=="funcCall"){
                 var varType =context.visit(ctx.expression())[0].retType
             }
@@ -111,7 +111,7 @@ export function handler(token, ctx, context) {
                     return { type: "var", children: [], name: ctx.identifier().getText(), varType: tree.getVar(ctx.identifier().getText(),context.data.scope,context.data.var).varType }
                 } catch {
                     //if(Object.keys(context.data.functions).includes(ctx.identifier().getText()))return handler("funcCall",ctx,context)
-                    //console.log(context)
+                    //util.termLog(context)
                     util.error(`${ctx.identifier().getText()} is undefined`, 'Alloc', ctx)
                 }
 
@@ -134,7 +134,7 @@ export function handler(token, ctx, context) {
                 var retType=tree.getFunction(method.join('.'),context.data.scope,context.data.functions).retType
                 return { type: "funcCall", children: [], class: baseClass, name: method[method.length - 1], params: context.visit(ctx.methodparams()).filter(i => i !== ","), retType}
             } catch (err) {
-                //console.log(ctx.getText())
+                //util.termLog(ctx.getText())
                 util.error('No such function: '+method.join('.'),'TypeError',ctx)
                 //abort()
             }
@@ -159,7 +159,7 @@ export function handler(token, ctx, context) {
                     comparisons.push(elm)
                 }
             })
-            //console.log({type:"bool",condition:ctx.getText(),children:[],comparisons})
+            //util.termLog({type:"bool",condition:ctx.getText(),children:[],comparisons})
             return {type:"bool",condition:ctx.getText(),children:[],comparisons}
         },
         'math':(ctx,context)=>{
@@ -195,7 +195,7 @@ export function handler(token, ctx, context) {
         },
         "import":(ctx,context)=>{
             var name=ctx.identifier().getText()
-            //console.log(name)
+            //util.termLog(name)
             if(!readdirSync('./src/headers').includes(name+'.json')){
                 var file= JSON.parse(readFileSync(path.join(util.data.file,name)))
                 file[path.basename(util.data.file).split('.')[0]].headers.forEach(elm=>{
@@ -218,7 +218,7 @@ export function handler(token, ctx, context) {
                     }
                 })
             }
-            //console.log(context.data)
+            //util.termLog(context.data)
             return {type:"import",name}
         },
         "for":(ctx,context)=>{

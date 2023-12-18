@@ -1,4 +1,4 @@
-//console.log(readFileSync(process.argv[2]))
+//util.termLog(readFileSync(process.argv[2]))
 import {writeFileSync,readFileSync} from 'fs'
 import * as path from 'path'
 import { fileURLToPath } from 'url';
@@ -46,7 +46,7 @@ export function inString(char, stringMap) {
 
 	stringMap.forEach((item) => {
 		try {
-			//console.log(char >= item[0], char <= item[1])
+			//util.termLog(char >= item[0], char <= item[1])
 			if ((char >= item[0]) && (char <= item[1])) {
 				ret = true
 			}
@@ -109,14 +109,14 @@ export function error(err,type,ctx){
 	file.error[type].push({line:ctx.start.line,column:ctx.start.column,err})
 	writeFileSync('./log',JSON.stringify(file))
 	if(!data.errs.includes(`[Error]: ${type} at line:${ctx.start.line}, column:${ctx.start.column};\n${err} `)){
-	console.log('\x1b[31m%s\x1b[0m',`[Error]: ${type} at line:${ctx.start.line}, column:${ctx.start.column};\n${err} `)
+	util.termLog('\x1b[31m%s\x1b[0m',`[Error]: ${type} at line:${ctx.start.line}, column:${ctx.start.column};\n${err} `)
 	data.errs.push(`[Error]: ${type} at line:${ctx.start.line}, column:${ctx.start.column};\n${err} `)
 	}
 }
 export function warn(warn,ctx){
 	data.warns=data.warns||[]
 	if(!data.warns.includes(`[Warning]: Warning at line:${ctx.start.line}, column:${ctx.start.column};\n${warn}`)){
-	console.log('\x1b[33m%s\x1b[0m',`[Warning]: Warning at line:${ctx.start.line}, column:${ctx.start.column};\n${warn}`)
+	util.termLog('\x1b[33m%s\x1b[0m',`[Warning]: Warning at line:${ctx.start.line}, column:${ctx.start.column};\n${warn}`)
 	data.warns.push(`[Warning]: Warning at line:${ctx.start.line}, column:${ctx.start.column};\n${warn}`)	
 }
 	
@@ -135,8 +135,9 @@ export function log(token){
 	writeFileSync('./log',JSON.stringify(file))
 }
 export function termLog(msg){
-	//console.dir(`[Log]:`,msg,{depth:null})
+	console.dir(`[Log]:`,msg,{depth:null})
 }
+export function info(msg){console.dir(msg,{depth:null})}
 export function childExists(ctx,child,index){
 	try{
 		if(index){
@@ -153,6 +154,7 @@ export function registerFile(ast,name){
 	data.asts=data.asts||{}
 	data.asts[name]=ast
 }
+//all hail this glorious function
 export function copy(obj){
 	return JSON.parse(JSON.stringify(obj))
 }

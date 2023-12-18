@@ -6,7 +6,7 @@ function getScopedChild(name,scope,nodeList){
 		var ret=null
 		scope.split('.').forEach((elm,i,arr)=>{
 			var current=arr.slice(0,i+1).join('.')
-            //console.log(current)
+            //util.termLog(current)
 			if(nodeList.hasOwnProperty(`${name}|${current}`)){
 				ret=nodeList[`${name}|${current}`]
 			}
