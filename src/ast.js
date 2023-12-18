@@ -189,7 +189,7 @@ export function handler(token, ctx, context) {
 
                     }
                     //strConcat fixes
-                    if ((res[i + 1] == '+') && ((!(res[i + 2].type == undefined)) && (res[i + 2].type == "string"))) { }
+                    if ((res[i + 1] == '+') && ((!(res[i + 2].type == undefined)) && (res[i + 2].type == "string"))) {res[i] = handler('stringConcat', ctx, context) }
                 }
 
 
