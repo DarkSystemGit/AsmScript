@@ -28,7 +28,122 @@
           }
         ],
         "retType": "str",
-        "children": []
+        "children": [
+          [
+            [],
+            null
+          ],
+          [
+            [
+              null
+            ],
+            null
+          ],
+          [
+            [
+              [
+                null
+              ]
+            ]
+          ],
+          [
+            {
+              "name": "key",
+              "varType": "number",
+              "children": [
+                [
+                  {
+                    "type": "number",
+                    "value": "0",
+                    "children": []
+                  }
+                ]
+              ],
+              "type": "varDec",
+              "scope": "function:global.function:input"
+            }
+          ],
+          [
+            {
+              "name": "res",
+              "varType": "string",
+              "children": [
+                [
+                  {
+                    "type": "string",
+                    "value": "\"\"",
+                    "children": []
+                  }
+                ]
+              ],
+              "type": "varDec",
+              "scope": "function:global.function:input"
+            }
+          ],
+          [
+            {
+              "type": "while",
+              "condition": {
+                "type": "bool",
+                "condition": "!key==io.keys.enter",
+                "children": [],
+                "comparisons": [
+                  "==",
+                  "!"
+                ]
+              },
+              "children": [
+                [
+                  {
+                    "name": "res",
+                    "varType": "string",
+                    "children": [
+                      [
+                        [
+                          {
+                            "type": "var",
+                            "children": [],
+                            "name": "res",
+                            "varType": "string"
+                          }
+                        ],
+                        "+",
+                        [
+                          {
+                            "type": "funcCall",
+                            "children": [],
+                            "class": [
+                              "io"
+                            ],
+                            "name": "getKey",
+                            "params": [],
+                            "retType": "int"
+                          }
+                        ]
+                      ]
+                    ],
+                    "type": "varDec",
+                    "scope": "function:global.function:input"
+                  }
+                ]
+              ]
+            }
+          ],
+          [],
+          [
+            {
+              "type": "return",
+              "value": [
+                {
+                  "type": "var",
+                  "children": [],
+                  "name": "res",
+                  "varType": "string"
+                }
+              ]
+            }
+          ]
+        ]
       },
       [],
       [

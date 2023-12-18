@@ -227,7 +227,7 @@ export function buildAst(file) {
 		}
 	})*/
 	util.log('\n	Results:', '\n		TI-Basic:\n		', JSON.stringify(out), '\n Data:	',/*handler()*/)
-	
+
 	var header=tree.getNode(out,["function","var","class"],1,true)
 	//console.log(tree.toStringTree(parser.ruleNames))
 	//console.dir(out,{depth:null})

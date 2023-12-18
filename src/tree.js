@@ -1,3 +1,4 @@
+import * as util from './util.js'
 function getScopedChild(name,scope,nodeList){
     if(nodeList.hasOwnProperty(`${name}|${scope}`)){
 		return nodeList[`${name}|${scope}`]
@@ -25,7 +26,8 @@ export function getVar(name,scope,varList){
 export function getNode(children,nodes,depth,remChildren){
 	if(depth!==0){
 	nodes.forEach(node=>{
-	children.forEach(elm=>{
+	children.forEach(orgElm=>{
+		var elm = util.copy(orgElm)
 		if(elm.children){
 			getNode(elm.children,nodes,depth-1,remChildren)
 		}else if(elm.constructor === Array){
