@@ -18,7 +18,7 @@ class Visitor extends ICEScriptVisitor {
 		}
 		code.forEach((elm,i)=>{
 			//if(!(['(',')','{','}',';',[null],[undefined],undefined,[]].includes(elm)))console.log(elm)
-			if(['(',')','{','}',';',[null],[undefined],undefined,null,[]].includes(elm)){
+			if(['(',')','{','}',';'].includes(elm)){
 				//if(!(['(',')'].includes(elm))){console.log(elm)}
 				code.splice(i,1)
 			}
@@ -198,13 +198,15 @@ class Visitor extends ICEScriptVisitor {
 }
 //util.log(tree.toStringTree(parser.ruleNames))
 export function buildAst(file) {
+	//console.log(util.isRegisteredAst(file))
 	if(!util.isRegisteredAst(file)){
 	util.data.file=file
-	file = readFileSync(file).toString().split('\n')
+	file = readFileSync(file).toString()
 	//file.forEach((elm,i)=>{if(!(elm[elm.length-1]==';')){file[i]=file[i]}})
-	const lexer = new ICEScriptLexer(new antlr4.InputStream(file.join('\n')));
+	const lexer = new ICEScriptLexer(new antlr4.InputStream(file));
 	util.log('Glacier Dev, v0.0.1:', /*'\n	Tree:\n		', tree.toStringTree(parser.ruleNames),*/)
-	var out = new Visitor().start(new ICEScriptParser(new antlr4.CommonTokenStream(lexer)).script())
+	var parser=new ICEScriptParser(new antlr4.CommonTokenStream(lexer))
+	var out = new Visitor().start(parser.script())
 	//Imagine using Antlr wheen you could roll your own
 	//Imagine using text, so October
 	/*Object.keys(handler()).forEach((elm, i) => {
@@ -226,9 +228,9 @@ export function buildAst(file) {
 	})*/
 	util.log('\n	Results:', '\n		TI-Basic:\n		', JSON.stringify(out), '\n Data:	',/*handler()*/)
 	
-	var header=tree.getNode(out,["function","var"],1,true)
+	var header=tree.getNode(out,["function","var","class"],1,true)
 	//console.log(tree.toStringTree(parser.ruleNames))
-	//console.log(JSON.stringify(out))
+	//console.dir(out,{depth:null})
 	util.registerFile({ast:out,header},path.basename(util.data.file).split('.')[0])
 
 }

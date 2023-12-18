@@ -89,15 +89,15 @@ export function handler(token, ctx, context) {
         "function": (ctx,  context) => {
 
             //util.log('ctx:', ctx)
-            //console.log(ctx.type())
+            //console.dir(context.visit(ctx.statement()),{depth:null})
             var paramsList = ctx.func_params().getText().split(')')[0].split(',')
             var params = []
             paramsList.forEach((elm) => { params.push({ name: elm.split(':')[0], type: elm.split(':')[1] }) })
             var oldScope=util.copy(context.data.scope)
-            var children=context.visit(ctx.statement()) 
             context.data.scope=`${oldScope}.function:${ctx.identifier().getText()}`
-            context.data.functions[ctx.identifier().getText()+`|${oldScope}`] = { type: "function", scope:oldScope,name: ctx.identifier().getText(), params, retType: ctx.type().getText(), children}
+            context.data.functions[ctx.identifier().getText()+`|${oldScope}`] = { type: "function", scope:oldScope,name: ctx.identifier().getText(), params, retType: ctx.type().getText(), children:context.visit(ctx.statement()) }
             context.data.scope=oldScope
+            //console.dir( context.data.functions[ctx.identifier().getText()+`|${oldScope}`],{depth:null})
             return context.data.functions[ctx.identifier().getText()+`|${oldScope}`]
 
             //util.log(ctx.number())
