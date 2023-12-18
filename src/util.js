@@ -137,7 +137,7 @@ export function log(token){
 export function termLog(msg){
 	console.dir(`[Log]:`,msg,{depth:null})
 }
-export function info(msg){console.dir(msg,{depth:null})}
+export function info(msg){console.log(msg)}
 export function childExists(ctx,child,index){
 	try{
 		if(index){
