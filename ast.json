@@ -4,21 +4,21 @@
       {
         "children": [
           {
-            "type": "import",
+            "node": "import",
             "name": "io"
           },
           {
-            "type": "import",
+            "node": "import",
             "name": "math"
           },
           {
-            "type": "import",
+            "node": "import",
             "name": "gfx"
           }
         ]
       },
       {
-        "type": "function",
+        "node": "function",
         "scope": "function:global",
         "name": "input",
         "params": [
@@ -27,7 +27,7 @@
             "type": "str"
           }
         ],
-        "retType": "str",
+        "type": "str",
         "children": [
           [
             [],
@@ -49,42 +49,42 @@
           [
             {
               "name": "key",
-              "varType": "number",
+              "type": "number",
               "children": [
                 [
                   {
-                    "type": "number",
+                    "node": "number",
                     "value": "0",
                     "children": []
                   }
                 ]
               ],
-              "type": "varDec",
+              "node": "varDec",
               "scope": "function:global.function:input"
             }
           ],
           [
             {
               "name": "res",
-              "varType": "string",
+              "type": "string",
               "children": [
                 [
                   {
-                    "type": "string",
+                    "node": "string",
                     "value": "\"\"",
                     "children": []
                   }
                 ]
               ],
-              "type": "varDec",
+              "node": "varDec",
               "scope": "function:global.function:input"
             }
           ],
           [
             {
-              "type": "while",
+              "node": "while",
               "condition": {
-                "type": "bool",
+                "node": "bool",
                 "condition": "!key==io.keys.enter",
                 "children": [],
                 "comparisons": [
@@ -96,33 +96,33 @@
                 [
                   {
                     "name": "res",
-                    "varType": "string",
+                    "type": "string",
                     "children": [
                       [
                         [
                           {
-                            "type": "var",
+                            "node": "var",
                             "children": [],
                             "name": "res",
-                            "varType": "string"
+                            "type": "string"
                           }
                         ],
                         "+",
                         [
                           {
-                            "type": "funcCall",
+                            "node": "funcCall",
                             "children": [],
                             "class": [
                               "io"
                             ],
                             "name": "getKey",
                             "params": [],
-                            "retType": "int"
+                            "type": "int"
                           }
                         ]
                       ]
                     ],
-                    "type": "varDec",
+                    "node": "varDec",
                     "scope": "function:global.function:input"
                   }
                 ]
@@ -132,13 +132,13 @@
           [],
           [
             {
-              "type": "return",
+              "node": "return",
               "value": [
                 {
-                  "type": "var",
+                  "node": "var",
                   "children": [],
                   "name": "res",
-                  "varType": "string"
+                  "type": "string"
                 }
               ]
             }
@@ -148,9 +148,9 @@
       [],
       [
         {
-          "type": "while",
+          "node": "while",
           "condition": {
-            "type": "bool",
+            "node": "bool",
             "condition": "true",
             "children": [],
             "comparisons": [
@@ -161,35 +161,35 @@
             [
               {
                 "name": "input",
-                "varType": "str",
+                "type": "str",
                 "children": [
                   [
                     {
-                      "type": "funcCall",
+                      "node": "funcCall",
                       "children": [],
                       "class": [],
                       "name": "input",
                       "params": [
                         [
                           {
-                            "type": "string",
+                            "node": "string",
                             "value": "\"\"",
                             "children": []
                           }
                         ]
                       ],
-                      "retType": "str"
+                      "type": "str"
                     }
                   ]
                 ],
-                "type": "varDec",
+                "node": "varDec",
                 "scope": "function:global"
               }
             ],
             [
               [
                 {
-                  "type": "funcCall",
+                  "node": "funcCall",
                   "children": [],
                   "class": [
                     "gfx"
@@ -199,7 +199,7 @@
                     [
                       [
                         {
-                          "type": "funcCall",
+                          "node": "funcCall",
                           "children": [],
                           "class": [
                             "math"
@@ -209,7 +209,7 @@
                             [
                               [
                                 {
-                                  "type": "number",
+                                  "node": "number",
                                   "value": "0",
                                   "children": []
                                 }
@@ -217,37 +217,37 @@
                               "-",
                               [
                                 {
-                                  "type": "var",
+                                  "node": "var",
                                   "children": [],
                                   "name": "input",
-                                  "varType": "str"
+                                  "type": "str"
                                 }
                               ]
                             ],
                             [
                               {
-                                "type": "var",
+                                "node": "var",
                                 "children": [],
                                 "name": "input",
-                                "varType": "str"
+                                "type": "str"
                               }
                             ]
                           ],
-                          "retType": "int"
+                          "type": "int"
                         }
                       ],
                       "+",
                       [
                         {
-                          "type": "var",
+                          "node": "var",
                           "children": [],
                           "name": "input",
-                          "varType": "str"
+                          "type": "str"
                         }
                       ]
                     ]
                   ],
-                  "retType": "void"
+                  "type": "void"
                 }
               ]
             ]
@@ -258,7 +258,7 @@
     ],
     "header": [
       {
-        "type": "function",
+        "node": "function",
         "scope": "function:global",
         "name": "input",
         "params": [
@@ -267,7 +267,7 @@
             "type": "str"
           }
         ],
-        "retType": "str",
+        "type": "str",
         "children": []
       }
     ]

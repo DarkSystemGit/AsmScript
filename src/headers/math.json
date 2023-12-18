@@ -1,18 +1,18 @@
 [
    {
-        "type": "function",
+        "node": "function",
         "name": "math.rand",
         "params": [
             {
                 "name": "min",
-                "type": "int"
+                "node": "int"
             },
             {
                 "name": "max",
-                "type": "int"
+                "node": "int"
             }
         ],
-        "retType": "int",
+        "type": "int",
         "children": []
     }
 ]

@@ -1,82 +1,135 @@
 fakeHome:
   ast:
     - children:
-        - type: import
+        - node: import
           name: io
-        - type: import
+        - node: import
           name: math
-        - type: import
+        - node: import
           name: gfx
-    - type: function
+    - node: function
       scope: function:global
       name: input
       params:
         - name: str
           type: str
-      retType: str
-      children: []
+      type: str
+      children:
+        - - []
+          - null
+        - - - null
+          - null
+        - - - - null
+        - - name: key
+            type: number
+            children:
+              - - node: number
+                  value: "0"
+                  children: []
+            node: varDec
+            scope: function:global.function:input
+        - - name: res
+            type: string
+            children:
+              - - node: string
+                  value: '""'
+                  children: []
+            node: varDec
+            scope: function:global.function:input
+        - - node: while
+            condition:
+              node: bool
+              condition: "!key==io.keys.enter"
+              children: []
+              comparisons:
+                - ==
+                - "!"
+            children:
+              - - name: res
+                  type: string
+                  children:
+                    - - - node: var
+                          children: []
+                          name: res
+                          type: string
+                      - +
+                      - - node: funcCall
+                          children: []
+                          class:
+                            - io
+                          name: getKey
+                          params: []
+                          type: int
+                  node: varDec
+                  scope: function:global.function:input
+        - []
+        - - node: return
+            value:
+              - node: var
+                children: []
+                name: res
+                type: string
     - []
-    - - type: while
+    - - node: while
         condition:
-          type: bool
+          node: bool
           condition: "true"
           children: []
           comparisons:
             - "true"
         children:
           - - name: input
-              varType: str
+              type: str
               children:
-                - - type: funcCall
+                - - node: funcCall
                     children: []
                     class: []
                     name: input
                     params:
-                      - - type: string
+                      - - node: string
                           value: '""'
                           children: []
-                    retType: str
-              type: varDec
+                    type: str
+              node: varDec
               scope: function:global
-          - - - type: funcCall
+          - - - node: funcCall
                 children: []
                 class:
                   - gfx
                 name: text
                 params:
-                  - - - type: funcCall
+                  - - - node: funcCall
                         children: []
                         class:
                           - math
                         name: rand
                         params:
-                          - - - type: number
+                          - - - node: number
                                 value: "0"
                                 children: []
                             - "-"
-                            - - type: var
+                            - - node: var
                                 children: []
                                 name: input
-                                varType: str
-                          - - type: var
+                                type: str
+                          - - node: var
                               children: []
                               name: input
-                              varType: str
-                        retType: int
+                              type: str
+                        type: int
                     - +
-                    - - type: var
+                    - - node: var
                         children: []
                         name: input
-                        varType: str
-                retType: void
+                        type: str
+                type: void
     - []
   header:
-    - type: function
+    - node: function
       scope: function:global
       name: input
       params:
         - name: str
           type: str
-      retType: str
+      type: str
       children: []
-#about half the size of the json

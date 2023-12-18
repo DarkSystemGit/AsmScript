@@ -1,17 +1,17 @@
 [
     {
-        "type": "function",
+        "node": "function",
         "name": "io.getKey",
         "params": [],
-        "retType": "int",
+        "type": "int",
         "children": []
     },
     {
-        "type": "varDec",
-        "varType": "number",
+        "node": "varDec",
+        "type": "number",
         "children": [
             {
-                "type": "number",
+                "node": "number",
                 "value": "9",
                 "children": []
             }
@@ -19,11 +19,11 @@
         "name": "io.keys.enter"
     },
     {
-        "type": "varDec",
-        "varType": "number",
+        "node": "varDec",
+        "type": "number",
         "children": [
             {
-                "type": "number",
+                "node": "number",
                 "value": "3",
                 "children": []
             }
@@ -31,11 +31,11 @@
         "name": "io.keys.right"
     },
     {
-        "type": "varDec",
-        "varType": "number",
+        "node": "varDec",
+        "type": "number",
         "children": [
             {
-                "type": "number",
+                "node": "number",
                 "value": "2",
                 "children": []
             }
@@ -43,11 +43,11 @@
         "name": "io.keys.left"
     },
     {
-        "type": "varDec",
-        "varType": "number",
+        "node": "varDec",
+        "type": "number",
         "children": [
             {
-                "type": "number",
+                "node": "number",
                 "value": "4",
                 "children": []
             }
@@ -55,11 +55,11 @@
         "name": "io.keys.up"
     },
     {
-        "type": "varDec",
-        "varType": "number",
+        "node": "varDec",
+        "type": "number",
         "children": [
             {
-                "type": "number",
+                "node": "number",
                 "value": "1",
                 "children": []
             }

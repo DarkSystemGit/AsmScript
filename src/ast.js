@@ -28,52 +28,53 @@ export function handler(token, ctx, context) {
             
             var children = []
             if(!context.data.var.hasOwnProperty(ctx.identifier().getText()+'|'+scope)){
-            var varType =context.visit(ctx.expression())
-            //util.termLog(varType)
+            var type =context.visit(ctx.expression())
+            //util.termLog(type)
             
-            if(!varType.type){
-                varType=varType[0]
-                if(!(varType==undefined)){
-                    varType = varType.type
+            if(!type.node){
+                type=type[0]
+                if(!(type==undefined)){
+                    type = type.node
                 }
-            }else if(typeof varType.type=="string"){
-                varType=varType.type
+            }else if(typeof type.node=="string"){
+                type=type.node
             }
-            //util.termLog(varType)
-            if(varType=="funcCall"){
-                var varType =context.visit(ctx.expression())[0].retType
+            //util.termLog(type)
+            if(type=="funcCall"){
+                var type =context.visit(ctx.expression())[0].type
             }
-            if(varType=="array"){
-                var varType =context.visit(ctx.expression())[0].listType
+            if(type=="array"){
+                var type =context.visit(ctx.expression())[0].type
             }
-            if(varType=="var"){
-                var varType =context.visit(ctx.expression())[0].varType
+            if(type=="var"){
+                var type =context.visit(ctx.expression())[0].type
             }
-            if(ctx.hasOwnProperty('type')&&(typeof ctx.type=="function")&&(!(ctx.type()==null)))varType=ctx.type().getText()
+            if(ctx.hasOwnProperty('type')&&(typeof ctx.type=="function")&&(!(ctx.type()==null)))type=ctx.type().getText()
             }else{
-                var varType=context.data.var[ctx.identifier().getText()+'|'+scope].varType
+                var type=context.data.var[ctx.identifier().getText()+'|'+scope].type
             }
-            if(varType==undefined){varType="undef";util.warn(`${ctx.identifier().getText()} is undefined! A type could not be infered! This may be bad!`,ctx)}
-            context.data.var[ctx.identifier().getText()+'|'+scope]={varType,scope}
-            return { name: ctx.identifier().getText(), varType, children:[context.visit(ctx.expression())], type: "varDec",scope:scope }
+            
+            if(type==undefined){type="undef";util.warn(`${ctx.identifier().getText()} is undefined! A type could not be infered! This may be bad!`,ctx)}
+            context.data.var[ctx.identifier().getText()+'|'+scope]={type,scope}
+            return { name: ctx.identifier().getText(), type, children:[context.visit(ctx.expression())], node: "varDec",scope:scope }
         },
         "while": function (ctx,  context) {
             var body = context.visit(ctx.statement())
-            return { type: "while", condition: context.visit(ctx.boolexpr()), children: body }
+            return { node: "while", condition: context.visit(ctx.boolexpr()), children: body }
         },
         "if": (ctx,  context) => {
             var body = context.visit(ctx.statement())
-            return { type: "if", condition: context.visit(ctx.boolexpr()), children: body }
+            return { node: "if", condition: context.visit(ctx.boolexpr()), children: body }
             //return `If ${ctx.boolexpr().getText()}:${body.substring(1, body.length - 1)}:End:`
         },
         "ifElse": (ctx,  context) => {
             var ifBody = context.visit(ctx.statement()[0])
             var elseBody = context.visit(ctx.statement()[1])
-            return { type: "if", condition: context.visit(ctx.boolexpr()), children: [ifBody,elseBody] }
+            return { node: "if", condition: context.visit(ctx.boolexpr()), children: [ifBody,elseBody] }
             //return `If ${ctx.boolexpr().getText()}:${ifBody.substring(1, ifBody.length - 1)}:Else:${elseBody.substring(1, elseBody.length - 1)}:End:`
         },
         "asm": (ctx,  context) => {
-            return {type:"asm",children:[],contents:ctx.any().getText()}
+            return {node:"asm",children:[],contents:ctx.any().getText()}
         },
         "funcParams": (ctx,  context) => {
 
@@ -95,7 +96,7 @@ export function handler(token, ctx, context) {
             paramsList.forEach((elm) => { params.push({ name: elm.split(':')[0], type: elm.split(':')[1] }) })
             var oldScope=util.copy(context.data.scope)
             context.data.scope=`${oldScope}.function:${ctx.identifier().getText()}`
-            context.data.functions[ctx.identifier().getText()+`|${oldScope}`] = { type: "function", scope:oldScope,name: ctx.identifier().getText(), params, retType: ctx.type().getText(), children:context.visit(ctx.statement()) }
+            context.data.functions[ctx.identifier().getText()+`|${oldScope}`] = { node: "function", scope:oldScope,name: ctx.identifier().getText(), params, type: ctx.type().getText(), children:context.visit(ctx.statement()) }
             context.data.scope=oldScope
             //console.dir( context.data.functions[ctx.identifier().getText()+`|${oldScope}`],{depth:null})
             return context.data.functions[ctx.identifier().getText()+`|${oldScope}`]
@@ -104,11 +105,11 @@ export function handler(token, ctx, context) {
             //return `:Label ${context.data.functions[name].label}:${context.visit(ctx.statement())}:______:`
         },
         "varAcess": (ctx,  context) => {
-            if (context.visitChildren(ctx)[0].type=="number") {
-                return {type:"number",value:ctx.getText(),children:[]}
+            if (context.visitChildren(ctx)[0].node=="number") {
+                return {node:"number",value:ctx.getText(),children:[]}
             } else {
                 try {
-                    return { type: "var", children: [], name: ctx.identifier().getText(), varType: tree.getVar(ctx.identifier().getText(),context.data.scope,context.data.var).varType }
+                    return { node: "var", children: [], name: ctx.identifier().getText(), type: tree.getVar(ctx.identifier().getText(),context.data.scope,context.data.var).type }
                 } catch {
                     //if(Object.keys(context.data.functions).includes(ctx.identifier().getText()))return handler("funcCall",ctx,context)
                     //util.termLog(context)
@@ -131,8 +132,8 @@ export function handler(token, ctx, context) {
             util.log("method:", ctx.identifier().getText())
             
             try {
-                var retType=tree.getFunction(method.join('.'),context.data.scope,context.data.functions).retType
-                return { type: "funcCall", children: [], class: baseClass, name: method[method.length - 1], params: context.visit(ctx.methodparams()).filter(i => i !== ","), retType}
+                var type=tree.getFunction(method.join('.'),context.data.scope,context.data.functions).type
+                return { node: "funcCall", children: [], class: baseClass, name: method[method.length - 1], params: context.visit(ctx.methodparams()).filter(i => i !== ","), type}
             } catch (err) {
                 //util.termLog(ctx.getText())
                 util.error('No such function: '+method.join('.'),'TypeError',ctx)
@@ -142,13 +143,13 @@ export function handler(token, ctx, context) {
         'list':(ctx,context)=>{
                 var list = ctx.getText().replace('[', '')
                 list = util.split(list.slice(list.length - 1, 1), ',', util.genStrMap(list.slice(list.length - 1, 1)))
-                return { type:"array", value: list, children:context.visitChildren(),listType:context.visitChildren()[0].type}
+                return { node:"array", value: list, children:context.visitChildren(),type:context.visitChildren()[0].node}
         },
         'string':(ctx)=>{
-            return {type:"string",value:ctx.getText(),children:[]}
+            return {node:"string",value:ctx.getText(),children:[]}
         },
         'number':(ctx)=>{
-            return {type:"number",value:ctx.getText(),children:[]}
+            return {node:"number",value:ctx.getText(),children:[]}
         },
         'bool':(ctx,context)=>{
             var src=ctx.getText()
@@ -159,8 +160,8 @@ export function handler(token, ctx, context) {
                     comparisons.push(elm)
                 }
             })
-            //util.termLog({type:"bool",condition:ctx.getText(),children:[],comparisons})
-            return {type:"bool",condition:ctx.getText(),children:[],comparisons}
+            //util.termLog({node:"bool",condition:ctx.getText(),children:[],comparisons})
+            return {node:"bool",condition:ctx.getText(),children:[],comparisons}
         },
         'math':(ctx,context)=>{
             var ops=["+","/","-","*"]
@@ -173,7 +174,7 @@ export function handler(token, ctx, context) {
                 }
                 children.filter(i=>i!==elm)
             })
-            return {type:"math",children,operations}
+            return {node:"math",children,operations}
         },
         "expr":(ctx,context)=>{
             var res= context.visitChildren(ctx)
@@ -191,7 +192,7 @@ export function handler(token, ctx, context) {
             return res
         },
         "return":(ctx,context)=>{
-            return {type:"return",value:context.visit(ctx.expression())}
+            return {node:"return",value:context.visit(ctx.expression())}
         },
         "import":(ctx,context)=>{
             var name=ctx.identifier().getText()
@@ -199,27 +200,27 @@ export function handler(token, ctx, context) {
             if(!readdirSync('./src/headers').includes(name+'.json')){
                 var file= JSON.parse(readFileSync(path.join(util.data.file,name)))
                 file[path.basename(util.data.file).split('.')[0]].headers.forEach(elm=>{
-                    if(elm.type=="function"){
+                    if(elm.node=="function"){
                         context.data.functions[elm.name]=elm
-                    }else if(elm.type=="varDec"){
-                        context.data.var[elm.name]=elm.varType
+                    }else if(elm.node=="varDec"){
+                        context.data.var[elm.name]=elm.type
                     }
                 })
             }else{
                 JSON.parse(readFileSync(`./src/headers/${name}.json`)).forEach(elm=>{
-                    if(elm.type=="function"){
+                    if(elm.node=="function"){
                         elm.name=elm.name+`|function:global`
                         context.data.functions[elm.name]=elm
                         context.data.functions[elm.name].scope=`function:global`
-                    }else if(elm.type=="varDec"){
+                    }else if(elm.node=="varDec"){
                         elm.name=elm.name+`|function:global`
-                        context.data.var[elm.name]={type:elm.varType}
+                        context.data.var[elm.name]={type:elm.type}
                         context.data.var[elm.name].scope=`function:global`
                     }
                 })
             }
             //util.termLog(context.data)
-            return {type:"import",name}
+            return {node:"import",name}
         },
         "for":(ctx,context)=>{
             if(util.childExists(ctx,'boolexpr')){
@@ -229,9 +230,9 @@ export function handler(token, ctx, context) {
                 }else{
                     var afterCond=context.visit(ctx.dec_stmt())
                 }
-                return {type:"for",condition,counter:context.visit(ctx.var_stmt()),afterCond,children:[context.visit(ctx.statement())]}
+                return {node:"for",condition,counter:context.visit(ctx.var_stmt()),afterCond,children:[context.visit(ctx.statement())]}
             }else{
-                return {type:"foreach",iterator:context.visit(ctx.var_stmt()),iterated:context.visit(ctx.value()),children:[context.visit(ctx.statement())]}
+                return {node:"foreach",iterator:context.visit(ctx.var_stmt()),iterated:context.visit(ctx.value()),children:[context.visit(ctx.statement())]}
             }
             
             
@@ -239,11 +240,11 @@ export function handler(token, ctx, context) {
         "object":(ctx,context)=>{
             var children=[]
             var obj =context.visitChildren()
-            obj.forEach((elm,i)=>{if(elm==":"){children.push({type:"array",children:[obj[i-1],obj[i+1]]})}})
-            return {type:"classInit",name:"Object",params:children,children:[]}
+            obj.forEach((elm,i)=>{if(elm==":"){children.push({node:"array",children:[obj[i-1],obj[i+1]]})}})
+            return {node:"classInit",name:"Object",params:children,children:[]}
         },
         "strConcat":(ctx,context)=>{
-            return {type:"concat",children:context.visitChildren().filter(i=>i!=='+')}
+            return {node:"concat",children:context.visitChildren().filter(i=>i!=='+')}
         },
         "class":(ctx,context)=>{
             var oldScope=util.copy(context.data.scope)
@@ -260,10 +261,10 @@ export function handler(token, ctx, context) {
                 elm.scope=context.data.scope
             })
             context.data.scope=oldScope
-            return {type:"class",name:ctx.identifier().getText(),children,extends:extension}
+            return {node:"class",name:ctx.identifier().getText(),children,extends:extension}
         },
         "classInit":(ctx,context)=>{
-            return {type:"classInit",name:ctx.identifier().getText(),children:[],params:context.visit(ctx.methodparams()).filter(i => i !== ",")}
+            return {node:"classInit",name:ctx.identifier().getText(),children:[],params:context.visit(ctx.methodparams()).filter(i => i !== ",")}
         }
     }
     

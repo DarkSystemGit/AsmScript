@@ -2,7 +2,6 @@
 import {writeFileSync,readFileSync} from 'fs'
 import * as path from 'path'
 import { fileURLToPath } from 'url';
-import { isGeneratorFunction } from 'util/types';
 export const __filename = fileURLToPath(import.meta.url);
 export const __dirname = path.dirname(__filename);
 writeFileSync('./log','{}')
@@ -116,7 +115,7 @@ export function error(err,type,ctx){
 export function warn(warn,ctx){
 	data.warns=data.warns||[]
 	if(!data.warns.includes(`[Warning]: Warning at line:${ctx.start.line}, column:${ctx.start.column};\n${warn}`)){
-	util.termLog('\x1b[33m%s\x1b[0m',`[Warning]: Warning at line:${ctx.start.line}, column:${ctx.start.column};\n${warn}`)
+	console.log('\x1b[33m%s\x1b[0m',`[Warning]: Warning at line:${ctx.start.line}, column:${ctx.start.column};\n${warn}`)
 	data.warns.push(`[Warning]: Warning at line:${ctx.start.line}, column:${ctx.start.column};\n${warn}`)	
 }
 	

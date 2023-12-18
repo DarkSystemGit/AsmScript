@@ -1,50 +1,50 @@
 [
     {
-        "type": "function",
+        "node": "function",
         "name": "gfx.text",
         "params": [
             {
                 "name": "text",
-                "type": "string"
+                "node": "string"
             }
         ],
-        "retType": "void",
+        "type": "void",
         "children": []
     },
     {
-        "type": "function",
+        "node": "function",
         "name": "gfx.draw",
         "params": [
             {
                 "name": "text",
-                "type": "string"
+                "node": "string"
             }
         ],
-        "retType": "void",
+        "type": "void",
         "children": []
     },
     {
-        "type": "function",
+        "node": "function",
         "name": "gfx.clear",
         "params": [
             {
                 "name": "text",
-                "type": "string"
+                "node": "string"
             }
         ],
-        "retType": "void",
+        "type": "void",
         "children": []
     },
     {
-        "type": "function",
+        "node": "function",
         "name": "gfx.clearScreen",
         "params": [
             {
                 "name": "text",
-                "type": "string"
+                "node": "string"
             }
         ],
-        "retType": "void",
+        "type": "void",
         "children": []
     }
 ]

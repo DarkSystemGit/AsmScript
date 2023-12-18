@@ -33,7 +33,7 @@ export function getNode(children,nodes,depth,remChildren){
 		}else if(elm.constructor === Array){
 			getNode(elm,nodes,depth-1,remChildren)
 		}
-		if(elm.type==node){
+		if(elm.node==node){
 			if(remChildren){
 			elm.children=[]
 		}
