@@ -3,6 +3,7 @@ import * as cli from 'inquirer'
 console.log('Glacier Stdlib Header Node Creater v1.0.0')
 
 var prompt = cli.default.prompt
+var node={}
 prompt([
     {
         name: 'files',
@@ -15,11 +16,22 @@ prompt([
         file=file.files
         var fileName=file
         var file= JSON.parse(fs.readFileSync('./src/headers/'+file))
-        prompt([{name:'type',message:'Type:',type:'list',choices:['function','var','class']}]).then((type)=>{
-            type=type.type
+        prompt([{name:'type',message:'Node type:',type:'list',choices:['function','var','class']}]).then((nodeType)=>{
+            nodeType=nodeType.type
+            node.node=nodeType
+            if(nodeType=="var"){
+                node.node="varDec"
+            }
             prompt([{name:'name',message:'Name:',type:'input'}]).then((name)=>{
-                name=fileName.split('.')[0]+name.name
-                console.log([name,type])
+                node.name=fileName.split('.')[0]+'.'+name.name
+                prompt([{name:'type',message:'Type:',type:'list',choices:['number','string','bool','void','object']}]).then((type)=>{
+                    node.type=type.type
+                    if(nodeType=='function'){
+                        prompt([{name:'params',message:'Parameter Number: ',type:'input'}]).then(()=>{})
+                    }else{
+
+                    }
+                })
             })
         })
 
