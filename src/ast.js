@@ -183,16 +183,19 @@ export function handler(token, ctx, context) {
             }
             //antlr hacks
             res.forEach((elm, i) => {
+                if(!elm==undefined){
                 if (typeof elm == "string") {
                     if (elm.startsWith('"')) {
                         res[i] = handler('string', ctx, context)
 
                     }
                     //strConcat fixes
-                    if ((res[i + 1] == '+') && ((!(res[i + 2].type == undefined)) && (res[i + 2].type == "string"))) {res[i] = handler('strConcat', ctx, context) }
+                    if ((res[i + 1] == '+') && ((!(res[i + 2].type == undefined)) && (res[i + 2].type == "string"))) { res[i] = handler('strConcat', ctx, context) }
                 }
-
-
+                if((elm.type&&res[i+2].type)&&([res[i+2].type,elm.type].includes("number"))){
+                    res[i] = handler('math', ctx, context)
+                }
+                }
             })
 
             return res
