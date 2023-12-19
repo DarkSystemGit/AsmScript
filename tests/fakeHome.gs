@@ -4,11 +4,12 @@ import gfx;
 function input(str:str): str{
     gfx.text(str);
     var key= 0;
-    var res="";
+    var res=[];
     while(!key==io.keys.enter){
-        res=res+io.getKey();
+        key=io.getKey();
+        res.push(key)
     };
-    return res;
+    return io.keysToString(res);
 };
 while(true){
     var input=input("");
