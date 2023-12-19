@@ -34,6 +34,7 @@
     "typescript": "^5.3.2"
   },
   "dependencies": {
+    "inquirer": "^9.2.12",
     "json5": "^2.2.3",
     "yaml": "^2.3.4"
   }
