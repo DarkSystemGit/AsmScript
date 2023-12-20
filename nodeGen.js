@@ -27,10 +27,15 @@ prompt([
                 prompt([{name:'type',message:'Type:',type:'list',choices:['number','string','bool','void','object']}]).then((type)=>{
                     node.type=type.type
                     if(nodeType=='function'){
-                        prompt([{name:'params',message:'Parameter Number: ',type:'input'}]).then(()=>{})
+                        prompt([{name:'params',message:'Number of Parameters: ',type:'input'}]).then((amount)=>{
+                            for(var i=0;i<amount;i++){
+                                
+                            }
+                        })
                     }else{
 
                     }
+                    
                 })
             })
         })
