@@ -28,9 +28,15 @@ prompt([
                     node.type=type.type
                     if(nodeType=='function'){
                         prompt([{name:'params',message:'Number of Parameters: ',type:'input'}]).then((amount)=>{
-                            for(var i=0;i<amount;i++){
+
+                            var questions=[]
+                            for(var i=0;i<parseInt(amount.params);i++){
                                 
+                                questions.push({name:'name',message:'Parameter name:',type:'input'})
+                                questions.push({name:'type',message:'Parameter type:',type:'list',choices:['number','string','bool','void','object']})
                             }
+                            console.log(questions)
+                            prompt(questions).then((prams)=>{console.log(prams)})
                         })
                     }else{
 
