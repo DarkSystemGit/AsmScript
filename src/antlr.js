@@ -20,7 +20,7 @@ class Visitor extends ICEScriptVisitor {
 			//if(!(['(',')','{','}',';',[null],[undefined],undefined,[]].includes(elm)))util.termLog(elm)
 			if(['(',')','{','}',';'].includes(elm)){
 				//if(!(['(',')'].includes(elm))){util.termLog(elm)}
-				code.splice(i,1)
+				//code.splice(i,1)
 			}
 		})
 		return code;
