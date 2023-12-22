@@ -108,7 +108,7 @@ export function error(err,type,ctx){
 	file.error[type].push({line:ctx.start.line,column:ctx.start.column,err})
 	writeFileSync('./log',JSON.stringify(file))
 	if(!data.errs.includes(`[Error]: ${type} at line:${ctx.start.line}, column:${ctx.start.column};\n${err} `)){
-	util.termLog('\x1b[31m%s\x1b[0m',`[Error]: ${type} at line:${ctx.start.line}, column:${ctx.start.column};\n${err} `)
+	termLog('\x1b[31m%s\x1b[0m',`[Error]: ${type} at line:${ctx.start.line}, column:${ctx.start.column};\n${err} `)
 	data.errs.push(`[Error]: ${type} at line:${ctx.start.line}, column:${ctx.start.column};\n${err} `)
 	}
 }
@@ -134,7 +134,7 @@ export function log(token){
 	writeFileSync('./log',JSON.stringify(file))
 }
 export function termLog(msg){
-	console.dir(`[Log]:`,msg,{depth:null})
+	console.dir(`[Log]: ${msg}`,{depth:null})
 }
 export function info(msg){console.log(msg)}
 export function childExists(ctx,child,index){

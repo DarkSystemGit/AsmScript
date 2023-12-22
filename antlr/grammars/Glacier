@@ -1,4 +1,4 @@
-grammar ICEScript;
+grammar Glacier;
 //Thanks to DisabledMallis for this grammar :D
 
 
@@ -47,7 +47,7 @@ methodcall
 	: identifier OPEN_BRACKET methodparams CLOSE_BRACKET
 	;
 methodparams
-	: expression* (',' expression)*
+	: expression (',' expression)*
 	;
 statement
 	: OPEN_CURLEY statement* CLOSE_CURLEY
@@ -221,8 +221,9 @@ number
    | PI
    ;
 list
-	:'['expression* (',' expression)*']'
+	:'['(expression (',' expression)* ']')||']'
 	;
+
 object
 	:'{' (string ':' data)* (',' (string ':' data)*) '}'
 	;

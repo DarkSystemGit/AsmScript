@@ -140,11 +140,6 @@ export function handler(token, ctx, context) {
                 //abort()
             }
         },
-        'list': (ctx, context) => {
-            var list = ctx.getText().replace('[', '')
-            list = util.split(list.slice(list.length - 1, 1), ',', util.genStrMap(list.slice(list.length - 1, 1)))
-            return { node: "array", value: list, children: context.visitChildren(), type: context.visitChildren()[0].node }
-        },
         'string': (ctx) => {
             return { node: "string", value: ctx.getText(), children: [] }
         },
@@ -167,7 +162,7 @@ export function handler(token, ctx, context) {
             var ops = ["+", "/", "-", "*"]
             var src = ctx.getText()
             var operations = []
-            var children = context.visitChildren()
+            var children = context.visitChildren(ctx)
             ops.forEach((elm) => {
                 if (src.split(elm).length > 1) {
                     operations.push(elm)
@@ -248,15 +243,15 @@ export function handler(token, ctx, context) {
         },
         "object": (ctx, context) => {
             var children = []
-            var obj = context.visitChildren()
+            var obj = context.visitChildren(ctx)
             obj.forEach((elm, i) => { if (elm == ":") { children.push({ node: "classInit", name: "Array", params: [obj[i - 1], obj[i + 1]], children: [] }) } })
             return { node: "classInit", name: "Object", params: children, children: [] }
         },
-        "array": (ctx, context) => {
-            return { node: "classInit", name: "Array", params: context.visitChildren().filter(i => i !== ','), children: [] }
+        "list": (ctx, context) => {
+            return { node: "classInit", name: "Array", params: context.visitChildren(ctx).filter(i => i !== ','), children: [] }
         },
         "strConcat": (ctx, context) => {
-            return { node: "concat", children: context.visitChildren().filter(i => i !== '+') }
+            return { node: "concat", children: context.visitChildren(ctx).filter(i => i !== '+') }
         },
         "class": (ctx, context) => {
             var oldScope = util.copy(context.data.scope)

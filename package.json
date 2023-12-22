@@ -8,22 +8,22 @@
   },
   "type": "module",
   "scripts": {
-    "env": "echo \"export DEVDIR=~&&export DEBUG=true\"",
+    "env": "echo \"export DEVDIR=~/Glacier&&export DEBUG=true\"",
     "start": "node ./main.js",
     "log": "node ./logviewer.cjs -list ",
-    "build": "cd $DEVDIR/ICEScript&& npm run clean; npm run compileVisitor && npm test",
-    "buildDbg": "cd $DEVDIR/ICEScript&& npm run clean; npm run compileDbg && npm test",
-    "test": "cd $DEVDIR/ICEScript&&tsc ./src/llvm.ts&&npm start ./tests/fakeHome.gs",
-    "compileVisitor": "antlr4 -o ./antlr/parsers -lib ./antlr/grammars -visitor -Dlanguage=JavaScript  ./antlr/grammars/ICEScript",
+    "build": "cd $DEVDIR&& npm run clean; npm run compileVisitor && npm test",
+    "buildDbg": "cd $DEVDIR&& npm run clean; npm run compileDbg && npm test",
+    "test": "cd $DEVDIR&&tsc ./src/llvm.ts&&npm start ./tests/fakeHome.gs",
+    "compileVisitor": "antlr4 -o ./antlr/parsers -lib ./antlr/grammars -visitor -Dlanguage=JavaScript  ./antlr/grammars/Glacier",
     "clean": "rm ./antlr/* && rm -r ./antlr/parsers/antlr           ",
-    "compileDbg": "antlr4 -XdbgST -o ./antlr/parsers -lib ./antlr/grammars -visitor -Dlanguage=JavaScript  ./antlr/grammars/ICEScript"
+    "compileDbg": "antlr4 -XdbgST -o ./antlr/parsers -lib ./antlr/grammars -visitor -Dlanguage=JavaScript  ./antlr/grammars/Glacier"
   },
   "repository": {
     "type": "git",
-    "url": "https://www.github.com/DarkSystemGit/ICEScript"
+    "url": "https://www.github.com/DarkSystemGit/Glacier"
   },
   "keywords": [
-    "ICEScript",
+    "Glacier",
     "JS",
     "TI84PCE"
   ],

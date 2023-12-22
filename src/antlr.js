@@ -1,7 +1,7 @@
 import antlr4 from "antlr4"
-import ICEScriptVisitor from "../antlr/parsers/antlr/grammars/ICEScriptVisitor.js";
-import ICEScriptParser from "../antlr/parsers/antlr/grammars/ICEScriptParser.js";
-import ICEScriptLexer from "../antlr/parsers/antlr/grammars/ICEScriptLexer.js";
+import ICEScriptVisitor from "../antlr/parsers/antlr/grammars/GlacierVisitor.js";
+import ICEScriptParser from "../antlr/parsers/antlr/grammars/GlacierParser.js";
+import ICEScriptLexer from "../antlr/parsers/antlr/grammars/GlacierLexer.js";
 import tokens from "./tokens.js";
 import * as util from "./util.js"
 import * as tree from "./tree.js"
@@ -206,7 +206,9 @@ export function buildAst(file) {
 	const lexer = new ICEScriptLexer(new antlr4.InputStream(file));
 	util.log('Glacier Dev, v0.0.1:', /*'\n	Tree:\n		', tree.toStringTree(parser.ruleNames),*/)
 	var parser=new ICEScriptParser(new antlr4.CommonTokenStream(lexer))
+	//console.log(parser.script().toStringTree(parser.ruleNames))
 	var out = new Visitor().start(parser.script())
+	
 	//Imagine using Antlr wheen you could roll your own
 	//Imagine using text, so October
 	/*Object.keys(handler()).forEach((elm, i) => {
