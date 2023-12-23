@@ -14,10 +14,11 @@ export function handler(token, ctx, context) {
 
             context.data = context.data || {}
             context.data.var = context.data.var || {}
+            context.data.classes = context.data.classes || {}
             context.data.functions = context.data.functions || {}
             context.data.functionCall = context.data.functionCall || {}
             context.data.types = context.data.types || ['number', 'string', 'list', 'boolexpr', 'methodCall', 'value']
-            context.data.var.strLists = context.data.var.strLists || ["Str0", "Str1", "Str2", "Str3", "Str4", "Str5", "Str6", "Str7", "Str8", "Str9"]
+           // context.data.var.strLists = context.data.var.strLists || ["Str0", "Str1", "Str2", "Str3", "Str4", "Str5", "Str6", "Str7", "Str8", "Str9"]
             context.data.scope = context.data.scope || "function:global"
         },
         "var": function (ctx, context) {
@@ -44,13 +45,13 @@ export function handler(token, ctx, context) {
                     var type = context.visit(ctx.expression())[0].type
                 }
                 if (type == "array") {
-                    var type = context.visit(ctx.expression())[0].type
+                  var type = context.visit(ctx.expression())[0].type
                 }
                 if (type == "var") {
                     var type = context.visit(ctx.expression())[0].type
                 }
                 if(type=="classInit"){
-                    var type = context.visit(ctx.expression())
+                    var type = 'class:'+context.visit(ctx.expression())[0].name
                 }
                 if (ctx.hasOwnProperty('type') && (typeof ctx.type == "function") && (!(ctx.type() == null))) type = ctx.type().getText()
             } else {
@@ -99,7 +100,7 @@ export function handler(token, ctx, context) {
             paramsList.forEach((elm) => { params.push({ name: elm.split(':')[0], type: elm.split(':')[1] }) })
             var oldScope = util.copy(context.data.scope)
             context.data.scope = `${oldScope}.function:${ctx.identifier().getText()}`
-            context.data.functions[ctx.identifier().getText() + `|${oldScope}`] = { node: "function", scope: oldScope, name: ctx.identifier().getText(), params, type: ctx.type().getText(), children: context.visit(ctx.statement()) }
+            context.data.functions[ctx.identifier().getText() + `|${oldScope}`] = { node: "function", scope: oldScope, name: ctx.identifier().getText(), params, type: ctx.type().getText(), children:context.visitChildren(ctx)[5] }
             context.data.scope = oldScope
             //console.dir( context.data.functions[ctx.identifier().getText()+`|${oldScope}`],{depth:null})
             return context.data.functions[ctx.identifier().getText() + `|${oldScope}`]

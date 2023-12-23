@@ -68,7 +68,7 @@
           [
             {
               "name": "res",
-              "type": "classInit",
+              "type": "class:Array",
               "children": [
                 [
                   {

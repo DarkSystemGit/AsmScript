@@ -1,0 +1,27 @@
+[
+    {
+        "node":"class",
+        "name":"Array",
+        "extends":["base"],
+        "children":[
+            {
+                "node":"functionDef",
+                "name":"push",
+                "params":[
+                    {"name":"elm","type":"any"}
+                ],
+                "type":"void",
+                "children":[]
+            },
+            {
+                "node":"functionDef",
+                "name":"init",
+                "params":[
+                    
+                ],
+                "type":"void",
+                "children":[]
+            }
+        ]
+    }
+]

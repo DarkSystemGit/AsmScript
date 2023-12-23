@@ -18,7 +18,13 @@ export function parseScope(scope){
     return scope.split('.').map(elm=>elm.split(':'))
 }
 export function getFunction(name,scope,nodeList){
-	return getScopedChild(...Array.from(arguments))
+	var func=getScopedChild(...Array.from(arguments))
+	if(func==null){
+		var classObj=getScopedChild(name.split('.')[0],scope,context.data.vars)
+		if((!(classObj==null))&&(classObj.type.split(':')[0]=='class')){
+			return context.data.classes[classObj.type.split(':')[1]].children.filter(elm=>elm.name==name.split('.')[0])[0] 
+		}
+	}
 }
 export function getVar(name,scope,varList){
     return getScopedChild(...Array.from(arguments))
