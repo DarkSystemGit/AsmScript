@@ -49,6 +49,9 @@ export function handler(token, ctx, context) {
                 if (type == "var") {
                     var type = context.visit(ctx.expression())[0].type
                 }
+                if(type=="classInit"){
+                    var type = context.visit(ctx.expression())
+                }
                 if (ctx.hasOwnProperty('type') && (typeof ctx.type == "function") && (!(ctx.type() == null))) type = ctx.type().getText()
             } else {
                 var type = context.data.var[ctx.identifier().getText() + '|' + scope].type

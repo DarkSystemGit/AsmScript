@@ -30,14 +30,10 @@
         "type": "str",
         "children": [
           [
-            [],
-            null
+            []
           ],
           [
-            [
-              null
-            ],
-            null
+            []
           ],
           [
             [
@@ -49,7 +45,7 @@
                   "children": []
                 }
               ],
-              null
+              ")"
             ]
           ],
           [
@@ -132,17 +128,13 @@
                   }
                 ],
                 [
-                  [
-                    null
-                  ],
-                  null
+                  [],
+                  ";"
                 ],
                 [
                   {
                     "node": "return",
-                    "value": [
-                      null
-                    ]
+                    "value": []
                   }
                 ]
               ]
@@ -175,9 +167,7 @@
                     "name": "input",
                     "type": "undef",
                     "children": [
-                      [
-                        null
-                      ]
+                      []
                     ],
                     "node": "varDec",
                     "scope": "function:global.function:input"
