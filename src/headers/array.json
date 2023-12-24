@@ -17,11 +17,21 @@
                 "node":"functionDef",
                 "name":"init",
                 "params":[
-                    
+                   "variable" 
+                ],
+                "type":"void",
+                "children":[]
+            },
+            {
+                "node":"functionDef",
+                "name":"default",
+                "params":[
+                    {"name":"index","type":"number"}
                 ],
                 "type":"void",
                 "children":[]
             }
+            
         ]
     }
 ]

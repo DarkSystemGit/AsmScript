@@ -1,6 +1,5 @@
 import * as util from "./util.js"
 import * as tree from "./tree.js"
-import { abort } from 'process'
 import { buildAst } from './antlr.js'
 import { readFileSync, readdirSync } from 'fs'
 export function handler(token, ctx, context) {
@@ -211,7 +210,12 @@ export function handler(token, ctx, context) {
                     if (elm.node == "function") {
                         context.data.functions[elm.name] = elm
                     } else if (elm.node == "varDec") {
-                        context.data.var[elm.name] = elm.type
+                        elm.name = elm.name + `|function:global`
+                        context.data.var[elm.name] = { type: elm.type }
+                        context.data.var[elm.name].scope = `function:global`
+                    }else if (elm.node == "class") {
+                        context.data.classes[elm.name] = elm
+                        context.data.classes[elm.name].scope='function:global' 
                     }
                 })
             } else {

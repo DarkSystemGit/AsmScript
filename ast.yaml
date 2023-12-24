@@ -55,7 +55,7 @@ fakeHome:
                       - +
                       - - node: funcCall
                           children: []
-                          class:
+                          :
                             - io
                           name: getKey
                           params: []
