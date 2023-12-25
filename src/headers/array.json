@@ -17,7 +17,7 @@
                 "node":"functionDef",
                 "name":"init",
                 "params":[
-                   "variable" 
+                   "va" 
                 ],
                 "type":"void",
                 "children":[]
@@ -27,6 +27,15 @@
                 "name":"default",
                 "params":[
                     {"name":"index","type":"number"}
+                ],
+                "type":"any",
+                "children":[]
+            },
+            {
+                "node":"functionDef",
+                "name":"pop",
+                "params":[
+                    
                 ],
                 "type":"void",
                 "children":[]

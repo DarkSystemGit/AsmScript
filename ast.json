@@ -101,27 +101,7 @@
                     "name": "key",
                     "type": "number",
                     "children": [
-                      [
-                        {
-                          "node": "funcCall",
-                          "children": [],
-                          "class": [
-                            "io"
-                          ],
-                          "name": "getKey",
-                          "params": [
-                            [
-                              {
-                                "node": "classInit",
-                                "name": "Array",
-                                "params": [],
-                                "children": []
-                              }
-                            ]
-                          ],
-                          "type": "int"
-                        }
-                      ]
+                      []
                     ],
                     "node": "varDec",
                     "scope": "function:global.function:input"
@@ -174,69 +154,7 @@
                   }
                 ],
                 [
-                  [
-                    {
-                      "node": "funcCall",
-                      "children": [],
-                      "class": [
-                        "gfx"
-                      ],
-                      "name": "text",
-                      "params": [
-                        [
-                          [
-                            {
-                              "node": "funcCall",
-                              "children": [],
-                              "class": [
-                                "math"
-                              ],
-                              "name": "rand",
-                              "params": [
-                                [
-                                  [
-                                    {
-                                      "node": "number",
-                                      "value": "0",
-                                      "children": []
-                                    }
-                                  ],
-                                  "-",
-                                  [
-                                    {
-                                      "node": "var",
-                                      "children": [],
-                                      "name": "input",
-                                      "type": "undef"
-                                    }
-                                  ]
-                                ],
-                                [
-                                  {
-                                    "node": "var",
-                                    "children": [],
-                                    "name": "input",
-                                    "type": "undef"
-                                  }
-                                ]
-                              ],
-                              "type": "int"
-                            }
-                          ],
-                          "+",
-                          [
-                            {
-                              "node": "var",
-                              "children": [],
-                              "name": "input",
-                              "type": "undef"
-                            }
-                          ]
-                        ]
-                      ],
-                      "type": "void"
-                    }
-                  ]
+                  []
                 ]
               ]
             }
