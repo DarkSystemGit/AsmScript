@@ -108,7 +108,7 @@ export function error(err,type,ctx){
 	file.error[type].push({line:ctx.start.line,column:ctx.start.column,err})
 	writeFileSync('./log',JSON.stringify(file))
 	if(!data.errs.includes(`[Error]: ${type} at line:${ctx.start.line}, column:${ctx.start.column};\n${err} `)){
-	termLog('\x1b[31m%s\x1b[0m',`[Error]: ${type} at line:${ctx.start.line}, column:${ctx.start.column};\n${err} `)
+	console.log('\x1b[31m%s\x1b[0m',`[Error]: ${type} at line:${ctx.start.line}, column:${ctx.start.column};\n${err} `)
 	data.errs.push(`[Error]: ${type} at line:${ctx.start.line}, column:${ctx.start.column};\n${err} `)
 	}
 }

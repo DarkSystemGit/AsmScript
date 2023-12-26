@@ -24,7 +24,7 @@
             },
             {
                 "node":"functionDef",
-                "name":"default",
+                "name":"at",
                 "params":[
                     {"name":"index","type":"number"}
                 ],
@@ -39,8 +39,63 @@
                 ],
                 "type":"void",
                 "children":[]
+            },
+            {
+                "node":"functionDef",
+                "name":"concat",
+                "params":[
+                    {"name":"array","type":"class:Array"}
+                ],
+                "type":"any[]",
+                "children":[]
+            },
+            {
+                "node":"functionDef",
+                "name":"fill",
+                "params":[
+                    {"name":"filler","type":"any"},
+                    {"name":"start","type":"number"},
+                    {"name":"end","type":"number"}
+                ],
+                "type":"void",
+                "children":[]
+            },
+            {
+                "node":"functionDef",
+                "name":"forEach",
+                "params":[
+                    {"name":"callback","type":"ptr:function"}
+                ],
+                "type":"void",
+                "children":[]
+            },
+            {
+                "node":"functionDef",
+                "name":"includes",
+                "params":[
+                    {"name":"elm","type":"any"}
+                ],
+                "type":"bool",
+                "children":[]
+            },
+            {
+                "node":"functionDef",
+                "name":"indexOf",
+                "params":[
+                    {"name":"elm","type":"any"}
+                ],
+                "type":"number",
+                "children":[]
+            },
+            {
+                "node":"functionDef",
+                "name":"join",
+                "params":[
+                   
+                ],
+                "type":"str",
+                "children":[]
             }
-            
         ]
     }
 ]

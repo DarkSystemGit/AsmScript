@@ -96,9 +96,13 @@ export function handler(token, ctx, context) {
             //console.dir(context.visit(ctx.statement()),{depth:null})
             var paramsList = ctx.func_params().getText().split(')')[0].split(',')
             var params = []
-            paramsList.forEach((elm) => { params.push({ name: elm.split(':')[0], type: elm.split(':')[1] }) })
             var oldScope = util.copy(context.data.scope)
             context.data.scope = `${oldScope}.function:${ctx.identifier().getText()}`
+            paramsList.forEach((elm) => {
+                 params.push({ name: elm.split(':')[0], type: elm.split(':')[1]}) 
+                 context.data.var[`${elm.split(':')[0]}|${context.data.scope}`]={scope:context.data.scope,type:elm.split(':')[1]}
+                })
+            
             context.data.functions[ctx.identifier().getText() + `|${oldScope}`] = { node: "function", scope: oldScope, name: ctx.identifier().getText(), params, type: ctx.type().getText(), children:context.visitChildren(ctx)[5] }
             context.data.scope = oldScope
             //console.dir( context.data.functions[ctx.identifier().getText()+`|${oldScope}`],{depth:null})
@@ -135,7 +139,7 @@ export function handler(token, ctx, context) {
             util.log("method:", ctx.identifier().getText())
 
             try {
-                var type = tree.getFunction(method.join('.'), context.data.scope, context.data.functions).type
+                var type = tree.getFunction(method.join('.'), context.data.scope, context.data.functions,context).type
                 return { node: "funcCall", children: [], class: baseClass, name: method[method.length - 1], params: context.visit(ctx.methodparams()).filter(i => i !== ","), type }
             } catch (err) {
                 //util.termLog(ctx.getText())
@@ -228,6 +232,9 @@ export function handler(token, ctx, context) {
                         elm.name = elm.name + `|function:global`
                         context.data.var[elm.name] = { type: elm.type }
                         context.data.var[elm.name].scope = `function:global`
+                    }else if (elm.node == "class") {
+                        context.data.classes[elm.name] = elm
+                        context.data.classes[elm.name].scope='function:global' 
                     }
                 })
             }

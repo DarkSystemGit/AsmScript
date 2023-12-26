@@ -17,14 +17,15 @@ function getScopedChild(name,scope,nodeList){
 export function parseScope(scope){
     return scope.split('.').map(elm=>elm.split(':'))
 }
-export function getFunction(name,scope,nodeList){
+export function getFunction(name,scope,nodeList,context){
 	var func=getScopedChild(...Array.from(arguments))
 	if(func==null){
-		var classObj=getScopedChild(name.split('.')[0],scope,context.data.vars)
+		var classObj=getScopedChild(name.split('.')[0],scope,context.data.var)
 		if((!(classObj==null))&&(classObj.type.split(':')[0]=='class')){
-			return context.data.classes[classObj.type.split(':')[1]].children.filter(elm=>elm.name==name.split('.')[0])[0] 
+			return context.data.classes[classObj.type.split(':')[1]].children.filter(elm=>elm.name==name.split('.')[1])[0] 
 		}
 	}
+	return func
 }
 export function getVar(name,scope,varList){
     return getScopedChild(...Array.from(arguments))
