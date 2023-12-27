@@ -7,6 +7,15 @@
         "children": []
     },
     {
+        "node": "function",
+        "name": "io.keys.toString",
+        "params": [{
+            "name":"keys","type":"class:Array"
+        }],
+        "type": "string",
+        "children": []
+    },
+    {
         "node": "varDec",
         "type": "number",
         "children": [

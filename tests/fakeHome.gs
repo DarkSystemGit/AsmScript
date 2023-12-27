@@ -9,7 +9,7 @@ function input(str:str): str{
         key=io.getKey();
         res.push(key)
     };
-    return io.keysToString(res);
+    return io.keys.toString(res);
 };
 while(true){
     var input=input("");
