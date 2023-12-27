@@ -132,7 +132,27 @@
                   }
                 ],
                 [
-                  [],
+                  [
+                    {
+                      "node": "funcCall",
+                      "children": [],
+                      "class": [
+                        "res"
+                      ],
+                      "name": "push",
+                      "params": [
+                        [
+                          {
+                            "node": "var",
+                            "children": [],
+                            "name": "key",
+                            "type": "number"
+                          }
+                        ]
+                      ],
+                      "type": "void"
+                    }
+                  ],
                   ";"
                 ],
                 [
