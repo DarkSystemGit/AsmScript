@@ -5,7 +5,15 @@
         "params": [
             {
                 "name": "text",
-                "node": "string"
+                "type": "string"
+            },
+            {
+                "name": "x",
+                "type": "class:Number"
+            },
+            {
+                "name": "y",
+                "type": "class:Number"
             }
         ],
         "type": "void",
@@ -17,7 +25,7 @@
         "params": [
             {
                 "name": "text",
-                "node": "string"
+                "type": "string"
             }
         ],
         "type": "void",
@@ -29,7 +37,7 @@
         "params": [
             {
                 "name": "text",
-                "node": "string"
+                "type": "string"
             }
         ],
         "type": "void",
@@ -41,7 +49,7 @@
         "params": [
             {
                 "name": "text",
-                "node": "string"
+                "type": "string"
             }
         ],
         "type": "void",

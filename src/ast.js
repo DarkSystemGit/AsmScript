@@ -15,7 +15,6 @@ export function handler(token, ctx, context) {
             context.data.var = context.data.var || {}
             context.data.classes = context.data.classes || {}
             context.data.functions = context.data.functions || {}
-            context.data.functionCall = context.data.functionCall || {}
             context.data.types = context.data.types || ['number', 'string', 'list', 'boolexpr', 'methodCall', 'value']
            // context.data.var.strLists = context.data.var.strLists || ["Str0", "Str1", "Str2", "Str3", "Str4", "Str5", "Str6", "Str7", "Str8", "Str9"]
             context.data.scope = context.data.scope || "function:global"
@@ -112,8 +111,8 @@ export function handler(token, ctx, context) {
             //return `:Label ${context.data.functions[name].label}:${context.visit(ctx.statement())}:______:`
         },
         "varAcess": (ctx, context) => {
-            if (context.visitChildren(ctx)[0].node == "number") {
-                return { node: "number", value: ctx.getText(), children: [] }
+            if ((context.visitChildren(ctx)[0].node == "classInit")&&(context.visitChildren(ctx)[0].name == "Number")) {
+                return context.visitChildren(ctx)[0]
             } else {
                 try {
                     return { node: "var", children: [], name: ctx.identifier().getText(), type: tree.getVar(ctx.identifier().getText(), context.data.scope, context.data.var).type }
@@ -151,7 +150,7 @@ export function handler(token, ctx, context) {
             return { node: "string", value: ctx.getText(), children: [] }
         },
         'number': (ctx) => {
-            return { node: "number", value: ctx.getText(), children: [] }
+            return { node: "classInit", name:"Number",params: [ctx.getText()], children: [] }
         },
         'bool': (ctx, context) => {
             var src = ctx.getText()
@@ -194,7 +193,7 @@ export function handler(token, ctx, context) {
                     //strConcat fixes
                     if ((res[i + 1] == '+') && ((!(res[i + 2].type == undefined)) && (res[i + 2].type == "string"))) { res[i] = handler('strConcat', ctx, context) }
                 }
-                if((elm.type&&res[i+2].type)&&([res[i+2].type,elm.type].includes("number"))){
+                if((elm.type&&res[i+2].type)&&([res[i+2].type,elm.type].includes("class:Number"))){
                     res[i] = handler('math', ctx, context)
                 }
                 }
@@ -209,7 +208,7 @@ export function handler(token, ctx, context) {
             var name = ctx.identifier().getText()
             //util.termLog(name)
             if (!readdirSync('./src/headers').includes(name + '.json')) {
-                var file = JSON.parse(readFileSync(path.join(util.data.file, name)))
+                var file = JSON.parse(util.read(path.join(util.data.file, name)))
                 file[path.basename(util.data.file).split('.')[0]].headers.forEach(elm => {
                     if (elm.node == "function") {
                         context.data.functions[elm.name] = elm
@@ -223,7 +222,7 @@ export function handler(token, ctx, context) {
                     }
                 })
             } else {
-                JSON.parse(readFileSync(`./src/headers/${name}.json`)).forEach(elm => {
+                oleJSON.parse(util.read(`./src/headers/${name}.json`)).forEach(elm => {
                     if (elm.node == "function") {
                         elm.name = elm.name + `|function:global`
                         context.data.functions[elm.name] = elm

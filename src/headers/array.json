@@ -5,7 +5,13 @@
         "extends":["base"],
         "children":[
             {
-                "node":"functionDef",
+                "node": "varDec",
+                "type": "class:Number", 
+                "children":[{"node":"classInit","name":"Number","params":["0"]}],
+                "name":"length"
+            },
+            {
+                "node":"function",
                 "name":"push",
                 "params":[
                     {"name":"elm","type":"any"}
@@ -14,7 +20,7 @@
                 "children":[]
             },
             {
-                "node":"functionDef",
+                "node":"function",
                 "name":"init",
                 "params":[
                    "va" 
@@ -23,16 +29,16 @@
                 "children":[]
             },
             {
-                "node":"functionDef",
+                "node":"function",
                 "name":"at",
                 "params":[
-                    {"name":"index","type":"number"}
+                    {"name":"index","type":"class:Number"}
                 ],
                 "type":"any",
                 "children":[]
             },
             {
-                "node":"functionDef",
+                "node":"function",
                 "name":"pop",
                 "params":[
                     
@@ -41,27 +47,27 @@
                 "children":[]
             },
             {
-                "node":"functionDef",
+                "node":"function",
                 "name":"concat",
                 "params":[
                     {"name":"array","type":"class:Array"}
                 ],
-                "type":"any[]",
+                "type":"class:Array",
                 "children":[]
             },
             {
-                "node":"functionDef",
+                "node":"function",
                 "name":"fill",
                 "params":[
                     {"name":"filler","type":"any"},
-                    {"name":"start","type":"number"},
-                    {"name":"end","type":"number"}
+                    {"name":"start","type":"class:Number"},
+                    {"name":"end","type":"class:Number"}
                 ],
                 "type":"void",
                 "children":[]
             },
             {
-                "node":"functionDef",
+                "node":"function",
                 "name":"forEach",
                 "params":[
                     {"name":"callback","type":"ptr:function"}
@@ -70,7 +76,7 @@
                 "children":[]
             },
             {
-                "node":"functionDef",
+                "node":"function",
                 "name":"includes",
                 "params":[
                     {"name":"elm","type":"any"}
@@ -79,21 +85,21 @@
                 "children":[]
             },
             {
-                "node":"functionDef",
+                "node":"function",
                 "name":"indexOf",
                 "params":[
                     {"name":"elm","type":"any"}
                 ],
-                "type":"number",
+                "type":"class:Number",
                 "children":[]
             },
             {
-                "node":"functionDef",
+                "node":"function",
                 "name":"join",
                 "params":[
                    
                 ],
-                "type":"str",
+                "type":"string",
                 "children":[]
             }
         ]

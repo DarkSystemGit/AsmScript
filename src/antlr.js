@@ -199,12 +199,12 @@ class Visitor extends ICEScriptVisitor {
 //util.log(tree.toStringTree(parser.ruleNames))
 export function buildAst(file) {
 	//util.termLog(util.isRegisteredAst(file))
-	var defaultImports=["array"]
+	var defaultImports=JSON.parse(util.read('./src/headers/std.json'))
 	var imports=[]
 	defaultImports.forEach((elm)=>{imports.push(`import ${elm};`)})
 	if(!util.isRegisteredAst(file)){
 	util.data.file=file
-	file = imports.join('\n')+'\n'+readFileSync(file).toString()
+	file = imports.join('\n')+'\n'+util.read(file).toString()
 	//file.forEach((elm,i)=>{if(!(elm[elm.length-1]==';')){file[i]=file[i]}})
 	const lexer = new ICEScriptLexer(new antlr4.InputStream(file));
 	util.log('Glacier Dev, v0.0.1:', /*'\n	Tree:\n		', tree.toStringTree(parser.ruleNames),*/)

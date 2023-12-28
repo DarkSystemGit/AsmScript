@@ -1,0 +1,35 @@
+[{
+    "node": "class",
+    "name": "Number",
+    "extends": [
+        "base"
+    ],
+    "children": [
+        {
+            "node": "function",
+            "name": "init",
+            "params": [
+                {
+                    "name": "number",
+                    "type": "num24"
+                }
+            ],
+            "type": "void",
+            "children": []
+        },
+        {
+            "node": "function",
+            "name": "getValue",
+            "params": [],
+            "type": "num24",
+            "children": []
+        },
+        {
+            "node": "function",
+            "name": "toString",
+            "params": [],
+            "type": "string",
+            "children": []
+        }
+    ]
+}]

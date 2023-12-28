@@ -1,4 +1,4 @@
-//util.termLog(readFileSync(process.argv[2]))
+//util.termLog(read(process.argv[2]))
 import {writeFileSync,readFileSync} from 'fs'
 import * as path from 'path'
 import { fileURLToPath } from 'url';
@@ -101,7 +101,7 @@ export function strIndexOf(str, substr) {
 	return pos
 }
 export function error(err,type,ctx){
-	var file = JSON.parse(readFileSync('./log'))
+	var file = JSON.parse(read('./log'))
 	data.errs=data.errs||[]
 	file.error=file.error||{}
 	file.error[type]=file.error[type]||[]
@@ -121,7 +121,7 @@ export function warn(warn,ctx){
 	
 }
 export function log(token){
-	var file = JSON.parse(readFileSync('./log'))
+	var file = JSON.parse(read('./log'))
 	file.log=file.log||{main:[],parsedTokens:[]}
 	var time = new Date();
 	if(token!==true){
@@ -161,4 +161,10 @@ export function isRegisteredAst(name){
 	data.asts=data.asts||{}
 	if(data.asts.hasOwnProperty(name))return true
 	return false
+}
+export function read(file){
+	return readFileSync(file).toString()
+}
+export function write(){
+	return writeFileSync(...Array.from(arguments))
 }

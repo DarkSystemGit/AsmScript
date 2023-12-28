@@ -17,11 +17,12 @@
     },
     {
         "node": "varDec",
-        "type": "number",
+        "type": "class:Number",
         "children": [
             {
-                "node": "number",
-                "value": "9",
+                "node": "classInit",
+                "params": ["9"],
+                "name":"Number",
                 "children": []
             }
         ],
@@ -29,11 +30,12 @@
     },
     {
         "node": "varDec",
-        "type": "number",
+        "type": "class:Number",
         "children": [
             {
-                "node": "number",
-                "value": "3",
+                "node": "classInit",
+                "params": ["3"],
+                "name":"Number",
                 "children": []
             }
         ],
@@ -41,11 +43,12 @@
     },
     {
         "node": "varDec",
-        "type": "number",
+        "type": "class:Number",
         "children": [
             {
-                "node": "number",
-                "value": "2",
+                "node": "classInit",
+                "params": ["2"],
+                "name":"Number",
                 "children": []
             }
         ],
@@ -53,11 +56,12 @@
     },
     {
         "node": "varDec",
-        "type": "number",
+        "type": "class:Number",
         "children": [
             {
-                "node": "number",
-                "value": "4",
+                "node": "classInit",
+                "params": ["4"],
+                "name":"Number",
                 "children": []
             }
         ],
@@ -65,11 +69,12 @@
     },
     {
         "node": "varDec",
-        "type": "number",
+        "type": "class:Number",
         "children": [
             {
-                "node": "number",
-                "value": "1",
+                "node": "classInit",
+                "params": ["1"],
+                "name":"Number",
                 "children": []
             }
         ],
