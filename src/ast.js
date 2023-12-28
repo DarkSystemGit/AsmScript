@@ -102,6 +102,7 @@ export function handler(token, ctx, context) {
                  context.data.var[`${elm.split(':')[0]}|${context.data.scope}`]={scope:context.data.scope,type:elm.split(':')[1]}
                 })
             
+            
             context.data.functions[ctx.identifier().getText() + `|${oldScope}`] = { node: "function", scope: oldScope, name: ctx.identifier().getText(), params, type: ctx.type().getText(), children:context.visitChildren(ctx)[5] }
             context.data.scope = oldScope
             //console.dir( context.data.functions[ctx.identifier().getText()+`|${oldScope}`],{depth:null})
@@ -222,7 +223,7 @@ export function handler(token, ctx, context) {
                     }
                 })
             } else {
-                oleJSON.parse(util.read(`./src/headers/${name}.json`)).forEach(elm => {
+                JSON.parse(util.read(`./src/headers/${name}.json`)).forEach(elm => {
                     if (elm.node == "function") {
                         elm.name = elm.name + `|function:global`
                         context.data.functions[elm.name] = elm
