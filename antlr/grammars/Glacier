@@ -25,8 +25,8 @@ include
 	;
 
 functionDef
-	: 'function' identifier OPEN_BRACKET func_params CLOSE_BRACKET ':' type statement
-	| identifier OPEN_BRACKET func_params CLOSE_BRACKET ':' type statement
+	: 'function' identifier OPEN_BRACKET func_params CLOSE_BRACKET ':' identifier statement
+	| identifier OPEN_BRACKET func_params CLOSE_BRACKET ':' identifier statement
 	;
 func_params
 	: func_identifier || func_identifier(',' func_identifier)*
@@ -260,10 +260,10 @@ type
 	:
 	|'object'
 	|'void'
-	|'str'
+	|'string'
 	|'number'
 	|'bool'
-	| type '[]'
+	|'array'
 	;
 //Stuff we wanna ignore
 LINECOMMENT : '//' ~[\r\n]* -> skip;
