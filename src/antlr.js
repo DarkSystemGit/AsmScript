@@ -209,7 +209,7 @@ export function buildAst(file) {
 	const lexer = new ICEScriptLexer(new antlr4.InputStream(file));
 	util.log('Glacier Dev, v0.0.1:', /*'\n	Tree:\n		', tree.toStringTree(parser.ruleNames),*/)
 	var parser=new ICEScriptParser(new antlr4.CommonTokenStream(lexer))
-	//console.log(parser.script().toStringTree(parser.ruleNames))
+	console.log(file,parser.script().toStringTree(parser.ruleNames))
 	var out = new Visitor().start(parser.script())
 	
 	//Imagine using Antlr wheen you could roll your own

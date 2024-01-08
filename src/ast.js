@@ -96,17 +96,17 @@ export function handler(token, ctx, context) {
             var paramsList = ctx.func_params().getText().split(')')[0].split(',')
             var params = []
             var oldScope = util.copy(context.data.scope)
-            context.data.scope = `${oldScope}.function:${ctx.identifier()[0].getText()}`
+            context.data.scope = `${oldScope}.function:${ctx.identifier().getText()}`
             paramsList.forEach((elm) => {
                  params.push({ name: elm.split(':')[0], type: elm.split(':')[1]}) 
                  context.data.var[`${elm.split(':')[0]}|${context.data.scope}`]={scope:context.data.scope,type:elm.split(':')[1]}
                 })
             
             
-            context.data.functions[ctx.identifier()[0].getText() + `|${oldScope}`] = { node: "function", scope: oldScope, name: ctx.identifier()[0].getText(), params, type: ctx.identifier()[1].getText(), children:context.visitChildren(ctx)[5] }
+            context.data.functions[ctx.identifier().getText() + `|${oldScope}`] = { node: "function", scope: oldScope, name: ctx.identifier().getText(), params, type: ctx.type().getText(), children:context.visitChildren(ctx)[5] }
             context.data.scope = oldScope
             //console.dir( context.data.functions[ctx.identifier().getText()+`|${oldScope}`],{depth:null})
-            return context.data.functions[ctx.identifier()[0].getText() + `|${oldScope}`]
+            return context.data.functions[ctx.identifier().getText() + `|${oldScope}`]
 
             //util.log(ctx.number())
             //return `:Label ${context.data.functions[name].label}:${context.visit(ctx.statement())}:______:`

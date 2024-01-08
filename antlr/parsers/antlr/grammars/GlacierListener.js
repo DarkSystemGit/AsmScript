@@ -275,6 +275,15 @@ export default class GlacierListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by GlacierParser#expr2.
+	enterExpr2(ctx) {
+	}
+
+	// Exit a parse tree produced by GlacierParser#expr2.
+	exitExpr2(ctx) {
+	}
+
+
 	// Enter a parse tree produced by GlacierParser#math.
 	enterMath(ctx) {
 	}
@@ -317,6 +326,15 @@ export default class GlacierListener extends antlr4.tree.ParseTreeListener {
 
 	// Exit a parse tree produced by GlacierParser#number.
 	exitNumber(ctx) {
+	}
+
+
+	// Enter a parse tree produced by GlacierParser#varAcess.
+	enterVarAcess(ctx) {
+	}
+
+	// Exit a parse tree produced by GlacierParser#varAcess.
+	exitVarAcess(ctx) {
 	}
 
 

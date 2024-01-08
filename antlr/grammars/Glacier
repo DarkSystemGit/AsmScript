@@ -25,14 +25,13 @@ include
 	;
 
 functionDef
-	: 'function' identifier OPEN_BRACKET func_params CLOSE_BRACKET ':' identifier statement
-	| identifier OPEN_BRACKET func_params CLOSE_BRACKET ':' identifier statement
+	: 'function'? identifier OPEN_BRACKET func_params CLOSE_BRACKET ':' type statement
 	;
 func_params
-	: func_identifier || func_identifier(',' func_identifier)*
+	: func_identifier (',' func_identifier)*
 	;
 func_identifier
-	:(identifier||expression||any)':'type
+	:identifier':'type
 	;
 classDef
 	:'class' identifier ('extends' identifier)* OPEN_CURLEY classBody CLOSE_CURLEY
@@ -78,16 +77,16 @@ asm_stmt
 
 any : ( . )+?;
 add_assign_stmt
-	: identifier ADDASSIGN value END_STMT
+	: identifier ADDASSIGN expression END_STMT
 	;
 sub_assign_stmt
-	: identifier SUBASSIGN value END_STMT
+	: identifier SUBASSIGN expression END_STMT
 	;
 mul_assign_stmt
-	: identifier MULASSIGN value END_STMT
+	: identifier MULASSIGN expression END_STMT
 	;
 div_assign_stmt
-	: identifier DIVASSIGN value END_STMT
+	: identifier DIVASSIGN expression END_STMT
 	;
 inc_stmt
 	: identifier INCREMENT END_STMT
@@ -106,11 +105,12 @@ while_stmt
 	;
 for_stmt
 	:FOR OPEN_BRACKET var_stmt boolexpr END_STMT (inc_stmt||dec_stmt) CLOSE_BRACKET statement
-	|FOR OPEN_BRACKET var_stmt 'in' value CLOSE_BRACKET statement
+	|FOR OPEN_BRACKET var_stmt 'in' varAcess CLOSE_BRACKET statement
 	;
 var_stmt
 	: VAR identifier ASSIGN expression END_STMT
 	| VAR identifier ':' type ASSIGN expression END_STMT
+    | VAR identifier
 	;
 return_stmt
 	: RETURN expression END_STMT
@@ -121,23 +121,35 @@ expression
 	: OPEN_BRACKET expression CLOSE_BRACKET
 	| classInit
 	| methodcall
-	| value
+	| number
 	| identifier
 	| boolexpr
 	| string
 	| object
 	| list
 	| string_concat
-	| expression ADD expression
-	| expression SUB expression
-	| expression MUL expression
-	| expression DIV expression
+    | math
+    | varAcess
 	;
+expr2
+    : OPEN_BRACKET expr2 CLOSE_BRACKET
+	| classInit
+	| methodcall
+	| number
+	| identifier
+	| boolexpr
+	| string
+	| object
+	| list
+	| string_concat
+    | varAcess
+	;
+
 math
-	: expression ADD expression
-	| expression SUB expression
-	| expression MUL expression
-	| expression DIV expression
+	: expr2 ADD expr2
+	| expr2 SUB expr2
+	| expr2 MUL expr2
+	| expr2 DIV expr2
 	;
 //Boolean expression
 boolexpr
@@ -154,7 +166,10 @@ boolexpr
 	| value AND boolexpr
 	| NOT boolexpr
 	;
-
+value
+    :number
+    |varAcess
+    ;
 
 
 
@@ -206,10 +221,7 @@ TRUE : 'true';
 FALSE : 'false';
 
 
-value
-	: identifier
-	| number
-	;
+
 
 identifier
 	:IDENTIFIER
@@ -219,6 +231,9 @@ IDENTIFIER : [a-zA-Z][a-zA-Z0-9_.]*;
 number
    : NUMBER
    | PI
+   ;
+varAcess
+   : identifier ('['string||number']')? ('.' identifier)?
    ;
 list
 	:'['(expression (',' expression)* ']')||']'
@@ -231,7 +246,7 @@ string
 	:STRING
 	;
 string_concat
-	:(string||data)'+'(string||data)('+'(string||data))*
+	:(string||data)'+'(data||string)string_concat*
 	;
 data
 	:string
@@ -239,7 +254,7 @@ data
 	|number
 	|boolexpr
 	|object
-	|value
+	|varAcess
 	|classInit
 	|methodcall
 	;

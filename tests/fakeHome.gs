@@ -1,7 +1,7 @@
 import io;
 import math;
 import gfx;
-function input(str:string,line:number): string{
+function input(str:string, line:number): string{
     gfx.text(str,line);
     if(str==""){
         line=line-1

@@ -186,6 +186,12 @@ export default class GlacierVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
+	// Visit a parse tree produced by GlacierParser#expr2.
+	visitExpr2(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
 	// Visit a parse tree produced by GlacierParser#math.
 	visitMath(ctx) {
 	  return this.visitChildren(ctx);
@@ -212,6 +218,12 @@ export default class GlacierVisitor extends antlr4.tree.ParseTreeVisitor {
 
 	// Visit a parse tree produced by GlacierParser#number.
 	visitNumber(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by GlacierParser#varAcess.
+	visitVarAcess(ctx) {
 	  return this.visitChildren(ctx);
 	}
 
