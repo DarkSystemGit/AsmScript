@@ -121,12 +121,12 @@ expression
 	: OPEN_BRACKET expression CLOSE_BRACKET
 	| classInit
 	| methodcall
+	| list
 	| number
 	| identifier
 	| boolexpr
 	| string
 	| object
-	| list
 	| string_concat
     | math
     | varAcess
@@ -236,7 +236,7 @@ varAcess
    : identifier ('['string||number']')? ('.' identifier)?
    ;
 list
-	:'['(expression (',' expression)* ']')||']'
+	:'['expression? (',' expression)*']'
 	;
 
 object
