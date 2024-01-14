@@ -34,8 +34,10 @@
     "typescript": "^5.3.2"
   },
   "dependencies": {
+    "@swc/core": "^1.3.102",
     "inquirer": "^9.2.12",
     "json5": "^2.2.3",
+    "woodpile": "^0.0.5",
     "yaml": "^2.3.4"
   }
 }
