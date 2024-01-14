@@ -1,10 +1,22 @@
 import { readFileSync, writeFileSync } from 'fs'
 import { parseSync } from '@swc/core';
 function parse(file) {
-    const swcAst = parseSync(readFileSync(file).toString(), { syntax: "typescript" });
+    file=readFileSync(file).toString()
     var ast =[]
+    var imports=extractImports(file)
+    processImports(imports).forEach(elm=>ast.push(elm))
+    const swcAst = parseSync(file, { syntax: "typescript" });
     parseNode(swcAst)
     return ast
+}
+function extractImports(file){
+    return file.split(';').filter((elm)=>{
+        if(elm.indexOf('import')==0){
+
+        }else{
+            return false
+        }
+    })
 }
 function parseNode(node,ast) {
     var body = getBody(node)
