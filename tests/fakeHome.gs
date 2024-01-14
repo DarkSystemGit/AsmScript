@@ -1,6 +1,6 @@
-import io;
-import math;
-import gfx;
+import * as io from 'io';
+import * as gfx from 'gfx';
+import * as math from 'math';
 function input(str:string, line:number): string{
     gfx.text(str,line);
     if(str==""){
