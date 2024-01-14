@@ -12,7 +12,8 @@ function parse(file) {
 function extractImports(file){
     return file.split(';').filter((elm)=>{
         if(elm.indexOf('import')==0){
-
+            elm=elm.replace('import','')
+            
         }else{
             return false
         }
