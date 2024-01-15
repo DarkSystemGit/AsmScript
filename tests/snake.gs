@@ -1,6 +1,6 @@
-import * as io from 'io';
-import * as gfx from 'gfx';
-import * as math from 'math';
+import io;
+import gfx;
+import math;
 gfx.clearScreen();
 var data = { oldSnake: [[0, 0], [1, 0], [2, 0], [3, 0], [4, 0]], snake: [[1, 0], [2, 0], [3, 0], [4, 0], [5, 0]], dir: [0, 0], screen: [320, 270], food: [0, 0], score: 0 };
 function update(snake: number[][]): number[][] {

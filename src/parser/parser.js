@@ -4,34 +4,43 @@ function parse(file) {
     file=readFileSync(file).toString()
     var ast =[]
     var imports=extractImports(file)
-    processImports(imports).forEach(elm=>ast.push(elm))
+    file=imports[1]
+    imports[0].forEach(elm=>ast.push(elm))
+    //console.log('file:',file+'\n',ast)
     const swcAst = parseSync(file, { syntax: "typescript" });
-    parseNode(swcAst)
+    parseNode(swcAst).forEach(elm=>ast.push(elm))
     return ast
 }
 function extractImports(file){
-    return file.split(';').filter((elm)=>{
+    var lines=0
+    var imports=file.split(';').flatMap((elm)=>{
+        elm= elm.trim()
         if(elm.indexOf('import')==0){
-            elm=elm.replace('import','')
-            
+            lines++
+            elm=elm.replace('import','').trim()
+            //console.log(elm)
+            return [{node:'import',name:elm}]
         }else{
-            return false
+            return []
         }
     })
+    file=file.split(';').filter((elm,i)=>i+1>lines).join(';')
+    return [imports,file]
 }
-function parseNode(node,ast) {
+function parseNode(node) {
     var body = getBody(node)
+    var ast=[]
     if (!(JSON.stringify(body) == '{}')) {
-        console.log(body)
+        //console.log(body)
         if (body instanceof Array) { 
             body.forEach(elm=>{
-                astNodeHandler(elm,parseNode)
+                ast.push(astNodeHandler(elm,parseNode))
             })
         } else {
-            astNodeHandler(body,parseNode)
+            ast.push(astNodeHandler(body,parseNode))
         }
     }
-    // return parseNode(getBody(node))
+    return ast
 }
 function getBody(node) {
     var bodies=['body','stmts','expression','callee']
@@ -45,6 +54,6 @@ function getBody(node) {
     
 }
 function astNodeHandler(elm,parser){
-
+    console.log(elm)
 }
 writeFileSync('./src/parser/ast.json', JSON.stringify(parse('./tests/snake.gs')))
