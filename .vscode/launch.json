@@ -4,6 +4,15 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+      {
+        "name": "Launch parser",
+        "program": "${workspaceFolder}/src/parser/parser.js",
+        "request": "launch",
+        "skipFiles": [
+            "<node_internals>/**"
+        ],
+        "type": "node"
+    },  
     {
         "name": "Launch nodeGen",
         "program": "${workspaceFolder}/nodeGen.js",
