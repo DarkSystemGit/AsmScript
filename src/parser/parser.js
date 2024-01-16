@@ -68,8 +68,8 @@ function dirImport(dir){
     const basename = path.basename(__filename);
     const functions = {}
 readdirSync(dir,{ recursive: true }).filter(file => (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js'))
-  .map(function (file){functions[file.slice(0, -3).split('/').at(-1)] = importSync.default(path.join(__dirname, file))})
+  .map(function (file){functions[file.slice(0, -3).split('/').at(-1)] = importSync.default(path.join(__dirname, file)).default})
   return functions
 }
 writeFileSync('./src/parser/ast.json', JSON.stringify(parse('./tests/snake.gs')))
-console.log('done')
+console.log()
