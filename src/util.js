@@ -1,27 +1,34 @@
 //util.termLog(read(process.argv[2]))
-import {writeFileSync,readFileSync} from 'fs'
+import { writeFileSync, readFileSync,readdirSync } from 'fs'
 import * as path from 'path'
+import * as importSync from 'import-sync'
 import { fileURLToPath } from 'url';
 export const __filename = fileURLToPath(import.meta.url);
 export const __dirname = path.dirname(__filename);
-writeFileSync('./log','{}')
-export var data=globalThis.data={}
-
+writeFileSync('./log', '{}')
+export var data = globalThis.data = {}
+export function dirImport(dir) {
+	const basename = path.basename(__filename);
+	const functions = {}
+	readdirSync(dir, { recursive: true }).filter(file => (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js'))
+		.map(function (file) { functions[file.slice(0, -3).split('/').at(-1)] = importSync.default(path.join(__dirname, file)).default })
+	return functions
+}
 export function hasKey(obj, key) {
 	if (obj === null || obj === undefined) {
-	  return false;
+		return false;
 	}
 	if (obj.hasOwnProperty(key)) {
-	  return true;
+		return true;
 	}
 	for (const k in obj) {
-	  if (hasKey(obj[k], key)) {
-		return true;
-	  }
+		if (hasKey(obj[k], key)) {
+			return true;
+		}
 	}
 	return false;
-  }
-  export function indexOf(searchStr, str, caseSensitive) {
+}
+export function indexOf(searchStr, str, caseSensitive) {
 	var searchStrLen = searchStr.length;
 	if (searchStrLen == 0) {
 		return [];
@@ -82,11 +89,11 @@ export function split(str, splitter, strMap) {
 	})
 	return res
 }
-export function replace(str,substr,replacement){
-	var indices=strIndexOf(str,substr)
-	indices.forEach((elm)=>{
-		str=replaceAt(str,elm,replacement,substr.length)
-		indices=strIndexOf(str,substr)
+export function replace(str, substr, replacement) {
+	var indices = strIndexOf(str, substr)
+	indices.forEach((elm) => {
+		str = replaceAt(str, elm, replacement, substr.length)
+		indices = strIndexOf(str, substr)
 	})
 	return str
 }
@@ -100,71 +107,71 @@ export function strIndexOf(str, substr) {
 	})
 	return pos
 }
-export function error(err,type,ctx){
+export function error(err, type, ctx) {
 	var file = JSON.parse(read('./log'))
-	data.errs=data.errs||[]
-	file.error=file.error||{}
-	file.error[type]=file.error[type]||[]
-	file.error[type].push({line:ctx.start.line,column:ctx.start.column,err})
-	writeFileSync('./log',JSON.stringify(file))
-	if(!data.errs.includes(`[Error]: ${type} at line:${ctx.start.line}, column:${ctx.start.column};\n${err} `)){
-	console.log('\x1b[31m%s\x1b[0m',`[Error]: ${type} at line:${ctx.start.line}, column:${ctx.start.column};\n${err} `)
-	data.errs.push(`[Error]: ${type} at line:${ctx.start.line}, column:${ctx.start.column};\n${err} `)
+	data.errs = data.errs || []
+	file.error = file.error || {}
+	file.error[type] = file.error[type] || []
+	file.error[type].push({ line: ctx.start.line, column: ctx.start.column, err })
+	writeFileSync('./log', JSON.stringify(file))
+	if (!data.errs.includes(`[Error]: ${type} at line:${ctx.start.line}, column:${ctx.start.column};\n${err} `)) {
+		console.log('\x1b[31m%s\x1b[0m', `[Error]: ${type} at line:${ctx.start.line}, column:${ctx.start.column};\n${err} `)
+		data.errs.push(`[Error]: ${type} at line:${ctx.start.line}, column:${ctx.start.column};\n${err} `)
 	}
 }
-export function warn(warn,ctx){
-	data.warns=data.warns||[]
-	if(!data.warns.includes(`[Warning]: Warning at line:${ctx.start.line}, column:${ctx.start.column};\n${warn}`)){
-	console.log('\x1b[33m%s\x1b[0m',`[Warning]: Warning at line:${ctx.start.line}, column:${ctx.start.column};\n${warn}`)
-	data.warns.push(`[Warning]: Warning at line:${ctx.start.line}, column:${ctx.start.column};\n${warn}`)	
+export function warn(warn, ctx) {
+	data.warns = data.warns || []
+	if (!data.warns.includes(`[Warning]: Warning at line:${ctx.start.line}, column:${ctx.start.column};\n${warn}`)) {
+		console.log('\x1b[33m%s\x1b[0m', `[Warning]: Warning at line:${ctx.start.line}, column:${ctx.start.column};\n${warn}`)
+		data.warns.push(`[Warning]: Warning at line:${ctx.start.line}, column:${ctx.start.column};\n${warn}`)
+	}
+
 }
-	
-}
-export function log(token){
+export function log(token) {
 	var file = JSON.parse(read('./log'))
-	file.log=file.log||{main:[],parsedTokens:[]}
+	file.log = file.log || { main: [], parsedTokens: [] }
 	var time = new Date();
-	if(token!==true){
-		if(file.log.main.includes({time:`${time.getFullYear()}:${time.getMonth()}.${time.getDay()}:${time.getHours()}`,log:Array.from(arguments)}))return;
-		file.log.main.push({time:`${time.getFullYear()}:${time.getMonth()}.${time.getDay()}:${time.getHours()}`,log:Array.from(arguments)})
-	}else{
-		if(file.log.parsedTokens.includes({time:`${time.getFullYear()}:${time.getMonth()}.${time.getDay()}:${time.getHours()}`,log:Array.from(arguments)}))return;
-		file.log.parsedTokens.push({time:`${time.getFullYear()}:${time.getMonth()}.${time.getDay()}:${time.getHours()}`,log:Array.from(arguments)})
+	if (token !== true) {
+		if (file.log.main.includes({ time: `${time.getFullYear()}:${time.getMonth()}.${time.getDay()}:${time.getHours()}`, log: Array.from(arguments) })) return;
+		file.log.main.push({ time: `${time.getFullYear()}:${time.getMonth()}.${time.getDay()}:${time.getHours()}`, log: Array.from(arguments) })
+	} else {
+		if (file.log.parsedTokens.includes({ time: `${time.getFullYear()}:${time.getMonth()}.${time.getDay()}:${time.getHours()}`, log: Array.from(arguments) })) return;
+		file.log.parsedTokens.push({ time: `${time.getFullYear()}:${time.getMonth()}.${time.getDay()}:${time.getHours()}`, log: Array.from(arguments) })
 	}
-	writeFileSync('./log',JSON.stringify(file))
+	writeFileSync('./log', JSON.stringify(file))
 }
-export function termLog(msg){
-	console.dir(`[Log]: ${msg}`,{depth:null})
+export function termLog(msg) {
+	console.dir(`[Log]: ${msg}`, { depth: null })
 }
-export function info(msg){console.log(msg)}
-export function childExists(ctx,child,index){
-	try{
-		if(index){
+export function info(msg) { console.log(msg) }
+export function childExists(ctx, child, index) {
+	try {
+		if (index) {
 			ctx[child][index]().getText()
-		}else{
+		} else {
 			ctx[child]().getText()
 		}
 		return true
-	}catch{
+	} catch {
 		return false
 	}
 }
-export function registerFile(ast,name){
-	data.asts=data.asts||{}
-	data.asts[name]=ast
+export function registerFile(ast, name) {
+	data.asts = data.asts || {}
+	data.asts[name] = ast
 }
 //all hail this glorious function
-export function copy(obj){
+export function copy(obj) {
 	return JSON.parse(JSON.stringify(obj))
 }
-export function isRegisteredAst(name){
-	data.asts=data.asts||{}
-	if(data.asts.hasOwnProperty(name))return true
+export function isRegisteredAst(name) {
+	data.asts = data.asts || {}
+	if (data.asts.hasOwnProperty(name)) return true
 	return false
 }
-export function read(file){
+export function read(file) {
 	return readFileSync(file).toString()
 }
-export function write(){
+export function write() {
 	return writeFileSync(...Array.from(arguments))
 }
