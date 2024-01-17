@@ -7,7 +7,7 @@ import * as importSync from 'import-sync'
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-
+var data={}
 function parse(file) {
     file=readFileSync(file).toString()
     var ast =[]
@@ -42,10 +42,15 @@ function parseNode(node) {
         //console.log(body)
         if (body instanceof Array) { 
             body.forEach(elm=>{
-                ast.push(astNodeHandler(elm,parseNode))
+                var node=astNodeHandler(elm,parseNode)
+                ast.push(node.elm)
+                data=node.data
+
             })
         } else {
-            ast.push(astNodeHandler(body,parseNode))
+            var node=astNodeHandler(body,parseNode)
+                ast.push(node.elm)
+                data=node.data
         }
     }
     return ast
