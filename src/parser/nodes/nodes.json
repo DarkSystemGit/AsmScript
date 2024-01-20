@@ -44,10 +44,6 @@
     "visitReturnStatement",
     "visitLabeledStatement",
     "visitForStatement",
-    "visitForOfStatement",
-    "visitForInStatement",
-    "visitEmptyStatement",
-    "visitDoWhileStatement",
     "visitDebuggerStatement",
     "visitWithStatement",
     "visitFunctionDeclaration",
@@ -124,5 +120,6 @@
     "visitAssignmentPatternProperty",
     "visitArrayPattern",
     "visitArrayPatternElements",
-    "visitArrayPatternElement"
+    "visitArrayPatternElement",
+    "VariableDeclaration"
 ]

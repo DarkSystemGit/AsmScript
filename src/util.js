@@ -3,15 +3,15 @@ import { writeFileSync, readFileSync,readdirSync } from 'fs'
 import * as path from 'path'
 import * as importSync from 'import-sync'
 import { fileURLToPath } from 'url';
-export const __filename = fileURLToPath(import.meta.url);
-export const __dirname = path.dirname(__filename);
+//export const __filename = fileURLToPath(import.meta.url);
+//export const __dirname = path.dirname(__filename);
 writeFileSync('./log', '{}')
 export var data = globalThis.data = {}
 export function dirImport(dir) {
 	const basename = path.basename(__filename);
 	const functions = {}
 	readdirSync(dir, { recursive: true }).filter(file => (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js'))
-		.map(function (file) { functions[file.slice(0, -3).split('/').at(-1)] = importSync.default(path.join(__dirname, file)).default })
+		.map(function (file) { functions[file.slice(0, -3).split('/').at(-1)] = importSync.default(path.join(dir, file)).default })
 	return functions
 }
 export function hasKey(obj, key) {

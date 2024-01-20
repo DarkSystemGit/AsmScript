@@ -3,11 +3,12 @@ import { parseSync } from '@swc/core';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
 import { createRequire } from 'module';
-import * as importSync from 'import-sync'
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+import * as util from '../util.js'
+global.__filename = fileURLToPath(import.meta.url);
+global.__dirname = path.dirname(fileURLToPath(import.meta.url));
 
 var data={}
+var nodeHandlers=util.dirImport(path.join(__dirname,'nodes'))
 function parse(file) {
     file=readFileSync(file).toString()
     var ast =[]
@@ -67,8 +68,8 @@ function getBody(node) {
     
 }
 function astNodeHandler(elm,parser){
-    console.log(elm)
+    //console.log()
+    return nodeHandlers[elm.type](elm,parser,data)
 }
 
 writeFileSync('./src/parser/ast.json', JSON.stringify(parse('./tests/snake.gs')))
-console.log()
