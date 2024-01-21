@@ -7,13 +7,14 @@ import * as util from '../util.js'
 global.__filename = fileURLToPath(import.meta.url);
 global.__dirname = path.dirname(fileURLToPath(import.meta.url));
 
-var data={}
+var data={scope:'function:global'}
 var nodeHandlers=util.dirImport(path.join(__dirname,'nodes'))
 function parse(file) {
     file=readFileSync(file).toString()
     var ast =[]
     var imports=extractImports(file)
     file=imports[1]
+    data.file=file
     imports[0].forEach(elm=>ast.push(elm))
     //console.log('file:',file+'\n',ast)
     const swcAst = parseSync(file, { syntax: "typescript" });

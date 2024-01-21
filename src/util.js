@@ -7,6 +7,15 @@ import { fileURLToPath } from 'url';
 //export const __dirname = path.dirname(__filename);
 writeFileSync('./log', '{}')
 export var data = globalThis.data = {}
+export function getType(elm,file){
+	//console.log(elm.typeAnnotation)
+	if(elm.typeAnnotation.hasOwnProperty('kind')){
+		return elm.typeAnnotation.kind
+	}else if(elm.typeAnnotation.hasOwnProperty('elemType')){
+		return 'class:Array'
+	}
+	return extract(elm.span,file)
+}
 export function dirImport(dir) {
 	const basename = path.basename(__filename);
 	const functions = {}
@@ -106,6 +115,10 @@ export function strIndexOf(str, substr) {
 		}
 	})
 	return pos
+}
+function extract(span,file){
+	//console.log(file.substring(span.start,span.end))
+	return file.substring(span.start,span.end).trim()
 }
 export function error(err, type, ctx) {
 	var file = JSON.parse(read('./log'))
