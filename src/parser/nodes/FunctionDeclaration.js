@@ -8,7 +8,7 @@ export default (elm, parser, data) => {
     })
     //console.log(data)
     try{
-    var oldScope=util.copy(data.scope)}catch{console.log(elm)}
+    var oldScope=util.copy(data.scope)}catch{console.log(elm);throw new Error('prblm')}
     data.scope=`${oldScope}.function:${elm.identifier.value}`
     data.functions[`${elm.identifier.value}|${oldScope}`]={ node: "function", params, scope: oldScope, type: util.getType(elm.returnType, data.file), name: elm.identifier.value, children: parser(elm.body) }
     data.scope=oldScope
