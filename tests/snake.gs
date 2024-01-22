@@ -6,6 +6,7 @@ var data = { oldSnake: [[0, 0], [1, 0], [2, 0], [3, 0], [4, 0]], snake: [[1, 0],
 function update(snake: number[][]): number[][] {
     data.oldSnake = snake;
     var key = io.getKey();
+    key='money'
     if (key == io.keys.down) {
         data.dir = [0, -1];
     }

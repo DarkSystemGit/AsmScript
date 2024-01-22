@@ -120,16 +120,26 @@ function extract(span,file){
 	//console.log(file.substring(span.start,span.end))
 	return file.substring(span.start,span.end).trim()
 }
-export function error(err, type, ctx) {
+export function error(err, type, span) {
 	var file = JSON.parse(read('./log'))
 	data.errs = data.errs || []
 	file.error = file.error || {}
+	var searchstr="hello, this is a search str pls no copy, hahahahDGHJUYTGFDCVBHGFCV BNHGFCVBHGVBG"
 	file.error[type] = file.error[type] || []
-	file.error[type].push({ line: ctx.start.line, column: ctx.start.column, err })
+	var prgm=replaceAt(data.file,span.start,searchstr,span.end-span.start).split('\n')
+	
+	var line={line:0,column:0}
+	prgm.forEach(elm,i=>{
+		if(elm.indexOf(searchstr)!=-1){
+			line={line:i,column:elm.indexOf(searchstr)}
+		}
+	})
+	
+	file.error[type].push({ line:line.line, column: line.column, err })
 	writeFileSync('./log', JSON.stringify(file))
-	if (!data.errs.includes(`[Error]: ${type} at line:${ctx.start.line}, column:${ctx.start.column};\n${err} `)) {
-		console.log('\x1b[31m%s\x1b[0m', `[Error]: ${type} at line:${ctx.start.line}, column:${ctx.start.column};\n${err} `)
-		data.errs.push(`[Error]: ${type} at line:${ctx.start.line}, column:${ctx.start.column};\n${err} `)
+	if (!data.errs.includes(`[Error]: ${type} at line:${line.line}, column:${line.column};\n${err} `)) {
+		console.log('\x1b[31m%s\x1b[0m', `[Error]: ${type} at line:${line.line}, column:${line.column};\n${err} `)
+		data.errs.push(`[Error]: ${type} at line:${line.line}, column:${line.column};\n${err} `)
 	}
 }
 export function warn(warn, ctx) {

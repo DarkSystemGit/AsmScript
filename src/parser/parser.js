@@ -7,7 +7,7 @@ import * as util from '../util.js'
 global.__filename = fileURLToPath(import.meta.url);
 global.__dirname = path.dirname(fileURLToPath(import.meta.url));
 
-var data={scope:'function:global'}
+var data=global.data={scope:'function:global'}
 var nodeHandlers=util.dirImport(path.join(__dirname,'nodes'))
 function parse(file) {
     file=readFileSync(file).toString()
@@ -41,7 +41,7 @@ function parseNode(node) {
     var body = getBody(node)
     var ast=[]
     if (!(JSON.stringify(body) == '{}')) {
-        //console.log(body)
+        console.log(body)
         if (body instanceof Array) { 
             body.forEach(elm=>{
                 var node=astNodeHandler(elm,parseNode)
@@ -55,10 +55,11 @@ function parseNode(node) {
                 data=node.data
         }
     }
+    //console.log(ast)
     return ast
 }
 function getBody(node) {
-    var bodies=['body','stmts','expression','callee']
+    var bodies=['body','stmts','expression','callee','test','consequent','alternate','identifier']
     var body ={}
     bodies.forEach((elm)=>{
         if(node.hasOwnProperty(elm)){
@@ -69,8 +70,9 @@ function getBody(node) {
     
 }
 function astNodeHandler(elm,parser){
-    //console.log()
-    return nodeHandlers[elm.type](elm,parser,data)
+   // console.log(data)
+    if(nodeHandlers[elm.type])return nodeHandlers[elm.type](elm,parser,global.data)
+    else return parser(elm)
 }
 
 writeFileSync('./src/parser/ast.json', JSON.stringify(parse('./tests/snake.gs')))
