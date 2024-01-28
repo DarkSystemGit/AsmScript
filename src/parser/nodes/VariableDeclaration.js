@@ -1,6 +1,7 @@
 import * as util from './../../util.js'
 export default (elm,parser,data)=>{
-    //console.log(data)
+    //console.log(globalThis.data)
+    data=globalThis.data
     data.var=data.var||{}
     elm=elm.declarations[0]
     var name= elm.id.value;
