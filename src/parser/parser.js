@@ -7,17 +7,23 @@ import * as util from '../util.js'
 global.__filename = fileURLToPath(import.meta.url);
 global.__dirname = path.dirname(fileURLToPath(import.meta.url));
 globalThis.data = { scope: 'function:global' }
-var stack = []
-var data = globalThis.data
-var nodeHandlers = util.dirImport(path.join(__dirname, 'nodes'))
-
+class Visitor{
+    static data={ scope: 'function:global' }
+    constructor(){
+        var nodes=util.dirImport(path.join(__dirname, 'nodes'))
+        for(node in nodes){
+            this[node]=nodes[node]
+        }
+    }
+}
+var visitor=new Visitor()
 function parse(file) {
     stack.push('parse', data)
     file = readFileSync(file).toString()
     var ast = []
     var imports = extractImports(file)
     file = imports[1]
-    data.file = file
+    visitor.data.file = file
     imports[0].forEach(elm => ast.push(elm))
     //console.log('file:',file+'\n',ast)
     const swcAst = parseSync(file, { syntax: "typescript" });
@@ -87,8 +93,8 @@ function getBody(node) {
 function astNodeHandler(elm, parser) {
     // console.log(data,elm.type,/*(new Error()).stack*/)
     stack.push('astNodeHandler', data, elm.type)
-    console.log(stack)
-    if (nodeHandlers[elm.type]) return nodeHandlers[elm.type](elm, parser)
+    //console.log(stack)
+    if (nodeHandlers[elm.type]) return visitor[elm.type](elm,parseNode)
     else return astNodeHandler(getBody(elm))
 }
 

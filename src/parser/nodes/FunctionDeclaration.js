@@ -1,7 +1,7 @@
 import * as util from './../../util.js'
-export default (elm, parser, data) => {
+export default (elm, parser) => {
     var params = []
-    data=globalThis.data
+    var data=this.data
     console.log(data)
     data.functions=data.functions||{}
     elm.params.forEach((param) => {
