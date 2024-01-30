@@ -20,7 +20,7 @@ export function dirImport(dir) {
 	const basename = path.basename(__filename);
 	const functions = {}
 	readdirSync(dir, { recursive: true }).filter(file => (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js'))
-		.map(function (file) { functions[file.slice(0, -3).split('/').at(-1)] = importSync.default(path.join(dir, file)).default })
+		.map(function (file) { functions[file.slice(0, -3).split('/').at(-1)] = readFileSync(path.join(dir, file)).toString().split('\n').slice(1).join('\n').replace('export default','')})
 	return functions
 }
 export function hasKey(obj, key) {
@@ -116,7 +116,7 @@ export function strIndexOf(str, substr) {
 	})
 	return pos
 }
-function extract(span,file){
+export function extract(span,file){
 	//console.log(file.substring(span.start,span.end))
 	return file.substring(span.start,span.end).trim()
 }

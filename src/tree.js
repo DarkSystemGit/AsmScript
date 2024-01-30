@@ -1,5 +1,6 @@
 import * as util from './util.js'
 function getScopedChild(name,scope,nodeList){
+	//console.log(nodeList)
     if(nodeList.hasOwnProperty(`${name}|${scope}`)){
 		return nodeList[`${name}|${scope}`]
 	}else{
@@ -18,9 +19,10 @@ export function parseScope(scope){
     return scope.split('.').map(elm=>elm.split(':'))
 }
 export function getFunction(name,scope,nodeList,context){
+	//console.log(arguments)
 	var func=getScopedChild(...Array.from(arguments))
 	if(func==null){
-		var classObj=getScopedChild(name.split('.')[0],scope,context.data.var)
+		var classObj=getScopedChild(name.split('.')[0],scope,context.data.functions)
 		if((!(classObj==null))&&(classObj.type.split(':')[0]=='class')){
 			return context.data.classes[classObj.type.split(':')[1]].children.filter(elm=>elm.name==name.split('.')[1])[0] 
 		}

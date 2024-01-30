@@ -3,30 +3,37 @@ import { parseSync } from '@swc/core';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
 import { createRequire } from 'module';
+import * as tree from './../tree.js'
 import * as util from '../util.js'
 global.__filename = fileURLToPath(import.meta.url);
 global.__dirname = path.dirname(fileURLToPath(import.meta.url));
 globalThis.data = { scope: 'function:global' }
-class Visitor{
-    static data={ scope: 'function:global' }
-    constructor(){
-        var nodes=util.dirImport(path.join(__dirname, 'nodes'))
-        for(node in nodes){
-            this[node]=nodes[node]
-        }
+function Visitor() {
+    this.data = { scope: 'function:global' }
+
+    var nodes = util.dirImport(path.join(__dirname, 'nodes'))
+    //console.log(nodes)
+    for (var node in nodes) {
+        if(node!='generateNodes')this[node] = eval(nodes[node])
+        
+    }
+    //console.log(Object.keys(this))
+    this.setData = (elm) => {
+        this.data[elm[0]] = elm[1]
     }
 }
-var visitor=new Visitor()
+var visitor = new Visitor()
 function parse(file) {
-    stack.push('parse', data)
+    //stack.push('parse', data)
     file = readFileSync(file).toString()
     var ast = []
     var imports = extractImports(file)
     file = imports[1]
-    visitor.data.file = file
+    visitor.setData(['file', file])
     imports[0].forEach(elm => ast.push(elm))
     //console.log('file:',file+'\n',ast)
     const swcAst = parseSync(file, { syntax: "typescript" });
+    writeFileSync(path.join(__dirname,'swcAst.json'),JSON.stringify(swcAst))
     parseNode(swcAst).forEach(elm => ast.push(elm))
     return ast
 }
@@ -54,24 +61,24 @@ function parseNode(node) {
 
         if (body instanceof Array) {
             body.forEach(elm => {
-                stack.push('parseNode', data)
+                //stack.push('parseNode', data)
                 //console.log('parseNode:',data)
                 var node = astNodeHandler(elm, parseNode)
-                ast.push(node.elm)
-                
+                ast.push(node)
+
                 if (data == undefined) {
                     //console.log(body.type)
                     throw new Error(elm.type)
                 }
             })
         } else {
-            stack.push('parseNode', data)
+            //stack.push('parseNode', data)
             var node = astNodeHandler(body, parseNode)
-            ast.push(node.elm)
-            
+            ast.push(node)
+
             if (data == undefined) {
                 throw new Error(body.type)
-                
+
             }
         }
     }
@@ -79,9 +86,9 @@ function parseNode(node) {
     return ast
 }
 function getBody(node) {
-    stack.push('getBody', data)
+    //stack.push('getBody', data)
     var bodies = ['body', 'stmts', 'expression', 'callee', 'test', 'consequent', 'alternate', 'identifier']
-    var body = {}
+    var body = node
     bodies.forEach((elm) => {
         if (node.hasOwnProperty(elm)) {
             body = node[elm]
@@ -92,10 +99,10 @@ function getBody(node) {
 }
 function astNodeHandler(elm, parser) {
     // console.log(data,elm.type,/*(new Error()).stack*/)
-    stack.push('astNodeHandler', data, elm.type)
-    //console.log(stack)
-    if (nodeHandlers[elm.type]) return visitor[elm.type](elm,parseNode)
+    //stack.push('astNodeHandler', data, elm.type)
+    console.log(visitor.hasOwnProperty(elm.type),elm.type)
+    if (visitor[elm.type]) return visitor[elm.type](elm, parseNode)
     else return astNodeHandler(getBody(elm))
 }
 
-writeFileSync('./src/parser/ast.json', JSON.stringify(parse('./tests/snake.gs')))
+writeFileSync(path.join(__dirname,'ast.json'), JSON.stringify(parse(path.join(__dirname , '../../tests/snake.gs'))))

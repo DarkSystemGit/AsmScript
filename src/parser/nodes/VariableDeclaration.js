@@ -1,7 +1,7 @@
 import * as util from './../../util.js'
-export default (elm,parser,data)=>{
-    //console.log(globalThis.data)
-    data=globalThis.data
+export default (elm,parser)=>{
+    //console.log(this)
+    data=this.data
     data.var=data.var||{}
     elm=elm.declarations[0]
     var name= elm.id.value;
@@ -13,5 +13,5 @@ export default (elm,parser,data)=>{
         }
     }}
     data.var[`${name}|${data.scope}`]={node:"var",type:children.type,children,name,scope:data.scope}
-    return {elm:data.var[`${name}|${data.scope}`],data}
+    return data.var[`${name}|${data.scope}`]
 }
