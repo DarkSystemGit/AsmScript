@@ -45,7 +45,8 @@ function extractImports(file) {
             lines++
             elm = elm.replace('import', '').trim()
             //console.log(elm)
-            var file = path.join(process.cwd,elm)
+            var file = JSON.parse(readFileSync(path.join(process.cwd(),elm)))
+            console.log(path)
             return [{ node: 'import', name: elm }]
         } else {
             return []
