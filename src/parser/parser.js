@@ -45,6 +45,7 @@ function extractImports(file) {
             lines++
             elm = elm.replace('import', '').trim()
             //console.log(elm)
+            var file = path.join(process.cwd,elm)
             return [{ node: 'import', name: elm }]
         } else {
             return []
