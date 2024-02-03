@@ -4,16 +4,16 @@ export default (elm,parser)=>{
     
     var obj={node:"funcCall"}
     obj.args=[]
-    obj.name=parser(elm.callee).flat(Infinity)
-    this.data.functions=this.data.functions||{}
-    var func=tree.getFunction(obj.name.join('.'),this.data.scope,this.data.functions,this)
+    obj.name=parser(elm.callee).flat(Infinity).join('.')
+    this.data.function=this.data.function||{}
+    var func=tree.getFunction(obj.name,this.data.scope,this.data.function,this)
     if(func){
         obj.type=func.type
-        console.log(func.params)
+        console.log(func)
         for(var i in func.params){
 
             var arg=parser(elm.arguments[i])
-            console.log(arg)
+            console.log(elm.arguments,i,elm)
         }
     }
     return obj

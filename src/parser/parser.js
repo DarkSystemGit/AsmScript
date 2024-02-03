@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, readdirSync } from 'fs'
+import { readFileSync, writeFileSync, existsSync } from 'fs'
 import { parseSync } from '@swc/core';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
@@ -7,9 +7,9 @@ import * as tree from './../tree.js'
 import * as util from '../util.js'
 global.__filename = fileURLToPath(import.meta.url);
 global.__dirname = path.dirname(fileURLToPath(import.meta.url));
-globalThis.data = { scope: 'function:global' }
+var data = { scope: 'function:global' }
 function Visitor() {
-    this.data = { scope: 'function:global' }
+    this.data = data
 
     var nodes = util.dirImport(path.join(__dirname, 'nodes'))
     //console.log(nodes)
@@ -35,7 +35,29 @@ function parse(file) {
     const swcAst = parseSync(file, { syntax: "typescript" });
     writeFileSync(path.join(__dirname,'swcAst.json'),JSON.stringify(swcAst))
     parseNode(swcAst).forEach(elm => ast.push(elm))
+    tree.getNode(ast,["function","var","class"],1,true)
+    ast ={ast,headers:data.headers}
+    //console.log(data)
     return ast
+}
+function importAst(file){
+    try{
+    var filename=path.join(process.cwd(),file+'.json')
+    var type='file'
+    if(!existsSync(path.join(process.cwd(),file+'.json'))){
+        filename=path.join(__dirname,'stdlib',file+'.json')
+        type='std'
+    }
+    if(type=='std'){
+        var file=JSON.parse(readFileSync(filename))
+    }else{
+        var file=parse(filename)
+    }
+    //console.log(file)
+    tree.getNode(file,["function","var","class"],1,false).forEach(node=>data[node.node]=node)
+    }catch{
+        util.error(`File ${file} cannot be found`,'ImportError',)
+    }
 }
 function extractImports(file) {
     var lines = 0
@@ -45,13 +67,14 @@ function extractImports(file) {
             lines++
             elm = elm.replace('import', '').trim()
             //console.log(elm)
-            var file = JSON.parse(readFileSync(path.join(process.cwd(),elm)))
-            console.log(path)
+            importAst(elm)
+
             return [{ node: 'import', name: elm }]
         } else {
             return []
         }
     })
+    JSON.parse(readFileSync(path.join(__dirname,'stdlib','std.json'))).forEach(lib=>importAst(lib))
     file = file.split(';').filter((elm, i) => i + 1 > lines).join(';')
     return [imports, file]
 }
@@ -107,4 +130,5 @@ function astNodeHandler(elm, parser) {
     else return astNodeHandler(getBody(elm))
 }
 
-writeFileSync(path.join(__dirname,'ast.json'), JSON.stringify(parse(path.join(__dirname , '../../tests/snake.gs'))))
+writeFileSync(path.join(__dirname,'ast.json'), JSON.stringify(parse(path.join(__dirname , '../../tests/fakeHome.gs'))))
+//console.log(data)
