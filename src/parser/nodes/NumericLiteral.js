@@ -1,5 +1,5 @@
 import * as util from './../../util.js'
 export default (elm,parser)=>{
-    
-    return {node:""}
+
+    return {node:"number",type:"number",value:elm.value}
 }

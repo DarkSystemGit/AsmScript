@@ -88,6 +88,7 @@ function parseNode(node) {
             body.forEach(elm => {
                 //stack.push('parseNode', data)
                 //console.log('parseNode:',data)
+                if(elm.type!='EmptyStatement'){
                 var node = astNodeHandler(elm, parseNode)
                 ast.push(node)
 
@@ -95,16 +96,17 @@ function parseNode(node) {
                     //console.log(body.type)
                     throw new Error(elm.type)
                 }
-            })
+            }})
         } else {
             //stack.push('parseNode', data)
+            if(body.type!='EmptyStatement'){
             var node = astNodeHandler(body, parseNode)
             ast.push(node)
 
             if (data == undefined) {
                 throw new Error(body.type)
 
-            }
+            }}
         }
     }
     //console.log(ast)
