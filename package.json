@@ -9,7 +9,7 @@
   "type": "module",
   "scripts": {
     "env": "echo \"export DEVDIR=~/Glacier&&export DEBUG=true\"",
-    "start": "node ./main.js",
+    "start": "node ./src/parser/parser.js",
     "log": "node ./logviewer.cjs -list ",
     "build": "cd $DEVDIR&& npm run clean; npm run compileVisitor && npm test",
     "buildDbg": "cd $DEVDIR&& npm run clean; npm run compileDbg && npm test",
