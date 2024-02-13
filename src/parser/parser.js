@@ -84,13 +84,15 @@ function parseNode(node) {
     var ast = []
     if (!(JSON.stringify(body) == '{}')) {
         var args=Array.from(arguments)
+        
         if (body instanceof Array) {
+            
             body.forEach(elm => {
                 //stack.push('parseNode', data)
                 //console.log('parseNode:',data)
                 if(elm.type!='EmptyStatement'){
-                    console.log(args)
-                var node = astNodeHandler(elm, parseNode,args)
+                    
+                var node = astNodeHandler(elm, args)
                 ast.push(node)
 
                 if (data == undefined) {
@@ -101,9 +103,9 @@ function parseNode(node) {
         } else {
             //stack.push('parseNode', data)
             if(body.type!='EmptyStatement'){
-            var node = astNodeHandler(body, parseNode,arguments)
+            var node = astNodeHandler(body, args)
             ast.push(node)
-
+                
             if (data == undefined) {
                 throw new Error(body.type)
 
@@ -125,7 +127,7 @@ function getBody(node) {
     return body
 
 }
-function astNodeHandler(elm, parser,extra) {
+function astNodeHandler(elm, extra) {
     // console.log(data,elm.type,/*(new Error()).stack*/)
     //stack.push('astNodeHandler', data, elm.type)
     //console.log(extra)
