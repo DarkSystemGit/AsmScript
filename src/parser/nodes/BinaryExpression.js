@@ -1,10 +1,11 @@
 import * as util from './../../util.js'
 export default (elm, parser) => {
-    var node = { children: [parser(elm.left), parser(elm.right)], operation: elm.operator }
+    var node = { children: [parser(elm.left), parser(elm.right)], operation: elm.operator,node:"" }
     var op = (op) => {
         var res = false
-        op.forEach(elm => {
-            if(elm.type==elm)res=true
+        op.forEach(searchelm => {
+            
+            if(elm.operator==searchelm)res=true
         })
         return res
     }

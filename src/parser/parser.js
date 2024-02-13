@@ -83,13 +83,14 @@ function parseNode(node) {
     var body = getBody(node)
     var ast = []
     if (!(JSON.stringify(body) == '{}')) {
-
+        var args=Array.from(arguments)
         if (body instanceof Array) {
             body.forEach(elm => {
                 //stack.push('parseNode', data)
                 //console.log('parseNode:',data)
                 if(elm.type!='EmptyStatement'){
-                var node = astNodeHandler(elm, parseNode)
+                    console.log(args)
+                var node = astNodeHandler(elm, parseNode,args)
                 ast.push(node)
 
                 if (data == undefined) {
@@ -100,7 +101,7 @@ function parseNode(node) {
         } else {
             //stack.push('parseNode', data)
             if(body.type!='EmptyStatement'){
-            var node = astNodeHandler(body, parseNode)
+            var node = astNodeHandler(body, parseNode,arguments)
             ast.push(node)
 
             if (data == undefined) {
@@ -124,12 +125,13 @@ function getBody(node) {
     return body
 
 }
-function astNodeHandler(elm, parser) {
+function astNodeHandler(elm, parser,extra) {
     // console.log(data,elm.type,/*(new Error()).stack*/)
     //stack.push('astNodeHandler', data, elm.type)
+    //console.log(extra)
     console.log(visitor.hasOwnProperty(elm.type),elm.type)
-    if (visitor[elm.type]) return visitor[elm.type](elm, parseNode)
-    else return astNodeHandler(getBody(elm))
+    if (visitor[elm.type]) return visitor[elm.type](elm, parseNode,...extra.slice(1))
+    else return astNodeHandler(getBody(elm),extra)
 }
 
 writeFileSync(path.join(__dirname,'ast.json'), JSON.stringify(parse(path.join(__dirname , '../../tests/fakeHome.gs'))))
