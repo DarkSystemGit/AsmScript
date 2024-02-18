@@ -29,8 +29,8 @@ export function getFunction(name,scope,nodeList,context){
 	}
 	return func
 }
-export function getVar(name,scope,varList){
-    return getScopedChild(...Array.from(arguments))
+export function getVar(name,scope,varList,errData){
+    return getScopedChild(...Array.from(arguments))|| util.error(`The variable ${name} doesn't exist`,'InvalidAccess',errData)
 }
 export function getNode(children,nodes,depth,remChildren){
 	if(depth!==0){
