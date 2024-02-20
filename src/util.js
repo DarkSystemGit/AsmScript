@@ -198,3 +198,8 @@ export function read(file) {
 export function write() {
 	return writeFileSync(...Array.from(arguments))
 }
+export function checkOp (op,func,elm) {
+	op.forEach(searchelm => {
+		if(elm.operator==searchelm)func(searchelm)
+	})
+}

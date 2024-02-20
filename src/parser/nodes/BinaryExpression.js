@@ -12,7 +12,7 @@ export default (elm, parser) => {
     if (op(['+','-','/','*','%','**'])) {
         node.type='number'
         node.node='arthmeticOp'
-    }else if(op(['==','=','!=','!==','<=','<','>','>='])){
+    }else if(op(['==','=','===','!=','!==','<=','<','>','>='])){
         node.type='bool'
         node.node='comparison'
     }else if(op(['&','^','|'])){

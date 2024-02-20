@@ -136,5 +136,5 @@ function astNodeHandler(elm, extra) {
     else return astNodeHandler(getBody(elm),extra)
 }
 
-writeFileSync(path.join(__dirname,'ast.json'), JSON.stringify(parse(path.join(__dirname , '../../tests/fakeHome.gs'))))
+writeFileSync(path.join(__dirname,'ast.json'), JSON.stringify(parse(path.join(__dirname , '../../tests/fakeHome.gs')),null, 2))
 //console.log(data)
