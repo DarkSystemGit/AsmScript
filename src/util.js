@@ -1,10 +1,6 @@
-//util.termLog(read(process.argv[2]))
+
 import { writeFileSync, readFileSync,readdirSync } from 'fs'
 import * as path from 'path'
-import * as importSync from 'import-sync'
-import { fileURLToPath } from 'url';
-//export const __filename = fileURLToPath(import.meta.url);
-//export const __dirname = path.dirname(__filename);
 writeFileSync('./log', '{}')
 export var data = globalThis.data = {}
 export function getType(elm,file){
@@ -129,13 +125,13 @@ export function error(err, type, span,data) {
 	//console.log(replaceAt(data.file,span.start,searchstr,span.end-span.start).split('\n'))
 	var prgm=replaceAt(data.file,span.start,searchstr,span.end-span.start).split('\n')
 	
-	var line={line:data.imports,column:0}
+	var line={line:0,column:0}
 	prgm.forEach((elm,i)=>{
 		if(elm.indexOf(searchstr)!=-1){
 			line={line:i,column:elm.indexOf(searchstr)}
 		}
 	})
-	
+	line.line=line.line+data.imports
 	file.error[type].push({ line:line.line, column: line.column, err })
 	writeFileSync('./log', JSON.stringify(file))
 	if (!data.errs.includes(`[Error]: ${type} at line:${line.line}, column:${line.column};\n${err} `)) {

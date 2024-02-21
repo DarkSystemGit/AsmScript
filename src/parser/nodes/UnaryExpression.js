@@ -1,5 +1,8 @@
 import * as util from './../../util.js'
 export default (elm,parser)=>{
-    
-    return {node:""}
+    var node;
+    var type;
+    util.checkOp(['~'],()=>{node='bitwise';type='binary'},elm)
+    util.checkOp(['delete'],()=>{node='delete'})
+    return {node,type,children:parser(argument)}
 }

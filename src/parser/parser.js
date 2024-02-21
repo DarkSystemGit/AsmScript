@@ -2,9 +2,9 @@ import { readFileSync, writeFileSync, existsSync } from 'fs'
 import { parseSync } from '@swc/core';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
-import { createRequire } from 'module';
 import * as tree from './../tree.js'
 import * as util from '../util.js'
+import * as process from 'process'
 global.__filename = fileURLToPath(import.meta.url);
 global.__dirname = path.dirname(fileURLToPath(import.meta.url));
 var data = { scope: 'function:global' }
@@ -133,5 +133,5 @@ function astNodeHandler(elm, extra) {
     else return astNodeHandler(getBody(elm),extra)
 }
 
-writeFileSync(path.join(__dirname,'ast.json'), JSON.stringify(parse(path.join(__dirname , '../../tests/fakeHome.gs')),null, 2))
+writeFileSync(path.join(__dirname,'ast.json'), JSON.stringify(parse(path.join(process.cwd() , process.argv[2])),null, 2))
 //console.log(data)
