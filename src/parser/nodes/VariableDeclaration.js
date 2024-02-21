@@ -9,7 +9,7 @@ export default (elm,parser)=>{
     if(data.var.hasOwnProperty(`${name}|${data.scope}`)){
     if(data.var[`${name}|${data.scope}`].type!=children.type){
         if(data.var[`${name}|${data.scope}`]!=undefined){
-            util.error('Illegal Type Assignment','TypeError',elm.span)
+            util.error('Illegal Type Reassignment','TypeError',elm.span,this.data)
         }
     }}
     data.var[`${name}|${data.scope}`]={node:"var",type:children.type,children,name,scope:data.scope}

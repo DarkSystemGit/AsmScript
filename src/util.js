@@ -120,16 +120,17 @@ export function extract(span,file){
 	//console.log(file.substring(span.start,span.end))
 	return file.substring(span.start,span.end).trim()
 }
-export function error(err, type, span) {
+export function error(err, type, span,data) {
 	var file = JSON.parse(read('./log'))
 	data.errs = data.errs || []
 	file.error = file.error || {}
 	var searchstr="hello, this is a search str pls no copy, hahahahDGHJUYTGFDCVBHGFCV BNHGFCVBHGVBG"
 	file.error[type] = file.error[type] || []
+	//console.log(replaceAt(data.file,span.start,searchstr,span.end-span.start).split('\n'))
 	var prgm=replaceAt(data.file,span.start,searchstr,span.end-span.start).split('\n')
 	
-	var line={line:0,column:0}
-	prgm.forEach(elm,i=>{
+	var line={line:data.imports,column:0}
+	prgm.forEach((elm,i)=>{
 		if(elm.indexOf(searchstr)!=-1){
 			line={line:i,column:elm.indexOf(searchstr)}
 		}

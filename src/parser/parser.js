@@ -61,6 +61,7 @@ function importAst(file){
 }
 function extractImports(file) {
     var lines = 0
+    var tl=0
     var imports = file.split(';').flatMap((elm) => {
         elm = elm.trim()
         if (elm.indexOf('import') == 0) {
@@ -74,6 +75,8 @@ function extractImports(file) {
             return []
         }
     })
+    file.split('\n').forEach(e=>{if(e.trim().indexOf('import') == 0){tl++;}})
+    visitor.setData(['imports',tl])
     JSON.parse(readFileSync(path.join(__dirname,'stdlib','std.json'))).forEach(lib=>importAst(lib))
     file = file.split(';').filter((elm, i) => i + 1 > lines).join(';')
     return [imports, file]
@@ -93,22 +96,16 @@ function parseNode(node) {
                 if(elm.type!='EmptyStatement'){
                     
                 var node = astNodeHandler(elm, args)
-                ast.push(node)
-
-                if (data == undefined) {
-                    //console.log(body.type)
-                    throw new Error(elm.type)
+                if (data != undefined) {
+                    ast.push(node)
                 }
             }})
         } else {
             //stack.push('parseNode', data)
             if(body.type!='EmptyStatement'){
             var node = astNodeHandler(body, args)
-            ast.push(node)
-                
-            if (data == undefined) {
-                throw new Error(body.type)
-
+            if (data != undefined) {
+                ast.push(node)
             }}
         }
     }
@@ -131,7 +128,7 @@ function astNodeHandler(elm, extra) {
     // console.log(data,elm.type,/*(new Error()).stack*/)
     //stack.push('astNodeHandler', data, elm.type)
     //console.log(extra)
-    console.log(visitor.hasOwnProperty(elm.type),elm.type)
+    console.log(visitor.hasOwnProperty(elm.type)&&(visitor.hasOwnProperty(elm.type).toString().indexOf('{node:""}')!=1),elm.type)
     if (visitor[elm.type]) return visitor[elm.type](elm, parseNode,...extra.slice(1))
     else return astNodeHandler(getBody(elm),extra)
 }

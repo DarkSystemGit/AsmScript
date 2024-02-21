@@ -20,7 +20,7 @@ function input(str:string, line:number): string{
 var line=0;
 while(true){
     var input=input("",line);
-    var num=math.rand(0-input,input)+input
+    var num=`${math.rand(0-input,input)}${input}`
     gfx.text(num,26-num.toString().length,line+1);
     line=line+2
 };

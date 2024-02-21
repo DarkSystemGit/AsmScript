@@ -4,6 +4,8 @@ export default (elm, parser, ex) => {
         return elm.value
     }else{
         this.data.var=this.data.var||{}
-        return {node:"varAccess",children:[],name:elm.value,type:tree.getVar(elm.value,this.data.scope,this.data.var,elm.span).type}
+        var type=tree.getVar(elm.value,this.data.scope,this.data.var,elm.span,this.data)
+        if(type!=undefined)type=type.type;else{type="void"}
+        return {node:"varAccess",children:[],name:elm.value,type}
     }
 }

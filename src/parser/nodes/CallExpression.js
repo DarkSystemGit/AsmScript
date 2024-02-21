@@ -9,11 +9,11 @@ export default (elm,parser)=>{
     var func=tree.getFunction(obj.name,this.data.scope,this.data.function,this)
     if(func){
         obj.type=func.type
-        console.log(func)
+        //console.log(func)
         for(var i in func.params){
 
             var arg=parser(elm.arguments[i])
-            console.log(elm.arguments,i,elm)
+            //console.log(elm.arguments,i,elm)
         }
     }
     return obj
