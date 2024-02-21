@@ -13,7 +13,7 @@ Literals
     -Objects
         -Access(x)
         -Dec
-    -Arrays
+    -Arrays(x)
         -Access(x)
         -Dec(x)
 ASM?
