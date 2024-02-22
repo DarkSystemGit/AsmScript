@@ -1,7 +1,7 @@
-Loops
-    -For
-        -In
-        -Of
+Loops(x)
+    -For(x)
+        -In(x)
+        -Of(x)
         -Reg(x)
     -While(x)
 Classes
@@ -9,10 +9,10 @@ Classes
     -Def
     -Methods
     -Calls
-Literals
-    -Objects
+Literals(x)
+    -Objects(x)
         -Access(x)
-        -Dec
+        -Dec(x)
     -Arrays(x)
         -Access(x)
         -Dec(x)
