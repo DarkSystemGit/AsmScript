@@ -8,7 +8,7 @@ export function getType(elm,file){
 	if(elm.typeAnnotation.hasOwnProperty('kind')){
 		return elm.typeAnnotation.kind
 	}else if(elm.typeAnnotation.hasOwnProperty('elemType')){
-		return 'class:Array'
+		return 'array'
 	}
 	return extract(elm.span,file)
 }

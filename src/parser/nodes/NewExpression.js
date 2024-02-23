@@ -1,5 +1,6 @@
 import * as util from './../../util.js'
 export default (elm,parser)=>{
-    
-    return {node:""}
+    var params=[]
+    elm.arguments.forEach((param)=>{params.push(parser(param.expression))})
+    return {node:"classInit",name:elm.callee.value,params}
 }

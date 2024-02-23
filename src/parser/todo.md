@@ -5,7 +5,7 @@ Loops(x)
         -Reg(x)
     -While(x)
 Classes
-    -Init
+    -Init(x)
     -Def
     -Methods
     -Calls

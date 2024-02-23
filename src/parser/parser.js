@@ -5,29 +5,16 @@ import { fileURLToPath } from 'url';
 import * as tree from './../tree.js'
 import * as util from '../util.js'
 import * as process from 'process'
+import { Visitor } from './Visitor.js';
 global.__filename = fileURLToPath(import.meta.url);
 global.__dirname = path.dirname(fileURLToPath(import.meta.url));
-var data = { scope: 'function:global' }
-function Visitor() {
-    this.data = data
-
-    var nodes = util.dirImport(path.join(__dirname, 'nodes'))
-    //console.log(nodes)
-    for (var node in nodes) {
-        if(node!='generateNodes')this[node] = eval(nodes[node])
-        
-    }
-    //console.log(Object.keys(this))
-    this.setData = (elm) => {
-        this.data[elm[0]] = elm[1]
-    }
-}
-var visitor = new Visitor()
+var visitor = new Visitor({ scope: 'function:global' })
 function parse(file) {
     //stack.push('parse', data)
     file = readFileSync(file).toString()
     var ast = []
-    var imports = extractImports(file)
+    
+    var imports = extractImports(file,visitor)
     file = imports[1]
     visitor.setData(['file', file])
     imports[0].forEach(elm => ast.push(elm))
@@ -40,7 +27,7 @@ function parse(file) {
     //console.log(data)
     return ast
 }
-function importAst(file){
+function importAst(file,visitor){
     try{
     var filename=path.join(process.cwd(),file+'.json')
     var type='file'
@@ -54,12 +41,13 @@ function importAst(file){
         var file=parse(filename)
     }
     //console.log(file)
-    tree.getNode(file,["function","var","class"],1,false).forEach(node=>data[node.node]=node)
-    }catch{
-        util.error(`File ${file} cannot be found`,'ImportError',)
+    tree.getNode(file,["function","var","class"],1,false).forEach(node=>visitor.setData([node.node,node]))
+    }catch(e){
+        console.log(visitor)
+        util.error(`File ${file} cannot be found`,'ImportError',{start:0,end:0},visitor.data)
     }
 }
-function extractImports(file) {
+function extractImports(file,visitor) {
     var lines = 0
     var tl=0
     var imports = file.split(';').flatMap((elm) => {
@@ -67,8 +55,8 @@ function extractImports(file) {
         if (elm.indexOf('import') == 0) {
             lines++
             elm = elm.replace('import', '').trim()
-            //console.log(elm)
-            importAst(elm)
+
+            importAst(elm,visitor)
 
             return [{ node: 'import', name: elm }]
         } else {
@@ -77,7 +65,7 @@ function extractImports(file) {
     })
     file.split('\n').forEach(e=>{if(e.trim().indexOf('import') == 0){tl++;}})
     visitor.setData(['imports',tl])
-    JSON.parse(readFileSync(path.join(__dirname,'stdlib','std.json'))).forEach(lib=>importAst(lib))
+    JSON.parse(readFileSync(path.join(__dirname,'stdlib','std.json'))).forEach(lib=>importAst(lib,visitor))
     file = file.split(';').filter((elm, i) => i + 1 > lines).join(';')
     return [imports, file]
 }
@@ -125,10 +113,8 @@ function getBody(node) {
 
 }
 function astNodeHandler(elm, extra) {
-    // console.log(data,elm.type,/*(new Error()).stack*/)
-    //stack.push('astNodeHandler', data, elm.type)
-    //console.log(extra)
-    console.log(visitor.hasOwnProperty(elm.type)&&(visitor.hasOwnProperty(elm.type).toString().indexOf('{node:""}')!=1),elm.type)
+
+
     if (visitor[elm.type]) return visitor[elm.type](elm, parseNode,...extra.slice(1))
     else return astNodeHandler(getBody(elm),extra)
 }
