@@ -5,11 +5,12 @@
     "version": "0.2.0",
     "configurations": [
 
+
       {
         "name": "Launch parser",
         "program": "${workspaceFolder}/src/parser/parser.js",
         "request": "launch",
-        "args": ["/tests/fakeHome.gs"],
+        "args": ["/tests/pong/main.gs"],
         "skipFiles": [
             "<node_internals>/**"
         ],

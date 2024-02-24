@@ -29,9 +29,9 @@ function parse(file) {
 }
 function importAst(file,visitor){
     try{
-    var filename=path.join(process.cwd(),file+'.json')
+    var filename=path.join(process.cwd(),path.dirname(process.argv[2]),file+'.gs')
     var type='file'
-    if(!existsSync(path.join(process.cwd(),file+'.json'))){
+    if(!existsSync(path.join(process.cwd(),path.dirname(process.argv[2]),file+'.gs'))){
         filename=path.join(__dirname,'stdlib',file+'.json')
         type='std'
     }
@@ -43,8 +43,8 @@ function importAst(file,visitor){
     //console.log(file)
     tree.getNode(file,["function","var","class"],1,false).forEach(node=>visitor.setData([node.node,node]))
     }catch(e){
-        console.log(visitor)
-        util.error(`File ${file} cannot be found`,'ImportError',{start:0,end:0},visitor.data)
+        console.log(e)
+        //util.error(`File ${file} cannot be found`,'ImportError',{start:0,end:0},visitor.data)
     }
 }
 function extractImports(file,visitor) {
