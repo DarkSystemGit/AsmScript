@@ -135,7 +135,7 @@ export function error(err, type, span,data) {
 	file.error[type].push({ line:line.line, column: line.column, err })
 	writeFileSync('./log', JSON.stringify(file))
 	if (!data.errs.includes(`[Error]: ${type} at line:${line.line}, column:${line.column};\n${err} `)) {
-		console.log('\x1b[31m%s\x1b[0m', `[Error]: ${type} at line:${line.line}, column:${line.column};\n${err} `)
+		console.log('\x1b[31m%s\x1b[0m', `[Error]: ${type} at line:${line.line}, column:${line.column} in file ${path.basename(data.filename)};\n${err} `)
 		data.errs.push(`[Error]: ${type} at line:${line.line}, column:${line.column};\n${err} `)
 	}
 }

@@ -225,6 +225,7 @@ export class Visitor {
     elm.arguments.forEach((param) => {
       params.push(parser(param.expression));
     });
+
     return { node: "classInit", name: elm.callee.value, params };
   }
   NullLiteral(elm, parser) {

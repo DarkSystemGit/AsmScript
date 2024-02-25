@@ -9,15 +9,20 @@ import { Visitor } from './Visitor.js';
 global.__filename = fileURLToPath(import.meta.url);
 global.__dirname = path.dirname(fileURLToPath(import.meta.url));
 var visitor = new Visitor({ scope: 'function:global' })
+var stack=[]
 function parse(file) {
     //stack.push('parse', data)
+    visitor.setData(['filename', file])
+    var filename=file
     file = readFileSync(file).toString()
     var ast = []
     
     var imports = extractImports(file,visitor)
     file = imports[1]
     visitor.setData(['file', file])
+
     imports[0].forEach(elm => ast.push(elm))
+    visitor.setData(['filename', filename])
     //console.log('file:',file+'\n',ast)
     const swcAst = parseSync(file, { syntax: "typescript" });
     writeFileSync(path.join(__dirname,'swcAst.json'),JSON.stringify(swcAst))
@@ -38,7 +43,7 @@ function importAst(file,visitor){
     if(type=='std'){
         var file=JSON.parse(readFileSync(filename))
     }else{
-        var file=parse(filename)
+        var file=parse(filename).ast
     }
     //console.log(file)
     tree.getNode(file,["function","var","class"],1,false).forEach(node=>visitor.setData([node.node,node]))
@@ -113,11 +118,14 @@ function getBody(node) {
 
 }
 function astNodeHandler(elm, extra) {
-
-
-    if (visitor[elm.type]) return visitor[elm.type](elm, parseNode,...extra.slice(1))
-    else return astNodeHandler(getBody(elm),extra)
+    
+    //if(elm.type!='VariableDeclaration')console.log(elm.type,getBody(elm))
+    //else{console.dir(getBody(elm),{depth:null})}
+    if (visitor[elm.type]) var res= visitor[elm.type](elm, parseNode,...extra.slice(1))
+    else var res= astNodeHandler(getBody(elm),extra)
+    stack.push({type:elm.type,pos:[elm.span,visitor.getData().filename],node:res})
+    return res
 }
 
 writeFileSync(path.join(__dirname,'ast.json'), JSON.stringify(parse(path.join(process.cwd() , process.argv[2])),null, 2))
-//console.log(data)
+writeFileSync(path.join(__dirname,'log.json'), JSON.stringify({stack:stack,visitorData:visitor.getData()}))
