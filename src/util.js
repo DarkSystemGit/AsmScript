@@ -12,6 +12,17 @@ export function getType(elm,file){
 	}
 	return extract(elm.span,file)
 }
+export function getBody(node) {
+    //stack.push('getBody', data)
+    var bodies = ['body', 'stmts', 'expression', 'callee', 'test', 'consequent', 'alternate', 'identifier']
+    var body = node
+    for(var elm in bodies){
+        elm=bodies[elm]
+        if(node[elm])body=node[elm]
+    }
+    return body
+
+}
 export function dirImport(dir) {
 	const basename = path.basename(__filename);
 	const functions = {}

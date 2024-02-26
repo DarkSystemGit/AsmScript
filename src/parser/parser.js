@@ -76,56 +76,42 @@ function extractImports(file,visitor) {
 }
 function parseNode(node) {
 
-    var body = getBody(node)
+    var body = util.getBody(node)
     var ast = []
     if (!(JSON.stringify(body) == '{}')) {
         var args=Array.from(arguments)
         
         if (body instanceof Array) {
             
-            body.forEach(elm => {
+            body.forEach((elm) => {
                 //stack.push('parseNode', data)
                 //console.log('parseNode:',data)
                 if(elm.type!='EmptyStatement'){
                     
-                var node = astNodeHandler(elm, args)
-                if (data != undefined) {
-                    ast.push(node)
-                }
+                    
+                        var node =  visitor.invoke(elm, args,parseNode)
+                        if (data != undefined) {
+                            ast.push(node)
+                        }
+                
             }})
         } else {
             //stack.push('parseNode', data)
             if(body.type!='EmptyStatement'){
-            var node = astNodeHandler(body, args)
-            if (data != undefined) {
-                ast.push(node)
+
+            
+                var node =  visitor.invoke(body, args,parseNode)
+                if (data != undefined) {
+                    ast.push(node)
+                }
+            
             }}
-        }
     }
     //console.log(ast)
     return ast
 }
-function getBody(node) {
-    //stack.push('getBody', data)
-    var bodies = ['body', 'stmts', 'expression', 'callee', 'test', 'consequent', 'alternate', 'identifier']
-    var body = node
-    bodies.forEach((elm) => {
-        if (node.hasOwnProperty(elm)) {
-            body = node[elm]
-        }
-    })
-    return body
 
-}
-function astNodeHandler(elm, extra) {
-    
-    //if(elm.type!='VariableDeclaration')console.log(elm.type,getBody(elm))
-    //else{console.dir(getBody(elm),{depth:null})}
-    if (visitor[elm.type]) var res= visitor[elm.type](elm, parseNode,...extra.slice(1))
-    else var res= astNodeHandler(getBody(elm),extra)
-    stack.push({type:elm.type,pos:[elm.span,visitor.getData().filename],node:res})
-    return res
-}
+
 
 writeFileSync(path.join(__dirname,'ast.json'), JSON.stringify(parse(path.join(process.cwd() , process.argv[2])),null, 2))
-writeFileSync(path.join(__dirname,'log.json'), JSON.stringify({stack:stack,visitorData:visitor.getData()}))
+writeFileSync(path.join(__dirname,'log.json'), JSON.stringify({stack:visitor.stack,visitorData:visitor.getData()}))

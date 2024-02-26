@@ -1,6 +1,7 @@
 import * as util from "../util.js";
 import * as tree from "../tree.js";
 export class Visitor {
+  stack = [];
   constructor(data) {
     this.data = data;
   }
@@ -9,6 +10,34 @@ export class Visitor {
   }
   getData() {
     return this.data;
+  }
+  invoke(elm, extra, parseNode) {
+    if (this[elm.type])
+      var res = this[elm.type](elm, parseNode, ...extra.slice(1));
+    else {
+      var bodies = [
+        "body",
+        "stmts",
+        "expression",
+        "callee",
+        "test",
+        "consequent",
+        "alternate",
+        "identifier",
+      ];
+      for (var body in bodies) {
+        body = bodies[body];
+        if (elm[body]) elm = elm[body];
+      }
+      if (elm != undefined) var res = this.invoke(elm, extra, parseNode);
+    }
+    this.stack.push({
+      type: elm.type,
+      pos: [elm.span, this.getData().filename],
+      node: res,
+    });
+    console.log(elm.type);
+    return res;
   }
   ArrayExpression(elm, parser) {
     var children = parser(elm.elements);
@@ -85,6 +114,15 @@ export class Visitor {
       );
     }
     return obj;
+  }
+  ClassDeclaration(elm, parser) {
+    //console.log(elm)
+    return {
+      node: "classDec",
+      name: elm.identifier.value,
+      children: parser(elm.body),
+      extends: elm.implements,
+    };
   }
   ClassMethod(elm, parser) {
     var params = [];

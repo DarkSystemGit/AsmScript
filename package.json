@@ -9,7 +9,7 @@
   "type": "module",
   "scripts": {
     "env": "echo \"export DEVDIR=~/Glacier&&export DEBUG=true\"",
-    "start": "node ./src/parser/parser.js",
+    "start": "node --max-old-space-size=4096 ./src/parser/parser.js",
     "log": "node ./logviewer.cjs -list ",
     "build": "node ./scripts/createVisitor&&npm start ",
     "install": "npm install && npm run build"
